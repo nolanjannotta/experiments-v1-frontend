@@ -3,12 +3,11 @@ import React from 'react'
 import Link from 'next/link'
 
 import {useQuery} from "@tanstack/react-query";
-import {contract} from "../../constants"
+import {contract} from "../../contract"
 
 async function getEditions() {
-    
   const lastEdition = await contract.read.editionCounter();
-
+ 
   let allEditions = [];
   for(let i = 1; i <= Number(lastEdition); i++) {
     let edition = await contract.read.getEdition([i]);

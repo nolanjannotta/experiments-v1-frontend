@@ -1,9 +1,9 @@
 "use client"
 
 import React from 'react'
-import { useWriteContract, useConfig,useSimulateContract  } from 'wagmi'
+import { useWriteContract, useConfig} from 'wagmi'
 import {useAccount} from 'wagmi'
-import { contractBase } from '../app/constants'
+import { contractBase } from '../app/contract'
 
 import CustomConnect from './CustomConnect'
 
@@ -14,7 +14,7 @@ import { ConnectKitButton } from "connectkit";
 
 
 
-function MintButton({isMinting}) {
+function MintButton({isMinting, editionId}) {
 
 
 
@@ -29,7 +29,8 @@ function MintButton({isMinting}) {
     function mint() {
         writeContract({
             ...contractBase,
-            functionName: "mint"
+            functionName: "mint",
+            args: [BigInt(editionId)],
         })
     }
 

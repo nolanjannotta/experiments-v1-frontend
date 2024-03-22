@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useQuery} from "@tanstack/react-query";
-import { contract } from "../../../constants";
+import { contract } from "../../../contract";
 import {useAccount } from "wagmi";
 import Link from "next/link";
 

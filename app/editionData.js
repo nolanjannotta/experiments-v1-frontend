@@ -1,17 +1,17 @@
 export const editionData = {
   signatures: {
     description: () => {
-      return (
-        <p>
-          Simple, minimal, cool. The inaugural edition of this whole
-          experiment thing.
-        </p>
-      );
+    //   return (
+    //     <p>
+    //       Simple, minimal, cool. The inaugural edition of this whole
+    //       experiment thing.
+    //     </p>
+    //   );
     },
     modifiable: false,
     inputs:[]
   },
-  "panels 2.0": {
+  "panels": {
     description: () => {
       return (
         <>

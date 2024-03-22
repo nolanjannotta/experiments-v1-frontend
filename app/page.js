@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main>
 
+
       <article>
         <header>
           <h1>Welcome</h1>
@@ -25,7 +26,11 @@ export default function Home() {
       
       </article>
 
-     
+      <aside>
+        <nav>
+          <h1>hello</h1>
+        </nav>
+      </aside>
 
       
     </main>

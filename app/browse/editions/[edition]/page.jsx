@@ -1,16 +1,16 @@
 "use client"
 import Link from 'next/link'
 
-// import {getAllFromEdition} from "../../../actions";
 import { useQuery } from "@tanstack/react-query";
-import {contract, ZERO_ADDRESS,artAddress} from "../../../constants"
+import {ZERO_ADDRESS,artAddress} from "../../../constants"
+import {contract} from "../../../contract"
 import { editionData } from '../../../editionData'
-// import {artAddress} from "../../../address"
 import { isAddress } from 'viem';
 
 
 
 function addressShrinker(address) {
+
   return `${address.slice(0,6)}...${address.slice(-4)}`
 }
 
@@ -92,26 +92,36 @@ function Gallery({params}) {
         <ul>
           <code>
             <small>
-              <li>&#x2022;edition: "{params.edition}"</li>
+              <li>&#x2022; edition: "{params.edition}"</li>
         {Object.keys(editionInfo.edition).map((key, i) => {
-          let value
           if(key === "artGenerator") {
-            return <li key={i}>&#x2022;{key}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
+            return <li key={i}>&#x2022; {key}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
             
           }
-          else if(typeof editionInfo.edition[key] === "bigint") {
-            value = Number(editionInfo.edition[key])
-            // return <li  key={i}>&#x2022;{key}: "{value}"</li>
+          if(key === "price") {
+            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])} eth"</li>
           }
-          else if(isAddress(editionInfo.edition[key])) {
-            value = addressShrinker(editionInfo.edition[key])
+          if (key === "royalty") {
+            return <li key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key]) / 100}%"</li>
+          }
+          if(key === "royaltyReceiver") {
+            return <li  key={i}>&#x2022; {key}: "{addressShrinker(editionInfo.edition[key])}"</li>
+          }
+          if(key === "supply") {
+            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])}"</li>
+          }
+          if(key === "counter") {
+            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])}"</li>
+          }
+          if(key === "description") {
+            return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li>
           }
           else {
-            value = editionInfo.edition[key]
+           return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li> 
           }
-          return <li  key={i}>&#x2022;{key}: "{value}"</li>
+          
         })}
-        <li>&#x2022;minting status: "active" <Link href="/mint">&#8599;</Link> </li>
+        <li>&#x2022; minting status: "active" <Link href="/mint">&#8599;</Link> </li>
         </small>
         </code>
         </ul>
