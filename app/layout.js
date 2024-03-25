@@ -2,7 +2,7 @@
 
 // import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import { Web3Provider } from '../components/Web3Provider'
+import { Web3Provider } from './components/Web3Provider'
 import {artAddress} from "./constants"
 import "./global.css"
 
@@ -11,7 +11,7 @@ export const metadata = {
   description: 'art experiments',
 }
 
-console.log(artAddress)
+// console.log(artAddress)
 
 export default function RootLayout({ children }) {
   return (
@@ -22,6 +22,7 @@ export default function RootLayout({ children }) {
       {/* <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css"/> */}
       {/* <link rel="stylesheet" type="text/css" href="https://unpkg.com/chimeracss/build/chimera.css"/> */}
       {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" /> */}
+      {/* <link rel="stylesheet" href="https://unpkg.com/mvp.css"/>  */}
       </head>
 
       <body>

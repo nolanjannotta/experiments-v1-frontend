@@ -24,7 +24,7 @@ function ArtGenerators() {
         initialData: [{name: "loading conracts...", address: ""}]
     })
 
-    console.log(artGenerators)
+    // console.log(artGenerators)
   return (
     <article>
         <h3>Art Generators</h3>

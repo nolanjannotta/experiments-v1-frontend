@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { contract } from "../../../constants";
+import { contract } from "../../../contract";
 import {useQuery} from "@tanstack/react-query";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ async function getAllEditions() {
 
 async function getBalance(address) {
     const balance = await contract.read.balanceOf([address]);
-    console.log(balance)
+    // console.log(balance)
     return balance;
 }
 
@@ -38,13 +38,13 @@ function Address({ params }) {
         initialData: []
     })
 
-    const {data: editionNames} = useQuery({
+    const {data: editionNames, error} = useQuery({
         queryKey: ["editionNames"],
         queryFn: getAllEditions,
         initialData: []
     })
     
-    console.log(editionNames)
+    console.log(error)
 
   return (
     <article>
@@ -60,7 +60,8 @@ function Address({ params }) {
             {tokens.map((id, index)=>{
             return (<li key={index}>
                 <Link href={`/browse/editions/${Number(id/1000000n)}`}>{editionNames[Number(id/1000000n)-1]}</Link>
-                <Link href={`/browse/token/${Number(id)}`}> &nbsp;#{Number(id%1000000n)}</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link href={`/browse/token/${Number(id)}`}>#{Number(id%1000000n)}</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link href={`/modify/${Number(id)}`}>&#9874;</Link>
 

@@ -1,90 +1,195 @@
-"use client"
+"use client";
 
-import React from 'react'
-import {useAccount} from 'wagmi'
-import {contract} from "../../constants"
+import React, { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
+import { contractBase,contract } from "../../contract";
+// import { contractBase } from '../contract'
+import { useWriteContract, useConfig} from 'wagmi'
 
-import { useQuery } from '@tanstack/react-query'
-import { editionData } from '@/app/editionData'
-import CustomConnect from '@/components/CustomConnect'
+import { useQuery } from "@tanstack/react-query";
+import { editionData } from "@/app/editionData";
+import CustomConnect from "@/app/components/CustomConnect";
+import { decodeAbiParameters, encodeAbiParameters   } from "viem";
+
 
 // console.log(contractTypes)
 async function exists(tokenId) {
-    return await contract.read.exists([tokenId]);
+  return await contract.read.exists([tokenId]);
 }
 
-async function isOwner(tokenId,account) {
-    const owner = await contract.read.ownerOf([tokenId]);
-    return owner === account.address;
-
+async function isOwner(tokenId, account) {
+  const owner = await contract.read.ownerOf([tokenId]);
+  return owner === account.address;
 }
 
+
+
+async function decodeSeed(tokenId, editionName) {
+//   const seed = await contract.read.getSeed([tokenId]);
+//   console.log(seed)
+  const unPacked = await contract.read.unPackSeed([tokenId]);
+
+  const values = decodeAbiParameters(
+    editionData[editionName]?.seed,
+    unPacked
+  );
+  let data = {}
+  values.forEach((value, index)=>{
+    data[editionData[editionName].seed[index].name] = value
+
+
+  })
+
+  return data;
+}
 
 function getEdition(tokenId) {
-    const edition = contract.read.getEdition([(tokenId/1000000).toFixed(0)]);
-    return edition;
+  const edition = contract.read.getEdition([(tokenId / 1000000).toFixed(0)]);
+  return edition;
 }
 
-function ModifyToken({params}) {
-    const account = useAccount();
+function ModifyToken({ params }) {
+  const [inputFields, setInputFields] = useState({});
+  const [modifyBytes, setModifyBytes] = useState("");
+//   const [isOwner, setIsOwner] = useState(false);
+  const account = useAccount();
 
-    const {data: tokenExists} = useQuery({
-        queryKey: ["exists", params.tokenId],
-        queryFn: () => exists(params.tokenId),
-        initialData: undefined
-    
+  const {writeContract} = useWriteContract();
+  
+  async function modify() {
+    writeContract({
+        ...contractBase,
+        functionName: "modify",
+        args: [params.tokenId, modifyBytes],
     })
-    const {data: isOwned} = useQuery({
-        queryKey: ["owner", params.tokenId],
-        queryFn: () => isOwner(params.tokenId,account),
-        initialData: false
     
-    })
-    const {data: edition, isFetching} = useQuery({
-        queryKey: ["edition", params.tokenId],
-        queryFn: () => getEdition(params.tokenId),
-        initialData: {name:""}
-    
-    })
+}
 
-    if(isFetching) return <article><p>loading...</p></article>
+  const { data: tokenExists } = useQuery({
+    queryKey: ["exists", params.tokenId],
+    queryFn: () => exists(params.tokenId),
+    initialData: undefined,
+  });
+  const { data: isOwned, refetch: checkOwner } = useQuery({
+    queryKey: ["owner", params.tokenId],
+    queryFn: () => isOwner(params.tokenId, account),
+    initialData: false,
+  });
+  const { data: edition, isFetching:isEditionFetching } = useQuery({
+    queryKey: ["edition", params.tokenId],
+    queryFn: () => getEdition(params.tokenId),
+    initialData: { name: "" },
+  });
+  // console.log(editionData[edition.name]?.inputs)
+  const { data: decodedSeed, error } = useQuery({
+    queryKey: ["decodedSeed", params.tokenId],
+    queryFn: () => decodeSeed(params.tokenId, edition.name),
+    enabled: edition.name !== "",
+    initialData: [],
+  });
+
+//   console.log(decodedSeed);
+
+  useEffect(() => {
+    if (account.isConnected) {
+        checkOwner();
+    }
+
+  }, [account.isConnected])
+
+  useEffect(() => {
+    if (decodedSeed.length > 0) {
+        let inputData = {}
+        editionData[edition.name].modify.forEach((value) => {
+            // console.log(value)
+            inputData[value.name] = decodedSeed[value.name]
+        })
+
+
+      setInputFields(inputData);
+    }
+  }, [decodedSeed]); 
+
+  useEffect(()=>{
+    // console.log(editionData[edition.name]?.modify.map((value)=>{return value.type}))
+    // const types = editionData[edition.name]?.modify.map((value)=>{return value.type}) || []
+    if(isEditionFetching) return
+
+    const values = editionData[edition.name]?.modify.map((value)=>{return inputFields[value.name]}) || []
+    const packed = encodeAbiParameters(editionData[edition.name]?.modify || [], values)
+    setModifyBytes(packed)
+
+  },[inputFields])
+
+
+  function eventHandler(event, index) {
+    const type = editionData[edition.name].modify[index].type
+    const value = type === "string" ? event.target.value : Number(event.target.value);
+    setInputFields(
+        prev => ({
+            ...prev, 
+            [editionData[edition.name].modify[index].name]: value}));
+
+    // const { name, value } = event.target;
+    // setInputFields(prevState => ({
+    //             ...prevState,
+    //             [name]: value
+    //         }));
+  }
+
+  if (isEditionFetching)
+    return (
+      <article>
+        <p>loading...</p>
+      </article>
+    );
 
   return (
-    <article> 
-        <header>
-            
-            {tokenExists === false ? <h1> token id {params.tokenId} does not exist.</h1> : <h1>Modifying {edition.name} #{params.tokenId % 1000000}</h1>}
-        </header>
+    <article>
+      <header>
+        {tokenExists === false ? (
+          <h1> token id {params.tokenId} does not exist.</h1>
+        ) : (
+          <h1>
+            Modifying {edition.name} #{params.tokenId % 1000000}
+          </h1>
+        )}
+      </header>
 
-        <CustomConnect/>
+      <CustomConnect />
 
-        {!account.isConnected && !account.isConnecting ? <p>connect to modify.</p> :!isOwned &&<p>you are not the owner.</p>}
+      {!account.isConnected ? (<p>connect to modify.</p>) : (!isOwned && <p>you are not the owner.</p>)}
 
 
-        {!editionData[edition.name]?.modifiable ? <p>{edition.name} is not modifiable</p> : 
-        
-
+      {!editionData[edition.name]?.modifiable ? (
+        <p>{edition.name} is not modifiable</p>
+      ) : (
         <fieldset>
-            <legend>Modify</legend>
-        
+          <legend>Modify</legend>
 
-            <form>
-
-            {
-                editionData[edition.name]?.inputs.map((input,index) => {return <div key={index}>
-                <input type={input.type} placeholder={input.name} /> 
-                {/* <p>current data:</p>
-                
-                <p>next data:</p> */}
-                </div>})
-            }
-            <button disabled={!isOwned} type="submit">Modify</button>
-        </form>
+          <form>
+            {editionData[edition.name]?.modify.map((input, index) => {
+                // console.log(input)
+              return (
+                <div key={index}>
+                  <label>{input?.name}</label>
+                  <input
+                    placeholder={input.name}
+                    onChange={(event) => eventHandler(event, index)}
+                    defaultValue={inputFields[input.name]}
+                  />
+                </div>
+              );
+            })}
+            
+          </form>
         </fieldset>
-        }
-
+      )}
+      <button disabled={!isOwned} onClick={()=> modify(params.tokenId,modifyBytes)}>
+              Modify
+            </button>
     </article>
-  )
+  );
 }
 
-export default ModifyToken
+export default ModifyToken;

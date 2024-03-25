@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import {ZERO_ADDRESS,artAddress} from "../../../constants"
 import {contract} from "../../../contract"
 import { editionData } from '../../../editionData'
-import { isAddress } from 'viem';
+import { formatEther } from 'viem'
 
 
 
@@ -82,12 +82,16 @@ function Gallery({params}) {
       initialData: initialData
     })
     
-    
 
     return (
       <section style={section}>
 
-        <h1>{editionInfo.edition?.name}</h1>
+        <h1>
+          <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
+           
+          &nbsp;&nbsp;&nbsp;&nbsp; {editionInfo.edition?.name} &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link style={arrows} href={`/browse/editions/${params.edition < Number(editionInfo?.edition.counter)-1 ? Number(params.edition) + 1 : Number(params.edition)}`}> &#8594; </Link>
+          </h1>
         <nav>
         <ul>
           <code>
@@ -95,33 +99,36 @@ function Gallery({params}) {
               <li>&#x2022; edition: "{params.edition}"</li>
         {Object.keys(editionInfo.edition).map((key, i) => {
           if(key === "artGenerator") {
-            return <li key={i}>&#x2022; {key}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
+            return <li key={i}>&#x2022; {"art generator"}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
             
           }
           if(key === "price") {
-            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])} eth"</li>
+            return <li  key={i}>&#x2022; {key}: "{formatEther(editionInfo.edition[key])} eth"</li>
           }
           if (key === "royalty") {
             return <li key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key]) / 100}%"</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; {key}: "{addressShrinker(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"royalty receiver"}: "{addressShrinker(editionInfo.edition[key])}"</li>
           }
           if(key === "supply") {
-            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"max supply"}: "{Number(editionInfo.edition[key])}"</li>
           }
           if(key === "counter") {
-            return <li  key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"current supply"}: "{Number(editionInfo.edition[key])}"</li>
           }
           if(key === "description") {
             return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li>
+          }
+          if(key === "mintStatus") {
+            return <li  key={i}>&#x2022; {"mint status"}: {editionInfo.edition[key] ? <>"active" <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
           }
           else {
            return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li> 
           }
           
         })}
-        <li>&#x2022; minting status: "active" <Link href="/mint">&#8599;</Link> </li>
+        {/* <li>&#x2022; minting status: "active" <Link href="/mint">&#8599;</Link> </li> */}
         </small>
         </code>
         </ul>
@@ -135,7 +142,7 @@ function Gallery({params}) {
         if(nft.error === "Failed to get token uri"){
           // console.log("hello")
           return (
-            <div style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+            <div key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
                 <p>uh oh, looks like alchemy's NFT api couldn't render #{i + 1}.<br /></p>
               <Link href={`/browse/token/${params.edition * 1000000 + (i + 1)}`}>click here to load from blockchain</Link>
 
@@ -166,6 +173,11 @@ const description = {
 width: "70%",
 
 
+}
+
+const arrows = {
+  textDecoration: "none",
+  color: "black",
 }
 
 

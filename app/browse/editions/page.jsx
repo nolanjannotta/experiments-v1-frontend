@@ -21,11 +21,12 @@ async function getEditions() {
 
 function Editions() {
 
-  const {data, isFetching, refetch} = useQuery({
+  const {data, error, isFetching, refetch} = useQuery({
     queryKey: ["editions"],
     queryFn: getEditions,
     initialData: []
       })
+      console.log(error)
 
   return (
     <section style={section}>
@@ -66,7 +67,7 @@ const button = {
 
 
 const gallery = {
-width: "60%",
+width: "80%",
 display: "flex",
 flexFlow: "wrap",
 justifyContent: "space-evenly",

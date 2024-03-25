@@ -9,7 +9,8 @@ export const editionData = {
     //   );
     },
     modifiable: false,
-    inputs:[]
+    seed:[],
+    modify:[]
   },
   "panels": {
     description: () => {
@@ -18,7 +19,7 @@ export const editionData = {
           <p>Based on very simple set of rules:</p>
           <ol>
             <li>
-              using the seed, deterministically slice a square either
+              Starting with a blank 1000x1000 rectangle, deterministically slice it either
               horizontally or vertically creating two rectangles.
             </li>
             <li>
@@ -39,7 +40,8 @@ export const editionData = {
       );
     },
     modifiable: false,
-    inputs:[]
+    seed:[],
+    modify:[]
   },
   "tree sketch": {
     description: () => {
@@ -65,7 +67,8 @@ export const editionData = {
       );
     },
     modifiable: false,
-    inputs:[]
+    seed:[],
+    modify: []
   },
   "rectangular clock": {
     description: () => {
@@ -99,18 +102,25 @@ export const editionData = {
             </li>
           </ol>
           <p>
-            note: the thumbnail is fetched from alchemy's NFT api and may not be
-            accurate. Click the arrow next to the name to see the accurate time.
+            note: the thumbnail below is fetched from alchemy's NFT api and may not be
+            up to date. Click the arrow next to the name to see the accurate time.
           </p>
         </>
       );
     },
     modifiable: true,
-    inputs: [
-        { name: "timeZoneOffset", type: "number" },
-        { name: "background", type: "number" },
-        { name: "location", type: "text" },
+    seed: [
+        { name: "timeZoneOffset", type: "uint8" },
+        {name: "length", type: "uint8"},
+        {name: "selfId", type: "uint32"},
+        { name: "backgroundId", type: "uint32" },
+        { name: "location", type: "string" },
       ],
+    modify: [
+        { name: "timeZoneOffset", type: "uint8" },
+        { name: "backgroundId", type: "uint32" },
+        { name: "location", type: "string" },
+    ]
   },
   "Black and white": {
     description: () => {
@@ -123,7 +133,8 @@ export const editionData = {
       );
     },
     modifiable: true,
-    inputs: [{ name: "target", type: "number" }]
+    seed: [{ name: "target", type: "uint" }],
+    modify: [{ name: "target", type: "uint" }]
   },
   "Where do you draw the line?": {
     description: () => {
@@ -167,6 +178,7 @@ export const editionData = {
       );
     },
     modifiable: false,
-    inputs:[]
+    seed:[],
+    modify:[]
   },
 };

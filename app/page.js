@@ -1,5 +1,6 @@
 // "use client"
 import Link from 'next/link'
+import Image from 'next/image'
 // import styles from './page.module.css'
 
 
@@ -23,17 +24,54 @@ export default function Home() {
      The goal of this project is to push my knowledge, experiment on with onchain art and mechanics,make interesting images,  learn a lot, and emerge with a 
      semi refined set of tools and techniques to work with SVG in solidity to create onchain art. 
      </p>
+
+
       
       </article>
 
-      <aside>
-        <nav>
-          <h1>hello</h1>
-        </nav>
-      </aside>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
 
+      <div style={outline}>        
+      <Image src="/mintFlowChart.png" width={1286} height={507} alt="minting flow chart"></Image>
+      </div>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div style={outline}>
+      <Image src="/tokenURIFlowChart.png" width={1407} height={576} alt="tokenURI flow chart"></Image>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <div style={outline}>
+      <Image src="/modifyFlowChart.png" width={1372} height={718} alt="art generator flow chart"></Image>
+      </div>
       
     </main>
   )
 }
 
+
+const outline = {
+  border: "1px solid black",
+  padding: "1rem",
+  margin: "1rem"
+}

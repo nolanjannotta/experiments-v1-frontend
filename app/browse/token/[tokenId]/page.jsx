@@ -14,6 +14,8 @@ async function tokenData(tokenId) {
       "base64"
     );
     let metadata = JSON.parse(bufferObj.toString("utf-8"));
+    console.log(metadata)
+
     return {metadata, owner};
 
 }
@@ -21,11 +23,13 @@ async function tokenData(tokenId) {
 function Token({ params }) {
   const account = useAccount();
   
-  const { data, refetch } = useQuery({
+  const { data, error, refetch } = useQuery({
     queryKey: ["token", params.tokenId],
     queryFn: () => tokenData(params.tokenId),
     initialData: {metadata: {name:"", description:"", attributes:[], image:""}, owner: ""}
   });
+
+  console.log(error)
 
   // console.log(typeof Number(params.tokenId))
 

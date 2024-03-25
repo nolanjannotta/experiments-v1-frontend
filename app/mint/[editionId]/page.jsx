@@ -4,16 +4,16 @@ import React from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
-import MintButton from '../../../components/MintButton';
+import MintButton from '../../components/MintButton';
 import {editionType} from '../../types'
+import { formatEther } from 'viem'
 
 async function mintPageData(editionId) {
- 
+  
   editionId = BigInt(editionId);
 
-  // const currentEditionId = await contract.read.editionCounter();
+  const currentEditionId = await contract.read.editionCounter();
   const edition = await contract.read.getEdition([editionId]);
-  console.log(edition)
   // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
   const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
   
@@ -24,7 +24,7 @@ async function mintPageData(editionId) {
   let bufferObj = Buffer.from(lastToken.split("data:application/json;base64,")[1], "base64");
   let metadata = JSON.parse(bufferObj.toString("utf-8"));
   
-  return {edition, metadata, mostRecentOwner};
+  return {edition, metadata, mostRecentOwner, editionId, currentEditionId};
 
 }
 
@@ -33,13 +33,13 @@ async function mintPageData(editionId) {
 function Mint({params}) {
 
 
-  const {data, error, isLoading} = useQuery({
-    queryKey: ["mintPageData", params.editionId],
+  const {data, error, isLoading, refetch} = useQuery({
+    queryKey: ["mintPageData"],
     queryFn: () => {return mintPageData(params.editionId)},
-    initialData: {edition: editionType, metadata: {}, mostRecentOwner: ""}
+    initialData: {edition: editionType, metadata: {}, mostRecentOwner: "", editionId: 0,  currentEditionId: 0}
   
   })
-  console.log(error)
+  // console.log(data)
 
   return (
     <article>
@@ -49,39 +49,59 @@ function Mint({params}) {
       <section>
         <ul>
           <li>
-            currently minting: {isLoading ? "loading..." : data.edition.name}
+            name: {isLoading ? "loading..." : data.edition.name}
             &nbsp; <Link href={`/browse/editions/${data?.editionId}`}>&#8599;</Link>
           </li>
           <li>
-            remaining: {isLoading ? "loading..." : Number(data.edition.supply - data.edition.counter)}
+            current supply: {isLoading ? "loading..." : Number(data.edition.counter)}
           </li>
           <li>
-            total: {isLoading ? "loading..." : Number(data.edition.supply)}
+            max supply: {isLoading ? "loading..." : Number(data.edition.supply)}
           </li>
-          {/* <li>
-            next id: {isLoading ? "loading..." : Number(data.edition.counter) + 1}
-          </li> */}
           <li>
-            price: {isLoading ? "loading..." : Number(data.edition.price)} eth
+            price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
+          </li>
+          <li>
+            mint status: {isLoading ? "loading..." : data.edition.mintStatus ? "active" : "paused"}
           </li>
         </ul>
 
-        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={params.editionId}/>
+        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} callback={()=> console.log("hello")}/>
         <figure style={galleryFig}>
           
           <img src={data.metadata?.image} alt='image loading...' width="500"></img>
-         {/* <object width="500" data={isLoading ? "" : data.metadata.image}></object>  */}
-         <figcaption> last minted token: &nbsp;{isLoading ? "loading" : `"${data.metadata?.name}"`}</figcaption>
+         <figcaption>{isLoading ? "loading" : `"${data.metadata?.name}"`}</figcaption>
         </figure>
         
 
       </section>
+
+      <div style={navigation}>
+        <Link href={`/mint/${(params.editionId > 1) ? Number(params.editionId)-1 : params.editionId}`}>previous</Link>
+        <Link href={`/mint/${(params.editionId < data.currentEditionId) ? Number(params.editionId)+1 : params.editionId}`}>next</Link>
+       
+      </div>
 
     </article>
   )
 }
 
 export default Mint
+
+const button = {
+  all: "unset",
+  cursor: "pointer",
+
+}
+
+const navigation = {
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+  gap: "1rem"
+  // background: "lightgrey",
+
+}
 
 
 const galleryFig = {

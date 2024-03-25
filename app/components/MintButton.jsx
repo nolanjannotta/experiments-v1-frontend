@@ -3,7 +3,7 @@
 import React from 'react'
 import { useWriteContract, useConfig} from 'wagmi'
 import {useAccount} from 'wagmi'
-import { contractBase } from '../app/contract'
+import { contractBase } from '../contract'
 
 import CustomConnect from './CustomConnect'
 
@@ -14,24 +14,29 @@ import { ConnectKitButton } from "connectkit";
 
 
 
-function MintButton({isMinting, editionId}) {
+function MintButton({isMinting, editionId, callback}) {
 
 
 
     const account = useAccount();
     // console.log(account)
-    const config = useConfig();
+    // const config = useConfig();
+    // const client = config.getClient();
     // console.log(config.getClient())
-    const {writeContract} = useWriteContract();
+    const write = useWriteContract();
     // const data = useWriteContract();
+    console.log(write)
+    
+    async function mint() {
 
-
-    function mint() {
-        writeContract({
+        const results = write.writeContract({
             ...contractBase,
             functionName: "mint",
             args: [BigInt(editionId)],
+            onSuccess: (results) => {console.log(results)},
         })
+
+        console.log(results)
     }
 
 

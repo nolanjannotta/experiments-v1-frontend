@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import {useState} from 'react'
 import {useAccount} from 'wagmi'
-import OtherConnectButton from '../../components/OtherConnectButton'
+import OtherConnectButton from '../components/OtherConnectButton'
 
 
 
