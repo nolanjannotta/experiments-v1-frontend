@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
-import MintButton from '../../components/MintButton';
+import MintButton from '../../../components/MintButton';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
 

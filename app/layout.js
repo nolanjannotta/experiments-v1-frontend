@@ -2,7 +2,7 @@
 
 // import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import { Web3Provider } from './components/Web3Provider'
+import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
 import "./global.css"
 

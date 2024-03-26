@@ -3,7 +3,7 @@
 import React from 'react'
 import { useWriteContract, useConfig} from 'wagmi'
 import {useAccount} from 'wagmi'
-import { contractBase } from '../contract'
+import { contractBase } from '../app/contract'
 
 import CustomConnect from './CustomConnect'
 

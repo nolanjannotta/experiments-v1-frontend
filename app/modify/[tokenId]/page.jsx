@@ -8,7 +8,7 @@ import { useWriteContract, useConfig} from 'wagmi'
 
 import { useQuery } from "@tanstack/react-query";
 import { editionData } from "@/app/editionData";
-import CustomConnect from "@/app/components/CustomConnect";
+import CustomConnect from "@/components/CustomConnect";
 import { decodeAbiParameters, encodeAbiParameters   } from "viem";
 
 
