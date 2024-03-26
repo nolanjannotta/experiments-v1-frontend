@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import {contract} from "../../constants"
+import {contract} from "../../contract"
 
 
 async function getArtGenerators() {
