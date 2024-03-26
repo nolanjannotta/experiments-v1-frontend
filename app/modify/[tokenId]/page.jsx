@@ -25,20 +25,23 @@ async function isOwner(tokenId, account) {
 
 
 async function decodeSeed(tokenId, editionName) {
-//   const seed = await contract.read.getSeed([tokenId]);
-//   console.log(seed)
+  const seed = await contract.read.getSeed([tokenId]);
+  console.log("seed", seed)
   const unPacked = await contract.read.unPackSeed([tokenId]);
-
+console.log("unpacked", unPacked)
   const values = decodeAbiParameters(
     editionData[editionName]?.seed,
     unPacked
   );
   let data = {}
+  console.log("decoded", values)
   values.forEach((value, index)=>{
     data[editionData[editionName].seed[index].name] = value
 
 
   })
+
+  console.log("data", data)
 
   return data;
 }
@@ -88,7 +91,7 @@ function ModifyToken({ params }) {
     initialData: [],
   });
 
-//   console.log(decodedSeed);
+  console.log(decodedSeed);
 
   useEffect(() => {
     if (account.isConnected) {
@@ -98,16 +101,18 @@ function ModifyToken({ params }) {
   }, [account.isConnected])
 
   useEffect(() => {
-    if (decodedSeed.length > 0) {
+    // if (decodedSeed.length > 0) {
         let inputData = {}
-        editionData[edition.name].modify.forEach((value) => {
-            // console.log(value)
+        // console.log(value)
+        editionData[edition.name]?.modify.forEach((value) => {
+            
             inputData[value.name] = decodedSeed[value.name]
         })
 
 
       setInputFields(inputData);
-    }
+      console.log("input fields", inputData)
+    // }
   }, [decodedSeed]); 
 
   useEffect(()=>{
@@ -121,7 +126,7 @@ function ModifyToken({ params }) {
 
   },[inputFields])
 
-
+  console.log("input fields:", inputFields)
   function eventHandler(event, index) {
     const type = editionData[edition.name].modify[index].type
     const value = type === "string" ? event.target.value : Number(event.target.value);
@@ -151,7 +156,7 @@ function ModifyToken({ params }) {
           <h1> token id {params.tokenId} does not exist.</h1>
         ) : (
           <h1>
-            Modifying {edition.name} #{params.tokenId % 1000000}
+            modifying {edition.name} #{params.tokenId % 1000000}
           </h1>
         )}
       </header>
@@ -169,7 +174,7 @@ function ModifyToken({ params }) {
 
           <form>
             {editionData[edition.name]?.modify.map((input, index) => {
-                // console.log(input)
+                // console.log(inputFields[input.name])
               return (
                 <div key={index}>
                   <label>{input?.name}</label>

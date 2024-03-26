@@ -133,8 +133,8 @@ export const editionData = {
       );
     },
     modifiable: true,
-    seed: [{ name: "target", type: "uint" }],
-    modify: [{ name: "target", type: "uint" }]
+    seed: [{ name: "selfId", type: "uint32" },{ name: "targetId", type: "uint32" }],
+    modify: [{ name: "targetId", type: "uint32" }]
   },
   "Where do you draw the line?": {
     description: () => {
@@ -171,9 +171,10 @@ export const editionData = {
           These are not squiggles. This is an homage to the real squiggle. I
           wanted to see whether a squiggle can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
-          credit goes to Artblocks and Snowfro. I will never personally make any
+          credit goes to Artblocks and Snowfro. 
+          {/* I will never personally make any
           money from this experiment. Royalties will start at zero and can be
-          turned on and sent to Snowfro.
+          turned on and sent to Snowfro. */}
         </p>
       );
     },
