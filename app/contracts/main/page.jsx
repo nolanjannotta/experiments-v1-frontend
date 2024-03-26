@@ -1,5 +1,5 @@
 import React from 'react'
-import {artAddress} from '../../address.js'
+import {artAddress} from '../../constants.js'
 
 function MainContract() {
   return (
