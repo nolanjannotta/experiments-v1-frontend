@@ -4,6 +4,7 @@ import { useQuery} from "@tanstack/react-query";
 import { contract } from "../../../contract";
 import {useAccount } from "wagmi";
 import Link from "next/link";
+import Image from "next/image";
 
 
 async function tokenData(tokenId) {
@@ -51,64 +52,68 @@ function Token({ params }) {
           </nav>
         </header>
 
-        <img src={data?.metadata.image} alt="loading..." width="35%"></img>
-        <nav>
+        <div style={imageContainer} >
+        <img src={data?.metadata.image} alt="loading..."></img>
+        </div>
+        <article>
+        {/* <nav> */}
           <ul>
             <li>
-              <code>&#x2022; name: &quot;{data?.metadata.name}&quot;</code>
+              <code>name: &quot;{data?.metadata.name}&quot;</code>
             </li>
             <li>
-              <code>&#x2022; description: &quot;{data?.metadata.description}&quot;</code>
+              <code> description: &quot;{data?.metadata.description}&quot;</code>
             </li>
             <li>
               {data.metadata.attributes?.length > 0 && 
-              <code>&#x2022;  attributes: &#91;{data.metadata.attributes.map((attribute) => {return ` ${attribute.trait_type}: "${attribute.value}"`}).toString()}&#93;</code>
+              <code>attributes: &#91;{data.metadata.attributes.map((attribute) => {return ` ${attribute.trait_type}: "${attribute.value}"`}).toString()}&#93;</code>
                 }
             </li>
 
             <li>
               <code>
-              &#x2022; token id: {params.tokenId} 
+              token id: {params.tokenId} 
               </code>
               
               </li>
 
               <li>
               <code>
-              &#x2022; owner: {data?.owner === account.address ? "you :)" : data?.owner}
+              owner: {data?.owner === account.address ? "you :)" : data?.owner}
               </code>
               
               </li>
 
               <li>
               <code>
-              &#x2022; opensea: <a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${contract.address}/${params.tokenId}`}>&#8599;</a>
+              opensea: <a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${contract.address}/${params.tokenId}`}>&#8599;</a>
               </code>
               
               </li>
               <li>
               <code>
-              &#x2022; source code: <a target="_blank" href={`${data?.metadata.image}`}>&#8599;</a>
+              source code: <a target="_blank" href={`${data?.metadata.image}`}>&#8599;</a>
               </code>
               
               </li>
               <li>
               <code>
                
-              &#x2022; reload: <button style={button} onClick={refetch}> <a>&#8634;</a></button>
+              reload: <button style={button} onClick={refetch}> <a>&#8634;</a></button>
               
               </code>
               
               </li>
               <li>
               <code>
-              &#x2022; modify: <Link href={`/modify/${params.tokenId}`} >&#9874;</Link>
+              modify: <Link href={`/modify/${params.tokenId}`} >&#9874;</Link>
               </code>
               
               </li>
 
           </ul>
-        </nav>
+        {/* </nav> */}
+        </article>
       </section>
   );
 }
@@ -123,4 +128,13 @@ const button = {
   // padding: "none",
   // margin: "none"
 
+}
+
+const imageContainer = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  // height: "70vh",
+  // backgroundColor: "lightgrey",
 }
