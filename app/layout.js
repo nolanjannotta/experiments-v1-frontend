@@ -22,7 +22,9 @@ export default function RootLayout({ children }) {
       {/* <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css"/> */}
       {/* <link rel="stylesheet" type="text/css" href="https://unpkg.com/chimeracss/build/chimera.css"/> */}
       {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" /> */}
-      {/* <link rel="stylesheet" href="https://unpkg.com/mvp.css"/>  */}
+      {/* <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css"/>  */}
+      {/* <link rel="stylesheet" href="node_modules/modern-normalize/modern-normalize.css"/> */}
+      {/* <link rel="stylesheet" href="https://raw.githack.com/waldyrious/downstyler/master/downstyler.css" /> */}
       </head>
 
       <body>
