@@ -55,7 +55,7 @@ function V2() {
                     </figure>
             </li>
             <li>
-              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a "cold storage," (since L2s are technically centralized and have actually gone offline for a period of time in the past). They'll be able to modify, sell and transfer on either chain, and can bridge back and forth 
+              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a period of time in the past). They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
             </li>
             <li>

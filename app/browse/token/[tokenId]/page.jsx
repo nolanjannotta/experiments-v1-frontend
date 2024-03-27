@@ -55,10 +55,10 @@ function Token({ params }) {
         <nav>
           <ul>
             <li>
-              <code>&#x2022; name: "{data?.metadata.name}"</code>
+              <code>&#x2022; name: &quot;{data?.metadata.name}&quot;</code>
             </li>
             <li>
-              <code>&#x2022; description: "{data?.metadata.description}"</code>
+              <code>&#x2022; description: &quot;{data?.metadata.description}&quot;</code>
             </li>
             <li>
               {data.metadata.attributes?.length > 0 && 

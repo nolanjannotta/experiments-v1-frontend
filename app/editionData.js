@@ -47,7 +47,7 @@ export const editionData = {
     description: () => {
       return (
         <p>
-          An attempt to create a 'hand drawn' or 'pencil sketch' effect with SVG
+          An attempt to create a &apos;hand drawn&apos; or &apos;pencil sketch&apos; effect with SVG
           using paths and curves. As an exercise I decided to create the classic
           recursive tree. This uses a very similar algorithm used in my previous
           Recursive Trees project on ethereum Mainnet. More info can be found on
@@ -102,7 +102,7 @@ export const editionData = {
             </li>
           </ol>
           <p>
-            note: the thumbnail below is fetched from alchemy's NFT api and may not be
+            note: the thumbnail below is fetched from alchemy&apos;s NFT api and may not be
             up to date. Click the arrow next to the name to see the accurate time.
           </p>
         </>
