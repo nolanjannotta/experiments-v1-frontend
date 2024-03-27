@@ -52,9 +52,9 @@ function Token({ params }) {
           </nav>
         </header>
 
-        <div style={imageContainer} >
+        {/* <div style={imageContainer} > */}
         <img src={data?.metadata.image} alt="loading..."></img>
-        </div>
+        {/* </div> */}
         <article>
         {/* <nav> */}
           <ul>

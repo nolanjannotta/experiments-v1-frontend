@@ -45,7 +45,7 @@ export default function Home() {
       <br/>
 
       <div style={outline}>        
-      <Image src="/mintFlowChart.png" width={1286} height={507} alt="minting flow chart"></Image>
+      <img src="/mintFlowChart.png"  alt="minting flow chart"></img>
       </div>
 
       <br/>
@@ -57,7 +57,7 @@ export default function Home() {
       <br/>
       <br/>
       <div style={outline}>
-      <Image src="/tokenURIFlowChart.png" width={1407} height={576} alt="tokenURI flow chart"></Image>
+      <img src="/tokenURIFlowChart.png" alt="tokenURI flow chart"></img>
       </div>
       <br/>
       <br/>
@@ -68,7 +68,7 @@ export default function Home() {
       <br/>
       <br/>
       <div style={outline}>
-      <Image src="/modifyFlowChart.png" width={1372} height={718} alt="art generator flow chart"></Image>
+      <img src="/modifyFlowChart.png" alt="art generator flow chart"></img>
       </div>
       
     </main>
