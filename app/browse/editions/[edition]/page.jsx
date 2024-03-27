@@ -96,35 +96,35 @@ function Gallery({params}) {
         <ul>
           <code>
             <small>
-              <li>&#x2022; edition: "{params.edition}"</li>
+              <li>&#x2022; edition: &quot;{params.edition}&quot;</li>
         {Object.keys(editionInfo.edition).map((key, i) => {
           if(key === "artGenerator") {
             return <li key={i}>&#x2022; {"art generator"}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
             
           }
           if(key === "price") {
-            return <li  key={i}>&#x2022; {key}: "{formatEther(editionInfo.edition[key])} eth"</li>
+            return <li  key={i}>&#x2022; {key}: &quot;{formatEther(editionInfo.edition[key])} eth&quot;</li>
           }
           if (key === "royalty") {
-            return <li key={i}>&#x2022; {key}: "{Number(editionInfo.edition[key]) / 100}%"</li>
+            return <li key={i}>&#x2022; {key}: &quot;{Number(editionInfo.edition[key]) / 100}%&quot;</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; {"royalty receiver"}: "{addressShrinker(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{addressShrinker(editionInfo.edition[key])}&quot;</li>
           }
           if(key === "supply") {
-            return <li  key={i}>&#x2022; {"max supply"}: "{Number(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"max supply"}: &quot;{Number(editionInfo.edition[key])}&quot;</li>
           }
           if(key === "counter") {
-            return <li  key={i}>&#x2022; {"current supply"}: "{Number(editionInfo.edition[key])}"</li>
+            return <li  key={i}>&#x2022; {"current supply"}: &quot;{Number(editionInfo.edition[key])}&quot;</li>
           }
           if(key === "description") {
-            return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li>
+            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li>
           }
           if(key === "mintStatus") {
-            return <li  key={i}>&#x2022; {"mint status"}: {editionInfo.edition[key] ? <>"active" <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
+            return <li  key={i}>&#x2022; {"mint status"}: {editionInfo.edition[key] ? <>&quot;active&quot; <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
           }
           else {
-           return <li  key={i}>&#x2022; {key}: "{editionInfo.edition[key]}"</li> 
+           return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li> 
           }
           
         })}
@@ -143,10 +143,10 @@ function Gallery({params}) {
           // console.log("hello")
           return (
             <div key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
-                <p>uh oh, looks like alchemy's NFT api couldn't render #{i + 1}.<br /></p>
+                <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render #{i + 1}.<br /></p>
               <Link href={`/browse/token/${params.edition * 1000000 + (i + 1)}`}>click here to load from blockchain</Link>
 
-              <button>retry</button>
+              {/* <button>retry</button> */}
             </div>
           );
         }
