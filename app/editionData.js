@@ -152,7 +152,7 @@ export const editionData = {
             </li>
             <li>
               recursively do this for each new line until the lines get close to
-              the edge OR is "iterations" is reached. iterations is either 1 or
+              the edge OR is &quot;iterations&quot; is reached. iterations is either 1 or
               2 and is determined by the seed. This keeps it from drawing too
               many lines.
             </li>
