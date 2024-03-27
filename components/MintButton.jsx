@@ -7,7 +7,6 @@ import { contractBase } from '../app/contract'
 
 import CustomConnect from './CustomConnect'
 
-import { ConnectKitButton } from "connectkit";
 
 
 

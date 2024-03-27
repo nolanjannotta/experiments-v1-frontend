@@ -1,22 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
-import { ConnectKitButton } from "connectkit";
+// import { ConnectKitButton } from "connectkit";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 
 export default function OtherConnectButton({children}) {
   return (
-    <ConnectKitButton.Custom>
-      {({ isConnected, isConnecting, show, hide, address, ensName, chain }) => {
+    <ConnectButton.Custom>
+      {({account, openConnectModal}) => {
         return (
           <>
-          {!isConnected ? (
-            <button style={button} onClick={show}>
+          {!account ? (
+            <button style={button} onClick={openConnectModal}>
             <a>connect to view your collection</a>
             </button>
-          ) : <Link href={`/browse/wallet/${address}`}>my collection</Link>}
+          ) : <Link href={`/browse/wallet/${account.address}`}>my collection</Link>}
           </>
         );
       }}
-    </ConnectKitButton.Custom>
+    </ConnectButton.Custom>
 
   )
 }

@@ -1,22 +1,25 @@
+"use client"
 import React from 'react'
-import { ConnectKitButton } from "connectkit";
+// import { ConnectKitButton } from "connectkit";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function CustomConnect() {
   return (
-    <ConnectKitButton.Custom>
-      {({ isConnected, isConnecting, show, hide, address, ensName, chain }) => {
+    <ConnectButton.Custom>
+      {({account, openAccountModal, openConnectModal}) => {
+          console.log(account)
         return (
           <>
-          {!isConnected && (
-            <button onClick={show}>
+          {!account && (
+            <button onClick={openConnectModal}>
               Connect wallet
             </button>
           )}
 
-          {isConnected && (
+          {account && (
             <div style={addressSection}>
-              hello {address}
-              <button style={button} onClick={show}>
+              hello {account.ensName || account.address}
+              <button style={button} onClick={openAccountModal}>
                  disconnect
               </button>
             </div>
@@ -25,7 +28,7 @@ export default function CustomConnect() {
           </>
         );
       }}
-    </ConnectKitButton.Custom>
+    </ConnectButton.Custom>
 
     // <ConnectKitButton/>
   )
