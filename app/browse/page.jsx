@@ -26,6 +26,7 @@ export default function Browse({searchParams}) {
         </ul>
         </nav>
           </header> 
+          
 
           <fieldset>
             {/* <legend>Modify</legend> */}
@@ -50,11 +51,3 @@ export default function Browse({searchParams}) {
     )
 }
 
-
-const button = {
-    background: "none",
-    border: "none",
-    textDecoration: "underline",
-
-  }
-  

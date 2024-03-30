@@ -1,12 +1,12 @@
 "use client"
-import { getContract, createPublicClient, http, } from "viem";
+import { getContract, createPublicClient, http,createWalletClient } from "viem";
 import { baseSepolia, mainnet } from "wagmi/chains";
 
 import abi from "./ART_ABI.json";
 import { artAddress } from "./constants";
 import { config } from "../components/Web3Provider";
 
-
+console.log(config.getClient());
 
 export const publicClient = createPublicClient({ 
     chain: baseSepolia,
@@ -23,4 +23,7 @@ export const contract = getContract({
     ...contractBase,
     client: config.getClient(),
   });
+
+
+
 

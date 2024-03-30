@@ -20,12 +20,12 @@ async function getTokens(editionId) {
 
 
     try {
-      const response = await fetch(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
+      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
       const tokens = await response.json()
-
+      console.log(tokens)
       return {edition, tokens};
     } catch (error) {
-
+      console.log(error)
 
   }
 }
@@ -34,7 +34,7 @@ async function loadSingleToken(tokenId) {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
 
   try {
-    const response = await fetch(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
+    const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
     const tokens = await response.json()
 
     return {edition, tokens};
@@ -139,7 +139,7 @@ function Gallery({params}) {
     <div style={gallery}>
 
       {editionInfo.tokens.nfts.map((nft, i) => {
-        if(nft.error === "Failed to get token uri"){
+        if(nft.raw.error === "Failed to get token uri"){
           // console.log("hello")
           return (
             <div key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
@@ -152,8 +152,8 @@ function Gallery({params}) {
         }
         return (
           <figure style={galleryFig} key={i}>
-            <img style={galleryImg} width="300" src={nft.metadata.image}></img>
-            <figcaption>{nft.metadata.name}  &nbsp; &nbsp;
+            <img style={galleryImg} width="300" src={nft.raw.metadata.image}></img>
+            <figcaption>{nft.raw.metadata.name}  &nbsp; &nbsp;
             <Link href={`/browse/token/${params.edition * 1000000 + (i+1)}`}>&#8599;</Link>
             </figcaption>
           </figure>

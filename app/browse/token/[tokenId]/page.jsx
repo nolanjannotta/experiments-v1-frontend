@@ -64,11 +64,24 @@ function Token({ params }) {
             <li>
               <code> description: &quot;{data?.metadata.description}&quot;</code>
             </li>
-            <li>
+            {/* <li>
               {data.metadata.attributes?.length > 0 && 
               <code>attributes: &#91;{data.metadata.attributes.map((attribute) => {return ` ${attribute.trait_type}: "${attribute.value}"`}).toString()}&#93;</code>
                 }
+            </li> */}
+
+            <li>
+            <code>attributes:
+              <ul>
+              {data.metadata.attributes.map((attribute, i) => {
+                  return (<li key={i}>{attribute.trait_type}: &quot;{attribute.value}&quot;</li>)
+                
+                })}
+                </ul>
+                </code>
             </li>
+
+            
 
             <li>
               <code>

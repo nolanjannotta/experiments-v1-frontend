@@ -12,7 +12,7 @@ import {
   getDefaultConfig,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
-import { WagmiProvider } from 'wagmi';
+import { WagmiProvider, http, createConfig } from 'wagmi';
 import {
   mainnet,
   polygon,
@@ -54,14 +54,26 @@ import {
 //   }),
 // );
 
+// const config = createConfig({
+//   appName: 'Experiments V1',
+//   projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
+//   chains: [baseSepolia],
+//   transports: {
+//     [baseSepolia.id]: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`),
+//   },
+//   ssr: true, // If your dApp uses server side rendering (SSR)
+// })
+
 export const config = getDefaultConfig({
   appName: 'Experiments V1',
   projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
   chains: [baseSepolia], 
+  transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`),
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
-
+// console.log(otherConfig)
+// console.log(config)
 const queryClient = new QueryClient();
 
 export const Web3Provider = ({ children }) => {

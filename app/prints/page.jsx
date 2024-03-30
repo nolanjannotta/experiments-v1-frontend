@@ -9,7 +9,7 @@ function Prints() {
 
         <p>
             A major goal of this project is to normalize offering high quality archival grade prints
-            for onchain art NFTs directly from the creater. 
+            for onchain art directly from the creater. 
             When it comes to this project, this depends entirely on whether theres any interest whatsoever from collectors. 
             If there is, I will personally buy a printer and get this whole thing started.
 
