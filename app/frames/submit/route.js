@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
-import { getLastMint } from "@/app/frameConfig.js";
+import { getLastMint,mint } from "@/app/frameConfig.js";
 import sharp from "sharp";
 
 const URL = "http://localhost:3000"
@@ -13,18 +13,14 @@ async function getResponse(request) {
         return new NextResponse('Message not valid', { status: 500 });
       }
     const lastData = await getLastMint();
-    // console.log(lastData.lastEdition)
 
     let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
                   <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
-                  <text x="500" y="85" text-anchor="middle" font-size="30">Currently minting</text>
-                    <text x="500" y="160" text-anchor="middle" font-size="60"> ${lastData.lastEdition.name}</text>
-
-                    <text x="400" y="220" text-anchor="middle" font-size="25">supply: ${Number(lastData.lastEdition.supply)}</text>
-                    <text x="600" y="220" text-anchor="middle" font-size="25">next id: ${Number(lastData.lastEdition.counter) + 1}</text>
-
-
-                   <image x="200" y="300" width="600" height="600" href="${lastData.lastUri}"></image>
+                  <text x="500" y="400" text-anchor="middle" font-size="80">minting</text>
+                  <text x="500" y="490" text-anchor="middle" font-size="80">1 ${lastData.lastEdition.name}</text>
+                  <text x="500" y="580" text-anchor="middle" font-size="60">to</text>
+                  <text x="500" y="670" text-anchor="middle" font-size="60">*address goes here*</text>
+             
 
                    </svg>
                   `
@@ -37,9 +33,10 @@ async function getResponse(request) {
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: [{label: "a"},{label: "b"},{label: "c"},{label: "d"}],
+            buttons: [{label: "submit", action:"post",  target: `${URL}/frames/results`}],
             image: {src: base64Img, aspectRatio: '1:1'},
-            postUrl: `${URL}/frames/submit`,
+            postUrl: `${URL}/frames/results`,
+            // state: {hash: "0x762db698e005647bb1ba0d87e290cdafb55bf7ad6f3b0b25eba3d2b2c48fa74e"}
         })
     );
 

@@ -7,7 +7,6 @@ export default function CustomConnect() {
   return (
     <ConnectButton.Custom>
       {({account, openAccountModal, openConnectModal}) => {
-          console.log(account)
         return (
           <>
           {!account && (

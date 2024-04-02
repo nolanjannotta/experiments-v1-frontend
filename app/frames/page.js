@@ -52,7 +52,7 @@ let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
                   <text x="575" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">ipfs</text>
                   <text x="725" y="220" text-anchor="middle"  font-size="30">solidity ✓</text>
                   <text x="875" y="220" text-anchor="middle"  font-size="30">SVG ✓</text>
-                  ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name} #1</text>`})}
+                  ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
                   ${thumbnails.map((thumbnail, index) => {return `<image x="${placements[index].x}" y="${placements[index].y}" width="${placements[index].width}" height="${placements[index].height}" href="${thumbnail.image}"> </image>`})}
 
                   
@@ -79,7 +79,7 @@ const frameMetadata = getFrameMetadata({
   buttons: [
     // {label: 'previous edition'},
     // {label: 'next edition'}, 
-    {label: 'MINT',  action: 'post', target: `${URL}/frames/mint`},
+    {label: 'MINT',  action: 'post'},
     {label: 'Official Website', action: 'link', target: `${URL}/`},
     
   ],
@@ -87,7 +87,7 @@ const frameMetadata = getFrameMetadata({
     src: base64Img,
     aspectRatio: '1:1'
   },
-  postUrl: `${URL}/frames`,
+  postUrl: `${URL}/frames/mint`,
 });
 
 export const metadata = {

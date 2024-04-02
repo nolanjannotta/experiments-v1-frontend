@@ -9,7 +9,7 @@ import { useWriteContract, useConfig} from 'wagmi'
 import { useQuery } from "@tanstack/react-query";
 import { editionData } from "@/app/editionData";
 import CustomConnect from "@/components/CustomConnect";
-import { decodeAbiParameters, encodeAbiParameters   } from "viem";
+import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
 
 
 // console.log(contractTypes)
@@ -56,6 +56,7 @@ function ModifyToken({ params }) {
   const [modifyBytes, setModifyBytes] = useState("");
 //   const [isOwner, setIsOwner] = useState(false);
   const account = useAccount();
+  console.log(inputFields)
 
   const {writeContract} = useWriteContract();
   
@@ -122,7 +123,9 @@ function ModifyToken({ params }) {
 
     const values = editionData[edition.name]?.modify.map((value)=>{return inputFields[value.name]}) || []
     const packed = encodeAbiParameters(editionData[edition.name]?.modify || [], values)
+    
     setModifyBytes(packed)
+    console.log(packed)
 
   },[inputFields])
 
@@ -130,16 +133,11 @@ function ModifyToken({ params }) {
   function eventHandler(event, index) {
     const type = editionData[edition.name].modify[index].type
     const value = type === "string" ? event.target.value : Number(event.target.value);
+    console.log(event.target.value)
     setInputFields(
         prev => ({
             ...prev, 
             [editionData[edition.name].modify[index].name]: value}));
-
-    // const { name, value } = event.target;
-    // setInputFields(prevState => ({
-    //             ...prevState,
-    //             [name]: value
-    //         }));
   }
 
   if (isEditionFetching)
