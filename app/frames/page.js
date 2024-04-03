@@ -1,6 +1,6 @@
 
 import { getFrameMetadata } from '@coinbase/onchainkit';
-import {getEdition,getLastMint, getThumbnails} from "../frameConfig.js"
+import {getThumbnails} from "../frameConfig.js"
 import sharp from "sharp";
 
 const URL = "http://localhost:3000"
