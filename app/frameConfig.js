@@ -42,13 +42,19 @@ const walletClient = createWalletClient({
         return ""
     }   
   }
+
+  export async function getEditionCounter() {
+    const counter = await signerContract.read.editionCounter();
+    return Number(counter);
   
+  }
+//   
   export async function getLastMint() {
       const lastEditionId = await signerContract.read.editionCounter();
       const lastEdition = await signerContract.read.getEdition([lastEditionId]);
       const lastToken = await signerContract.read.getRawSvg([(lastEditionId * 1000000n) + lastEdition.counter])
       const lastUri = await signerContract.read.getDataUri([(lastEditionId * 1000000n) + lastEdition.counter])
-      return {lastEdition, lastToken,lastUri}
+      return {lastEditionId, lastEdition, lastToken,lastUri}
   }
 
   export async function checkTxStatus(txHash) {
