@@ -39,24 +39,24 @@ else {
 <line x1="500" x2="500" y1="0" y2="1000" stroke="black" stroke-width="3"></line>
  */}
 
+                  // <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
 
-let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
-                  <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
-
-                  <text x="500" y="100" text-anchor="middle" font-size="80">Experiments V1</text>
-                  <text x="500" y="150" text-anchor="middle" font-size="30">A collection of 100% onchain images.</text>
-                  <text x="500" y="185" text-anchor="middle" font-size="30">experimenting with onchain art and onchain mechanics.</text>
+                  // <text x="500" y="100" text-anchor="middle" font-size="80">Experiments V1</text>
+                  // <text x="500" y="150" text-anchor="middle" font-size="30">A collection of 100% onchain images.</text>
+                  // <text x="500" y="185" text-anchor="middle" font-size="30">experimenting with onchain art and onchain mechanics.</text>
                   
 
-                  <text x="125" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">p5.js</text>
-                  <text x="275" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">javascript</text>
-                  <text x="425" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">servers</text>
-                  <text x="575" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">ipfs</text>
-                  <text x="725" y="220" text-anchor="middle"  font-size="30">solidity ✓</text>
-                  <text x="875" y="220" text-anchor="middle"  font-size="30">SVG ✓</text>
+                  // <text x="125" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">p5.js</text>
+                  // <text x="275" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">javascript</text>
+                  // <text x="425" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">servers</text>
+                  // <text x="575" y="220" text-anchor="middle" text-decoration="line-through" font-size="30">ipfs</text>
+                  // <text x="725" y="220" text-anchor="middle"  font-size="30">solidity ✓</text>
+                  // <text x="875" y="220" text-anchor="middle"  font-size="30">SVG ✓</text>
 
-                  ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
-                  ${thumbnails.map((thumbnail, index) => {return `<image x="160" y="275" width="680" height="680" href="${thumbnail.image}"> </image>`})}
+                  // ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
+let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
+
+                  ${thumbnails.map((thumbnail, index) => {return `<image x="${placements[index].x}" y="${placements[index].y}" width="${placements[index].width}" height="${placements[index].height}" href="${thumbnail.image}"> </image>`})}
 
                   
          
