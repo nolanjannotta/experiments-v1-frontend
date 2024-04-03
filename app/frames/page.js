@@ -19,7 +19,7 @@ const URL = "http://localhost:3000"
 export async function generateMetadata() {
 
   const thumbnails = await getThumbnails();
-console.log(thumbnails)
+// console.log(thumbnails[0].image)
 // thumbnails = thumbnails.slice(0,4)
 
     const placements = []
@@ -63,27 +63,23 @@ console.log(thumbnails)
                       <text x="725" y="220" text-anchor="middle"  font-size="30">solidity ✓</text>
                       <text x="875" y="220" text-anchor="middle"  font-size="30">SVG ✓</text>
 
-                      ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
 
-                      ${thumbnails.map((thumbnail, index) => {return `<image x="${placements[index].x}" y="${placements[index].y}" width="${placements[index].width}" height="${placements[index].height}" href="${thumbnail.image}"> </image>`})}
+                      ${thumbnails.map((thumbnail, index) => {
+                          return `
+                            <image x="${placements[index].x}" y="${placements[index].y}" width="${placements[index].width}" height="${placements[index].height}" href="${thumbnail.image}"> </image>
+                            <text x="${placements[index].nameX}" y="${placements[index].nameY}" text-anchor="middle" font-size="30"> ${thumbnail.name}</text>  
+                          `})}
 
-                      
-            
                       </svg>
                       `
 
-                      // <image x="133" y="300" width="300" height="300" href="${thumbnails[thumbnails.length-3]}"></image>
-                      // <image x="566" y="300" width="300" height="300" href="${thumbnails[thumbnails.length-2]}"></image>
-
-                      // <image x="133" y="300" width="300" height="300" href="${thumbnails[thumbnails.length-1]}"></image>
-                      // <image x="566" y="300" width="300" height="300" href="${thumbnails[thumbnails.length]}"></image>
-                      
-                      // ${thumbnails.map((thumbnail, index) => {return `<image x="${25 + (index * 350)}" y="${300 + (index * 200)}" width="300" height="300" href="${thumbnail}"> </image>`})}
-
+            
+            // svg = svg.replace(/\s+/g, ' ').trim();
+            console.log(svg)
     const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
 
     const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
+    // console.log(base64Img)
     const frameMetadata = getFrameMetadata({
       buttons: [
         // {label: 'previous edition'},
@@ -160,3 +156,4 @@ export default async function Frames() {
     </>
   );
 }
+

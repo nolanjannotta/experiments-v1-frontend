@@ -31,12 +31,20 @@ async function tokenData(tokenId) {
 
 
 export async function generateMetadata({ params }) {
-  const svg = await contract.read.getRawSvg([params.tokenId]);
+  // const svg = await contract.read.getRawSvg([params.tokenId]);
+  let svg = await contract.read.getDataUri([params.tokenId]);
+  svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'> 
+  <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
 
+  <image x="200" y="300" width="600" height="600" href="${svg}"> </image>        
+  </svg>
+  `
+
+  
   const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
 
   const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
+console.log(svg)
 
   const frameMetadata = getFrameMetadata({
     image: {
