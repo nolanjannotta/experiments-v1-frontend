@@ -55,10 +55,10 @@ let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
                   <text x="725" y="220" text-anchor="middle"  font-size="30">solidity ✓</text>
                   <text x="875" y="220" text-anchor="middle"  font-size="30">SVG ✓</text>
 
-                  ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
                   ${thumbnails.map((thumbnail, index) => {return `<image x="${placements[index].x}" y="${placements[index].y}" width="${placements[index].width}" height="${placements[index].height}" href="${thumbnail.image}"> </image>`})}
 
-                  
+                  ${placements.map((placement, index) => {return `<text x="${placement.nameX}" y="${placement.nameY}" text-anchor="middle" font-size="30"> ${thumbnails[index].name}</text>`})}
+
          
                   </svg>
                   `
@@ -71,9 +71,9 @@ let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
                   
                   // ${thumbnails.map((thumbnail, index) => {return `<image x="${25 + (index * 350)}" y="${300 + (index * 200)}" width="300" height="300" href="${thumbnail}"> </image>`})}
 
-const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("jpg").toBuffer();
+const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
 
-const base64Img = `data:image/jpg;base64,${img.toString('base64')}`;
+const base64Img = `data:image/png;base64,${img.toString('base64')}`;
 
 
 
