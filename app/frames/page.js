@@ -6,12 +6,13 @@ import sharp from "sharp";
 const URL = "http://localhost:3000"
 
 
-const lastData = await getLastMint();
+// const lastData = await getLastMint();
 
-const edition = await getEdition(1)
+// const edition = await getEdition(1)
 
 let thumbnails = await getThumbnails();
 // thumbnails = thumbnails.slice(0,4)
+
 const placements = []
 if(thumbnails.length == 1) {
   placements.push({x: 160, y: 275, width: 680, height: 680, nameX: 500, nameY: 980})
