@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint,mint } from "@/app/frameConfig.js";
 import sharp from "sharp";
-
-const URL = "http://localhost:3000"
+import {FRAME_URL} from "@/app/constants.js";
+// const URL = "http://localhost:3000"
 
 
 async function getResponse(request) {
@@ -33,9 +33,9 @@ async function getResponse(request) {
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: [{label: "submit", action:"post",  target: `${URL}/frames/results`}],
+            buttons: [{label: "submit", action:"post",  target: `${FRAME_URL}/frames/results`}],
             image: {src: base64Img, aspectRatio: '1:1'},
-            postUrl: `${URL}/frames/results`,
+            postUrl: `${FRAME_URL}/frames/results`,
             // state: {hash: "0x762db698e005647bb1ba0d87e290cdafb55bf7ad6f3b0b25eba3d2b2c48fa74e"}
         })
     );

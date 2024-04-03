@@ -3,8 +3,8 @@ import { getFrameMetadata } from '@coinbase/onchainkit';
 import {getThumbnails} from "../frameConfig.js"
 import sharp from "sharp";
 import { contract } from "../contract_server.js";
-
-const URL = "http://localhost:3000"
+import {FRAME_URL} from "../constants.js"
+// const URL = "http://localhost:3000"
 
 
 // const lastData = await getLastMint();
@@ -85,14 +85,14 @@ export async function generateMetadata() {
         // {label: 'previous edition'},
         // {label: 'next edition'}, 
         {label: 'MINT',  action: 'post'},
-        {label: 'Official Website', action: 'link', target: `${URL}/`},
+        {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         
       ],
       image: {
         src: base64Img,
         aspectRatio: '1:1'
       },
-      postUrl: `${URL}/frames/mint`,
+      postUrl: `${FRAME_URL}/frames/mint`,
     });
 
     return {

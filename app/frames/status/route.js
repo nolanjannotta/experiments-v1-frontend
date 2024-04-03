@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint, checkTxStatus, mint,getSvg } from "@/app/frameConfig.js";
 import sharp from "sharp";
-
-const URL = "http://localhost:3000"
+import {FRAME_URL} from "@/app/constants.js";
+// const URL = "http://localhost:3000"
 
 
 async function getResponse(request) {
@@ -55,7 +55,7 @@ async function getResponse(request) {
         getFrameHtmlResponse({
             buttons: buttons,
             image: {src: base64Img, aspectRatio: '1:1'},
-            postUrl: `${URL}/frames/status`,
+            postUrl: `${FRAME_URL}/frames/status`,
             state: {hash: state.hash}
         })
     );

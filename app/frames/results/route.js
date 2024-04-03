@@ -3,8 +3,8 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint, checkTxStatus, mint, getEditionCounter } from "@/app/frameConfig.js";
 import sharp from "sharp";
 import {kv} from '@vercel/kv'
-
-const URL = "http://localhost:3000"
+import {FRAME_URL} from "@/app/constants.js";
+// const URL = "http://localhost:3000"
 
 
 async function getResponse(request) {
@@ -57,7 +57,7 @@ async function getResponse(request) {
         getFrameHtmlResponse({
             buttons: [{label: "check status"}],
             image: {src: base64Img, aspectRatio: '1:1'},
-            postUrl: `${URL}/frames/status`,
+            postUrl: `${FRAME_URL}/frames/status`,
             state: {hash: tx}
         })
     );

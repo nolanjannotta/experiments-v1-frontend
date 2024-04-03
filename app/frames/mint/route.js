@@ -3,8 +3,8 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint } from "@/app/frameConfig.js";
 import sharp from "sharp";
 import {kv} from "@vercel/kv"
-
-const URL = "http://localhost:3000"
+import {FRAME_URL} from "@/app/constants.js"
+// const URL = "http://localhost:3000"
 
 
 async function getResponse(request) {
@@ -72,7 +72,7 @@ async function getResponse(request) {
         getFrameHtmlResponse({
             buttons: [{label: "a"},{label: "b"},{label: "c"},{label: "d"}],
             image: {src: base64Img, aspectRatio: '1:1'},
-            postUrl: `${URL}/frames/submit`,
+            postUrl: `${FRAME_URL}/frames/submit`,
         })
     );
 
