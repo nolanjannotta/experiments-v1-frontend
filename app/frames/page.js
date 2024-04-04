@@ -12,7 +12,7 @@ import {FRAME_URL} from "../constants.js"
 // const edition = await getEdition(1)
 
 
-
+const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`
 
 
 
@@ -75,10 +75,10 @@ export async function generateMetadata() {
 
             
             // svg = svg.replace(/\s+/g, ' ').trim();
-            console.log(svg)
-    const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
+            // console.log(svg)
+    // const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
 
-    const base64Img = `data:image/png;base64,${img.toString('base64')}`;
+    // const base64Img = `data:image/png;base64,${img.toString('base64')}`;
     // console.log(base64Img)
     const frameMetadata = getFrameMetadata({
       buttons: [
@@ -89,10 +89,11 @@ export async function generateMetadata() {
         
       ],
       image: {
-        src: base64Img,
+        src: image,
         aspectRatio: '1:1'
       },
       postUrl: `${FRAME_URL}/frames/mint`,
+      // postUrl: image,
     });
 
     return {
@@ -101,7 +102,7 @@ export async function generateMetadata() {
       openGraph: {
         title: 'Experiments V1',
         description: 'frame for minting on chain art experiments',
-        images: [base64Img], 
+        images: [image], 
       },
       other: {
         ...frameMetadata,
