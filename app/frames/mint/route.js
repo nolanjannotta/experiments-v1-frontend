@@ -7,6 +7,8 @@ import {FRAME_URL} from "@/app/constants.js"
 // const URL = "http://localhost:3000"
 
 
+
+
 async function getResponse(request) {
     // const obj = {name: "nolan", age: 28, location: "california"}
 
@@ -27,6 +29,8 @@ async function getResponse(request) {
 
     // console.log(currentAllowance)
     const lastData = await getLastMint();
+
+    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}`
     // console.log(lastData.lastEdition)
 
     const currentAllowance = await kv.get(`${body.mockFrameData.interactor.fid}`);
@@ -46,32 +50,10 @@ async function getResponse(request) {
         allowance.canMint = currentAllowance < 2 ? true : false;
     }
 
-
-    let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
-                  <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
-                  <text x="500" y="85" text-anchor="middle" font-size="30">Currently minting</text>
-                    <text x="500" y="160" text-anchor="middle" font-size="60"> ${lastData.lastEdition.name}</text>
-
-                    <text x="400" y="220" text-anchor="middle" font-size="25">supply: ${Number(lastData.lastEdition.supply)}</text>
-                    <text x="600" y="220" text-anchor="middle" font-size="25">next id: ${Number(lastData.lastEdition.counter) + 1}</text>
-
-                    <text x="500" y="250" text-anchor="middle" font-size="25">${allowance.message}</text>
-
-                   <image x="200" y="300" width="600" height="600" href="${lastData.lastUri}"></image>
-
-                   </svg>
-                  `
-
-    const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
-
-    const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
-    // console.log(base64Img)
-
     return new NextResponse(
         getFrameHtmlResponse({
             buttons: [{label: "a"},{label: "b"},{label: "c"},{label: "d"}],
-            image: {src: base64Img, aspectRatio: '1:1'},
+            image: {src: image, aspectRatio: '1:1'},
             postUrl: `${FRAME_URL}/frames/submit`,
         })
     );
@@ -85,3 +67,5 @@ export async function POST(request) {
 
 
 export const dynamic = "force-dynamic";
+
+// export const GET = POST;
