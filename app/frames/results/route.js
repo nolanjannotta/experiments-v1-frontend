@@ -9,23 +9,31 @@ import {FRAME_URL} from "@/app/constants.js";
 
 async function getResponse(request) {
     const body = await request.json();
-    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear: true});
-    const currentAllowance = await kv.get(`${body.mockFrameData.interactor.fid}`);
-    const editionCounter = await getEditionCounter();
-    console.log(currentAllowance);
+    const allowFramegear = process.env.NODE_ENV !== 'production'; 
+
+    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear});
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
+    const currentAllowance = await kv.get(`${message.interactor.fid}`);
+
+    const state = JSON.parse(message.state.serialized)
+    const minterAddress = state.minterAddress
+    const tokenName = state.tokenName
+    // const editionCounter = await getEditionCounter();
+    // console.log(currentAllowance);
+
+   
     // console.log(isValid)
     // const lastData = await getLastMint();
     let tx;
+    console.log(currentAllowance)
     
-    
-    if(currentAllowance != null && currentAllowance[editionCounter] < 2) {
-        let allowance = Number(currentAllowance[editionCounter]);
-        const newState = {...currentAllowance, [editionCounter]: allowance+1};
+    if(currentAllowance != null && currentAllowance[tokenName] > 0) {
+        let allowance = Number(currentAllowance[tokenName]);
+        const newState = {...currentAllowance, [tokenName]: allowance-1};
         await kv.set(`${body.mockFrameData.interactor.fid}`, newState);
-        // tx = await mint("0x8f088eca0009ad61fb94a6d7e9a5d7a087c08564");
+        tx = await mint(minterAddress);
         // console.log("tx",tx)  
     }
 

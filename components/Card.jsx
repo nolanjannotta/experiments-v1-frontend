@@ -3,7 +3,7 @@ export default function Card({ children }
     return (
       <div
         style={{
-          justifyContent: "flex-start",
+          justifyContent: "center",
           alignItems: "center",
           display: "flex",
           flexDirection: "column",

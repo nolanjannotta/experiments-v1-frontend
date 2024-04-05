@@ -8,7 +8,9 @@ import {FRAME_URL} from "@/app/constants.js";
 
 async function getResponse(request) {
     const body = await request.json();
-    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear: true});
+    const allowFramegear = process.env.NODE_ENV !== 'production'; 
+
+    const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear});
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }

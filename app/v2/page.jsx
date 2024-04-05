@@ -12,7 +12,7 @@ function V2() {
           This page will act as a place to brainstorm features and ideas for the
           next version of this project. 
         </p>
-        <p>If YOU have an idea, reach out! lets build the coolest possible thing. &#8594; <a>twitter</a> || <a>warpcast</a></p>
+        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a>twitter</a> || <a>warpcast</a></p>
         <figure>
           <figcaption>Objectives</figcaption> 
           <ul>
