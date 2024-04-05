@@ -10,45 +10,28 @@ import {FRAME_URL} from "@/app/constants.js"
 
 
 async function getResponse(request) {
-    // const obj = {name: "nolan", age: 28, location: "california"}
-
-    // await kv.set("username #1", obj);
-    // const test = await kv.get("username #1");
-    let allowance = {canMint: false, message: "" };
-
-    // console.log(test);
-
     const body = await request.json();
-    console.log(body.mockFrameData.interactor.fid)
-    const { isValid } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear: true});
+    const allowFramegear = process.env.NODE_ENV !== 'production'; 
+
+    const { isValid } = await getFrameMessage(body, { neynarApiKey: process.env.NEXT_PUBLIC_NAYNAR_KEY, allowFramegear});
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
-
- 
-
-    // console.log(currentAllowance)
+      console.log(body)
     const lastData = await getLastMint();
-
-    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}`
-    // console.log(lastData.lastEdition)
-
-    const currentAllowance = await kv.get(`${body.mockFrameData.interactor.fid}`);
-    
-    // console.log(currentAllowance, currentAllowance[lastData?.lastEditionId])
-    
-    if(currentAllowance == null || currentAllowance[lastData?.lastEditionId] == null) {
+    const currentAllowance = await kv.get("0");
+        
+    if(currentAllowance == null || currentAllowance[lastData?.lastEdition.name] == null) {
         let name = lastData?.lastEdition.name;
-        let id = lastData?.lastEditionId;
-        const newAllowance = {...currentAllowance, [id]: 0};
+        const newAllowance = {...currentAllowance, [name]: 2};
         await kv.set(`${body.mockFrameData.interactor.fid}`, newAllowance);
-        allowance.message = `you have 2 free warpcast mints for ${name}`
-        allowance.canMint = true;
     }
-    else {
-        allowance.message = `you have ${2 - currentAllowance} free warpcast mints`
-        allowance.canMint = currentAllowance < 2 ? true : false;
-    }
+
+
+
+
+    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance[lastData.lastEdition.name] || 2}`
+
 
     return new NextResponse(
         getFrameHtmlResponse({
