@@ -43,34 +43,12 @@ export async function GET() {
           and onchain mechanics.
         </p>
         <ul>
-          <li
-            style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}
-          >
-            p5.js
-          </li>
-
-          <li
-            style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}
-          >
-            javascript
-          </li>
-          <li
-            style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}
-          >
-            servers
-          </li>
-          <li
-            style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}
-          >
-            ipfs
-          </li>
-
-          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>
-            solidity
-          </li>
-          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>
-            svg
-          </li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>p5.js</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>javascript</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>servers</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>ipfs</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>solidity</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>svg</li>
         </ul>
         {/* <br/>
         <br/> */}
