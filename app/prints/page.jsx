@@ -28,7 +28,7 @@ function Prints() {
         <li>All payments, royalties etc and as much business logic as possible will take place on chain. Things like shipping addresses will need to be handled elsewhere, possibly Coinbase Commerce?</li>
         <li>Will include the SVG code printed on the back or on a seperate peice of paper. </li>
         <li>May include some sort of watermark or some kind of cryptographic signed message for authenticity.</li>
-        <li>Will most likely not include an NFC chip, unless I'm convinced otherwise.</li>
+        <li>Will most likely not include an NFC chip.</li>
 
         </ul>
 </figure>
