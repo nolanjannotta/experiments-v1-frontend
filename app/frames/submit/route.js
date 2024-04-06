@@ -14,9 +14,9 @@ async function getResponse(request) {
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
-
+    console.log(message)
     const address = request.nextUrl.searchParams.get("address")
-    const tokenName = JSON.parse(message.state.serialized).tokenName
+    const tokenName = JSON.parse(message.state).tokenName
 
     const image = `${FRAME_URL}/frames/images/submit?date=${Date.now()}&address=${address}&tokenName=${tokenName}`
 
