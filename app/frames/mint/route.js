@@ -18,12 +18,13 @@ async function getResponse(request) {
         return new NextResponse('Message not valid', { status: 500 });
       }
     const lastData = await getLastMint();
-    const currentAllowance = await kv.get(`${message.interactor.fid}`);
+    let currentAllowance = await kv.get(message.interactor.fid);
         console.log(currentAllowance)
-    if(currentAllowance == null || currentAllowance[lastData?.lastEdition.name] == null) {
+    !currentAllowance ? currentAllowance = {} : currentAllowance;
+    if(currentAllowance[lastData?.lastEdition.name] == null) {
         let name = lastData?.lastEdition.name;
         const newAllowance = {...currentAllowance, [name]: 2};
-        await kv.set(`${message.interactor.fid}`, newAllowance);
+        await kv.set(message.interactor.fid, newAllowance);
     }
 
 
@@ -32,7 +33,14 @@ async function getResponse(request) {
     const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance[lastData.lastEdition.name] == null ? 2 : currentAllowance[lastData.lastEdition.name]}`
     process.env.NODE_ENV !== 'production' ? message.interactor.verified_addresses.eth_addresses = ["0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39", "0xcddb54bbAC783c2aE9860A8e494556c0b61e4Eee"] : message.interactor.verified_addresses.eth_addresses
     
-    const buttons = message.interactor.verified_addresses.eth_addresses.map((address) => {return {label: `${address.slice(0,6)}...${address.slice(-4)}`, action: "post", target: `${FRAME_URL}/frames/submit?address=${address}`}})
+    let buttons = [];
+    if(currentAllowance[lastData.lastEdition.name] == null || currentAllowance[lastData.lastEdition.name] > 0) {
+        buttons = message.interactor.verified_addresses.eth_addresses.map((address) => {return {label: `${address.slice(0,6)}...${address.slice(-4)}`, action: "post", target: `${FRAME_URL}/frames/submit?address=${address}`}})
+    }
+    else {
+        buttons = [{label: "mint on the website!", action: "link", target: `${FRAME_URL}/mint`}]
+    }
+
 
     return new NextResponse(
         getFrameHtmlResponse({

@@ -17,7 +17,10 @@ function V2() {
           <figcaption>Objectives</figcaption> 
           <ul>
             <li>
-                increase robustness and flexibility.
+                increase robustness and flexibility... whatever that means.
+            </li>
+            <li>
+                add more fun interoperability features.
             </li>
 
             <li>
@@ -28,7 +31,7 @@ function V2() {
 
             </li>
             <li>
-                <i>Possibly</i> implement ERC-6551: Non-fungible Token Bound Accounts. For example for things that consume other things, (like black and white or rectangular clock),
+                consider possibly implementing ERC-6551: Non-fungible Token Bound Accounts. For example for things that consume other things, (like black and white or rectangular clock),
                 the tokens that they point to could be owned by the token itself.
                 <figure>
                 <figcaption>pro</figcaption>
@@ -55,7 +58,7 @@ function V2() {
                     </figure>
             </li>
             <li>
-              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a period of time in the past). They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
+              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a period of time in the past. unless im wrong about that). They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
             </li>
             <li>

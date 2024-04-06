@@ -27,7 +27,7 @@ async function getResponse(request) {
             buttons: [{label: "submit", action:"post",  target: `${FRAME_URL}/frames/results`}],
             image: {src: image, aspectRatio: '1:1'},
             postUrl: `${FRAME_URL}/frames/results`,
-            state: {minterAddress: address, tokenName: tokenName}
+            state: {minterAddress: address, tokenName: tokenName, submittedAt: Date.now()/1000}
         })
     );
 

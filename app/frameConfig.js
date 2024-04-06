@@ -69,7 +69,7 @@ const walletClient = createWalletClient({
         hash: txHash
      }) 
 
-     console.log(fromHex(results.logs[0]?.topics[3], "number"))
+    //  console.log(fromHex(results.logs[0]?.topics[3], "number"))
 
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {
@@ -85,7 +85,7 @@ const walletClient = createWalletClient({
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
     const edition = await signerContract.read.editionCounter();
-    console.log("hello")
+    // console.log("hello")
     const { request } = await publicClient.simulateContract({
         address: artAddress,
         abi: abi,

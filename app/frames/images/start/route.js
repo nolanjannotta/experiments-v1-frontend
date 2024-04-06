@@ -5,16 +5,12 @@ import {getThumbnails} from "@/app/frameConfig";
 
 function thumbnailImage(thumbnail, index, length) {
     const width = length == 1 ? "70%" : length == 2 ? "45%" : "35%"
-    // const styles = length == 1 ? {maxWidth;"85%"} : length == 2 ? "45%" : "35%"
     return (
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        //   backgroundColor: "orange",
-        //   marginRight: "0px",
-        //   padding: "0 0 0 0",
           maxWidth: width
         }}
         key={index}
@@ -29,7 +25,6 @@ export async function GET() {
 
     let thumbnails = await getThumbnails();
     // thumbnails = thumbnails.slice(0, 2)
-    // console.log(thumbnails)
 
 
 
@@ -50,20 +45,13 @@ export async function GET() {
           <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>solidity</li>
           <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>svg</li>
         </ul>
-        {/* <br/>
-        <br/> */}
         <div
           style={{
             width:"100%",
             marginTop: thumbnails.length == 1 ? "40px" : thumbnails.length == 2 ? "100px" : "40px",
             display: "flex",
-            // flexDirection: "row",
-            // gap: "0px 490px;",
             flexWrap: "wrap",
             justifyContent: "space-around",
-            // backgroundColor: "blue",
-            // alignContent: "flex-start",
-            // alignItems: "center",
           }}
         >
           {thumbnails.map((thumbnail, index) => {
