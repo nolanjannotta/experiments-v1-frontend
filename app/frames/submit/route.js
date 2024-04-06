@@ -11,9 +11,9 @@ async function getResponse(request) {
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
     const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-    if (!isValid) {
-        return new NextResponse('Message not valid', { status: 500 });
-      }
+    // if (!isValid) {
+    //     return new NextResponse('Message not valid', { status: 500 });
+    //   }
 
     const address = request.nextUrl.searchParams.get("address")
     const tokenName = JSON.parse(message.state.serialized).tokenName
