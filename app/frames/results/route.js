@@ -17,7 +17,7 @@ async function getResponse(request) {
       }
     const userAllowances = await kv.get(`${message.interactor.fid}`);
     // const lastMintTimestamp = await kv.get("lastMintTimestamp");
-    const state = JSON.parse(message.state)
+    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
     const minterAddress = state.minterAddress
     const tokenName = state.tokenName
     const submittedAt = state.submittedAt

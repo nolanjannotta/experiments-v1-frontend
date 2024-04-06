@@ -16,7 +16,7 @@ async function getResponse(request) {
       }
     console.log(message)
     const address = request.nextUrl.searchParams.get("address")
-    const tokenName = JSON.parse(message.state).tokenName
+    const tokenName = JSON.parse(decodeURIComponent(message.state?.serialized)).tokenName
 
     const image = `${FRAME_URL}/frames/images/submit?date=${Date.now()}&address=${address}&tokenName=${tokenName}`
 

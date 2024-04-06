@@ -16,7 +16,7 @@ async function getResponse(request) {
       }
     // console.log(isValid)
     // const lastData = await getLastMint();
-    const state = JSON.parse(message.state)
+    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
     let results = {}
     
     if(state.hash) results = await checkTxStatus(state.hash)
