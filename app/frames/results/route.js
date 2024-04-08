@@ -8,6 +8,7 @@ import {FRAME_URL} from "@/app/constants.js";
 
 
 async function getResponse(request) {
+
     const body = await request.json();
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
@@ -16,13 +17,17 @@ async function getResponse(request) {
         return new NextResponse('Message not valid', { status: 500 });
       }
 
-    console.log(message)
-    const userAllowances = await kv.get(`${message.interactor.fid}`);
-    // const lastMintTimestamp = await kv.get("lastMintTimestamp");
     const state = JSON.parse(decodeURIComponent(message.state?.serialized))
     const minterAddress = state.minterAddress
     const tokenName = state.tokenName
     const submittedAt = state.submittedAt
+
+
+    // console.log(message)
+    const userAllowance = await kv.hget(message.interactor.fid, tokenName);
+    const lastSubmitted = await kv.hget(message.interactor.fid, "lastSubmitted") || 0;
+    // const lastMintTimestamp = await kv.get("lastMintTimestamp");
+    console.log("lastSubmitted", lastSubmitted)
     // const editionCounter = await getEditionCounter();
     // console.log(currentAllowance);
 
@@ -32,12 +37,12 @@ async function getResponse(request) {
     let tx;
     // console.log(currentAllowance)
     
-    let allowance = Number(userAllowances[tokenName]);
-    let lastSubmitted = Number(userAllowances.lastSubmitted) || 0;
+    // let allowance = Number(userAllowances[tokenName]);
+    // let lastSubmitted = Number(userAllowances.lastSubmitted) || 0;
     // console.log("interval", Date.now() - timestamp)
-    if(allowance > 0 &&  submittedAt - lastSubmitted > 10){
-        const newState = {...userAllowances, [tokenName]: allowance-1, lastSubmitted: submittedAt};
-        await kv.set(message.interactor.fid, newState);
+    if(userAllowance > 0 &&  submittedAt - lastSubmitted > 10){
+        // const newState = {...userAllowances, [tokenName]: allowance-1, lastSubmitted: submittedAt};
+        await kv.hset(message.interactor.fid, {[tokenName]: userAllowance-1, lastSubmitted: submittedAt});
         try {
             tx = await mint(minterAddress);
         } catch (error) {

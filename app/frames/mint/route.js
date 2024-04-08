@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint } from "@/app/frameConfig.js";
 import sharp from "sharp";
-import {kv} from "@vercel/kv"
+import {kv } from "@vercel/kv"
 import {FRAME_URL,nolanjFID} from "@/app/constants.js"
 import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 
@@ -10,7 +10,20 @@ import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 
 
 const neynar = new NeynarAPIClient(process.env.NEYNAR_KEY);
+// await kv.hset('test', {hello: 'world', whatsUp: 123})
 
+// await kv.hset('nolan', { userId: 123, email: 'ex@example.com' });
+
+// await kv.hset('nolan', { name: 'bob' });
+
+// await kv.hset('nolan', { show: 'breaking bad' });
+
+
+// const value1 = await kv.hget('nolan', 'email'); 
+// const value2 = await kv.hget('nolan', 'name'); 
+// const value3 = await kv.hget('nolan', 'show'); 
+  
+// console.log(value1,value2,value3)
 
 const doesUserFollowNolan = async (fid) => {
     if(fid == nolanjFID) return true;
@@ -24,7 +37,7 @@ const doesUserFollowNolan = async (fid) => {
       });
       users = users.concat(result.result.users);
       cursor = result.result.next.cursor;
-      console.log(cursor);
+    //   console.log(cursor);
     } while (cursor !== "" && cursor !== null);
   
     if(users.includes(nolanjFID)) {
@@ -44,24 +57,30 @@ async function getResponse(request) {
       }
 
     const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
+    await kv.hset(message.interactor.fid, {isFollower: userFollowsNolan}); 
+
     const lastData = await getLastMint();
-    let currentAllowance = await kv.get(message.interactor.fid);
-        // console.log(currentAllowance)
-    !currentAllowance ? currentAllowance = {} : currentAllowance;
-    if(currentAllowance[lastData?.lastEdition.name] == null) {
-        let name = lastData?.lastEdition.name;
-        const newAllowance = {...currentAllowance, [name]: 2};
-        await kv.set(message.interactor.fid, newAllowance);
+    const currentAllowance = await kv.hget(message.interactor.fid, lastData?.lastEdition.name);
+    // try {
+    //     currentAllowance = await kv.hget(message.interactor.fid, lastData?.lastEdition.name);
+    // } catch (error) {
+    //     currentAllowance = null;
+    // }
+
+        console.log(currentAllowance)
+    // !currentAllowance ? currentAllowance = {} : currentAllowance;
+    if(currentAllowance == null) {
+        await kv.hset(message.interactor.fid, {[lastData?.lastEdition.name]: 2});
     }
 
 
 
 
-    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance[lastData.lastEdition.name] == null ? 2 : currentAllowance[lastData.lastEdition.name]}&following=${userFollowsNolan}`
+    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance == null ? 2 : currentAllowance}&following=${userFollowsNolan}`
     process.env.NODE_ENV !== 'production' ? message.interactor.verified_addresses.eth_addresses = ["0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39", "0xcddb54bbAC783c2aE9860A8e494556c0b61e4Eee"] : message.interactor.verified_addresses.eth_addresses
     
     let buttons = [];
-    if(currentAllowance[lastData.lastEdition.name] == null || currentAllowance[lastData.lastEdition.name] > 0) {
+    if(currentAllowance == null || currentAllowance > 0) {
         buttons = message.interactor.verified_addresses.eth_addresses.map((address) => {return {label: `${address.slice(0,6)}...${address.slice(-4)}`, action: "post", target: `${FRAME_URL}/frames/submit?address=${address}`}})
     }
     else {
@@ -71,9 +90,9 @@ async function getResponse(request) {
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: buttons,
+            buttons: userFollowsNolan ? buttons : [{label: "home"}],
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: `${FRAME_URL}/frames/submit`,
+            postUrl: userFollowsNolan ? `${FRAME_URL}/frames/submit` : `${FRAME_URL}/frames` ,
             state: {tokenName: lastData.lastEdition.name}
             
         })
