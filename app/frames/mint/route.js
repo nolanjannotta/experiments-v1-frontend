@@ -3,10 +3,35 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint } from "@/app/frameConfig.js";
 import sharp from "sharp";
 import {kv} from "@vercel/kv"
-import {FRAME_URL} from "@/app/constants.js"
+import {FRAME_URL,nolanjFID} from "@/app/constants.js"
+import { NeynarAPIClient } from "@neynar/nodejs-sdk";
+
 // const URL = "http://localhost:3000"
 
 
+const neynar = new NeynarAPIClient(process.env.NEYNAR_KEY);
+
+
+const doesUserFollowNolan = async (fid) => {
+    if(fid == nolanjFID) return true;
+
+    let cursor = "";
+    let users = [];
+    do {
+      const result = await neynar.fetchUserFollowing(fid, {
+        limit: 150,
+        cursor,
+      });
+      users = users.concat(result.result.users);
+      cursor = result.result.next.cursor;
+      console.log(cursor);
+    } while (cursor !== "" && cursor !== null);
+  
+    if(users.includes(nolanjFID)) {
+        return true;
+    }
+    return false;
+  };
 
 
 async function getResponse(request) {
@@ -17,6 +42,9 @@ async function getResponse(request) {
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
+
+    const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
+    console.log(userFollowsNolan)
     const lastData = await getLastMint();
     let currentAllowance = await kv.get(message.interactor.fid);
         console.log(currentAllowance)
@@ -30,7 +58,7 @@ async function getResponse(request) {
 
 
 
-    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance[lastData.lastEdition.name] == null ? 2 : currentAllowance[lastData.lastEdition.name]}`
+    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance[lastData.lastEdition.name] == null ? 2 : currentAllowance[lastData.lastEdition.name]}&following=${userFollowsNolan}`
     process.env.NODE_ENV !== 'production' ? message.interactor.verified_addresses.eth_addresses = ["0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39", "0xcddb54bbAC783c2aE9860A8e494556c0b61e4Eee"] : message.interactor.verified_addresses.eth_addresses
     
     let buttons = [];

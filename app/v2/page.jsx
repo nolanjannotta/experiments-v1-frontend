@@ -12,7 +12,7 @@ function V2() {
           This page will act as a place to brainstorm features and ideas for the
           next version of this project. 
         </p>
-        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a>twitter</a> || <a>warpcast</a></p>
+        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a>twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
         <figure>
           <figcaption>Objectives</figcaption> 
           <ul>
@@ -31,8 +31,7 @@ function V2() {
 
             </li>
             <li>
-                consider possibly implementing ERC-6551: Non-fungible Token Bound Accounts. For example for things that consume other things, (like black and white or rectangular clock),
-                the tokens that they point to could be owned by the token itself.
+                consider possibly implementing ERC-6551: Non-fungible Token Bound Accounts. This might be useful for certain features.
                 <figure>
                 <figcaption>pro</figcaption>
                 <ul>

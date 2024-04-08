@@ -15,6 +15,8 @@ async function getResponse(request) {
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
+
+    console.log(message)
     const userAllowances = await kv.get(`${message.interactor.fid}`);
     // const lastMintTimestamp = await kv.get("lastMintTimestamp");
     const state = JSON.parse(decodeURIComponent(message.state?.serialized))

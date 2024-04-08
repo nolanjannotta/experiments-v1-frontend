@@ -14,7 +14,6 @@ async function getResponse(request) {
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
-    console.log(message)
     const address = request.nextUrl.searchParams.get("address")
     const tokenName = JSON.parse(decodeURIComponent(message.state?.serialized)).tokenName
 
