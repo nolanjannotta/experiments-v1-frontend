@@ -44,10 +44,9 @@ async function getResponse(request) {
       }
 
     const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
-    console.log(userFollowsNolan)
     const lastData = await getLastMint();
     let currentAllowance = await kv.get(message.interactor.fid);
-        console.log(currentAllowance)
+        // console.log(currentAllowance)
     !currentAllowance ? currentAllowance = {} : currentAllowance;
     if(currentAllowance[lastData?.lastEdition.name] == null) {
         let name = lastData?.lastEdition.name;

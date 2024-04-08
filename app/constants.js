@@ -1,4 +1,4 @@
-export const artAddress = "0xa088b582D05346Dc57dc9eBc8217DA30b24eB388";
+export const artAddress = "0x4Ecd75a41a3f872718a0cf583b804d4cd3e60D47";
 
 export const ZERO_ADDRESS= "0x0000000000000000000000000000000000000000"
 

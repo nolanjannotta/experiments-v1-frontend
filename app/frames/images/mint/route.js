@@ -13,9 +13,9 @@ export async function GET(request) {
     const supply    = request.nextUrl.searchParams.get("supply")
     const remaining = request.nextUrl.searchParams.get("remaining")
     const allowance = request.nextUrl.searchParams.get("allowance")
-
+    const following = request.nextUrl.searchParams.get("following")
     const uri = await getUri(lastId)
-
+    
 
   return new ImageResponse(
     (
@@ -23,7 +23,10 @@ export async function GET(request) {
         <p style={{ margin: "0" }}>currently minting</p>
         <h1 style={{ margin: "0" }}>{name}</h1>
         <p style={{ margin: "0" }}>supply: {supply} ||  remaining: {remaining}</p>
-        <p style={{ margin: "0" }}> you have {allowance} free mint{allowance == 1 ? "" : "s"} for this edition{allowance != 0 ? "! :)" : " :("}</p>
+        {!following ? <p style={{ margin: "0" }}> you have {allowance} free mint{allowance == 1 ? "" : "s"} for this edition{allowance != 0 ? "! :)" : " :("}</p>
+                    : <p style={{ margin: "0" }}>follow @nolanj to get your free mints!</p>    
+    }
+        
 
         <div
           style={{
