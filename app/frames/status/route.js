@@ -21,45 +21,15 @@ async function getResponse(request) {
     
     if(state.hash) results = await checkTxStatus(state.hash)
 
-    console.log("state",state)
 
     const image = `${FRAME_URL}/frames/images/status?date=${Date.now()}&tokenId=${results.tokenId || 0}&status=${results.status}`
     
-    // const image = results.status == "success" ? await getSvg(results.tokenId) : ""
-    // const results = await checkTxStatus(state.hash)
-    //   console.log(image)
-    // console.log(JSON.parse(body.untrustedData.state))
-    // ${image ? `<image x="200" y="300" width="600" height="600" href="${image}"></image>` : ""}
-    //   let svg = "<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'><rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>";
-    //   let buttons =[]
-    //   if(image) {
-    //     buttons = [{label: "check status"}, {label: "view", action: "link", target: `${URL}/browse/token/${results.tokenId}`}]
-
-    //     svg = `${svg}<text x="500" y="150" text-anchor="middle" font-size="80">success!!</text> <image x="200" y="300" width="600" height="600" href="${image}"></image></svg>`
-        
-    //   }
-    //   else {
-    //     buttons = [{label: "check status"}]
-    //     svg = `${svg}<text x="500" y="400" text-anchor="middle" font-size="80">tx submitted...</text>
-    //                 <text x="500" y="550" text-anchor="middle" font-size="30">check status after several seconds</text>
-
-    //                 <text x="500" y="700" text-anchor="middle" font-size="80">pending</text>
-    //                </svg>
-    //               `
-    //   }
-    
-
-    // const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
-
-    // const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
-    // console.log(base64Img)
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons:  [{label: "check status"}],
+            buttons:  [results.status != "success" ? {label: "check status"} : {label: "home"}],
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: `${FRAME_URL}/frames/status`,
+            postUrl: results.status != "success" ? `${FRAME_URL}/frames/status` : `${FRAME_URL}/frames`,
             state: {hash: state.hash}
         })
     );

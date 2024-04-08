@@ -24,8 +24,7 @@ export async function GET(request) {
         <h1 style={{ margin: "0" }}>{name}</h1>
         <p style={{ margin: "0" }}>supply: {supply} ||  remaining: {remaining}</p>
         {following ? <p style={{ margin: "0" }}> you have {allowance} free mint{allowance == 1 ? "" : "s"} for this edition{allowance != 0 ? "! :)" : " :("}</p>
-                    : <p style={{ margin: "0" }}>follow @nolanj to get your free mints!</p>    
-    }
+                    : <p style={{ margin: "0" }}>follow @nolanj to get your free mints!</p>}
         
 
         <div
