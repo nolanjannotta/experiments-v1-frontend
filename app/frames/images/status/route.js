@@ -12,9 +12,16 @@ export async function GET(request) {
     const tokenId = request.nextUrl.searchParams.get("tokenId")
     console.log(status,tokenId)
 
-    let uri
+    let uri;
+    let alt;
     if(status == "success") {
-        uri = await getUri(tokenId)
+        try{
+          uri = await getUri(tokenId)  
+        }
+        catch(e){
+          alt = "error fetching image"
+        }
+        
     }
 
 
@@ -31,7 +38,7 @@ export async function GET(request) {
             justifyContent: "center",
           }}
         >
-            { uri ? <img width="65%" src={uri}></img> : <p>oops, looks like an error occured.</p>}
+            { uri ? <img width="65%" src={uri} alt={alt}></img> : <p>oops, looks like an error occured.</p>}
 
         </div>
       </Card>

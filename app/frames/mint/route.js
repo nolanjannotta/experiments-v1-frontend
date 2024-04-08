@@ -56,7 +56,7 @@ async function getResponse(request) {
         return new NextResponse('Message not valid', { status: 500 });
       }
 
-    const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
+    const userFollowsNolan = true; //await doesUserFollowNolan(message.interactor.fid);
     await kv.hset(message.interactor.fid, {isFollower: userFollowsNolan}); 
 
     const lastData = await getLastMint();
