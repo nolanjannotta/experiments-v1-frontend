@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
            
             <li><a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${artAddress}`}>open sea</a></li>
 
-            <li><a target="_blank" href={`https://sepolia.basescan.org/address/${artAddress}`}>etherscan</a></li>
+            <li><a target="_blank" href={`https://sepolia.basescan.org/address/${artAddress}`}>basescan</a></li>
             <li style={{color: "#d7d7d7"}}>made with &#9760; by nolan</li>
           </ul>
         </nav>

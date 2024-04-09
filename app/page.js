@@ -51,10 +51,7 @@ export default function Home() {
       <br/>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+
 
       <p>below are some flowcharts that show the basic moving parts for some of functions in this project. </p>
 
@@ -66,10 +63,7 @@ export default function Home() {
       <br/>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+
       <div style={outline}>
       <img src="/tokenURIFlowChart.png" alt="tokenURI flow chart"></img>
       </div>
@@ -77,10 +71,7 @@ export default function Home() {
       <br/>
       <br/>
       <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+
       <div style={outline}>
       <img src="/modifyFlowChart.png" alt="art generator flow chart"></img>
       </div>
