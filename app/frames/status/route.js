@@ -3,6 +3,7 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint, checkTxStatus, mint,getSvg } from "@/app/frameConfig.js";
 import sharp from "sharp";
 import {FRAME_URL} from "@/app/constants.js";
+import {artAddress} from "@/app/constants.js";
 // const URL = "http://localhost:3000"
 
 
@@ -25,9 +26,12 @@ async function getResponse(request) {
     const image = `${FRAME_URL}/frames/images/status?date=${Date.now()}&tokenId=${results.tokenId || 0}&status=${results.status}`
     
 
+    const successButtons = [{label: "open sea", action: "link", target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${results.tokenId}`},
+                            {label: "website", action: "link", target: `${FRAME_URL}/browse/token/${results.tokenId}`}]
+
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons:  [results.status != "success" ? {label: "check status"} : {label: "home"}],
+            buttons: results.status != "success" ?  [{label: "check status"}] : successButtons,
             image: {src: image, aspectRatio: '1:1'},
             postUrl: results.status != "success" ? `${FRAME_URL}/frames/status` : `${FRAME_URL}/frames`,
             state: {hash: state.hash}

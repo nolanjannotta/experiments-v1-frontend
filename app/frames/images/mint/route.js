@@ -14,6 +14,7 @@ export async function GET(request) {
     const remaining = request.nextUrl.searchParams.get("remaining")
     const allowance = request.nextUrl.searchParams.get("allowance")
     const following = request.nextUrl.searchParams.get("following")
+    const hasVerifiedAddresses = request.nextUrl.searchParams.get("hasVerifiedAddresses")
     const uri = await getUri(lastId)
 
 
@@ -41,7 +42,7 @@ export async function GET(request) {
             <img width="65%" src={uri}></img>
 
         </div>
-          {JSON.parse(following) ? <p style={{margin: "20px 0 0 0"}}> {allowance > 0 ? "select which address of yours to mint to." : "your free warpcast mints are used up :("} </p> : ""}
+          {JSON.parse(following) ? <p style={{margin: "20px 0 0 0"}}> {allowance > 0 ? (!hasVerifiedAddresses ? "select which address of yours to mint to." : "looks like you dont have any addresses verified on farcaster.") : `your free warpcast mints for ${name} are used up :(`} </p> : ""}
           {allowance == 0 ? <p style={{margin: 0}}>but fear not, you can still mint on the website</p> : ""}
       </Card>
     ),

@@ -13,7 +13,7 @@ export async function GET(request) {
     console.log(status,tokenId)
 
     let uri;
-    let alt;
+    let alt = "image";
     if(status == "success") {
         try{
           uri = await getUri(tokenId)  
