@@ -32,11 +32,9 @@ export async function generateMetadata({ params }) {
   const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
 
   const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-  const buttons = [{label: 'website', action: 'link', target: `${FRAME_URL}/browse/token/${params.tokenId}`},
-                  {label: 'open sea', action: 'link', target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${params.tokenId}`}]
 
   const frameMetadata = getFrameMetadata({
-    buttons: buttons,
+    buttons: [{label: 'open sea', action: 'link', target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${params.tokenId}`}],
     image: {
       src: base64Img,
       aspectRatio: "1:1",
