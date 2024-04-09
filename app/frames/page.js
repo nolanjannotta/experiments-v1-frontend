@@ -1,8 +1,5 @@
 
 import { getFrameMetadata } from '@coinbase/onchainkit';
-import {getThumbnails} from "../frameConfig.js"
-import sharp from "sharp";
-import { contract } from "../contract_server.js";
 import {FRAME_URL} from "../constants.js"
 
 const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`

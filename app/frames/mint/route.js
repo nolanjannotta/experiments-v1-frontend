@@ -1,29 +1,11 @@
 import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import { getLastMint } from "@/app/frameConfig.js";
-import sharp from "sharp";
 import {kv } from "@vercel/kv"
 import {FRAME_URL,nolanjFID} from "@/app/constants.js"
 import { NeynarAPIClient } from "@neynar/nodejs-sdk";
 
-// const URL = "http://localhost:3000"
-
-
 const neynar = new NeynarAPIClient(process.env.NEYNAR_KEY);
-// await kv.hset('test', {hello: 'world', whatsUp: 123})
-
-// await kv.hset('nolan', { userId: 123, email: 'ex@example.com' });
-
-// await kv.hset('nolan', { name: 'bob' });
-
-// await kv.hset('nolan', { show: 'breaking bad' });
-
-
-// const value1 = await kv.hget('nolan', 'email'); 
-// const value2 = await kv.hget('nolan', 'name'); 
-// const value3 = await kv.hget('nolan', 'show'); 
-  
-// console.log(value1,value2,value3)
 
 const doesUserFollowNolan = async (fid) => {
     if(fid == nolanjFID) return true;
@@ -56,19 +38,12 @@ async function getResponse(request) {
         return new NextResponse('Message not valid', { status: 500 });
       }
 
-    const userFollowsNolan = true; //await doesUserFollowNolan(message.interactor.fid);
+    const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
     await kv.hset(message.interactor.fid, {isFollower: userFollowsNolan}); 
 
     const lastData = await getLastMint();
     const currentAllowance = await kv.hget(message.interactor.fid, lastData?.lastEdition.name);
-    // try {
-    //     currentAllowance = await kv.hget(message.interactor.fid, lastData?.lastEdition.name);
-    // } catch (error) {
-    //     currentAllowance = null;
-    // }
 
-        console.log(currentAllowance)
-    // !currentAllowance ? currentAllowance = {} : currentAllowance;
     if(currentAllowance == null) {
         await kv.hset(message.interactor.fid, {[lastData?.lastEdition.name]: 2});
     }

@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
-import { getLastMint, checkTxStatus, mint, getEditionCounter } from "@/app/frameConfig.js";
-import sharp from "sharp";
+import { mint } from "@/app/frameConfig.js";
 import {kv} from '@vercel/kv'
 import {FRAME_URL} from "@/app/constants.js";
-// const URL = "http://localhost:3000"
 
 
 async function getResponse(request) {
@@ -26,22 +24,9 @@ async function getResponse(request) {
     // console.log(message)
     const userAllowance = await kv.hget(message.interactor.fid, tokenName);
     const lastSubmitted = await kv.hget(message.interactor.fid, "lastSubmitted") || 0;
-    // const lastMintTimestamp = await kv.get("lastMintTimestamp");
-    console.log("lastSubmitted", lastSubmitted)
-    // const editionCounter = await getEditionCounter();
-    // console.log(currentAllowance);
 
-   
-    // console.log(isValid)
-    // const lastData = await getLastMint();
     let tx;
-    // console.log(currentAllowance)
-    
-    // let allowance = Number(userAllowances[tokenName]);
-    // let lastSubmitted = Number(userAllowances.lastSubmitted) || 0;
-    // console.log("interval", Date.now() - timestamp)
     if(userAllowance > 0 &&  submittedAt - lastSubmitted > 10){
-        // const newState = {...userAllowances, [tokenName]: allowance-1, lastSubmitted: submittedAt};
         await kv.hset(message.interactor.fid, {[tokenName]: userAllowance-1, lastSubmitted: submittedAt});
         try {
             tx = await mint(minterAddress);
@@ -53,29 +38,6 @@ async function getResponse(request) {
 
     const image = `${FRAME_URL}/frames/images/results?date=${Date.now()}` //&address=${minterAddress}&tokenName=${tokenName}`
 
-    
-    // let state = JSON.parse(body.untrustedData.state)
-    // let results; // =  await checkTxStatus(state.hash)
-
-    // const results = await checkTxStatus(state.hash)
-
-    // console.log(JSON.parse(body.untrustedData.state))
-
-    // let svg = `<svg width='1000' height='1000' xmlns='http://www.w3.org/2000/svg'>
-    //               <rect stroke='black' stroke-width='3' width='1000' height='1000' fill='white'></rect>
-                  
-    //                 <text x="500" y="400" text-anchor="middle" font-size="80">tx submitted...</text>
-    //                 <text x="500" y="550" text-anchor="middle" font-size="30">check status after several seconds</text>
-
-    //                 <text x="500" y="700" text-anchor="middle" font-size="80">${results?.status == "success" ? "success!" : ""}</text>
-    //                </svg>
-    //               `
-
-    // const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
-
-    // const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
-    // console.log(base64Img)
 
     return new NextResponse(
         getFrameHtmlResponse({

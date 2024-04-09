@@ -1,16 +1,13 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
 import {getUri} from "@/app/frameConfig";
-import {kv} from "@vercel/kv"
 
 
 
 
 export async function GET(request) {
-    // console.log(request.nextUrl.searchParams)
     const status = request.nextUrl.searchParams.get("status")
     const tokenId = request.nextUrl.searchParams.get("tokenId")
-    console.log(status,tokenId)
 
     let uri;
     let alt = "image";

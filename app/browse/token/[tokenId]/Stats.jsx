@@ -7,8 +7,7 @@ import {useAccount} from "wagmi";
 export default function Stats({ data, tokenId, address }) {
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    // const { innerWidth: width, innerHeight: height } = Window;
-    // console.log(width, height);
+
     const image = {
         width: dimensions.width < dimensions.height ? "100%" : "40%",
         
@@ -21,7 +20,7 @@ export default function Stats({ data, tokenId, address }) {
         setDimensions({ width: window.innerWidth, height: window.innerHeight });
         
 
-    },[window.innerHeight, window.innerWidth])
+    },[])
 
   return (
     <section
@@ -56,12 +55,6 @@ export default function Stats({ data, tokenId, address }) {
           <li>
             <code>token id: {tokenId}</code>
           </li>
-
-          {/* <li>
-              {data.metadata.attributes?.length > 0 && 
-              <code>attributes: &#91;{data.metadata.attributes.map((attribute) => {return ` ${attribute.trait_type}: "${attribute.value}"`}).toString()}&#93;</code>
-                }
-            </li> */}
 
           <li>
             <code>
@@ -104,15 +97,7 @@ export default function Stats({ data, tokenId, address }) {
               </a>
             </code>
           </li>
-          {/* <li>
-            <code>
-              reload:{" "}
-              <button style={button} action={()=> reload(tokenId)}>
-                {" "}
-                <a>&#8634;</a>
-              </button>
-            </code>
-          </li> */}
+
           <li>
             <code>
               modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
@@ -125,22 +110,22 @@ export default function Stats({ data, tokenId, address }) {
 }
 
 
-const button = {
-    background: "none",
-    border: "none",
-    fontSize: "1rem",
-    textDecoration: "underline"
-    // padding: "none",
-    // margin: "none"
+// const button = {
+//     background: "none",
+//     border: "none",
+//     fontSize: "1rem",
+//     textDecoration: "underline"
+//     // padding: "none",
+//     // margin: "none"
   
-  }
+//   }
   
-  const imageContainer = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    // height: "70vh",
-    // backgroundColor: "lightgrey",
-  }
+//   const imageContainer = {
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     width: "100%",
+//     // height: "70vh",
+//     // backgroundColor: "lightgrey",
+//   }
 
