@@ -152,7 +152,7 @@ function Gallery({params}) {
         }
         return (
           <figure style={galleryFig} key={i}>
-            <img style={galleryImg} width="300" src={nft.raw.metadata.image}></img>
+            <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
             <figcaption>{nft.raw.metadata.name}  &nbsp; &nbsp;
             <Link href={`/browse/token/${params.edition * 1000000 + (i+1)}`}>&#8599;</Link>
             </figcaption>
@@ -170,7 +170,7 @@ function Gallery({params}) {
 export default Gallery
 
 const description = {
-width: "70%",
+  width: "70%",
 
 
 }
@@ -182,18 +182,25 @@ const arrows = {
 
 
 const gallery = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-  gap: "1rem",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: "2rem",
-  width: "70%",
+  // display: "grid",
+  // gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+  // gap: "1rem",
+  // justifyContent: "center",
+  // alignItems: "center",
+  // padding: "2rem",
+  display: "flex",
+  flexWrap: "wrap",
+  flexDirection: "row",
+  justifyContent: "space-evenly",
+  gap: "50px",
+  width: "90%",
+  // backgroundColor: "blue"
 
 }
+
 const galleryImg = {
-  width: "100%",
-  height: "auto",
+  // width: "30%",
+  // height: "auto",
   objectFit: "cover",
 }
 

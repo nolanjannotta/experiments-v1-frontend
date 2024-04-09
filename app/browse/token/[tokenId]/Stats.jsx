@@ -28,7 +28,7 @@ export default function Stats({ data, tokenId, address }) {
       </header>
 
       {/* <div style={imageContainer} > */}
-      <img src={data?.metadata.image} alt="loading..."></img>
+      <img src={data?.metadata.image} style={image} alt="loading..."></img>
       {/* </div> */}
       <article>
         <ul>
@@ -127,4 +127,9 @@ const button = {
     width: "100%",
     // height: "70vh",
     // backgroundColor: "lightgrey",
+  }
+
+  const image = {
+    width: "40%"
+    
   }
