@@ -1,12 +1,27 @@
 "use client"
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {useAccount} from "wagmi";
 
 
 export default function Stats({ data, tokenId, address }) {
     const account = useAccount();
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    // const { innerWidth: width, innerHeight: height } = Window;
+    // console.log(width, height);
+    const image = {
+        width: dimensions.width < dimensions.height ? "100%" : "40%",
+        
+      }
 
+    
+    useEffect(()=>{
+        console.log("height", window.innerHeight);
+        console.log("width", window.innerWidth);
+        setDimensions({ width: window.innerWidth, height: window.innerHeight });
+        
+
+    },[window.innerHeight, window.innerWidth])
 
   return (
     <section
@@ -129,7 +144,3 @@ const button = {
     // backgroundColor: "lightgrey",
   }
 
-  const image = {
-    width: "40%"
-    
-  }
