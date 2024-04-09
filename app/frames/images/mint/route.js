@@ -42,7 +42,7 @@ export async function GET(request) {
             <img width="65%" src={uri}></img>
 
         </div>
-          {JSON.parse(following) ? <p style={{margin: "20px 0 0 0"}}> {allowance > 0 ? (!JSON.parse(hasVerifiedAddresses) ? "select which address of yours to mint to." : "looks like you dont have any addresses verified on farcaster.") : `your free warpcast mints for ${name} are used up :(`} </p> : ""}
+          {JSON.parse(following) ? <p style={{margin: "20px 0 0 0"}}> {allowance > 0 ? (JSON.parse(hasVerifiedAddresses) ? "select which address of yours to mint to." : "looks like you dont have any addresses verified on farcaster.") : `your free warpcast mints for ${name} are used up :(`} </p> : ""}
           {allowance == 0 ? <p style={{margin: 0}}>but fear not, you can still mint on the website</p> : ""}
       </Card>
     ),
