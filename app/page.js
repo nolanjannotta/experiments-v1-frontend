@@ -26,6 +26,7 @@ export default function Home() {
      make interesting things, learn a lot, and emerge with a semi refined set of tools and techniques to 
      work with SVG in solidity to create onchain art. 
      </p>
+     <br/>
 
     <p>
       Each token has a corresponding 32 bit seed that is stored in the ERC721 smart contract. This can be any number, string, bytes, etc. 
@@ -33,6 +34,7 @@ export default function Home() {
       Also the minters address can be used also. The seed can also be any arbitrary data that can fit into 32 bytes, and can be packed and unpacked 
       by the art generator contract.
     </p>
+    <br/>
 
     <p>
 
@@ -43,6 +45,15 @@ export default function Home() {
       for each edition through the frame. Depending on the demand, the owner may set a reasonable price and royalty (ERC-2981) for the remaining tokens.
       
       
+      </p>
+      <br/>
+
+      <p>
+        The token IDs work like this: 
+        <br/>  
+        <code>(editionId x 1,000,000) + editionCounter</code> 
+        <br/>
+         For example: tokenId #1000001 is the first token of edition 1, #4000056 is the 56th token of edition 4, etc.
       </p>
       
       </article>
@@ -55,7 +66,8 @@ export default function Home() {
 
       <p>below are some flowcharts that show the basic moving parts for some of functions in this project. </p>
 
-      <div style={outline}>        
+      <div style={outline}>   
+           
       <img src="/mintFlowChart.png"  alt="minting flow chart"></img>
       </div>
 

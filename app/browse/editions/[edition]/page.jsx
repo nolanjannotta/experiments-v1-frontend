@@ -1,6 +1,5 @@
 "use client"
 import Link from 'next/link'
-
 import { useQuery } from "@tanstack/react-query";
 import {ZERO_ADDRESS,artAddress} from "../../../constants"
 import {contract} from "../../../contract"
@@ -9,7 +8,7 @@ import { formatEther } from 'viem'
 
 
 
-function addressShrinker(address) {
+function truncateAddress(address) {
 
   return `${address.slice(0,6)}...${address.slice(-4)}`
 }
@@ -29,21 +28,6 @@ async function getTokens(editionId) {
 
   }
 }
-
-async function loadSingleToken(tokenId) {
-  const options = {method: 'GET', headers: {accept: 'application/json'}};
-
-  try {
-    const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
-    const tokens = await response.json()
-
-    return {edition, tokens};
-  } catch (error) {
-
-
-}
-}
-
 
 
 
@@ -85,10 +69,10 @@ function Gallery({params}) {
 
     return (
       <section style={section}>
+        
 
-        <h1>
+        <h1 style={{margin: "0", padding: "0"}}>
           <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
-           
           &nbsp;&nbsp;&nbsp;&nbsp; {editionInfo.edition?.name} &nbsp;&nbsp;&nbsp;&nbsp;
           <Link style={arrows} href={`/browse/editions/${params.edition < Number(editionInfo?.edition.counter)-1 ? Number(params.edition) + 1 : Number(params.edition)}`}> &#8594; </Link>
           </h1>
@@ -109,7 +93,7 @@ function Gallery({params}) {
             return <li key={i}>&#x2022; {key}: &quot;{Number(editionInfo.edition[key]) / 100}%&quot;</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{addressShrinker(editionInfo.edition[key])}&quot;</li>
+            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{truncateAddress(editionInfo.edition[key])}&quot;</li>
           }
           if(key === "supply") {
             return <li  key={i}>&#x2022; {"max supply"}: &quot;{Number(editionInfo.edition[key])}&quot;</li>

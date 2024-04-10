@@ -12,7 +12,7 @@ function V2() {
           This page will act as a place to brainstorm features and ideas for the
           next version of this project. 
         </p>
-        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a>twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
+        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a target="_blank" href="https://twitter.com/jannotta_nolan">twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
         <figure>
           <figcaption>Objectives</figcaption> 
           <ul>
@@ -24,14 +24,14 @@ function V2() {
             </li>
 
             <li>
-                Create a platform for other artists to mint their 100% onchain art works. 
+                Create a platform and tools for other artists to mint their 100% onchain art works. 
             </li>
             <li>
                 continue offering prints as key part of the project. Split revenue between collector, artist, and printer.
 
             </li>
             <li>
-                consider possibly implementing ERC-6551: Non-fungible Token Bound Accounts. This might be useful for certain features.
+                <i>consider</i> possibly implementing ERC-6551: Non-fungible Token Bound Accounts. This might be useful for certain features.
                 <figure>
                 <figcaption>pro</figcaption>
                 <ul>
@@ -51,7 +51,7 @@ function V2() {
                         not really necessary IMO.  
                     </li>
                     <li>
-                       cost more gas, and/or may require additional transactions for approvals and such.
+                       may cost more gas, and/or may require additional transactions for approvals and such.
                     </li>
                 </ul>
                     </figure>
