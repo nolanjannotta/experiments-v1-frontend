@@ -27,7 +27,7 @@ function MintPage() {
     },[currentEdition])
 
   return (
-    <article>be patient... redirecting to current edition.</article>
+    <article>hang tight... redirecting to current edition.</article>
   )
 }
 
