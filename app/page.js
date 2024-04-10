@@ -31,7 +31,7 @@ export default function Home() {
     <p>
       Each token has a corresponding 32 bit seed that is stored in the ERC721 smart contract. This can be any number, string, bytes, etc. 
       When it comes to generative art, it is usually a &quot;random&quot; number. This number can be derived from block data like timestamp, block hash, etc. 
-      Also the minters address can be used also. The seed can also be any arbitrary data that can fit into 32 bytes, and can be packed and unpacked 
+      The minters address can also be used. The seed can also be any arbitrary data that can fit into 32 bytes, and can be packed, unpacked and modified
       by the art generator contract.
     </p>
     <br/>
@@ -51,7 +51,7 @@ export default function Home() {
       <p>
         The token IDs work like this: 
         <br/>  
-        <code>(editionId x 1,000,000) + editionCounter</code> 
+        <code style={{backgroundColor: "lightGrey"}}>(editionId x 1,000,000) + editionCounter</code> 
         <br/>
          For example: tokenId #1000001 is the first token of edition 1, #4000056 is the 56th token of edition 4, etc.
       </p>
