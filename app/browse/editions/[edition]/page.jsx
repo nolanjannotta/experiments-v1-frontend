@@ -128,7 +128,7 @@ function Gallery({params}) {
           return (
             <div key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
                 <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render #{i + 1}.<br /></p>
-              <Link href={`/browse/token/${params.edition * 1000000 + (i + 1)}`}>click here to load from blockchain</Link>
+              <Link href={`/token/${params.edition * 1000000 + (i + 1)}`}>click here to load from blockchain</Link>
 
               {/* <button>retry</button> */}
             </div>
@@ -138,7 +138,7 @@ function Gallery({params}) {
           <figure style={galleryFig} key={i}>
             <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
             <figcaption>{nft.raw.metadata.name}  &nbsp; &nbsp;
-            <Link href={`/browse/token/${params.edition * 1000000 + (i+1)}`}>&#8599;</Link>
+            <Link href={`/token/${params.edition * 1000000 + (i+1)}`}>&#8599;</Link>
             </figcaption>
           </figure>
         )
