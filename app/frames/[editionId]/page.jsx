@@ -1,6 +1,6 @@
 
 import { getFrameMetadata } from '@coinbase/onchainkit';
-import {FRAME_URL} from "../constants.js"
+import {FRAME_URL} from "../../constants.js"
 
 const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`
 
