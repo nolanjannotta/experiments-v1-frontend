@@ -146,7 +146,7 @@ function Gallery({params}) {
  
 
     </div>
-      {!isFetching && <Link href="/browse/editions">back</Link>}
+      {!isFetching && <Link href="/browse">back</Link>}
     </section>
   )
 }

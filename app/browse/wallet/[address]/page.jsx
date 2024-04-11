@@ -61,7 +61,7 @@ function Address({ params }) {
             return (<li key={index}>
                 <Link href={`/browse/editions/${Number(id/1000000n)}`}>{editionNames[Number(id/1000000n)-1]}</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link href={`/browse/token/${Number(id)}`}>#{Number(id%1000000n)}</Link>
+                <Link href={`/token/${Number(id)}`}>#{Number(id%1000000n)}</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link href={`/modify/${Number(id)}`}>&#9874;</Link>
 

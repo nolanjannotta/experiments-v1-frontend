@@ -49,9 +49,8 @@ export default function Home() {
       <br/>
 
       <p>
-        The token IDs work like this: 
-        <br/>  
-        <code style={{backgroundColor: "lightGrey"}}>(editionId x 1,000,000) + editionCounter</code> 
+        The token IDs work like this: &nbsp;
+        <code>(editionId x 1,000,000) + editionCounter</code> 
         <br/>
          For example: tokenId #1000001 is the first token of edition 1, #4000056 is the 56th token of edition 4, etc.
       </p>

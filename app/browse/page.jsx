@@ -54,11 +54,11 @@ export default function Browse({searchParams}) {
       <section style={section}>
 
         
-      <div style={{display:"flex", alignItems:"center"}}>
+      {/* <div style={{display:"flex", alignItems:"center"}}> */}
 
-        <h1>{isFetching && "loading"} editions</h1>
+        <h1 style={{margin: 0}}>{isFetching && "loading"} editions</h1>
 
-      </div>
+      {/* </div> */}
   
       <div style={gallery}>
 

@@ -5,7 +5,7 @@ import OtherConnectButton from "../../components/OtherConnectButton";
 export default function EditionLayout({ children }) {
   return (
     <>
-      <header>
+      <header style={{textAlign: "center"}}>
         <nav>
           <ul>
             <li><Link href="/browse/search">search</Link></li>
