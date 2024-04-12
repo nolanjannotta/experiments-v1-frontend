@@ -1,12 +1,11 @@
 export const editionData = {
   signatures: {
     description: () => {
-    //   return (
-    //     <p>
-    //       Simple, minimal, cool. The inaugural edition of this whole
-    //       experiment thing.
-    //     </p>
-    //   );
+      return (
+        <p>
+          Comes with 1 built in utitility that will become clear in the following editions.
+        </p>
+      );
     },
     modifiable: false,
     seed:[],
@@ -16,11 +15,13 @@ export const editionData = {
     description: () => {
       return (
         <>
-          <p>Based on very simple set of rules:</p>
+          {/* <p>Based on very simple set of rules:</p> */}
           <ol>
             <li>
-              Starting with a blank 1000x1000 rectangle, deterministically slice it either
-              horizontally or vertically creating two rectangles.
+              Start with a blank 1000x1000 rectangle, 
+            </li>
+            <li>
+                slice the rectangle either horizontally or vertically somewhere on the rectangle giving you 2 rectangles.
             </li>
             <li>
               slice one of the resulting rectangles perpendicular to the first

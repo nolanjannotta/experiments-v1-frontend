@@ -12,7 +12,7 @@ function V2() {
           This page will act as a place to brainstorm features and ideas for the
           next version of this project. 
         </p>
-        <p>If YOU have an idea, reach out! lets build the coolest possible onchain art platform. &#8594; <a target="_blank" href="https://twitter.com/jannotta_nolan">twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
+        <p>If YOU have an idea, reach out! lets build the coolest possible 100% onchain art platform. &#8594; <a target="_blank" href="https://twitter.com/jannotta_nolan">twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
         <figure>
           <figcaption>Objectives</figcaption> 
           <ul>
@@ -59,6 +59,14 @@ function V2() {
             <li>
               create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a period of time in the past. unless im wrong about that). They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
+            </li>
+            <li>
+              create an entirely new onchain SVG rendering system. for example having a single ultra efficient rendering 
+              contract that returns the actual SVG code (written in yul or huff??). The art generator contracts will instead generate 
+              a set of parameters or a compressed SVG string that is passed to the rendering contract. To go even further, there could be 
+              a higher level SVG specific language, framework or GUI that compiles down to solidity code that then creates the compressed svg strings, 
+              and an online editor for artists to use to create their own art generator contracts. how cool would that be?
+
             </li>
             <li>
                 increase vibes by at least 10x.

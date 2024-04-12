@@ -5,6 +5,7 @@ import {ZERO_ADDRESS,artAddress} from "../../../constants"
 import {contract} from "../../../contract"
 import { editionData } from '../../../editionData'
 import { formatEther } from 'viem'
+import useScreenSize from "../../../../hooks/useScreenSize"
 
 
 
@@ -32,6 +33,14 @@ async function getTokens(editionId) {
 
 
 function Gallery({params}) {
+  const screenSize = useScreenSize();
+  console.log(screenSize)
+
+  const description = {
+    width: screenSize.width < 1400 ?  "100%" : "60%",
+  
+  
+  }
 
     // const data = await getAllFromEdition(params.edition) 
 
@@ -153,11 +162,7 @@ function Gallery({params}) {
 
 export default Gallery
 
-const description = {
-  width: "70%",
 
-
-}
 
 const arrows = {
   textDecoration: "none",
