@@ -104,7 +104,7 @@ async function Token({ params }) {
         <h4>&#x2709; transfers:</h4>
         <br/>
         <ul style={{listStyleType: "none", margin: 0, padding: 0}}>
-        {transfers.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#x7c;</li>})}
+        {transfers?.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#x7c;</li>})}
         </ul>
     </article>
     </>
