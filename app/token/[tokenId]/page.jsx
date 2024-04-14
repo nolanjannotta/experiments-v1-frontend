@@ -6,7 +6,8 @@ import Stats from "./Stats"
 import sharp from "sharp";
 import {FRAME_URL} from "@/app/constants.js";
 import { artAddress } from '@/app/constants.js';
-
+import useTruncateAddress from "../../../hooks/useTruncateAddress"
+import {baseScanUrl} from "@/app/constants.js"
 import Moralis from "moralis";
 
 await Moralis.start({apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY});
@@ -92,7 +93,7 @@ function truncateAddress(address) {
 async function Token({ params }) {
 
   const transfers = await getTokenTransfers(params?.tokenId)
-  // console.log(transfers)
+  console.log(transfers)
 
   const data = await tokenData(params.tokenId);
   return (
@@ -104,7 +105,7 @@ async function Token({ params }) {
         <h4>&#x2709; transfers:</h4>
         <br/>
         <ul style={{listStyleType: "none", margin: 0, padding: 0}}>
-        {transfers?.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#x7c;</li>})}
+        {transfers?.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{useTruncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{useTruncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618; <a style={{textDecoration:"none"}} target="_blank" href={`${baseScanUrl}/tx/${transfer.transaction_hash}`} >tx&#8599;</a> &#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#9618;&#9618;&#x7c;</li>})}
         <hr/>
         </ul>
     </article>

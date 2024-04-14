@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
 import "./global.css"
+import { baseScanUrl } from './constants'
 
 export const metadata = {
   title: 'Experiments V1',
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
         <li><Link href="/mint">mint</Link></li>
         <li><Link href="/prints">prints</Link></li>
         <li><Link href="/v2">v2</Link></li>
+        <li><Link href="/owners">owners</Link></li>
         </ul>
         </nav>
         </header>
@@ -50,7 +52,7 @@ export default function RootLayout({ children }) {
            
             <li><a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${artAddress}`}>open sea</a></li>
 
-            <li><a target="_blank" href={`https://sepolia.basescan.org/address/${artAddress}`}>basescan</a></li>
+            <li><a target="_blank" href={`${baseScanUrl}address/${artAddress}`}>basescan</a></li>
             <li style={{color: "#d7d7d7"}}>made with &#9760; by nolan</li>
           </ul>
         </nav>

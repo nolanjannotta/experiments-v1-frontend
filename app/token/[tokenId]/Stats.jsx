@@ -47,7 +47,7 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
           </li>
 
           <li>
-            <p>
+            <>
               attributes:
               <ul>
                 {data.metadata.attributes.map((attribute, i) => {
@@ -58,14 +58,14 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
                   );
                 })}
               </ul>
-            </p>
+            </>
           </li>
 
           <li>
-            <p>
+            <>
               owner:{" "}
               {data?.owner === account.address ? "you :)" : data?.owner}
-            </p>
+            </>
           </li>
 
           <li>
