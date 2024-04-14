@@ -9,7 +9,7 @@ import { artAddress } from '@/app/constants.js';
 
 import Moralis from "moralis";
 
-await Moralis.start({apiKey: process.env.MORALIS_KEY});
+await Moralis.start({apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY});
 
 async function tokenData(tokenId) {
   const uri = await contract.read.tokenURI([tokenId]);
