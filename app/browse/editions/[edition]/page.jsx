@@ -8,11 +8,31 @@ import { formatEther } from 'viem'
 import useScreenSize from "../../../../hooks/useScreenSize"
 
 
+const initialData = {
+  edition: {
+    artGenerator: ZERO_ADDRESS,
+    counter: 0n,
+    description: "",
+    name: "",
+    price: 0n,
+    royaltyReceiver: ZERO_ADDRESS,
+    supply: 0n,
+  },
+  tokens: { 
+    nfts: [], 
+    nextToken: "" 
+  },
+  owners:{}
+};
+
+
+
 
 function truncateAddress(address) {
 
   return `${address.slice(0,6)}...${address.slice(-4)}`
 }
+
 
 async function getTokens(editionId) {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
@@ -22,13 +42,31 @@ async function getTokens(editionId) {
     try {
       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
       const tokens = await response.json()
-      console.log(tokens)
+
+      // const ownerResponse = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=false`, options)
+      // const owners = await ownerResponse.json()
+
+      // console.log(tokens)
       return {edition, tokens};
     } catch (error) {
       console.log(error)
 
   }
 }
+
+// async function getOwners() {
+//   const options = {method: 'GET', headers: {accept: 'application/json'}};
+//     try {
+//       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=false`, options)
+//       const owners = await response.json()
+//       return owners;
+//     } catch (error) {
+//       return {}
+
+//   }
+
+
+// }
 
 
 
@@ -42,38 +80,21 @@ function Gallery({params}) {
   
   }
 
-    // const data = await getAllFromEdition(params.edition) 
+  // const { data: tokenOwners, error: getOwnerError } = useQuery({
+  //   queryKey: ["owners"],
+  //   queryFn: getOwners,
+  //   initialData: {},
+  // });
 
-    // console.log(getAddress(0))
 
+  const {data: editionInfo, isFetching,} = useQuery({
+    queryKey: ["editionInfo", params.edition],
+    queryFn: () => getTokens(params.edition),
+    initialData: initialData,
+  });
     
-    // const {data, error, isLoading, isFetching} = useQuery({
-    //   queryKey: ["edition", params.edition],
-    //   queryFn: () => getAllFromEdition(params.edition),
-    //   initialData: {metadatas: [], name: ""}
-    // })
 
-    const initialData = {
-      edition: {
-        artGenerator: ZERO_ADDRESS,
-        counter: 0n,
-        description: "",
-        name: "",
-        price: 0n,
-        royaltyReceiver: ZERO_ADDRESS,
-        supply: 0n,
-      },
-      tokens: { 
-        nfts: [], 
-        nextToken: "" 
-      },
-    };
 
-    const {data: editionInfo, error, isLoading, isFetching} = useQuery({
-      queryKey: ["editionInfo", params.edition],
-      queryFn: () => getTokens(params.edition),
-      initialData: initialData
-    })
     
 
     return (
@@ -114,14 +135,14 @@ function Gallery({params}) {
             return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li>
           }
           if(key === "mintStatus") {
-            return <li  key={i}>&#x2022; {"mint status"}: {editionInfo.edition[key] ? <>&quot;active&quot; <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
+            return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo.edition[key] ? <>&quot;active&quot; <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
           }
           else {
            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li> 
           }
           
         })}
-        {/* <li>&#x2022; minting status: "active" <Link href="/mint">&#8599;</Link> </li> */}
+        {/* <li>&#x2022; unique owners: {editionInfo.owners.owners.length} </li> */}
         </small>
         </code>
         </ul>

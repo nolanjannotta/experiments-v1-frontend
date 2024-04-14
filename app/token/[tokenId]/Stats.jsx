@@ -4,7 +4,7 @@ import Link from "next/link";
 import {useAccount} from "wagmi";
 
 
-export default function Stats({ data, tokenId, address }) {
+export default function Stats({ data, tokenId, address, connectedAddress }) {
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -27,24 +27,14 @@ export default function Stats({ data, tokenId, address }) {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <header>
-        <nav>
-          <ul>
-            <li>
-              <Link href={`./${Number(tokenId) - 1}`}>
-                &#8592; previous
-              </Link>
-            </li>
-            <li>
-              <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
-            </li>
-          </ul>
-        </nav>
+        
       </header>
-
+    
       {/* <div style={imageContainer} > */}
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
       {/* </div> */}
       <article>
+        
         <ul>
           <li>
             <code>name: &quot;{data?.metadata.name}&quot;</code>
@@ -105,6 +95,18 @@ export default function Stats({ data, tokenId, address }) {
           </li>
         </ul>
       </article>
+      <nav style={{margin:0}}>
+          <ul>
+            <li>
+              <Link href={`./${Number(tokenId) - 1}`}>
+                &#8592; previous
+              </Link>
+            </li>
+            <li>
+              <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
+            </li>
+          </ul>
+        </nav>
     </section>
   );
 }

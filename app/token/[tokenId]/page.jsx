@@ -1,13 +1,15 @@
 "use server"
 
 import { getFrameMetadata } from '@coinbase/onchainkit';
-import { contract } from "../../contract_server";
+import { contract,publicClient } from "../../contract_server";
 import Stats from "./Stats"
 import sharp from "sharp";
 import {FRAME_URL} from "@/app/constants.js";
 import { artAddress } from '@/app/constants.js';
 
-const URL = "http://localhost:3000"
+import Moralis from "moralis";
+
+await Moralis.start({apiKey: process.env.MORALIS_KEY});
 
 async function tokenData(tokenId) {
   const uri = await contract.read.tokenURI([tokenId]);
@@ -20,6 +22,29 @@ async function tokenData(tokenId) {
   // console.log(metadata)
 
   return {metadata, owner};
+
+}
+
+// console.log(publicClient.chain.id)
+
+async function getTokenTransfers(tokenId) {
+
+  try {
+
+  
+    const response = await Moralis.EvmApi.nft.getNFTTransfers({
+      "chain": publicClient.chain.id,
+      "format": "decimal",
+      "order": "DESC",
+      "address": artAddress,
+      "tokenId": tokenId
+    });
+    // console.log(response.raw.result)
+    return response.raw.result;
+  } catch (e) {
+    return {}
+    // console.error(e);
+  }
 
 }
 
@@ -58,13 +83,31 @@ export async function generateMetadata({ params }) {
 
 
 
+function truncateAddress(address) {
+
+  return `${address.slice(0,6)}...${address.slice(-4)}`
+}
 
 
 async function Token({ params }) {
 
+  const transfers = await getTokenTransfers(params?.tokenId)
+  // console.log(transfers)
+
   const data = await tokenData(params.tokenId);
   return (
+    <>
     <Stats data={data} tokenId={params.tokenId} address={contract.address}/>
+    
+    <article style={{textAlign:"center"}}>
+      <hr/>
+        <h4>&#x2709; transfers:</h4>
+        <br/>
+        <ul style={{listStyleType: "none", margin: 0, padding: 0}}>
+        {transfers.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#x7c;</li>})}
+        </ul>
+    </article>
+    </>
   );
 }
 

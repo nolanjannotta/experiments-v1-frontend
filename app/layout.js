@@ -41,6 +41,7 @@ export default function RootLayout({ children }) {
         </ul>
         </nav>
         </header>
+        <hr/>
       <Web3Provider>{children}</Web3Provider>
 
       <footer>
