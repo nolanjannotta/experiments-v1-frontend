@@ -27,13 +27,18 @@ async function getOwners() {
 
 }
 
+function truncateAddress(address) {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`
 
+}
 
 
 
 export default async function Owners() {
+    
 
     const owners = await getOwners();
+
     console.log(owners)
   return (
     <article>
@@ -44,7 +49,7 @@ export default async function Owners() {
           return (
             <li key={index}>
                 &#9618;&#9618;&#9618;
-                <Link href={`/browse/wallet/${owner.ownerAddress}`}>{useTruncateAddress(owner.ownerAddress)}</Link>
+                <Link href={`/browse/wallet/${owner.ownerAddress}`}>{truncateAddress(owner.ownerAddress)}</Link>
               &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;
               balance: {owner.tokenBalances.length} &nbsp;
               &#9618;&#9618;&#9618;&#9618;&#9618;&#9618; 
