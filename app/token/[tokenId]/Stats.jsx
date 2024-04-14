@@ -33,21 +33,21 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
       {/* <div style={imageContainer} > */}
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
       {/* </div> */}
-      <article>
+      <article style={{width:"100%"}}>
         
         <ul>
           <li>
-            <code>name: &quot;{data?.metadata.name}&quot;</code>
+            <p>name: &quot;{data?.metadata.name}&quot;</p>
           </li>
           <li>
-            <code> description: &quot;{data?.metadata.description}&quot;</code>
+            <p> description: &quot;{data?.metadata.description}&quot;</p>
           </li>
           <li>
-            <code>token id: {tokenId}</code>
+            <p>token id: {tokenId}</p>
           </li>
 
           <li>
-            <code>
+            <p>
               attributes:
               <ul>
                 {data.metadata.attributes.map((attribute, i) => {
@@ -58,18 +58,18 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
                   );
                 })}
               </ul>
-            </code>
+            </p>
           </li>
 
           <li>
-            <code>
+            <p>
               owner:{" "}
               {data?.owner === account.address ? "you :)" : data?.owner}
-            </code>
+            </p>
           </li>
 
           <li>
-            <code>
+            <p>
               opensea:{" "}
               <a
                 target="_blank"
@@ -77,21 +77,21 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
               >
                 &#8599;
               </a>
-            </code>
+            </p>
           </li>
           <li>
-            <code>
+            <p>
               source code:{" "}
               <a target="_blank" href={`${data?.metadata.image}`}>
                 &#8599;
               </a>
-            </code>
+            </p>
           </li>
 
           <li>
-            <code>
+            <p>
               modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
-            </code>
+            </p>
           </li>
         </ul>
       </article>
