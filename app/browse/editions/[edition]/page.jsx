@@ -172,8 +172,8 @@ function Gallery({params}) {
           );
         }
         return (
-          <Link style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (i+1)}`}>
-          <figure style={galleryFig} key={i}>
+          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (i+1)}`}>
+          <figure style={galleryFig} >
             <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
             <figcaption>{nft.raw.metadata.name}
             {/* &#8599; */}
