@@ -49,8 +49,8 @@ function Mint({params}) {
       <section>
         <ul>
           <li>
-            name: {isLoading ? "loading..." : data.edition.name}
-            &nbsp; <Link href={`/browse/editions/${data?.editionId}`}>&#8599;</Link>
+            name: {isLoading ? "loading..." : <><Link style={{textDecoration:"none"}} href={`/browse/editions/${data?.editionId}`}>{data.edition.name} &#8599;</Link></>}
+        
           </li>
           <li>
             current supply: {isLoading ? "loading..." : Number(data.edition.counter)}
@@ -62,7 +62,7 @@ function Mint({params}) {
             price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
           </li>
           <li>
-            mint status: {isLoading ? "loading..." : data.edition.mintStatus ? "active" : "paused"}
+            mint status: {isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}
           </li>
         </ul>
 

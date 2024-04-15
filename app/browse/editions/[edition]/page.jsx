@@ -95,7 +95,7 @@ function Gallery({params}) {
     
 
 
-    
+    console.log(editionInfo)
 
     return (
       <section style={section}>
@@ -134,8 +134,15 @@ function Gallery({params}) {
           if(key === "description") {
             return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li>
           }
+
           if(key === "mintStatus") {
-            return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo.edition[key] ? <>&quot;active&quot; <Link href={`/mint/${params.edition}`}>&#8599;</Link></> : '"paused"'}</li>
+            if(editionInfo.edition.counter === editionInfo.edition.supply) {
+              return <li  key={i}>&#x2022; {"mint status"}: {"ended"}</li>
+            }
+            else {
+              return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo.edition[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
+
+            }
           }
           else {
            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li> 
@@ -165,12 +172,14 @@ function Gallery({params}) {
           );
         }
         return (
+          <Link style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (i+1)}`}>
           <figure style={galleryFig} key={i}>
             <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
-            <figcaption>{nft.raw.metadata.name}  &nbsp; &nbsp;
-            <Link href={`/token/${params.edition * 1000000 + (i+1)}`}>&#8599;</Link>
+            <figcaption>{nft.raw.metadata.name}
+            {/* &#8599; */}
             </figcaption>
           </figure>
+          </Link>
         )
       })}
  
