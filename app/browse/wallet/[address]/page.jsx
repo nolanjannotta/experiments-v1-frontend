@@ -9,7 +9,7 @@ async function getAllForAddress(address) {
 
 }
 async function getAllEditions() {
-    const lastEdition = await contract.read.editionCounter();
+    const lastEdition = await contract.read.EDITION_COUNTER();
     let allEditions = [];
     for(let i = 1; i <= Number(lastEdition); i++) {
         let edition = await contract.read.getEdition([i]);

@@ -44,7 +44,7 @@ const walletClient = createWalletClient({
   }
 
   export async function getEditionCounter() {
-    const counter = await signerContract.read.editionCounter();
+    const counter = await signerContract.read.EDITION_COUNTER();
     return Number(counter);
   
   }
@@ -55,7 +55,7 @@ const walletClient = createWalletClient({
   }
 //   
   export async function getLastMint() {
-      const lastEditionId = await signerContract.read.editionCounter();
+      const lastEditionId = await signerContract.read.EDITION_COUNTER();
       const lastEdition = await signerContract.read.getEdition([lastEditionId]);
     //   const lastToken = await signerContract.read.getRawSvg([(lastEditionId * 1000000n) + lastEdition.counter])
     //   const lastUri = await signerContract.read.getDataUri([(lastEditionId * 1000000n) + lastEdition.counter])
@@ -84,7 +84,7 @@ const walletClient = createWalletClient({
   export async function mint(addressTo) {
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
-    const edition = await signerContract.read.editionCounter();
+    const edition = await signerContract.read.EDITION_COUNTER();
     // console.log("hello")
     const { request } = await publicClient.simulateContract({
         address: artAddress,
@@ -100,7 +100,7 @@ const walletClient = createWalletClient({
   }
 
   export async function getThumbnails() {
-    const lastEditionId = await signerContract.read.editionCounter();
+    const lastEditionId = await signerContract.read.EDITION_COUNTER();
     const thumbnails = [];
     for(let i=lastEditionId < 4n ? 1n : lastEditionId-3n; i <= lastEditionId; i++) {
       let edition = await signerContract.read.getEdition([i]);

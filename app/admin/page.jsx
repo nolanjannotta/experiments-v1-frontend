@@ -3,48 +3,40 @@ import React, {useState} from "react";
 import { useAccount } from "wagmi";
 import CustomConnect from "@/components/CustomConnect";
 import { useQuery } from "@tanstack/react-query";
-import { contract,contractBase } from "@/app/contract";
+import { contract,contractBase,publicClient } from "@/app/contract";
 import { formatEther, parseEther } from "viem";
 import { useWriteContract, useConfig} from 'wagmi'
 // import ABI from "../../app/"
 
 
-async function setPrice(editionId, price) {
-  await contract.write.setPrice([1, parseEther("1.5")]);
-}
 
-async function toggleMintStatus(editionId) {}
-
-async function setGlobalSignature(signatureId) {}
-
-async function createEdition(name, description, artGenerator, totalSupply) {}
-
-async function setRoyaltyInfo(editionId, receiver, basisPoints) {}
-
-async function contractOwner() {
+async function getAdminData() {
   const owner = await contract.read.owner();
-  return owner;
+  const minter = await contract.read.MINTER_ADDRESS();
+  const contractBalance = await publicClient.getBalance({address: contract.address});
+  return {owner, minter,contractBalance};
 }
+
+
 
 
 
 function Admin() {
-  const { data: owner } = useQuery({
-    queryKey: ["contractOwner"],
-    queryFn: contractOwner,
-    initialData: "",
+  const { data: adminData, error: adminError } = useQuery({
+    queryKey: ["adminData"],
+    queryFn: getAdminData,
+    initialData: {},
   });
+
 
   const [inputState, setInputState] = useState({})
 
   const {writeContract, error} = useWriteContract();
-  console.log(error)
   const handleInputChange = (value, functionName, parameter) => {
 
     setInputState((inputState) => {return {...inputState, [functionName]: {...inputState[functionName], [parameter]: value}}})
   }
 
-  console.log(inputState)
   const account = useAccount();
 
   if (!account.isConnected) {
@@ -56,9 +48,11 @@ function Admin() {
     );
   }
 
-  if (account.address !== owner) {
+  if (account.address !== adminData.owner) {
     return (
       <article>
+        <p>owner: {adminData.owner}</p>
+        <p>minter: {adminData.minter}</p>
         <p>you are not the owner. gtfo</p>
       </article>
     );
@@ -66,6 +60,29 @@ function Admin() {
 
   return (
     <article>
+      <p>owner: {adminData.owner}</p>
+      <p>minter: {adminData.minter}</p>
+      <p>balance: {formatEther(adminData.contractBalance)} eth</p>
+
+      <fieldset>
+        <legend>withdraw</legend>
+        <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
+      </fieldset>
+        <br/>
+        <br/>
+        <br/>
+      <fieldset>
+        <legend>set minter address</legend>
+        <form>
+          <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setMinterAddress", "address")}}></input>
+          
+        </form>
+        <button onClick={() => writeContract({...contractBase, functionName: "setMinterAddress", args:[inputState["setMinterAddress"]?.address]})}>set owner</button>
+      </fieldset>
+      <br/>
+        <br/>
+        <br/>
+       
       <fieldset>
         <legend>set price for an edition</legend>
         <form>
@@ -78,18 +95,7 @@ function Admin() {
         <br/>
         <br/>
         <br/>
-        {/* <fieldset>
-        <legend>mint to</legend>
-        <form>
-          <input type="text" placeholder="addressTo" onChange={(e)=>{handleInputChange(e.target.value, "mintTo", "address")}}></input>
-          <input type="text" placeholder="editionId" onChange={(e)=>{handleInputChange(e.target.value, "mintTo", "editionId")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "mintTo", args:[inputState["mintTo"]?.address, parseEther(inputState["mintTo"]?.editionId)]})}>mint</button>
-      </fieldset>
-        <br/>
-        <br/>
-        <br/> */}
+
       <fieldset>
         <legend>toggle mint status</legend>
         <form>

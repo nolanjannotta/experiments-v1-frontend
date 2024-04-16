@@ -4,7 +4,7 @@ function All() {
   return (
 
     <article>
-        All mints will be displayed here chronologically.
+        All tokens will be displayed here chronologically.
         </article>
   )
 }

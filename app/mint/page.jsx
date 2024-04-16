@@ -9,7 +9,7 @@ function MintPage() {
     const {data:currentEdition, error, isLoading} = useQuery({
         queryKey: ["currentEdition"],
         queryFn: async() => {
-            const currentEditionId = await contract.read.editionCounter();
+            const currentEditionId = await contract.read.EDITION_COUNTER();
             return Number(currentEditionId);
 
         },

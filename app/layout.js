@@ -1,6 +1,6 @@
 
 
-// import { Inter } from 'next/font/google'
+import { Inter,Urbanist,Trispace } from 'next/font/google'
 import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
@@ -12,6 +12,11 @@ export const metadata = {
   description: 'art experiments',
 }
 
+const inter = Inter({ subsets: ['latin'] })
+const trispace = Trispace({ subsets: ['latin'] })
+
+
+
 // console.log(artAddress)
 
 export default function RootLayout({ children }) {
@@ -19,13 +24,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-      {/* <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css"/> */}
-      {/* <link rel="stylesheet" type="text/css" href="https://unpkg.com/chimeracss/build/chimera.css"/> */}
-      {/* <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" /> */}
-      {/* <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css"/>  */}
-      {/* <link rel="stylesheet" href="node_modules/modern-normalize/modern-normalize.css"/> */}
-      {/* <link rel="stylesheet" href="https://raw.githack.com/waldyrious/downstyler/master/downstyler.css" /> */}
       </head>
 
       <body>

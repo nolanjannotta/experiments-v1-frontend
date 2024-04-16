@@ -7,7 +7,7 @@ import {contract} from "../../contract"
 
 async function getArtGenerators() {
     // returns list of objects with name and address of art generators
-    const lastEdition = await contract.read.editionCounter();
+    const lastEdition = await contract.read.EDITION_COUNTER();
     let artGenerators = [];
     for (let i = 1; i <=lastEdition; i++) {
         let edition = await contract.read.getEdition([i]);

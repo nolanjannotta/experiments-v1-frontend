@@ -13,18 +13,12 @@ import CustomConnect from './CustomConnect'
 
 
 
-function MintButton({isMinting, editionId, callback}) {
+function MintButton({isMinting, editionId}) {
 
 
 
     const account = useAccount();
-    // console.log(account)
-    // const config = useConfig();
-    // const client = config.getClient();
-    // console.log(config.getClient())
     const write = useWriteContract();
-    // const data = useWriteContract();
-    console.log(write)
     
     async function mint() {
 

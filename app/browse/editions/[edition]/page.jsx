@@ -80,12 +80,6 @@ function Gallery({params}) {
   
   }
 
-  // const { data: tokenOwners, error: getOwnerError } = useQuery({
-  //   queryKey: ["owners"],
-  //   queryFn: getOwners,
-  //   initialData: {},
-  // });
-
 
   const {data: editionInfo, isFetching,} = useQuery({
     queryKey: ["editionInfo", params.edition],
@@ -93,10 +87,6 @@ function Gallery({params}) {
     initialData: initialData,
   });
     
-
-
-    console.log(editionInfo)
-
     return (
       <section style={section}>
         
@@ -106,6 +96,7 @@ function Gallery({params}) {
           &nbsp;&nbsp;&nbsp;&nbsp; {editionInfo.edition?.name} &nbsp;&nbsp;&nbsp;&nbsp;
           <Link style={arrows} href={`/browse/editions/${params.edition < Number(editionInfo?.edition.counter)-1 ? Number(params.edition) + 1 : Number(params.edition)}`}> &#8594; </Link>
           </h1>
+          <br />
         <nav>
         <ul>
           <code>
@@ -149,14 +140,15 @@ function Gallery({params}) {
           }
           
         })}
-        {/* <li>&#x2022; unique owners: {editionInfo.owners.owners.length} </li> */}
         </small>
         </code>
         </ul>
         </nav>
+        <br/>
         <section style={description}>
         {editionData[editionInfo.edition?.name]?.description()}
         </section>
+        <br/>
     <div style={gallery}>
 
       {editionInfo.tokens.nfts.map((nft, i) => {

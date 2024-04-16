@@ -11,9 +11,6 @@ async function getOwners() {
     try {
         const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
         const owners = await response.json()
-        // const ensTest = await publicClient.getEnsName("0x887e4cCaE8717e05C39aCfC2210293ac8DD9f2a2")
-        // const promises = owners?.owners.map(async (element) =>  publicClient.getEnsName(element.ownerAddress) );
-        // const ensNames = await Promise.all(promises);
         const ordered = owners.owners.sort((a, b) => {
             return b.tokenBalances.length - a.tokenBalances.length;
           });
@@ -35,11 +32,9 @@ function truncateAddress(address) {
 
 
 export default async function Owners() {
-    
 
     const owners = await getOwners();
 
-    console.log(owners)
   return (
     <article>
       <h2>Owners</h2>

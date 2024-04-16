@@ -146,6 +146,19 @@
   },
   {
     "inputs": [],
+    "name": "EDITION_COUNTER",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "GLOBAL_SIGNATURE_ID",
     "outputs": [
       {
@@ -269,19 +282,6 @@
         "name": "",
         "type": "uint256"
       },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "editionCounter",
-    "outputs": [
       {
         "internalType": "uint256",
         "name": "",
@@ -781,6 +781,29 @@
       }
     ],
     "name": "setPrice",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "receiver",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "basisPoints",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRoyaltyForId",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

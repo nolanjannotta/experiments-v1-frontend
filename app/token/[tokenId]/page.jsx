@@ -93,7 +93,6 @@ function truncateAddress(address) {
 async function Token({ params }) {
 
   const transfers = await getTokenTransfers(params?.tokenId)
-  console.log(transfers)
 
   const data = await tokenData(params.tokenId);
   return (

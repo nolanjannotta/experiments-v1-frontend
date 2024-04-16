@@ -12,7 +12,7 @@ async function mintPageData(editionId) {
   
   editionId = BigInt(editionId);
 
-  const currentEditionId = await contract.read.editionCounter();
+  const currentEditionId = await contract.read.EDITION_COUNTER();
   const edition = await contract.read.getEdition([editionId]);
   // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
   const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
