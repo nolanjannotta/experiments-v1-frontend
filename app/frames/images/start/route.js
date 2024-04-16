@@ -42,13 +42,13 @@ export async function GET() {
           <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>javascript</li>
           <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>servers</li>
           <li style={{ padding: "0 20px 0 20px", textDecoration: "line-through" }}>ipfs</li>
-          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>solidity</li>
-          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>svg</li>
+          {/* <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>solidity</li>
+          <li style={{ padding: "0 20px 0 20px", textDecoration: "underline" }}>svg</li> */}
         </ul>
         <div
           style={{
             width:"100%",
-            marginTop: thumbnails.length == 1 ? "40px" : thumbnails.length == 2 ? "100px" : "40px",
+            marginTop: thumbnails.length == 1 ? "10px" : thumbnails.length == 2 ? "100px" : "40px",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "space-around",
