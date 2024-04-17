@@ -21,9 +21,12 @@ function thumbnailImage(thumbnail, index, length) {
     );
 }
 
-export async function GET() {
+export async function GET(request) {
 
-    let thumbnails = await getThumbnails();
+    const lastEdition = request.nextUrl.searchParams.get("lastEdition")
+    console.log("lastEdition", lastEdition)
+
+    let thumbnails = await getThumbnails(lastEdition);
     // thumbnails = thumbnails.slice(0, 2)
 
 

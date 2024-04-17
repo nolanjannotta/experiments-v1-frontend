@@ -2,9 +2,10 @@
 import { getFrameMetadata } from '@coinbase/onchainkit';
 import {FRAME_URL} from "../../constants.js"
 
-const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`
 
-export async function generateMetadata() {
+export async function generateMetadata({params}) {
+    const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}&lastEdition=${params.editionId}`
+
 
     const frameMetadata = getFrameMetadata({
       buttons: [

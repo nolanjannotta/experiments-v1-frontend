@@ -99,8 +99,8 @@ const walletClient = createWalletClient({
     return await  walletClient.writeContract(request)
   }
 
-  export async function getThumbnails() {
-    const lastEditionId = await signerContract.read.EDITION_COUNTER();
+  export async function getThumbnails(lastEditionId) {
+    // const lastEditionId = await signerContract.read.EDITION_COUNTER();
     const thumbnails = [];
     for(let i=lastEditionId < 4n ? 1n : lastEditionId-3n; i <= lastEditionId; i++) {
       let edition = await signerContract.read.getEdition([i]);
