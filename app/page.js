@@ -24,7 +24,7 @@ export default function Home() {
      offchain scripts or URLs to servers. Raw SVG code is generated and returned 100% onchain forever.
      The goal of this project is to push my knowledge, experiment with onchain art and mechanics,
      make interesting things, learn a lot, and emerge with a semi refined set of tools and techniques to 
-     work with SVG in solidity to create onchain art. Then take what I've learned and start thinking about a v2.
+     work with SVG in solidity to create onchain art. Then take what I&apos;ve learned and start thinking about a v2.
      </p>
      <br/>
 
@@ -37,7 +37,7 @@ export default function Home() {
     <br/>
 
     <p>
-      
+
       Each edition will be &quot;uploaded&quot;/deployed individually over time as I make them. Once a new edition is added, 
       minting for the previous one will be paused. If the supply is not reached, the owner can unpause and pause at anytime 
       as well as mint paused editions. They will have a low supply (100-300 probably), 
