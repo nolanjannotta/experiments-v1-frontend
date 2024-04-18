@@ -3,6 +3,7 @@ import { getContract,  http,webSocket,createWalletClient,createPublicClient,getT
 import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
 import { baseSepolia } from "wagmi/chains";
+import * as fabric from 'fabric/node'; // v6
 
 import { artAddress } from "./constants";
 import { contractBase } from "./contract";
@@ -102,10 +103,14 @@ const walletClient = createWalletClient({
   export async function getThumbnails(lastEditionId) {
     // const lastEditionId = await signerContract.read.EDITION_COUNTER();
     const thumbnails = [];
-    for(let i=lastEditionId < 4n ? 1n : lastEditionId-3n; i <= lastEditionId; i++) {
+    for(let i=lastEditionId < 4 ? 1 : lastEditionId-3; i <= lastEditionId; i++) {
       let edition = await signerContract.read.getEdition([i]);
-      let image = await signerContract.read.getDataUri([(i* 1000000n) + edition.counter]);
-      thumbnails.push({image, name: edition.name});
+      let image = await signerContract.read.getDataUri([BigInt(i* 1000000) + edition.counter]);
+      const png = await fabric.FabricImage.fromURL(image);
+      const pngURI = png.toDataURL();
+
+
+      thumbnails.push({image: pngURI, name: edition.name});
     }
     return thumbnails;
   }

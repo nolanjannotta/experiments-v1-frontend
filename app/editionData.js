@@ -47,10 +47,11 @@ export const editionData = {
   "tree sketch": {
     description: () => {
       return (
+        <>
         <p>
           An attempt to create a &apos;hand drawn&apos; or &apos;pencil sketch&apos; effect with SVG
           using paths and curves. As an exercise I decided to create the classic
-          recursive tree. This uses a very similar algorithm used in my previous
+          recursive tree. This uses basically the same algorithm as my previous
           Recursive Trees project on ethereum Mainnet. More info can be found on
           this{" "}
           <a
@@ -59,12 +60,19 @@ export const editionData = {
           >
             medium
           </a>{" "}
-          article or on the main recursive trees{" "}
+          article and can be minted on the main recursive trees{" "}
           <a href="https://www.recursivetrees.xyz/" target="_blank">
             website
           </a>
           .
         </p>
+
+        <p>
+          note, this particular edition uses lots of gas to render the image. 
+          This usually causes Alchemy's NFT api to fail which is why most or all of the thumbnails below don&apos;t show up. 
+          You can always click on the image which loads it directly from the blockchain though.
+           </p>
+        </>
       );
     },
     modifiable: false,
@@ -169,10 +177,15 @@ export const editionData = {
     description: () => {
       return (
         <p>
-          These are not squiggles. This is an homage to the real squiggle. I
-          wanted to see whether a squiggle can be made completely onchain using
+          These are, in fact, <i>not</i> squiggles. As the title suggests, this is an experiment. I
+          wanted to see whether a squiggle-like thing can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
           credit goes to Artblocks and Snowfro. 
+
+          {/* These are not squiggles. This is an homage to the real squiggle. I
+          wanted to see whether a squiggle can be made completely onchain using
+          only solidity and SVG. As it turns out, you can get pretty close. All
+          credit goes to Artblocks and Snowfro.  */}
           {/* I will never personally make any
           money from this experiment. Royalties will start at zero and can be
           turned on and sent to Snowfro. */}

@@ -155,12 +155,14 @@ function Gallery({params}) {
         if(nft.raw.error === "Failed to get token uri"){
           // console.log("hello")
           return (
-            <div key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent: "center", alignItems: "center"}}>
+            <Link style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + (i + 1)}`}>
+            <figure key={i} style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent:"center", textAlign: "center", border: "1px solid lightgrey"}}>
                 <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render #{i + 1}.<br /></p>
-              <Link href={`/token/${params.edition * 1000000 + (i + 1)}`}>click here to load from blockchain</Link>
+                <p>click to open</p>
 
               {/* <button>retry</button> */}
-            </div>
+            </figure>
+            </Link>
           );
         }
         return (
