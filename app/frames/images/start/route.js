@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
 import {getThumbnails} from "@/app/frameConfig";
 
-import * as fabric from 'fabric/node'; // v6
 
 
 
@@ -29,25 +28,7 @@ export async function GET(request) {
     const lastEdition = request.nextUrl.searchParams.get("lastEdition")
     console.log("lastEdition", lastEdition)
 
-    let thumbnails = await getThumbnails(lastEdition);
-
-
-
-    // const image = await fabric.FabricImage.fromURL(thumbnails[3].image);
-    // const pngURI = image.toDataURL();
-
-    // const imgURI = canvas
-    //   .toDataURL('image/png')
-    //   // .replace('image/png', 'image/octet-stream');
-
-    //   console.log(imgURI)
-
-
-
-    // const something = await fabric.loadSVGFromURL(thumbnails[0].image)
-
-    // console.log(something)
-    // thumbnails = thumbnails.slice(0, 2)
+    const thumbnails = await getThumbnails(lastEdition);
 
 
 

@@ -51,7 +51,10 @@ const walletClient = createWalletClient({
   }
 
   export async function getUri(tokenId) {
-    return await signerContract.read.getDataUri([tokenId])
+    const image = await signerContract.read.getDataUri([tokenId])
+
+    const png = await fabric.FabricImage.fromURL(image);
+    return png.toDataURL();
   
   }
 //   
