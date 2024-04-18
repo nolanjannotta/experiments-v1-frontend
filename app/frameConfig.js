@@ -106,11 +106,13 @@ const walletClient = createWalletClient({
     for(let i=lastEditionId < 4 ? 1 : lastEditionId-3; i <= lastEditionId; i++) {
       let edition = await signerContract.read.getEdition([i]);
       let image = await signerContract.read.getDataUri([BigInt(i* 1000000) + edition.counter]);
+      
+      // converts SVG to PNG!!!!!!!!!!!!!!!!
       const png = await fabric.FabricImage.fromURL(image);
-      const pngURI = png.toDataURL();
+      const pngURL = png.toDataURL();
 
 
-      thumbnails.push({image: pngURI, name: edition.name});
+      thumbnails.push({image: pngURL, name: edition.name});
     }
     return thumbnails;
   }
