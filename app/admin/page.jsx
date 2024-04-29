@@ -11,7 +11,7 @@ import { useWriteContract, useConfig} from 'wagmi'
 
 
 async function getAdminData() {
-  const owner = await contract.read.owner();
+  const owner = await contract.read.OWNER();
   const minter = await contract.read.MINTER_ADDRESS();
   const contractBalance = await publicClient.getBalance({address: contract.address});
   return {owner, minter,contractBalance};
@@ -77,7 +77,18 @@ function Admin() {
           <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setMinterAddress", "address")}}></input>
           
         </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setMinterAddress", args:[inputState["setMinterAddress"]?.address]})}>set owner</button>
+        <button onClick={() => writeContract({...contractBase, functionName: "setMinterAddress", args:[inputState["setMinterAddress"]?.address]})}>set minter</button>
+      </fieldset>
+      <br/>
+        <br/>
+        <br/> 
+      <fieldset>
+        <legend>set new owner</legend>
+        <form>
+          <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setNewOwner", "address")}}></input>
+          
+        </form>
+        <button onClick={() => writeContract({...contractBase, functionName: "setOwner", args:[inputState["setNewOwner"]?.address]})}>set owner</button>
       </fieldset>
       <br/>
         <br/>

@@ -3,7 +3,7 @@ import { getContract,  http,webSocket,createWalletClient,createPublicClient,getT
 import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
 import { baseSepolia } from "wagmi/chains";
-import * as fabric from 'fabric/node'; // v6
+import {FabricImage} from 'fabric/node'; // v6
 
 import { artAddress } from "./constants";
 import { contractBase } from "./contract";
@@ -53,7 +53,7 @@ const walletClient = createWalletClient({
   export async function getUri(tokenId) {
     const image = await signerContract.read.getDataUri([tokenId])
 
-    const png = await fabric.FabricImage.fromURL(image);
+    const png = await FabricImage.fromURL(image);
     return png.toDataURL();
   
   }
@@ -111,7 +111,7 @@ const walletClient = createWalletClient({
       let image = await signerContract.read.getDataUri([BigInt(i* 1000000) + edition.counter]);
       
       // converts SVG to PNG!!!!!!!!!!!!!!!!
-      const png = await fabric.FabricImage.fromURL(image);
+      const png = await FabricImage.fromURL(image);
       const pngURL = png.toDataURL();
 
 

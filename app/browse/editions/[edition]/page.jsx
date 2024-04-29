@@ -6,6 +6,7 @@ import {contract} from "../../../contract"
 import { editionData } from '../../../editionData'
 import { formatEther } from 'viem'
 import useScreenSize from "../../../../hooks/useScreenSize"
+import { useSearchParams } from 'next/navigation'
 
 
 const initialData = {
@@ -22,7 +23,8 @@ const initialData = {
     nfts: [], 
     nextToken: "" 
   },
-  owners:{}
+  owners:{},
+  attributes: []
 };
 
 
@@ -37,7 +39,7 @@ function truncateAddress(address) {
 async function getTokens(editionId) {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
   const edition = await contract.read.getEdition([editionId]);
-
+  // let attributes = [];
 
     try {
       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
@@ -45,8 +47,14 @@ async function getTokens(editionId) {
 
       // const ownerResponse = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=false`, options)
       // const owners = await ownerResponse.json()
+      // tokens.nfts.forEach((token, i) => {
+      //   token.raw?.metadata.attributes.forEach((attribute, i) => {
+      //     attributes.includes(attribute.trait_type) ? null : attributes.push(attribute.trait_type)
+      //   })
 
-      // console.log(tokens)
+        // attributes.includes(token.raw?.metadata.attributes[0].trait_type) ? null : attributes.push(token.raw?.metadata.attributes[0])      
+      // })
+      // console.log(attributes)
       return {edition, tokens};
     } catch (error) {
       console.log(error)
@@ -72,7 +80,7 @@ async function getTokens(editionId) {
 
 function Gallery({params}) {
   const screenSize = useScreenSize();
-  console.log(screenSize)
+
 
   const description = {
     width: screenSize.width < 1400 ?  "100%" : "60%",
@@ -81,11 +89,20 @@ function Gallery({params}) {
   }
 
 
-  const {data: editionInfo, isFetching,} = useQuery({
+  const {data: editionInfo, isFetching, error} = useQuery({
     queryKey: ["editionInfo", params.edition],
     queryFn: () => getTokens(params.edition),
     initialData: initialData,
   });
+  console.log("edition info", error, editionInfo, isFetching )
+
+
+
+  if(!isFetching && error) {
+    return <section style={section}>
+      <h2> uh oh, edition #{params.edition} not found!</h2>
+    </section>
+  }
     
     return (
       <section style={section}>
@@ -147,6 +164,14 @@ function Gallery({params}) {
         <br/>
         <section style={description}>
         {editionData[editionInfo.edition?.name]?.description()}
+        {/* <figure> */}
+          {/* <legend>traits:</legend> */}
+          {/* <nav>
+            <ul>        
+              {editionInfo.attributes.map((attribute, i) => {return <li key={i}>{attribute}</li>})}
+            </ul>
+          </nav> */}
+        {/* </figure> */}
         </section>
         <br/>
     <div style={gallery}>

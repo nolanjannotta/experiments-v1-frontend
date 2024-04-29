@@ -26,13 +26,8 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
     <section
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <header>
-        
-      </header>
-    
-      {/* <div style={imageContainer} > */}
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
-      {/* </div> */}
+      {!data.error ? 
       <article style={{width:"100%"}}>
         
         <ul>
@@ -94,7 +89,10 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
             </p>
           </li>
         </ul>
-      </article>
+      </article> : <article>
+        <h3>uh oh, token id #{tokenId} not found!</h3>
+      </article> }
+
       <nav style={{margin:0}}>
           <ul>
             <li>

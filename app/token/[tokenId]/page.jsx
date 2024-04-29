@@ -4,25 +4,35 @@ import { getFrameMetadata } from '@coinbase/onchainkit';
 import { contract,publicClient } from "../../contract_server";
 import Stats from "./Stats"
 import sharp from "sharp";
-import {FRAME_URL} from "@/app/constants.js";
+// import {FRAME_URL} from "@/app/constants.js";
 import { artAddress } from '@/app/constants.js';
-import useTruncateAddress from "../../../hooks/useTruncateAddress"
+// import useTruncateAddress from "../../../hooks/useTruncateAddress"
 import {baseScanUrl} from "@/app/constants.js"
 import Moralis from "moralis";
+import { base } from 'viem/chains';
 
 await Moralis.start({apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY});
 
 async function tokenData(tokenId) {
-  const uri = await contract.read.tokenURI([tokenId]);
+  try{
+    const uri = await contract.read.tokenURI([tokenId]);
   const owner = await contract.read.ownerOf([tokenId]);
   let bufferObj = Buffer.from(
     uri.split("data:application/json;base64,")[1],
     "base64"
   );
   let metadata = JSON.parse(bufferObj.toString("utf-8"));
+  return {metadata, owner, error: false};
+  }
+  catch(e) {
+    return {metadata: {}, owner: "", error: true}
+
+  }
+
+  
   // console.log(metadata)
 
-  return {metadata, owner};
+  
 
 }
 
@@ -54,11 +64,17 @@ async function getTokenTransfers(tokenId) {
 
 
 export async function generateMetadata({ params }) {
-  const svg = await contract.read.getRawSvg([params.tokenId]);
-  const img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
+  let svg, img, base64Img;
+  try{
+    svg = await contract.read.getRawSvg([params.tokenId]);
+    img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
+    base64Img = `data:image/png;base64,${img.toString('base64')}`;
+  
+  } catch(e) {
+    base64Img = ""
 
-  const base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
+  }
+  
   const frameMetadata = getFrameMetadata({
     buttons: [{label: 'open sea', action: 'link', target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${params.tokenId}`}],
     image: {
@@ -95,10 +111,17 @@ async function Token({ params }) {
   const transfers = await getTokenTransfers(params?.tokenId)
 
   const data = await tokenData(params.tokenId);
+
+  // if(data.error) {
+  //   return  <section style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+  //     <h3>uh oh, token id #{params.tokenId} not found!</h3>
+
+  //   </section>
+  // }
   return (
     <>
     <Stats data={data} tokenId={params.tokenId} address={contract.address}/>
-    
+
     <article style={{textAlign:"center"}}>
       <hr/>
         <h4>&#x2709; transfers:</h4>

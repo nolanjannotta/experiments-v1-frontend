@@ -8,16 +8,20 @@ import { contract,publicClient } from "../contract_server";
 
 async function getOwners() {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
+  // console.log(artAddress)
     try {
         const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
+
         const owners = await response.json()
+        // console.log(owners)
         const ordered = owners.owners.sort((a, b) => {
             return b.tokenBalances.length - a.tokenBalances.length;
           });
 
       return ordered;
     } catch (error) {
-      return {}
+      // console.log(error)
+      return []
 
   }
 
@@ -43,12 +47,11 @@ export default async function Owners() {
         {owners.map((owner, index) => {
           return (
             <li key={index}>
-                &#9618;&#9618;&#9618;
+                &nbsp;&nbsp;&nbsp;
                 <Link href={`/browse/wallet/${owner.ownerAddress}`}>{truncateAddress(owner.ownerAddress)}</Link>
-              &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               balance: {owner.tokenBalances.length} &nbsp;
-              &#9618;&#9618;&#9618;&#9618;&#9618;&#9618; 
-        
+            <hr/>
             </li>
           )
         })}

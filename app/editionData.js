@@ -178,7 +178,7 @@ export const editionData = {
       return (
         <p>
           These are, in fact, <i>not</i> squiggles. As the title suggests, this is an experiment. I
-          wanted to see whether a squiggle-like thing can be made completely onchain using
+          wanted to see whether a squiggle-like image can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
           credit goes to Artblocks and Snowfro. 
 

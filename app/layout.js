@@ -12,18 +12,19 @@ export const metadata = {
   description: 'art experiments',
 }
 
-const inter = Inter({ subsets: ['latin'] })
-const trispace = Trispace({ subsets: ['latin'] })
-
+export const revalidate = 30
 
 
 // console.log(artAddress)
 
 export default function RootLayout({ children }) {
+  const favicon = (Date.now() % 2) + 1
   return (
     <html lang="en">
       <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="icon" type="image/png" sizes="32x32" href={`/favicons/${favicon}.png`}/>
+      
       </head>
 
       <body>
