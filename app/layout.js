@@ -1,10 +1,11 @@
 
 
-import { Inter,Urbanist,Trispace } from 'next/font/google'
+// import { Inter,Urbanist,Trispace } from 'next/font/google'
 import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
 import "./global.css"
+// import "./test.css"
 import { baseScanUrl } from './constants'
 
 export const metadata = {
@@ -33,11 +34,17 @@ export default function RootLayout({ children }) {
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/browse">browse</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/modify">modify</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/mint">mint</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/prints">prints</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/v2">v2</Link></li>
+        <li>&#x26AC;</li>
         <li><Link href="/owners">owners</Link></li>
         </ul>
         </nav>
@@ -50,9 +57,15 @@ export default function RootLayout({ children }) {
           <ul>
            
             <li><a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${artAddress}`}>open sea</a></li>
+            <li>&#x26AC;</li>
 
             <li><a target="_blank" href={`${baseScanUrl}address/${artAddress}`}>basescan</a></li>
+            <li>&#x26AC;</li>
+            {/* <li style={{color: "#d7d7d7"}}>made in la</li>
+            <li>&#x26AC;</li> */}
+
             <li style={{color: "#d7d7d7"}}>made with &#9760; by nolan</li>
+            
           </ul>
         </nav>
       </footer>

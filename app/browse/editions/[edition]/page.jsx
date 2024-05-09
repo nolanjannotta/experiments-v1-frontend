@@ -7,6 +7,7 @@ import { editionData } from '../../../editionData'
 import { formatEther } from 'viem'
 import useScreenSize from "../../../../hooks/useScreenSize"
 import { useSearchParams } from 'next/navigation'
+import {editionType} from '../../../types'
 
 
 const initialData = {
@@ -36,26 +37,38 @@ function truncateAddress(address) {
 }
 
 
-async function getTokens(editionId) {
+// async function refresh(tokenId) {
+
+//   const options = {method: 'POST', headers: {accept: 'application/json', 'content-type': 'application/json'}};
+//   // const edition = await contract.read.getEdition([editionId]);
+//   // let attributes = [];
+
+//     try {
+//       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/refreshNftMetadata?contractAddress=${artAddress}&tokenId=${tokenId}`, options)
+//       const result = await response.json()
+//       console.log(result)
+//     }
+//     catch (error) {
+//       // console.log(error)
+//     }
+
+// }
+
+async function getEdition(editionId) {
+  return await contract.read.getEdition([editionId]);
+
+
+}
+
+
+async function getThumbnails(editionId, counter) {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
-  const edition = await contract.read.getEdition([editionId]);
-  // let attributes = [];
+
 
     try {
-      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${edition.counter || 0}`, options)
+      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${counter || 0}`, options)
       const tokens = await response.json()
-
-      // const ownerResponse = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=false`, options)
-      // const owners = await ownerResponse.json()
-      // tokens.nfts.forEach((token, i) => {
-      //   token.raw?.metadata.attributes.forEach((attribute, i) => {
-      //     attributes.includes(attribute.trait_type) ? null : attributes.push(attribute.trait_type)
-      //   })
-
-        // attributes.includes(token.raw?.metadata.attributes[0].trait_type) ? null : attributes.push(token.raw?.metadata.attributes[0])      
-      // })
-      // console.log(attributes)
-      return {edition, tokens};
+      return {images: tokens.nfts, loading: false};
     } catch (error) {
       console.log(error)
 
@@ -89,18 +102,37 @@ function Gallery({params}) {
   }
 
 
-  const {data: editionInfo, isFetching, error} = useQuery({
+
+
+  const {data: editionInfo, isFetching: editionFething, error} = useQuery({
     queryKey: ["editionInfo", params.edition],
-    queryFn: () => getTokens(params.edition),
-    initialData: initialData,
+    queryFn: () => getEdition(params.edition),
+    initialData: editionType,
   });
-  console.log("edition info", error, editionInfo, isFetching )
+
+  const {data: thumbnails} = useQuery({
+    queryKey: ["thumbnails", params.edition],
+    queryFn: () => getThumbnails(params.edition, editionInfo.counter),
+    initialData: {images: [],loading: true},
+    enabled: editionInfo.counter > 0,
+
+  });
 
 
 
-  if(!isFetching && error) {
+
+  // console.log("edition info", error, thumbnails, isFetching )
+
+
+
+  if(!editionFething && error) {
     return <section style={section}>
-      <h2> uh oh, edition #{params.edition} not found!</h2>
+      <h1 style={{margin: "0", padding: "0"}}>
+          <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
+          &nbsp;&nbsp;&nbsp;&nbsp; {isFetching ? "loading" : "uh oh, edition #" + params.edition + "not found!"} &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}> &#8594; </Link>
+          </h1>
+      {/* <h2> uh oh, edition #{params.edition} not found!</h2> */}
     </section>
   }
     
@@ -110,50 +142,50 @@ function Gallery({params}) {
 
         <h1 style={{margin: "0", padding: "0"}}>
           <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
-          &nbsp;&nbsp;&nbsp;&nbsp; {editionInfo.edition?.name} &nbsp;&nbsp;&nbsp;&nbsp;
-          <Link style={arrows} href={`/browse/editions/${params.edition < Number(editionInfo?.edition.counter)-1 ? Number(params.edition) + 1 : Number(params.edition)}`}> &#8594; </Link>
+          &nbsp;&nbsp;&nbsp;&nbsp; {editionFething ? "loading" : editionInfo.name} &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}> &#8594; </Link>
           </h1>
           <br />
         <nav>
         <ul>
           <code>
             <small>
-              <li>&#x2022; edition: &quot;{params.edition}&quot;</li>
-        {Object.keys(editionInfo.edition).map((key, i) => {
+              <li>&#x2022; edition #: &quot;{params.edition}&quot;</li>
+        {Object.keys(editionInfo).map((key, i) => {
           if(key === "artGenerator") {
-            return <li key={i}>&#x2022; {"art generator"}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo.edition[key]}`} target="_blank">&#8599;</a></li>
+            return <li key={i}>&#x2022; {"art generator"}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">&#8599;</a></li>
             
           }
           if(key === "price") {
-            return <li  key={i}>&#x2022; {key}: &quot;{formatEther(editionInfo.edition[key])} eth&quot;</li>
+            return <li  key={i}>&#x2022; {key}: &quot;{formatEther(editionInfo[key])} eth&quot;</li>
           }
           if (key === "royalty") {
-            return <li key={i}>&#x2022; {key}: &quot;{Number(editionInfo.edition[key]) / 100}%&quot;</li>
+            return <li key={i}>&#x2022; {key}: &quot;{Number(editionInfo[key]) / 100}%&quot;</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{truncateAddress(editionInfo.edition[key])}&quot;</li>
+            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{truncateAddress(editionInfo[key])}&quot;</li>
           }
           if(key === "supply") {
-            return <li  key={i}>&#x2022; {"max supply"}: &quot;{Number(editionInfo.edition[key])}&quot;</li>
+            return <li  key={i}>&#x2022; {"max supply"}: &quot;{Number(editionInfo[key])}&quot;</li>
           }
           if(key === "counter") {
-            return <li  key={i}>&#x2022; {"current supply"}: &quot;{Number(editionInfo.edition[key])}&quot;</li>
+            return <li  key={i}>&#x2022; {"current supply"}: &quot;{Number(editionInfo[key])}&quot;</li>
           }
           if(key === "description") {
-            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li>
+            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo[key]}&quot;</li>
           }
 
           if(key === "mintStatus") {
-            if(editionInfo.edition.counter === editionInfo.edition.supply) {
+            if(editionInfo.counter === editionInfo.supply) {
               return <li  key={i}>&#x2022; {"mint status"}: {"ended"}</li>
             }
             else {
-              return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo.edition[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
+              return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
 
             }
           }
           else {
-           return <li  key={i}>&#x2022; {key}: &quot;{editionInfo.edition[key]}&quot;</li> 
+           return <li  key={i}>&#x2022; {key}: &quot;{editionInfo[key]}&quot;</li> 
           }
           
         })}
@@ -163,48 +195,47 @@ function Gallery({params}) {
         </nav>
         <br/>
         <section style={description}>
-        {editionData[editionInfo.edition?.name]?.description()}
-        {/* <figure> */}
-          {/* <legend>traits:</legend> */}
-          {/* <nav>
-            <ul>        
-              {editionInfo.attributes.map((attribute, i) => {return <li key={i}>{attribute}</li>})}
-            </ul>
-          </nav> */}
-        {/* </figure> */}
+        {editionData[editionInfo.name]?.description()}
+
         </section>
         <br/>
     <div style={gallery}>
 
-      {editionInfo.tokens.nfts.map((nft, i) => {
+      {thumbnails.images.error && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
+      {thumbnails.loading && <p>loading thumbnails...</p>}
+      {thumbnails.images.map((nft, i) => {
+        // console.log(nft)
         if(nft.raw.error === "Failed to get token uri"){
-          // console.log("hello")
+          
           return (
             <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + (i + 1)}`}>
             <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent:"center", textAlign: "center", border: "1px solid lightgrey"}}>
                 <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render #{i + 1}.<br /></p>
                 <p>click to open</p>
 
-              {/* <button>retry</button> */}
             </figure>
             </Link>
           );
         }
         return (
           <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (i+1)}`}>
+
           <figure style={galleryFig} >
             <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
             <figcaption>{nft.raw.metadata.name}
-            {/* &#8599; */}
             </figcaption>
           </figure>
           </Link>
+
         )
       })}
  
 
     </div>
-      {!isFetching && <Link href="/browse">back</Link>}
+    <br/>
+    <br/>
+    <br/>
+      {!editionFething && <Link href="/browse">back</Link>}
     </section>
   )
 }

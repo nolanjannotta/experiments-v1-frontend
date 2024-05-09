@@ -21,7 +21,7 @@ function Prints() {
             <ul>
         <li>Highest quality reasonably possible. (Epson P700 or P900)</li>
         <li>All printing, packaging and shipping will be done by hand by me.</li>
-        <li>All packaging will be 100% recycleable.</li>
+        <li>All packaging should be 100% recycleable.</li>
         <li>Ideally shipped anywhere in the world.</li>
         <li>The revenue from the prints will be split between the artist, the owner of the piece being printed, and the printer. Percentages TBD. </li>
         <li>Prints will be priced in Eth. </li>

@@ -13,8 +13,9 @@ import { useWriteContract, useConfig} from 'wagmi'
 async function getAdminData() {
   const owner = await contract.read.OWNER();
   const minter = await contract.read.MINTER_ADDRESS();
+  const globalSignature = await contract.read.GLOBAL_SIGNATURE_ID();
   const contractBalance = await publicClient.getBalance({address: contract.address});
-  return {owner, minter,contractBalance};
+  return {owner, minter,contractBalance,globalSignature};
 }
 
 
@@ -60,12 +61,10 @@ function Admin() {
 
   return (
     <article>
-      <p>owner: {adminData.owner}</p>
-      <p>minter: {adminData.minter}</p>
-      <p>balance: {formatEther(adminData.contractBalance)} eth</p>
 
       <fieldset>
         <legend>withdraw</legend>
+        <p>balance: {formatEther(adminData.contractBalance)} eth</p>
         <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
       </fieldset>
         <br/>
@@ -73,6 +72,8 @@ function Admin() {
         <br/>
       <fieldset>
         <legend>set minter address</legend>
+        <p>minter: {adminData.minter}</p>
+
         <form>
           <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setMinterAddress", "address")}}></input>
           
@@ -84,6 +85,7 @@ function Admin() {
         <br/> 
       <fieldset>
         <legend>set new owner</legend>
+        <p>owner: {adminData.owner}</p>
         <form>
           <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setNewOwner", "address")}}></input>
           
@@ -121,8 +123,9 @@ function Admin() {
         <br/>
       <fieldset>
         <legend>set global signature</legend>
+        <p>current signature: {Number(adminData.globalSignature)}</p>
         <form>
-          <input type="text" placeholder="Signature ID" onChange={(e)=>{handleInputChange(e.target.value, "setGlobalSignature", "signatureId")}}></input>
+          <input type="text" placeholder="new signature id" onChange={(e)=>{handleInputChange(e.target.value, "setGlobalSignature", "signatureId")}}></input>
           
         </form>
         <button onClick={() => writeContract({...contractBase, functionName: "setGlobalSignatureId", args:[inputState["setGlobalSignature"]?.signatureId]})}>set global signature</button>

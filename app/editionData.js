@@ -105,7 +105,7 @@ export const editionData = {
               by the owner of the clock.
             </li>
             <li>
-              a text to display below the clock. This text can be up to 22
+              a text to display below the clock. This text can be up to 23
               characters long. It could be the timezone location, a name, or
               anything else.
             </li>
@@ -120,7 +120,6 @@ export const editionData = {
     modifiable: true,
     seed: [
         { name: "timeZoneOffset", type: "uint8" },
-        {name: "length", type: "uint8"},
         {name: "selfId", type: "uint32"},
         { name: "backgroundId", type: "uint32" },
         { name: "location", type: "string" },
@@ -149,10 +148,9 @@ export const editionData = {
     description: () => {
       return (
         <>
-          <p>Based on a simple set of rules:</p>
           <ol>
             <li>
-              using the seed, deterministically draw a line either vertically or
+              first, draw a line either vertically or
               horizontally somewhere near the middle of the square.
             </li>
             <li>
@@ -160,10 +158,9 @@ export const editionData = {
               in either direction.
             </li>
             <li>
-              recursively do this for each new line until the lines get close to
-              the edge OR is &quot;iterations&quot; is reached. iterations is either 1 or
-              2 and is determined by the seed. This keeps it from drawing too
-              many lines.
+              do this for each new line until the lines get close to
+              the edge OR its &quot;iterations&quot; are reached. iterations is either 1 or
+              2 and is determined by the seed. This keeps it from getting out of control.
             </li>
           </ol>
         </>
@@ -178,17 +175,10 @@ export const editionData = {
       return (
         <p>
           These are, in fact, <i>not</i> squiggles. As the title suggests, this is an experiment. I
-          wanted to see whether a squiggle-like image can be made completely onchain using
+          wanted to see whether a project as legendary as the Chromie Squiggle can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
           credit goes to Artblocks and Snowfro. 
 
-          {/* These are not squiggles. This is an homage to the real squiggle. I
-          wanted to see whether a squiggle can be made completely onchain using
-          only solidity and SVG. As it turns out, you can get pretty close. All
-          credit goes to Artblocks and Snowfro.  */}
-          {/* I will never personally make any
-          money from this experiment. Royalties will start at zero and can be
-          turned on and sent to Snowfro. */}
         </p>
       );
     },

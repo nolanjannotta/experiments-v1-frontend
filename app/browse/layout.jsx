@@ -9,8 +9,11 @@ export default function EditionLayout({ children }) {
         <nav>
           <ul>
             <li><Link href="/browse/search">search</Link></li>
+            <li>&#x26AC;</li>
             <li><Link href="/browse/">all editions</Link></li>
+            <li>&#x26AC;</li>
             <li><Link href="/browse/all">all mints</Link></li>
+            <li>&#x26AC;</li>
             <li><OtherConnectButton /></li>
 
           </ul>

@@ -13,7 +13,7 @@ import CustomConnect from './CustomConnect'
 
 
 
-function MintButton({isMinting, editionId}) {
+function MintButton({isMinting, editionId, price}) {
 
 
 
@@ -26,6 +26,7 @@ function MintButton({isMinting, editionId}) {
             ...contractBase,
             functionName: "mint",
             args: [BigInt(editionId)],
+            value: price,
             onSuccess: (results) => {console.log(results)},
         })
 

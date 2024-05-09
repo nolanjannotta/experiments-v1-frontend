@@ -1,10 +1,15 @@
 "use client"
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import {useAccount} from "wagmi";
+import {useAccount, useWriteContract} from "wagmi";
+import { contractBase } from "../../contract";
+import { isAddress } from "viem";
+import ConnectSimple from "../../../components/ConnectSimple";
 
 
 export default function Stats({ data, tokenId, address, connectedAddress }) {
+    const [transferData, setTransferData] = useState({ready: false, to: ""})
+    // console.log(data);
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -22,17 +27,40 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
 
     },[])
 
+    const {writeContract} = useWriteContract();
+
+    async function transfer() {
+      writeContract({
+          ...contractBase,
+          functionName: "safeTransferFrom",
+          args: [account.address, transferData.to, tokenId],
+      })
+      
+  }
+
+  function handleInputChange(e) {
+    const state = {
+      to: e.target.value,
+      ready: isAddress(e.target.value),
+
+    }
+    setTransferData(state)
+  }
+
+
   return (
     <section
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
+      <br/>
+      <br/>
       {!data.error ? 
       <article style={{width:"100%"}}>
         
         <ul>
           <li>
-            <p>name: &quot;{data?.metadata.name}&quot;</p>
+            <p>name: &quot; <Link style={{textDecoration:"none", color: "inherit"}}href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}>{data?.editionName}</Link> #{tokenId % 1000000}&quot;</p>
           </li>
           <li>
             <p> description: &quot;{data?.metadata.description}&quot;</p>
@@ -41,6 +69,7 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
             <p>token id: {tokenId}</p>
           </li>
 
+          {data.metadata.attributes.length > 0  &&
           <li>
             <>
               attributes:
@@ -55,6 +84,7 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
               </ul>
             </>
           </li>
+          }   
 
           <li>
             <>
@@ -83,11 +113,29 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
             </p>
           </li>
 
+          
+          
+          {data?.owner === account.address || !account.isConnected ? 
+          <>
           <li>
             <p>
-              modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
+              
+              transfer: <ConnectSimple>
+                      
+                       <><input placeholder="address to" onChange={handleInputChange}></input> <button style={button} disabled={!transferData.ready} onClick={() => transfer()}>&#x2709;</button></>
+                       
+                      </ConnectSimple>
             </p>
           </li>
+          <li>
+          <p>
+            modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
+          </p>
+        </li>
+        </>
+          :
+          <></>
+        } 
         </ul>
       </article> : <article>
         <h3>uh oh, token id #{tokenId} not found!</h3>
@@ -110,15 +158,15 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
 }
 
 
-// const button = {
-//     background: "none",
-//     border: "none",
-//     fontSize: "1rem",
-//     textDecoration: "underline"
-//     // padding: "none",
-//     // margin: "none"
+const button = {
+    background: "none",
+    border: "none",
+    fontSize: "1rem",
+    // textDecoration: "underline"
+    // padding: "none",
+    // margin: "none"
   
-//   }
+  }
   
 //   const imageContainer = {
 //     display: "flex",

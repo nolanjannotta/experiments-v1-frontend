@@ -66,7 +66,7 @@ function Mint({params}) {
           </li>
         </ul>
 
-        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} callback={()=> console.log("hello")}/>
+        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price} callback={()=> console.log("hello")}/>
         <figure style={galleryFig}>
           
           <img src={data.metadata?.image} alt='image loading...' width="500"></img>

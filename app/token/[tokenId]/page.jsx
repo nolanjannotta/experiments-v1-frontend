@@ -13,16 +13,20 @@ import { base } from 'viem/chains';
 
 await Moralis.start({apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY});
 
+
+
 async function tokenData(tokenId) {
   try{
     const uri = await contract.read.tokenURI([tokenId]);
   const owner = await contract.read.ownerOf([tokenId]);
+  const editionName = await contract.read.getEdition([Math.floor(tokenId/1000000)]);
+
   let bufferObj = Buffer.from(
     uri.split("data:application/json;base64,")[1],
     "base64"
   );
   let metadata = JSON.parse(bufferObj.toString("utf-8"));
-  return {metadata, owner, error: false};
+  return {metadata, owner, error: false, editionName: editionName.name};
   }
   catch(e) {
     return {metadata: {}, owner: "", error: true}
@@ -127,7 +131,7 @@ async function Token({ params }) {
         <h4>&#x2709; transfers:</h4>
         <br/>
         <ul style={{listStyleType: "none", margin: 0, padding: 0}}>
-        {transfers?.map((transfer, i) => {return <li key={i} >&#x7c;&#9618;&#9618;&#9618; &#x2709; #{transfers.length-i} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &#9618;&#9618;&#9618;&#9618;&#9618;&#9618;&#9618; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &#9618;&#9618;&#9618;&#9618; <a style={{textDecoration:"none"}} target="_blank" href={`${baseScanUrl}/tx/${transfer.transaction_hash}`} >tx&#8599;</a> &#9618;&#9618;&#9618;&#9618; &#x2713;&#9618;&#9618;&#9618;&#9618;&#x7c;</li>})}
+        {transfers?.map((transfer, i) => {return <li key={i} >&#x7c; &nbsp;&nbsp; &#x2709; #{transfers.length-i} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#128337;  {new Date(transfer.block_timestamp).toLocaleString()} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#91;{truncateAddress(transfer.from_address)}&#93; &#x279F; &#91;{truncateAddress(transfer.to_address)}&#93; &nbsp;&nbsp;&nbsp;&nbsp; <a style={{textDecoration:"none"}} target="_blank" href={`${baseScanUrl}/tx/${transfer.transaction_hash}`} >tx&#8599;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x7c;</li>})}
         <hr/>
         </ul>
     </article>
