@@ -91,7 +91,7 @@ export default function Home() {
        Minting is very straight forward. When a user mints, a few basic checks are done to make sure the edition exists 
        and the max supply is not reached. If they all pass, the contract will call the art generator contract to create the seed, store it, 
         then mint the token to the user. Each Art Generator can create the seed in any way they want. 
-        it might be a "random" number from block data. It could store specific data, or be blank.
+        it might be a &quot;random&quot; number from block data. It could store specific data, or be blank.
       </p>
 
 
