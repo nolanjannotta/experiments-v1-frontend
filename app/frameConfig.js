@@ -105,18 +105,18 @@ const walletClient = createWalletClient({
 
   export async function getThumbnails(lastEditionId) {
     // const lastEditionId = await signerContract.read.EDITION_COUNTER();
-    const thumbnails = [];
-    for(let i=lastEditionId < 4 ? 1 : lastEditionId-3; i <= lastEditionId; i++) {
-      let edition = await signerContract.read.getEdition([i]);
-      let image = await signerContract.read.getDataUri([BigInt(i* 1000000) + edition.counter]);
-      
+    // const thumbnails = [];
+    // for(let i=lastEditionId < 4 ? 1 : lastEditionId-3; i <= lastEditionId; i++) {
+      let edition = await signerContract.read.getEdition([lastEditionId]);
+      let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
+      console.log(image)
       // converts SVG to PNG!!!!!!!!!!!!!!!!
       const png = await FabricImage.fromURL(image);
       const pngURL = png.toDataURL();
 
 
-      thumbnails.push({image: pngURL, name: edition.name});
-    }
-    return thumbnails;
+      // thumbnails.push({image: pngURL, name: edition.name});
+    // }
+    return {image: pngURL, name: edition.name};
   }
   
