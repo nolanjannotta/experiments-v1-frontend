@@ -85,11 +85,12 @@ export default function Browse({searchParams}) {
 
 
 const gallery = {
-  width: "80%",
+  width: "70%",
   display: "flex",
   flexFlow: "wrap",
   justifyContent: "space-evenly",
-  alignItems: "center"
+  alignItems: "center",
+  gap: "150px"
   
   }
   const galleryImg = {

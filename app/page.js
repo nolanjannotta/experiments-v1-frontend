@@ -41,7 +41,7 @@ export default function Home() {
 
         <p>
           Each token has 32 bits of storage that is stored in the ERC721 smart
-          contract. This can be any number, string, bytes, etc. When it comes to
+          contract. This can be number, string, bytes, etc. When it comes to
           generative art, it is usually a &quot;random&quot; number. This number
           can be derived from block data like timestamp, block hash, etc. The
           minters address can also be used. The seed can also be any arbitrary
@@ -53,20 +53,26 @@ export default function Home() {
         <p>
           Each edition will be &quot;uploaded&quot;/deployed individually over
           time as I make them. Once a new edition is added, minting for the
-          previous one will be paused. If the supply is not reached, the owner
+          previous one will be paused. If the supply for a paused edition is not reached, the owner
           can unpause and pause at anytime as well as mint paused editions. They
-          will have a low supply (100-300 probably), start as completely free,
+          will have a low supply (100-300 probably, 500 max), start as completely free,
           mintable through this website as well as through a frame in warpcast.
-          Every warpcast user who follows my{" "}
+          In an effort to grow my audience, every warpcast user who follows my{" "}
           <a target="_blank" href="https://warpcast.com/nolanj">
             account
           </a>{" "}
-          gets 2 free (zero gas) mints for each edition through the frame.
+          gets 2 free (zero gas!) mints for each edition through the frame.
           Depending on the demand, the owner may set a reasonable price and
-          royalty (ERC-2981) for the remaining tokens (I gotta eat!).
+          royalty (ERC-2981) for the remaining tokens and new editions (I gotta eat!).
         </p>
         <br />
 
+        <p>
+        One thing worth noting is that, since everything is onchain, your faced with a couple limitations. 
+        For example contract size, gas limit, lack of standard SVG solidity libraries (for now...), etc.
+        I actually like this &quot;feature&quot;. For me, it pushes me to be more creative with less.
+        </p>
+        <br/>
         <p>
           The token IDs work like this: &nbsp;
           <code>(editionId x 1,000,000) + editionCounter</code>
@@ -79,7 +85,7 @@ export default function Home() {
       <br />
       <br />
       <p>
-        below are some flowcharts that show the basic moving parts for some of
+        Below are some flowcharts that show the basic moving parts for some of
         functions in this project.{" "}
       </p>
       <br />
@@ -205,8 +211,11 @@ export default function Home() {
       <br/>
 
       <p>
-        as you can see, this project is very simple, but very fun! Since everything is onchain, your faced with a couple limitations.   
-        I consider this a feature rather than a bug. For me, it pushes me to be more creative with less.
+        As you can see, this project is very simple, but very fun! As said to above, this is a place for me to 
+        experiment and draft ideas, while at the same time creating a finished product that conveys my vision and that anyone can use and enjoy. 
+        This is part 1 of at least 2 parts. Brainstorming for V2 can be found <Link href="/v2">here</Link>, and I encourage all 
+        onchain generative art enthusiasts to reach out! 
+
       </p>
     </main>
   );
