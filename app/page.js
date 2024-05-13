@@ -19,18 +19,17 @@ export default function Home() {
           <a target="_blank" href="https://www.artblocks.io/">
             {" "}
             ArtBlocks
-          </a>
-          . These experiments are managed by a single ERC721{" "}
+          </a> and others. These experiments are managed by a single ERC721{" "}
           <Link href="/contracts/main">smart contract</Link> on the{" "}
           <a target="blank" href="https://www.base.org/">
             Base
           </a>{" "}
-          L2 blockchain. Each individual &quot;experiment&quot; (also,
+          L2 blockchain. Each individual &quot;experiment&quot; (also
           &quot;edition&quot;) is linked to its own immutable{" "}
           <Link href="/contracts/artgenerator">ArtGenerator</Link> contract.
           This contract is in charge of generating the raw SVG code and any
           attributes that this experiment may or may not have. There will never
-          be any offchain scripts or URLs to servers. Raw SVG code is generated
+          be any offchain scripts, javascript, ipfs, or URLs to servers. Raw SVG code is generated
           and returned 100% onchain forever. The goal of this project is to push
           my knowledge, experiment with onchain art and mechanics, make
           interesting things, learn a lot, and emerge with a semi refined set of
@@ -43,8 +42,8 @@ export default function Home() {
           Each token has 32 bits of storage that is stored in the ERC721 smart
           contract. This can be number, string, bytes, etc. When it comes to
           generative art, it is usually a &quot;random&quot; number. This number
-          can be derived from block data like timestamp, block hash, etc. The
-          minters address can also be used. The seed can also be any arbitrary
+          can be derived from block data like timestamp, block hash, minters 
+          address, etc. The seed can also be any arbitrary
           data that can fit into 32 bytes, and can be packed, unpacked and
           modified by the art generator contract.
         </p>
