@@ -5,27 +5,26 @@ import {getThumbnails} from "@/app/frameConfig";
 
 
 
-function thumbnailImage(thumbnail) {
-    // const width = length == 1 ? "70%" : length == 2 ? "45%" : "35%"
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          maxWidth: "70%"
-        }}
-      >
-        <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
-        <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
-      </div>
-    );
-}
+// function thumbnailImage(thumbnail) {
+//     // const width = length == 1 ? "70%" : length == 2 ? "45%" : "35%"
+//     return (
+//       <div
+//         style={{
+//           display: "flex",
+//           flexDirection: "column",
+//           alignItems: "center",
+//           maxWidth: "70%"
+//         }}
+//       >
+//         <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
+//         <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
+//       </div>
+//     );
+// }
 
 export async function GET(request) {
 
-    const lastEdition = request.nextUrl.searchParams.get("lastEdition")
-    console.log("lastEdition", lastEdition)
+    const lastEdition = request.nextUrl.searchParams.get("lastEdition") 
 
     const thumbnail = await getThumbnails(lastEdition);
 
@@ -65,8 +64,9 @@ export async function GET(request) {
           maxWidth: "70%"
         }}
       >
-        <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
-        <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
+        
+        { thumbnail.image && <img style={{padding:0}} width="100%" src={thumbnail.image}></img>}
+        { thumbnail.name && <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>}
       </div>
 
       </div>

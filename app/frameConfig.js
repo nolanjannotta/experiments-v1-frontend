@@ -4,7 +4,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
 import { baseSepolia } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
-
+import sharp from 'sharp';
 import { artAddress } from "./constants";
 import { contractBase } from "./contract";
 
@@ -103,23 +103,19 @@ const walletClient = createWalletClient({
     return await  walletClient.writeContract(request)
   }
 
+
+
   export async function getThumbnails(lastEditionId) {
-    // const lastEditionId = await signerContract.read.EDITION_COUNTER();
-    // const thumbnails = [];
-    // for(let i=lastEditionId < 4 ? 1 : lastEditionId-3; i <= lastEditionId; i++) {
+      if(!lastEditionId) return {image: "", name: ""}
       let edition = await signerContract.read.getEdition([lastEditionId]);
       let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
-      console.log(image)
       // converts SVG to PNG!!!!!!!!!!!!!!!!
-      let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
-      let base64Img = `data:image/png;base64,${img.toString('base64')}`;
+      // let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
+      // let base64Img = `data:image/png;base64,${img.toString('base64')}`;
 
-      // const png = await FabricImage.fromURL(image);
-      // const pngURL = png.toDataURL();
+      const png = await FabricImage.fromURL(image);
+      const pngURL = png.toDataURL();
 
-
-      // thumbnails.push({image: pngURL, name: edition.name});
-    // }
-    return {image: base64Img, name: edition.name};
+    return {image: pngURL, name: edition.name};
   }
   
