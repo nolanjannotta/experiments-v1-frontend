@@ -48,3 +48,6 @@ export default async function Frames() {
   );
 }
 
+export const dynamic = "force-dynamic";
+
+export const POST = Frames;
