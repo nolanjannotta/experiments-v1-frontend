@@ -24,7 +24,7 @@ async function getResponse(request) {
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
         {label: "Home", target: `${FRAME_URL}/frames`},
-        {label: "Sounds cool, mint me one!", target: `${FRAME_URL}/frames/mint`}
+        // {label: "Sounds cool, mint me one!", target: `${FRAME_URL}/frames/mint`}
         ]
     
     ]
