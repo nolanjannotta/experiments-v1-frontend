@@ -111,12 +111,15 @@ const walletClient = createWalletClient({
       let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
       console.log(image)
       // converts SVG to PNG!!!!!!!!!!!!!!!!
-      const png = await FabricImage.fromURL(image);
-      const pngURL = png.toDataURL();
+      let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
+      let base64Img = `data:image/png;base64,${img.toString('base64')}`;
+
+      // const png = await FabricImage.fromURL(image);
+      // const pngURL = png.toDataURL();
 
 
       // thumbnails.push({image: pngURL, name: edition.name});
     // }
-    return {image: pngURL, name: edition.name};
+    return {image: base64Img, name: edition.name};
   }
   
