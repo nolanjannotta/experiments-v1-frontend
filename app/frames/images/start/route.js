@@ -56,6 +56,7 @@ export async function GET(request) {
             justifyContent: "space-around",
           }}
         >
+          { thumbnail.image && 
           <div
         style={{
           display: "flex",
@@ -65,10 +66,10 @@ export async function GET(request) {
         }}
       >
         
-        { thumbnail.image && <img style={{padding:0}} width="100%" src={thumbnail.image}></img>}
-        { thumbnail.name && <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>}
+        <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
+        <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
       </div>
-
+      }
       </div>
       </Card>
     ),
