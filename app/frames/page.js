@@ -4,6 +4,8 @@ import {FRAME_URL} from "../constants.js"
 
 const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`
 
+
+
 export async function generateMetadata() {
 
     const frameMetadata = getFrameMetadata({

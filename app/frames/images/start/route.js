@@ -23,7 +23,7 @@ import {getThumbnails} from "@/app/frameConfig";
 // }
 
 export async function GET(request) {
-
+  
     const lastEdition = request.nextUrl.searchParams.get("lastEdition") 
 
     const thumbnail = await getThumbnails(lastEdition);
