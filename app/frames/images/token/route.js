@@ -8,11 +8,7 @@ import { signerContract } from "@/app/frameConfig";
 export async function GET(request) {
     const tokenId = request.nextUrl.searchParams.get("tokenId")
 
-    let uri;
-    uri = await getUri(tokenId)  
-    // const image = await signerContract.read.getDataUri([tokenId])
-
-
+    let uri = await getUri(tokenId)  
 
   return new ImageResponse(
     (
@@ -25,7 +21,7 @@ export async function GET(request) {
             justifyContent: "center",
           }}
         >
-            { uri ? <img width="65%" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
+            { uri ? <img width="90%" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
 
         </div>
       </Card>

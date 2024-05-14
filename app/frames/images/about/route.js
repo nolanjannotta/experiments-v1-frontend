@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
-import {getUri} from "@/app/frameConfig";
+// import {getUri} from "@/app/frameConfig";
 
 
 const pageContent = [
