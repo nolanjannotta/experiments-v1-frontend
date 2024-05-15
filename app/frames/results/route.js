@@ -29,7 +29,7 @@ async function getResponse(request) {
     if(userAllowance > 0 &&  submittedAt - lastSubmitted > 10){
         await kv.hset(message.interactor.fid, {[tokenName]: userAllowance-1, lastSubmitted: submittedAt});
         try {
-            tx = await mint(minterAddress);
+            tx = await mint(editionId,minterAddress);
         } catch (error) {
             console.error(error)
         }
