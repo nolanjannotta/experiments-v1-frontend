@@ -27,7 +27,7 @@ function V2() {
                 Create a platform and tools for other artists to mint their 100% onchain art works. 
             </li>
             <li>
-                continue offering prints as key part of the project. Split revenue between collector, artist, and printer.
+                continue offering prints as key part of the project. Split revenue between collector, artist, and printer. Not limited to just prints on paper, could include other physical objects.
 
             </li>
             <li>
@@ -38,6 +38,7 @@ function V2() {
                    <li>
                     cool new modern feature.
                     </li> 
+                    
                     </ul>
                 <figcaption>con</figcaption>
                 <ul>
@@ -57,7 +58,10 @@ function V2() {
                     </figure>
             </li>
             <li>
-              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a period of time in the past. unless im wrong about that). They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
+              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a 
+              kind of &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a 
+              period of time in the past. unless im wrong about that. I'm not saying Base has done this, but just L2s in general). 
+              They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
             </li>
             <li>

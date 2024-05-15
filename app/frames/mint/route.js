@@ -30,6 +30,8 @@ const doesUserFollowNolan = async (fid) => {
 
 
 async function getResponse(request) {
+    const editionId = request.nextUrl.searchParams.get("editionId");
+    console.log(editionId)
     const body = await request.json();
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
@@ -41,7 +43,7 @@ async function getResponse(request) {
     const userFollowsNolan = await doesUserFollowNolan(message.interactor.fid);
     await kv.hset(message.interactor.fid, {isFollower: userFollowsNolan}); 
 
-    const lastData = await getLastMint();
+    const lastData = await getLastMint(editionId);
     const currentAllowance = await kv.hget(message.interactor.fid, lastData?.lastEdition.name);
 
     if(currentAllowance == null) {
@@ -50,7 +52,7 @@ async function getResponse(request) {
 
 
 
-    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.lastEditionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance == null ? 2 : currentAllowance}&following=${userFollowsNolan}&hasVerifiedAddresses=${message.interactor.verified_addresses.eth_addresses ? "true" : "false"}`
+    const image = `${FRAME_URL}/frames/images/mint?date=${Date.now()}&editionName=${lastData.lastEdition.name}&supply=${lastData.lastEdition.supply.toString()}&remaining=${(lastData.lastEdition.supply - lastData.lastEdition.counter).toString()}&lastId=${((lastData.editionId * 1000000n) + lastData.lastEdition.counter).toString()}&allowance=${currentAllowance == null ? 2 : currentAllowance}&following=${userFollowsNolan}&hasVerifiedAddresses=${message.interactor.verified_addresses.eth_addresses ? "true" : "false"}&active=${lastData.lastEdition.mintStatus ? "true" : "false"}`
     // process.env.NODE_ENV !== 'production' ? message.interactor.verified_addresses.eth_addresses = ["0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39", "0xcddb54bbAC783c2aE9860A8e494556c0b61e4Eee"] : message.interactor.verified_addresses.eth_addresses
     
     let buttons = [];
@@ -69,9 +71,9 @@ async function getResponse(request) {
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: userFollowsNolan ? buttons : [{label: "home"}],
+            buttons: userFollowsNolan ? buttons : [{label: "home", target: `${FRAME_URL}/frames/${lastData.editionId}`}],
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: userFollowsNolan ? `${FRAME_URL}/frames/submit` : `${FRAME_URL}/frames` ,
+            postUrl: userFollowsNolan && `${FRAME_URL}/frames/submit`,
             state: {tokenName: lastData.lastEdition.name}
             
         })

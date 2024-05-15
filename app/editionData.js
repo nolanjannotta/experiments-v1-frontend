@@ -90,15 +90,15 @@ export const editionData = {
             rotated 360 degrees at the correct speeds for the minute and hour
             hands. By default, each clock is set to Pacific Standard Time (Los
             Angeles). This token is modifiable. This means that owners are able
-            to change the timezone, the text, and background of the clock.{" "}
+            to change the timezone, the text (&apos;location&apos;), and background of the clock.{" "}
           </p>
           <p>To modify, you need to supply 3 inputs:</p>
           <ol>
             <li>
               a number between 1 and 24 to set the timezone. The blockchain
-              timestamp is in UTC, so for example PDT is 7 hours behind UTC, so
-              the offset would be 17 (24-7). EDT is 4 hours behind UTC, so the
-              offset would be 20 (24-4).
+              timestamp is in UTC, so for example PDT (Pacific) is 7 hours <i>behind</i> UTC, so
+              the offset would be 17 (24-7). London is 1 hour <i>ahead</i> UTC, so the
+              offset would be 1.
             </li>
             <li>
               a token ID to use as the background. This token ID must be owned
@@ -177,7 +177,8 @@ export const editionData = {
           These are, in fact, <i>not</i> squiggles. As the title suggests, this is an experiment. I
           wanted to see whether something as legendary as the Chromie Squiggle can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
-          credit goes to Artblocks and Snowfro. 
+          credit goes to Artblocks and Snowfro. These are obviously not meant to be IDENTICAL to the originals. Most of the key traits are
+          implemented, and some are not.
 
         </p>
       );

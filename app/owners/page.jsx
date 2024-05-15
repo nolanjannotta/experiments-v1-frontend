@@ -1,9 +1,10 @@
-
 // import {contract} from "../contract"
 import {artAddress} from "../constants"
 import Link from 'next/link'
 import useTruncateAddress from "../../hooks/useTruncateAddress"
 import { contract,publicClient } from "../contract_server";
+import {useAccount} from "wagmi";
+
 
 
 async function getOwners() {
@@ -36,6 +37,7 @@ function truncateAddress(address) {
 
 
 export default async function Owners() {
+  // const {address} = useAccount();
 
     const owners = await getOwners();
 

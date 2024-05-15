@@ -202,7 +202,7 @@ function Gallery({params}) {
     <div style={gallery}>
 
       {thumbnails.images.error && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
-      {thumbnails.loading && <p>loading thumbnails...</p>}
+      {thumbnails.loading && <p>loading previews...</p>}
       {thumbnails.images.map((nft, i) => {
         // console.log(nft)
         if(nft.raw.error === "Failed to get token uri"){

@@ -186,6 +186,7 @@ function ModifyToken({ params }) {
             })}
             
           </form>
+          <p>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </p>
         </fieldset>
       )}
       <button disabled={!isOwned} onClick={()=> modify(params.tokenId,modifyBytes)}>

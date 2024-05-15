@@ -11,6 +11,7 @@ async function getResponse(request) {
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
 
+    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
 
     let buttons = [
         [
@@ -23,20 +24,31 @@ async function getResponse(request) {
         ],
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
-        {label: "Home", target: `${FRAME_URL}/frames`},
+        {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
         // {label: "Sounds cool, mint me one!", target: `${FRAME_URL}/frames/mint`}
         ]
     
     ]
     
-    const state = message.state?.serialized ? JSON.parse(decodeURIComponent(message.state?.serialized)) : {index:0}
-
-
+    // const state = message.state?.serialized ? JSON.parse(decodeURIComponent(message.state?.serialized)) : {index:0}
+    console.log(state.index)
     // if index is 0 and state exists, then the state is already set
-    if(state.index === 0 && message.state.serialized){
-        console.log("already has state")
+    if(!state.index && state.index !== 0){
+        console.log("does not have index already")
+        state.index = 0;
+        // message.button === 2 && (state.index = 1)
+    }
+
+    else if(state.index === 0){
+        console.log("has state already")
+
         message.button === 2 && (state.index = 1)
     }
+
+    // if(state.index === 0 && message.state.serialized){
+    //     console.log("already has state")
+    //     message.button === 2 && (state.index = 1)
+    // }
 
     else if(state.index === 1){
         message.button === 1 && (state.index = 0)
@@ -50,7 +62,7 @@ async function getResponse(request) {
 
 
     const image = `${FRAME_URL}/frames/images/about?pageIndex=${parseInt(state.index)}`
-
+    // console.log(state)
     return new NextResponse(
         getFrameHtmlResponse({
             buttons: buttons[parseInt(state.index)],

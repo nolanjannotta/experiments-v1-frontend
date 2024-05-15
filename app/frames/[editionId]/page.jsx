@@ -9,7 +9,7 @@ export async function generateMetadata({params}) {
 
     const frameMetadata = getFrameMetadata({
       buttons: [
-        {label: 'MINT',  action: 'post'},
+        {label: 'MINT',  action: 'post', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
         {label: 'About', action: 'post', target: `${FRAME_URL}/frames/about`},
         {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         
@@ -18,7 +18,8 @@ export async function generateMetadata({params}) {
         src: image,
         aspectRatio: '1:1'
       },
-      postUrl: `${FRAME_URL}/frames/mint`,
+      state: {editionId: Number(params.editionId)}
+      // postUrl: `${FRAME_URL}/frames/mint`,
       // postUrl: image,
     });
 

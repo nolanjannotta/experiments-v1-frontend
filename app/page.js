@@ -210,10 +210,10 @@ export default function Home() {
       <br/>
 
       <p>
-        As you can see, this project is very simple, but very fun! As said to above, this is a place for me to 
-        experiment and draft ideas, while at the same time creating a finished product that conveys my vision and that anyone can use and enjoy. 
-        This is part 1 of at least 2 parts. Brainstorming for V2 can be found <Link href="/v2">here</Link>, and I encourage all 
-        onchain generative art enthusiasts to reach out! 
+        As you can see, this project is very simple, but very fun! As said above, this is a place for me to 
+        experiment and draft ideas, while at the same time creating a finished product that best conveys my vision and that anyone can use and enjoy. 
+        This is version 1 of at least 2 version. Brainstorming for V2 can be found <Link href="/v2">here</Link>. I encourage all 
+        onchain generative art enthusiasts to reach out if you have ideas! 
 
       </p>
     </main>
