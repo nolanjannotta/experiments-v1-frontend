@@ -87,17 +87,17 @@ const walletClient = createWalletClient({
   }
 
 
-  export async function mint(addressTo) {
+  export async function mint(addressTo, editionId) {
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
-    const edition = await signerContract.read.EDITION_COUNTER();
+    // const edition = await signerContract.read.EDITION_COUNTER();
     // console.log("hello")
     const { request } = await publicClient.simulateContract({
         address: artAddress,
         abi: abi,
         account,
         functionName: 'mintTo',
-        args: [edition, addressTo]
+        args: [editionId, addressTo]
       })
 
     //   console.log("request", request)

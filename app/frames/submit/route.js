@@ -4,6 +4,7 @@ import {FRAME_URL} from "@/app/constants.js";
 
 
 async function getResponse(request) {
+  const editionId = request.nextUrl.searchParams.get("editionId");
     const body = await request.json();
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
@@ -20,7 +21,7 @@ async function getResponse(request) {
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: [{label: "submit", action:"post",  target: `${FRAME_URL}/frames/results`}],
+            buttons: [{label: "submit", action:"post",  target: `${FRAME_URL}/frames/results?editionId=${editionId}`}],
             image: {src: image, aspectRatio: '1:1'},
             postUrl: `${FRAME_URL}/frames/results`,
             state: {minterAddress: address, tokenName: tokenName, submittedAt: Date.now()/1000}

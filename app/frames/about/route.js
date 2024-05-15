@@ -15,7 +15,7 @@ async function getResponse(request) {
 
     let buttons = [
         [
-        {label: "Home", target: `${FRAME_URL}/frames`},
+        {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
         {label: "Next", target: `${FRAME_URL}/frames/about`}
         ],
         [
