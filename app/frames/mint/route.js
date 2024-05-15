@@ -73,7 +73,7 @@ async function getResponse(request) {
         getFrameHtmlResponse({
             buttons: userFollowsNolan ? buttons : [{label: "home", target: `${FRAME_URL}/frames/${lastData.editionId}`}],
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: userFollowsNolan && `${FRAME_URL}/frames/submit&editionId=${lastData.editionId}`,
+            postUrl: userFollowsNolan && `${FRAME_URL}/frames/submit?editionId=${lastData.editionId}`,
             state: {tokenName: lastData.lastEdition.name}
             
         })
