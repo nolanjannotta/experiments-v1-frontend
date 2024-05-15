@@ -91,7 +91,7 @@ const walletClient = createWalletClient({
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
     // const edition = await signerContract.read.EDITION_COUNTER();
-    // console.log("hello")
+    console.log("mint edition id", editionId)
     const { request } = await publicClient.simulateContract({
         address: artAddress,
         abi: abi,

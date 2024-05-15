@@ -12,7 +12,7 @@ async function getResponse(request) {
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
 
     const state = JSON.parse(decodeURIComponent(message.state?.serialized))
-
+    console.log(state)
     let buttons = [
         [
         {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
@@ -31,7 +31,6 @@ async function getResponse(request) {
     ]
     
     // const state = message.state?.serialized ? JSON.parse(decodeURIComponent(message.state?.serialized)) : {index:0}
-    console.log(state.index)
     // if index is 0 and state exists, then the state is already set
     if(!state.index && state.index !== 0){
         console.log("does not have index already")
