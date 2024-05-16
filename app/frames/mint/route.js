@@ -61,7 +61,7 @@ async function getResponse(request) {
             buttons = [{label: "mint on the website!", action: "link", target: `${FRAME_URL}/mint`}]
         }
         else {
-            buttons = message.interactor.verified_addresses.eth_addresses.map((address) => {return {label: `${address.slice(0,6)}...${address.slice(-4)}`, action: "post", target: `${FRAME_URL}/frames/submit?address=${address}`}})
+            buttons = message.interactor.verified_addresses.eth_addresses.map((address) => {return {label: `${address.slice(0,6)}...${address.slice(-4)}`, action: "post", target: `${FRAME_URL}/frames/submit?address=${address}&editionId=${lastData.editionId}`}})
         }
     }
     else {
@@ -73,7 +73,7 @@ async function getResponse(request) {
         getFrameHtmlResponse({
             buttons: userFollowsNolan ? buttons : [{label: "home", target: `${FRAME_URL}/frames/${lastData.editionId}`}],
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: userFollowsNolan && `${FRAME_URL}/frames/submit?editionId=${lastData.editionId}`,
+            // postUrl: userFollowsNolan && `${FRAME_URL}/frames/submit?editionId=${lastData.editionId}`,
             state: {tokenName: lastData.lastEdition.name}
             
         })
