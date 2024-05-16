@@ -10,8 +10,17 @@ async function getResponse(request) {
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-    
-    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
+    let state = {
+        editionId: null
+    }
+    try{
+        state = JSON.parse(decodeURIComponent(message.state?.serialized))
+    }
+    catch(e){
+        console.log(e)
+    }
+
+    //  state = JSON.parse(decodeURIComponent(message.state?.serialized))
     console.log("state",  state)
     
     let buttons = [
@@ -21,7 +30,7 @@ async function getResponse(request) {
         ],
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
-        {label: "Next", target: `${FRAME_URL}/frames/about`}
+        {label: "Next", postUrl: `${FRAME_URL}/frames/about`}
         ],
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},

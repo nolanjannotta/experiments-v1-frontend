@@ -19,8 +19,7 @@ export async function generateMetadata({params}) {
         aspectRatio: '1:1'
       },
       state: {editionId: Number(params.editionId)}
-      // postUrl: `${FRAME_URL}/frames/mint`,
-      // postUrl: image,
+
     });
 
     return {
