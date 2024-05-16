@@ -5,7 +5,7 @@ import {FRAME_URL} from "@/app/constants.js";
 
 async function getResponse(request) {
     const body = await request.json();
-    // console.log(request)
+    console.log(body)
 
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
