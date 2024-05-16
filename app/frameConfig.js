@@ -7,6 +7,7 @@ import {FabricImage} from 'fabric/node'; // v6
 import sharp from 'sharp';
 import { artAddress } from "./constants";
 import { contractBase } from "./contract";
+import { Resvg } from "@resvg/resvg-js";
 
 
 
@@ -108,16 +109,26 @@ const walletClient = createWalletClient({
 
 
   export async function getThumbnails(lastEditionId) {
+
       if(!lastEditionId) return {image: "", name: ""}
       let edition = await signerContract.read.getEdition([lastEditionId]);
       let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
+      let rawSvg = await signerContract.read.getRawSvg([BigInt(lastEditionId * 1000000) + edition.counter]);
+      
+
+      const resvg = new Resvg(rawSvg, {})
+      const pngData = resvg.render()
+      const pngBuffer = pngData.asPng()
+      // console.log(pngBuffer.toString('base64'))
       // converts SVG to PNG!!!!!!!!!!!!!!!!
       // let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
       // let base64Img = `data:image/png;base64,${img.toString('base64')}`;
 
-      const png = await FabricImage.fromURL(image);
-      const pngURL = png.toDataURL();
+      // const png = await FabricImage.fromURL(image);
+      // const pngURL = png.toDataURL();
 
-    return {image: pngURL, name: edition.name};
+    return {image: `data:image/png;base64,${pngBuffer.toString('base64')}`, name: edition.name};
+    // return {image: pngURL, name: edition.name};
+
   }
   

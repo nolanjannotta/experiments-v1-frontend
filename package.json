@@ -32,6 +32,7 @@
   "devDependencies": {
     "encoding": "^0.1.13",
     "eslint": "^8",
-    "eslint-config-next": "13.5.6"
+    "eslint-config-next": "13.5.6",
+    "nextjs-node-loader": "^1.1.5"
   }
 }
