@@ -11,8 +11,8 @@ async function getResponse(request) {
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
 
-    // const state = JSON.parse(decodeURIComponent(message.state?.serialized))
-    const state = {index: 1};
+    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
+    // const state = {index: 1};
     console.log(state)
     let buttons = [
         [
