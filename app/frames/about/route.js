@@ -4,20 +4,21 @@ import {FRAME_URL} from "@/app/constants.js";
 
 
 async function getResponse(request) {
+    const editionId = request.nextUrl.searchParams.get("editionId");
+
     const body = await request.json();
-    console.log("body", body)
 
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-    let state = {
-        editionId: null
-    }
+
+    let state = {}
     try{
         state = JSON.parse(decodeURIComponent(message.state?.serialized))
     }
     catch(e){
-        console.log(e)
+        state = {editionId: Number(editionId)}
+        // console.log(e)
     }
 
     //  state = JSON.parse(decodeURIComponent(message.state?.serialized))
@@ -30,7 +31,7 @@ async function getResponse(request) {
         ],
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
-        {label: "Next", postUrl: `${FRAME_URL}/frames/about`}
+        {label: "Next", target: `${FRAME_URL}/frames/about`}
         ],
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
