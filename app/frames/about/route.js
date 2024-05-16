@@ -12,9 +12,8 @@ async function getResponse(request) {
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
     
     const state = JSON.parse(decodeURIComponent(message.state?.serialized))
-    // console.log("state",  state)
-    // const state = {index: 1};
-    // console.log(JSON.parse(message.state?.serialized))
+    console.log("state",  state)
+    
     let buttons = [
         [
         {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
@@ -27,7 +26,6 @@ async function getResponse(request) {
         [
         {label: "Back", target: `${FRAME_URL}/frames/about`},
         {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
-        // {label: "Sounds cool, mint me one!", target: `${FRAME_URL}/frames/mint`}
         ]
     
     ]
