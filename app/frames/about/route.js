@@ -5,15 +5,15 @@ import {FRAME_URL} from "@/app/constants.js";
 
 async function getResponse(request) {
     const body = await request.json();
-    console.log(body)
+    // console.log(body)
 
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-    console.log("state", message.state)
-    const state = JSON.parse(decodeURIComponent(message.state?.serialized))
+    console.log("state", message)
+    const state = JSON.parse(message.state.serialized); //JSON.parse(decodeURIComponent(message.state?.serialized))
     // const state = {index: 1};
-    console.log(state)
+    // console.log(JSON.parse(message.state?.serialized))
     let buttons = [
         [
         {label: "Home", target: `${FRAME_URL}/frames/${state.editionId || ""}`},
