@@ -26,11 +26,12 @@ async function getResponse(request) {
     const lastSubmitted = await kv.hget(message.interactor.fid, "lastSubmitted") || 0;
 
     let tx;
+    let error
     if(userAllowance > 0 &&  submittedAt - lastSubmitted > 10){
         try {
             tx = await mint(editionId,minterAddress);
         } catch (error) {
-            console.error(error)
+            error = true;
         }
         
     }
