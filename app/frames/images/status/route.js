@@ -34,7 +34,7 @@ export async function GET(request) {
             justifyContent: "center",
           }}
         >
-            {!uri && <p>loading...</p>} 
+            {!uri || status === "reverted" || status === "failed" && <p>loading...</p>} 
             {uri && <img width="65%" src={uri} alt="image"></img>}
             { status === "reverted" || status === "failed" && <p>oops, looks like an error occured.</p>}
 
