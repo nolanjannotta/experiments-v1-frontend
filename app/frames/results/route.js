@@ -27,13 +27,17 @@ async function getResponse(request) {
 
     let tx;
     if(userAllowance > 0 &&  submittedAt - lastSubmitted > 10){
-        await kv.hset(message.interactor.fid, {[tokenName]: userAllowance-1, lastSubmitted: submittedAt});
         try {
             tx = await mint(editionId,minterAddress);
         } catch (error) {
             console.error(error)
         }
         
+    }
+
+    if(tx){
+        await kv.hset(message.interactor.fid, {[tokenName]: userAllowance-1, lastSubmitted: submittedAt});
+
     }
 
     const image = `${FRAME_URL}/frames/images/results?date=${Date.now()}&error=${error ? "true" : "false"}` //&address=${minterAddress}&tokenName=${tokenName}`
