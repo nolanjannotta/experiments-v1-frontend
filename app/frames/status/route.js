@@ -26,7 +26,7 @@ async function getResponse(request) {
 
     const successButtons = [{label: "open sea", action: "link", target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${results.tokenId}`},
                             {label: "website", action: "link", target: `${FRAME_URL}/token/${results.tokenId}`},
-                            {label: "Home", target: `${FRAME_URL}/frames/${results.tokenId || ""}`}]
+                            {label: "Home", target: `${FRAME_URL}/frames/${Number(results.tokenId)/1000000 || ""}`}]
 
     return new NextResponse(
         getFrameHtmlResponse({
