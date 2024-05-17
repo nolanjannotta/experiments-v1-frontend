@@ -10,14 +10,13 @@ export async function GET(request) {
     const tokenId = request.nextUrl.searchParams.get("tokenId")
 
     let uri;
-    let alt = "image";
     if(status == "success") {
         try{
           uri = await getUri(tokenId)  
         }
         catch(e){
-          alt = "error fetching image"
-        }
+            console.error(e)
+          }
         
     }
 
@@ -35,7 +34,8 @@ export async function GET(request) {
             justifyContent: "center",
           }}
         >
-            { uri ? <img width="65%" src={uri} alt={alt}></img> : <p>oops, looks like an error occured.</p>}
+            {!uri && <p>loading...</p>} 
+            { status === "reverted" || status === "failed"  ? <img width="65%" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
 
         </div>
       </Card>

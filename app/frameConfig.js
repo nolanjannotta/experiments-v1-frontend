@@ -81,7 +81,7 @@ const walletClient = createWalletClient({
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {
       console.log(e)
-      return false
+      return {states: "failed", tokenId: null}
     }   
     
     
@@ -119,7 +119,6 @@ const walletClient = createWalletClient({
       // const pngData = resvg.render()
       // const pngBuffer = pngData.asPng()
       // console.log(pngBuffer.toString('base64'))
-      // converts SVG to PNG!!!!!!!!!!!!!!!!
       // let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
       // let base64Img = `data:image/png;base64,${img.toString('base64')}`;
 
