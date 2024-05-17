@@ -35,7 +35,8 @@ export async function GET(request) {
           }}
         >
             {!uri && <p>loading...</p>} 
-            { status === "reverted" || status === "failed"  ? <img width="65%" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
+            {uri && <img width="65%" src={uri} alt="image"></img>}
+            { status === "reverted" || status === "failed" && <p>oops, looks like an error occured.</p>}
 
         </div>
       </Card>
