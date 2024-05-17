@@ -36,7 +36,7 @@ async function getResponse(request) {
         
     }
 
-    const image = `${FRAME_URL}/frames/images/results?date=${Date.now()}` //&address=${minterAddress}&tokenName=${tokenName}`
+    const image = `${FRAME_URL}/frames/images/results?date=${Date.now()}&error=${error ? "true" : "false"}` //&address=${minterAddress}&tokenName=${tokenName}`
 
 
     return new NextResponse(
