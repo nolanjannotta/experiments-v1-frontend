@@ -12,14 +12,10 @@
     "@coinbase/onchainkit": "^0.11.0",
     "@neynar/nodejs-sdk": "^1.15.0",
     "@rainbow-me/rainbowkit": "^2.0.2",
-    "@resvg/resvg-js": "^2.6.2",
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-query-devtools": "^5.24.8",
     "@vercel/kv": "^1.0.1",
     "fabric": "^6.0.0-rc1",
-    "frames.js": "^0.11.1",
-    "frog": "^0.10.0",
-    "hono": "^4.3.7",
     "moralis": "^2.25.4",
     "next": "^14.1.0",
     "pino-pretty": "^10.3.1",
@@ -32,7 +28,6 @@
   "devDependencies": {
     "encoding": "^0.1.13",
     "eslint": "^8",
-    "eslint-config-next": "13.5.6",
-    "nextjs-node-loader": "^1.1.5"
+    "eslint-config-next": "13.5.6"
   }
 }
