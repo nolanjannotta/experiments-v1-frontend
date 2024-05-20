@@ -111,8 +111,8 @@ export const editionData = {
             </li>
           </ol>
           <p>
-            note: the thumbnail below is fetched from alchemy&apos;s NFT api and may not be
-            up to date. Click the arrow next to the name to see the accurate time.
+            note: the thumbnail below is fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s nft api</a> and may not be
+            up to date. Click on the any clock to open it up and see accurate info.
           </p>
         </>
       );
@@ -178,7 +178,7 @@ export const editionData = {
           wanted to see whether something as legendary as the Chromie Squiggle can be made completely onchain using
           only solidity and SVG. As it turns out, you can get pretty close. All
           credit goes to Artblocks and Snowfro. These are obviously not meant to be IDENTICAL to the originals. Most of the key traits are
-          implemented, and some are not.
+          implemented, some are not.
 
         </p>
       );

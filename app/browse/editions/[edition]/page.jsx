@@ -1,33 +1,13 @@
 "use client"
+import {useState } from 'react';
 import Link from 'next/link'
-import { useQuery } from "@tanstack/react-query";
-import {ZERO_ADDRESS,artAddress} from "../../../constants"
+import { useQuery,keepPreviousData } from "@tanstack/react-query";
+import {artAddress} from "../../../constants"
 import {contract} from "../../../contract"
 import { editionData } from '../../../editionData'
 import { formatEther } from 'viem'
 import useScreenSize from "../../../../hooks/useScreenSize"
-import { useSearchParams } from 'next/navigation'
 import {editionType} from '../../../types'
-
-
-const initialData = {
-  edition: {
-    artGenerator: ZERO_ADDRESS,
-    counter: 0n,
-    description: "",
-    name: "",
-    price: 0n,
-    royaltyReceiver: ZERO_ADDRESS,
-    supply: 0n,
-  },
-  tokens: { 
-    nfts: [], 
-    nextToken: "" 
-  },
-  owners:{},
-  attributes: []
-};
-
 
 
 
@@ -37,23 +17,6 @@ function truncateAddress(address) {
 }
 
 
-// async function refresh(tokenId) {
-
-//   const options = {method: 'POST', headers: {accept: 'application/json', 'content-type': 'application/json'}};
-//   // const edition = await contract.read.getEdition([editionId]);
-//   // let attributes = [];
-
-//     try {
-//       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/refreshNftMetadata?contractAddress=${artAddress}&tokenId=${tokenId}`, options)
-//       const result = await response.json()
-//       console.log(result)
-//     }
-//     catch (error) {
-//       // console.log(error)
-//     }
-
-// }
-
 async function getEdition(editionId) {
   return await contract.read.getEdition([editionId]);
 
@@ -61,46 +24,41 @@ async function getEdition(editionId) {
 }
 
 
-async function getThumbnails(editionId, counter) {
+async function getThumbnails(page, totalTokens, editionId) {
+
   const options = {method: 'GET', headers: {accept: 'application/json'}};
+  let limit = 50;
+  let start = (editionId * 1000000) + ((page) * limit) + 1; 
+  if(totalTokens / limit < page) {
+    return {images: [], loading: false, error: false};
+  }
+  if((page+1) * limit > totalTokens) {  
+    start = (editionId * 1000000) + (page) * limit + 1;
+    limit = totalTokens -  (page)*limit;
 
-
+    
+  }
+   
     try {
-      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${(editionId * 1000000) + 1}&limit=${counter || 0}`, options)
+      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
       const tokens = await response.json()
-      return {images: tokens.nfts, loading: false};
-    } catch (error) {
-      console.log(error)
+
+      // console.log("page key", Number(tokens.pageKey))
+      return {images: tokens.nfts, loading: false, error: false};
+    } catch (e) {
+      console.log(e)
+      return {images: [], loading: false, error: true};
 
   }
 }
 
-// async function getOwners() {
-//   const options = {method: 'GET', headers: {accept: 'application/json'}};
-//     try {
-//       const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=false`, options)
-//       const owners = await response.json()
-//       return owners;
-//     } catch (error) {
-//       return {}
-
-//   }
-
-
-// }
-
-
-
 function Gallery({params}) {
   const screenSize = useScreenSize();
 
+  const [page, setPage] = useState(0);
 
-  const description = {
-    width: screenSize.width < 1400 ?  "100%" : "60%",
-  
-  
-  }
 
+  // console.log(allThumbnails)
 
 
 
@@ -111,19 +69,13 @@ function Gallery({params}) {
   });
 
   const {data: thumbnails} = useQuery({
-    queryKey: ["thumbnails", params.edition],
-    queryFn: () => getThumbnails(params.edition, editionInfo.counter),
-    initialData: {images: [],loading: true},
+    queryKey: ["thumbnails", params.edition, page],
+    queryFn: () => getThumbnails(page, Number(editionInfo.counter), params.edition),
+    initialData: {images: [], loading: true, error: false},
     enabled: editionInfo.counter > 0,
+    placeholderData: keepPreviousData
 
   });
-
-
-
-
-  // console.log("edition info", error, thumbnails, isFetching )
-
-
 
   if(!editionFething && error) {
     return <section style={section}>
@@ -132,7 +84,6 @@ function Gallery({params}) {
           &nbsp;&nbsp;&nbsp;&nbsp; {isFetching ? "loading" : "uh oh, edition #" + params.edition + "not found!"} &nbsp;&nbsp;&nbsp;&nbsp;
           <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}> &#8594; </Link>
           </h1>
-      {/* <h2> uh oh, edition #{params.edition} not found!</h2> */}
     </section>
   }
     
@@ -194,34 +145,35 @@ function Gallery({params}) {
         </ul>
         </nav>
         <br/>
-        <section style={description}>
+        <section style={{width: screenSize.width < 1400 ?  "100%" : "60%"}}>
         {editionData[editionInfo.name]?.description()}
 
         </section>
         <br/>
     <div style={gallery}>
 
-      {thumbnails.images.error && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
-      {thumbnails.loading && <p>loading previews...</p>}
-      {thumbnails.images.map((nft, i) => {
-        // console.log(nft)
+      {thumbnails?.error || !thumbnails.images && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
+      {thumbnails?.loading && <p>loading previews...</p>}
+      {thumbnails.images?.map((nft, i) => {
         if(nft.raw.error === "Failed to get token uri"){
           
           return (
-            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + (i + 1)}`}>
-            <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", justifyContent:"center", textAlign: "center", border: "1px solid lightgrey"}}>
-                <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render #{i + 1}.<br /></p>
+            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*50) + i + 1)}`}>
+            <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
+              <div style={{width:"70%"}}>
+                <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render this image<br /></p>
                 <p>click to open</p>
-
+                </div>
+                <figcaption>{editionInfo.name} #{(page*50) + i + 1}</figcaption>
             </figure>
             </Link>
           );
         }
         return (
-          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (i+1)}`}>
+          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + ((page*50) + i + 1)}`}>
 
           <figure style={galleryFig} >
-            <img style={galleryImg} width="300px" src={nft.raw.metadata.image}></img>
+            <img style={galleryImg} width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
             <figcaption>{nft.raw.metadata.name}
             </figcaption>
           </figure>
@@ -235,6 +187,17 @@ function Gallery({params}) {
     <br/>
     <br/>
     <br/>
+      <div style={{display: "flex",justifyContent:"center"}}>
+      {page !== 0 && <button style={button} onClick={() => setPage((prev) => Math.max(prev-1, 0))}>&#8592;</button>}
+        &nbsp;&nbsp;
+      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page+1}/{(Math.ceil(Number(editionInfo?.counter)/50))}</p>
+      &nbsp;&nbsp;
+      {page+1 < (Math.ceil(Number(editionInfo?.counter)/50)) && <button style={button} onClick={() => setPage(prev => prev+1)}>&#8594;</button>}
+      </div>
+    
+    <br/>
+    <br/>
+    <br/>
       {!editionFething && <Link href="/browse">back</Link>}
     </section>
   )
@@ -242,6 +205,15 @@ function Gallery({params}) {
 
 export default Gallery
 
+
+
+
+const button = {
+  background: "none",
+  border: "none",
+  margin: "0",
+  // fontSize: "large",
+}
 
 
 const arrows = {
