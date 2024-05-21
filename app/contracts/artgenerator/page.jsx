@@ -62,7 +62,7 @@ function ArtGenerators() {
      
         <ul>
             {artGenerators.map((generator, index) => {
-                if(generator.address == "") return <p>loading...</p>
+                if(generator.address == "") return <p key={index}>loading...</p>
                 return <li key={index}><a href={`https://sepolia.basescan.org/address/${generator.address}`} target="_blank">{generator.name} &#8599;</a></li>
             })}
         </ul>
