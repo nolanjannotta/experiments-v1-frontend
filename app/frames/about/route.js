@@ -4,7 +4,7 @@ import {FRAME_URL} from "@/app/constants.js";
 
 
 async function getResponse(request) {
-    const editionId = request.nextUrl.searchParams.get("editionId");
+    // const editionId = request.nextUrl.searchParams.get("editionId");
 
     const body = await request.json();
 
@@ -17,7 +17,7 @@ async function getResponse(request) {
         state = JSON.parse(decodeURIComponent(message.state?.serialized))
     }
     catch(e){
-        state = {editionId: Number(editionId)}
+        // state = {editionId: Number(editionId)}
         // console.log(e)
     }
 
