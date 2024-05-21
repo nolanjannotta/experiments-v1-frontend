@@ -7,3 +7,5 @@ export const baseScanUrl = "https://sepolia.basescan.org/" // "https://basescan.
 export const FRAME_URL = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'https://experiments-v1.vercel.app';
 
 export const nolanjFID = 252806;
+
+export const allowFramegear = process.env.NODE_ENV !== 'production'; 

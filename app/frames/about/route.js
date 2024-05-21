@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
-import {FRAME_URL} from "@/app/constants.js";
+import {FRAME_URL,allowFramegear} from "@/app/constants.js";
 
 
 async function getResponse(request) {
@@ -8,9 +8,7 @@ async function getResponse(request) {
     const editionId = request.nextUrl.searchParams.get("editionId");
     
     const body = await request.json();
-
-    const allowFramegear = process.env.NODE_ENV !== 'production'; 
-
+    console.log(body)
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
     
     let state = {}
