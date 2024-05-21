@@ -1,5 +1,5 @@
 
-import { getFrameMetadata } from '@coinbase/onchainkit';
+import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import {FRAME_URL} from "../../constants.js"
 
 
@@ -9,8 +9,8 @@ export async function generateMetadata({params}) {
 
     const frameMetadata = getFrameMetadata({
       buttons: [
-        {label: 'MINT',  action: 'post', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
-        {label: 'About', action: 'post', target: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
+        {label: 'MINT', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
+        {label: 'About', postUrl: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
         {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         
       ],

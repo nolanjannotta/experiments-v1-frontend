@@ -1,6 +1,6 @@
 "use server"
 
-import { getFrameMetadata } from '@coinbase/onchainkit';
+import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import { contract,publicClient } from "../../contract_server";
 import Stats from "./Stats"
 import sharp from "sharp";

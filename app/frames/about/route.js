@@ -4,21 +4,22 @@ import {FRAME_URL} from "@/app/constants.js";
 
 
 async function getResponse(request) {
-    // const editionId = request.nextUrl.searchParams.get("editionId");
-
+    console.log(request)
+    const editionId = request.nextUrl.searchParams.get("editionId");
+    
     const body = await request.json();
 
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 
     const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-
+    
     let state = {}
     try{
         state = JSON.parse(decodeURIComponent(message.state?.serialized))
     }
     catch(e){
-        // state = {editionId: Number(editionId)}
-        // console.log(e)
+        state = {editionId: Number(editionId)}
+        console.log(e)
     }
 
     //  state = JSON.parse(decodeURIComponent(message.state?.serialized))
