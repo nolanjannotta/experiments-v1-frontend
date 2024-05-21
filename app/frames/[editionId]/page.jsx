@@ -10,7 +10,7 @@ export async function generateMetadata({params}) {
     const frameMetadata = getFrameMetadata({
       buttons: [
         {label: 'MINT', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
-        {label: 'About', postUrl: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
+        {label: 'About', target: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
         {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         
       ],
