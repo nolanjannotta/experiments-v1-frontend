@@ -61,10 +61,11 @@ export default function RootLayout({ children }) {
 
             <li><a target="_blank" href={`${baseScanUrl}address/${artAddress}`}>basescan</a></li>
             <li>&#x26AC;</li>
-            {/* <li style={{color: "#d7d7d7"}}>made in la</li>
-            <li>&#x26AC;</li> */}
 
             <li style={{color: "#d7d7d7"}}>made with &#9760; by nolan</li>
+            <li>&#x26AC;</li>
+
+            <li style={{color: "#d7d7d7"}}>est. 2024</li>
             
           </ul>
         </nav>

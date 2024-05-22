@@ -3,13 +3,12 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import {FRAME_URL,allowFramegear} from "@/app/constants.js";
 
 
+
 async function getResponse(request) {
-    console.log(request)
     const editionId = request.nextUrl.searchParams.get("editionId");
     
     const body = await request.json();
-    console.log(body)
-    const {message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
+    const {message} = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
     
     let state = {}
     try{

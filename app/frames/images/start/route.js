@@ -1,32 +1,13 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
-import {getThumbnails} from "@/app/frameConfig";
+import {getStartImage} from "@/app/frameConfig";
 
-
-
-
-// function thumbnailImage(thumbnail) {
-//     // const width = length == 1 ? "70%" : length == 2 ? "45%" : "35%"
-//     return (
-//       <div
-//         style={{
-//           display: "flex",
-//           flexDirection: "column",
-//           alignItems: "center",
-//           maxWidth: "70%"
-//         }}
-//       >
-//         <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
-//         <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
-//       </div>
-//     );
-// }
 
 export async function GET(request) {
   
-    const lastEdition = request.nextUrl.searchParams.get("lastEdition") 
+    const editionId = request.nextUrl.searchParams.get("editionId"); 
 
-    const thumbnail = await getThumbnails(lastEdition);
+    const thumbnail = await getStartImage(editionId);
 
 
 

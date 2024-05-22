@@ -108,20 +108,12 @@ const walletClient = createWalletClient({
 
 
 
-  export async function getThumbnails(lastEditionId) {
+  export async function getStartImage(lastEditionId) {
 
       if(!lastEditionId) return {image: "", name: ""}
       let edition = await signerContract.read.getEdition([lastEditionId]);
       let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
       
-
-      // const resvg = new Resvg(rawSvg, {})
-      // const pngData = resvg.render()
-      // const pngBuffer = pngData.asPng()
-      // console.log(pngBuffer.toString('base64'))
-      // let img = await sharp(Buffer.from(svg)).resize(1200).toFormat("png").toBuffer();
-      // let base64Img = `data:image/png;base64,${img.toString('base64')}`;
-
       const png = await FabricImage.fromURL(image);
       const pngURL = png.toDataURL();
 

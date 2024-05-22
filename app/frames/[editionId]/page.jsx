@@ -4,7 +4,7 @@ import {FRAME_URL} from "../../constants.js"
 
 
 export async function generateMetadata({params}) {
-    const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}&lastEdition=${params.editionId}`
+    const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}&editionId=${params.editionId}`
 
 
     const frameMetadata = getFrameMetadata({
@@ -18,7 +18,6 @@ export async function generateMetadata({params}) {
         src: image,
         aspectRatio: '1:1'
       },
-      // state: {editionId: Number(params.editionId)}
 
     });
 
@@ -40,10 +39,10 @@ export async function generateMetadata({params}) {
 export default async function Frames() {
 
   return (
-    <>
+    <article>
       <h1>Experiments V1 mint frame</h1>
 
-    </>
+    </article>
   );
 }
 

@@ -1,13 +1,11 @@
-import { NextResponse } from "next/server";
-import {redirect} from "next/navigation"
-import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
-import {FRAME_URL,allowFramegear} from "@/app/constants.js";
+import {redirect,permanentRedirect } from "next/navigation"
+import {FRAME_URL} from "@/app/constants.js";
 import {getEditionCounter} from "../frameConfig";
 
 
 export async function GET(request) {
     const lastEdition = await getEditionCounter();
-    return redirect(`${FRAME_URL}/frames/${lastEdition}`)
+    return permanentRedirect(`${FRAME_URL}/frames/${lastEdition}`)
 }
 
 
