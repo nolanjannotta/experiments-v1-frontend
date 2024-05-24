@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
 
       <body>
       <header>
-      <h1>Experiments V1</h1>
+      <div style={{display:"flex"}}><h1>Experiments V1</h1>&trade;</div>
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>
@@ -50,7 +50,10 @@ export default function RootLayout({ children }) {
         </nav>
         </header>
         <hr/>
-      <Web3Provider>{children}</Web3Provider>
+      <Web3Provider>
+        
+        {children}
+        </Web3Provider>
 
       <footer>
         <nav>
@@ -80,4 +83,12 @@ const footer = {
   position: "absolute",
   bottom: "0",
   width: "100%"
+}
+
+
+const connectedAddress = {
+  position: "absolute",
+  right: "0",
+  top: "0"
+
 }

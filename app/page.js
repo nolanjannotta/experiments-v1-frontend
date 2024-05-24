@@ -1,16 +1,55 @@
 // "use client"
 import Link from 'next/link'
+import HomeThumbnails from '../components/HomeThumbnails'
 // import Image from 'next/image'
 // import styles from './page.module.css'
+import { contract } from "../app/contract_server";
 
 
+async function getThumbnails() {
+  const lastEdition = await contract.read.EDITION_COUNTER();
+  let uris = [];
+  let editions = []
+  
+  for (let i = 1; i <= 4; i++) {
+    let randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);
+    while(editions.includes(randomEdition)) {
+      randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);
+    }
+    editions.push(randomEdition)
+  }
 
-export default function Home() {
+  for(const edition of editions) {
+    const editionData = await contract.read.getEdition([edition]);
+    const tokenId = Math.floor(Math.random() * Number(editionData.counter)) + 1;
+    let thumbnail = await contract.read.getDataUri([edition * 1000000 + tokenId]);
+    uris.push(thumbnail);
+  }
+  return uris;
+
+}
+
+
+export default async function Home() {
+  const uris = await getThumbnails();
+  console.log(uris)
+
   return (
     <main>
       <article>
         <header>
           <h1>Welcome</h1>
+          <br/>
+          <br/>
+          <section style={thumbnails}>
+            {uris.map((uri, index) => {
+              return (
+                <img width="200px" height="200" key={index} src={uri} alt="thumbnail"></img>
+              )
+            })}
+          </section>
+          <br/>
+          <br/>
         </header>
         <p>
           Experiments V1 is a project where I learn, explore, and{" "}
@@ -47,10 +86,11 @@ export default function Home() {
           data that can fit into 32 bytes, and can be packed, unpacked and
           modified by the art generator contract.
         </p>
+
         <br />
 
         <p>
-          Each edition will be &quot;uploaded&quot;/deployed individually over
+          My original long term vision for this project is for each edition to be &quot;uploaded&quot;/deployed individually over
           time as I make them. Once a new edition is added, minting for the
           previous one will be paused. If the supply for a paused edition is not reached, the owner
           can unpause and pause at anytime as well as mint paused editions. They
@@ -62,14 +102,24 @@ export default function Home() {
           </a>{" "}
           gets 2 free (zero gas!) mints for each edition through the frame.
           Depending on the demand, the owner may set a reasonable price and
-          royalty (ERC-2981) for the remaining tokens and new editions (I gotta eat!).
+          royalty (ERC-2981) for the remaining tokens and new editions.
         </p>
+        <p>
+          However, this project is my submission to{" "}
+          <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base's Onchain Summer Buildathon</a>. 
+          {" "} Because of this, I will doing things a little differently. To start, all of my finished editions that I have ready by the deadline will be deployed and 
+          added to the project at the same time. The supplies will be way higher to be more inclusive (2,000 - 4,000 per edition...TBD). 
+          All editions will be mintable at the same time. They will still be completely free or extremely cheap. 
+        
+          </p>
         <br />
 
         <p>
-        One thing worth noting is that, since everything is onchain, your faced with a couple limitations. 
-        For example contract size, gas limit, lack of standard SVG solidity libraries (for now...), etc.
-        I actually like this &quot;feature&quot;. For me, it pushes me to be more creative with less.
+        One thing worth noting is that, since everything is onchain, you're faced with a couple limitations. 
+        For example contract size, gas limit, computing power, lack of standard SVG solidity libraries (for now...), etc.
+        I actually like this &quot;feature&quot;. For me, it pushes me to be more creative will less options. It also 
+        helps keep me from overthinking.
+    
         </p>
         <br/>
         <p>
@@ -225,4 +275,13 @@ const outline = {
   border: "1px solid black",
   padding: "1rem",
   margin: "1rem"
+}
+
+const thumbnails = {
+  // backgroundColor: "black",
+  display: "flex",
+  justifyContent: "space-evenly",
+  // alignItems: "center",
+  // gap: "1rem"
+
 }

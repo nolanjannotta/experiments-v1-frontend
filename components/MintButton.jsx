@@ -38,9 +38,9 @@ function MintButton({isMinting, editionId, price}) {
   return (
 
     <div style={style}>
-        <CustomConnect/>
-        <button disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={mint}>Mint</button>
-        {/* {account.isConnected && <button onClick={mint}>Mint</button>} */}
+        <br/>
+
+        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
         
     </div>
   )
@@ -54,3 +54,11 @@ const style={
     justifyContent: "center",
     alignItems: "center"
 }
+
+const button = {
+    background: "none",
+    border: "none",
+    textDecoration: "underline",
+    fontSize: "30px"
+    
+  }

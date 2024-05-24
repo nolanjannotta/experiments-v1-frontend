@@ -3,6 +3,8 @@ import React from "react";
 import { contract } from "../../../contract";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useCapabilities, useWriteContracts } from "wagmi/experimental";
+
 
 async function getAllForAddress(address) {
   return contract.read.tokensOfOwner([address]);
@@ -23,6 +25,10 @@ async function getBalance(address) {
 }
 
 function Address({ params }) {
+
+ 
+
+
   const { data: balance } = useQuery({
     queryKey: ["balance"],
     queryFn: () => getBalance(params.address),
@@ -41,7 +47,6 @@ function Address({ params }) {
     initialData: [],
   });
 
-  console.log(error);
 
   return (
     <article>

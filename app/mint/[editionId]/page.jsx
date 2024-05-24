@@ -7,6 +7,11 @@ import {contract } from '../../contract'
 import MintButton from '../../../components/MintButton';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
+import { useCapabilities } from 'wagmi/experimental'
+import { useAccount } from 'wagmi'
+// import {config} from '../../../components/Web3Provider'
+import CustomConnect from '../../../components/CustomConnect'
+
 
 async function mintPageData(editionId) {
   
@@ -65,8 +70,9 @@ function Mint({params}) {
             mint status: {isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}
           </li>
         </ul>
-
-        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price} callback={()=> console.log("hello")}/>
+        <CustomConnect />
+        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price}/>
+        
         <figure style={galleryFig}>
           
           <img src={data.metadata?.image} alt='image loading...' width="500"></img>
