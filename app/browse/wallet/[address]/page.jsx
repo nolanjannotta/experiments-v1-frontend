@@ -35,11 +35,13 @@ function Address({ params }) {
     initialData: 0,
   });
 
-  const { data: tokens } = useQuery({
+  const { data: tokens, error:tokensOfOwnerError } = useQuery({
     queryKey: ["tokens"],
     queryFn: () => getAllForAddress(params.address),
     initialData: [],
   });
+
+  console.log(tokensOfOwnerError)
 
   const { data: editionNames, error } = useQuery({
     queryKey: ["editionNames"],

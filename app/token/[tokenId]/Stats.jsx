@@ -7,7 +7,7 @@ import { isAddress } from "viem";
 import ConnectSimple from "../../../components/ConnectSimple";
 
 
-export default function Stats({ data, tokenId, address, connectedAddress }) {
+export default function Stats({ data, tokenId, address }) {
     const [transferData, setTransferData] = useState({ready: false, to: ""})
     // console.log(data);
     const account = useAccount();
@@ -27,10 +27,10 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
 
     },[])
 
-    const {writeContract} = useWriteContract();
+    const write = useWriteContract();
 
     async function transfer() {
-      writeContract({
+      write.writeContract({
           ...contractBase,
           functionName: "safeTransferFrom",
           args: [account.address, transferData.to, tokenId],
@@ -47,6 +47,26 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
     setTransferData(state)
   }
 
+  async function destroy() {
+    let tokenName = `${data?.editionName} #${tokenId % 1000000}`
+    let confirm = prompt(`You are about to permanently destroy ${tokenName}.\nThere is no coming back from this.\n\nType 'destroy' to confirm.`)
+    if(confirm != "destroy") {
+      alert("destruction cancelled"); 
+      return
+    }
+    if(confirm === "destroy") {
+      console.log("destroying")
+      write.writeContract({
+        ...contractBase,
+        functionName: "burn",
+        args: [tokenId],
+    })
+
+    }
+  }
+
+  console.log(write)
+
 
   return (
     <section
@@ -58,7 +78,7 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
       {!data.error ? 
       <article style={{width:"100%"}}>
         
-        <ul>
+        <ul style={{listStyleType: "circle"}}>
           <li>
             <p>name: &quot; <Link style={{textDecoration:"none", color: "inherit"}}href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}>{data?.editionName}</Link> #{tokenId % 1000000}&quot;</p>
           </li>
@@ -132,6 +152,7 @@ export default function Stats({ data, tokenId, address, connectedAddress }) {
             modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
           </p>
         </li>
+        <li>destroy: <button style={button} onClick={destroy}>&#x2297;</button></li>
         </>
           :
           <></>

@@ -64,13 +64,13 @@ export const editionData = {
           <a href="https://www.recursivetrees.xyz/" target="_blank">
             website
           </a>
-          .
+          . (all proceeds go to charity)
         </p>
 
         <p>
           note, this particular edition uses lots of gas to render the image. 
           This usually causes Alchemy&apos;s NFT api to fail which is why most or all of the thumbnails below don&apos;t show up. 
-          You can always click on the image which loads it directly from the blockchain though.
+          You can always click on the image which loads it directly from the blockchain.
            </p>
         </>
       );
@@ -85,14 +85,13 @@ export const editionData = {
         <>
           <p>
             Fully functional and accurate clock. When the image is rendered
-            onchain, the initial hand angles are calculated using the timestamp
+            onchain, the initial hand positions are calculated using the timestamp
             from the blockchain. Then, using SVG animation, the hands are
-            rotated 360 degrees at the correct speeds for the minute and hour
-            hands. By default, each clock is set to Pacific Standard Time (Los
-            Angeles). This token is modifiable. This means that owners are able
-            to change the timezone, the text (&apos;location&apos;), and background of the clock.{" "}
+            rotated 360 degrees once every minute and hour. By default, each clock is set to Pacific Standard Time (Los
+            Angeles). This token is <b>*modifiable*</b>, meaning that owners are able
+            to change the timezone, the text, and background art of the clock.{" "}
           </p>
-          <p>To modify, you need to supply 3 inputs:</p>
+          <p>To modify, you need to change or supply 3 inputs:</p>
           <ol>
             <li>
               a number between 1 and 24 to set the timezone. The blockchain
@@ -111,8 +110,8 @@ export const editionData = {
             </li>
           </ol>
           <p>
-            note: the thumbnail below is fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s nft api</a> and may not be
-            up to date. Click on the any clock to open it up and see accurate info.
+            note: the thumbnails below are fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s nft api</a> and may not be
+            up to date. Click on any clock to open it up and see accurate image.
           </p>
         </>
       );
@@ -135,7 +134,7 @@ export const editionData = {
       return (
         <p>
           A very simple experiment. It can be pointed to a token ID and returns
-          a black and white version of the image. The owner must own the token
+          a black and white version of the image. Thats it, thats the art. The owner must own the token
           ID that it points to. These images will be blank by default.
         </p>
       );

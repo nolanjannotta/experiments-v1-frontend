@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
-import MintButton from '../../../components/MintButton';
+import MintComponent from '../../../components/MintComponent';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import { useCapabilities } from 'wagmi/experimental'
@@ -17,7 +17,7 @@ async function mintPageData(editionId) {
   
   editionId = BigInt(editionId);
 
-  const currentEditionId = await contract.read.EDITION_COUNTER();
+  // const currentEditionId = await contract.read.EDITION_COUNTER();
   const edition = await contract.read.getEdition([editionId]);
   // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
   const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
@@ -29,7 +29,7 @@ async function mintPageData(editionId) {
   let bufferObj = Buffer.from(lastToken.split("data:application/json;base64,")[1], "base64");
   let metadata = JSON.parse(bufferObj.toString("utf-8"));
   
-  return {edition, metadata, mostRecentOwner, editionId, currentEditionId};
+  return {edition, metadata, mostRecentOwner, editionId};
 
 }
 
@@ -44,6 +44,18 @@ function Mint({params}) {
     initialData: {edition: editionType, metadata: {}, mostRecentOwner: "", editionId: 0,  currentEditionId: 0}
   
   })
+
+  const {data:lastEdition} = useQuery({
+    queryKey: ["lastEdition"],
+    queryFn: async() => {
+        const lastEdition = await contract.read.EDITION_COUNTER();
+        return Number(lastEdition);
+
+    },
+    initialData: 0
+  
+  })
+
   // console.log(data)
 
   return (
@@ -52,7 +64,7 @@ function Mint({params}) {
         <h1>mint</h1>
       </header>
       <section>
-        <ul>
+        <ul style={{listStyleType: "circle"}}>
           <li>
             name: {isLoading ? "loading..." : <><Link style={{textDecoration:"none"}} href={`/browse/editions/${data?.editionId}`}>{data.edition.name} &#8599;</Link></>}
         
@@ -71,7 +83,7 @@ function Mint({params}) {
           </li>
         </ul>
         <CustomConnect />
-        <MintButton isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price}/>
+        <MintComponent isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
         
         <figure style={galleryFig}>
           
@@ -84,7 +96,7 @@ function Mint({params}) {
 
       <div style={navigation}>
         <Link href={`/mint/${(params.editionId > 1) ? Number(params.editionId)-1 : params.editionId}`}>previous</Link>
-        <Link href={`/mint/${(params.editionId < data.currentEditionId) ? Number(params.editionId)+1 : params.editionId}`}>next</Link>
+        <Link href={`/mint/${(params.editionId < lastEdition) ? Number(params.editionId)+1 : params.editionId}`}>next</Link>
        
       </div>
 

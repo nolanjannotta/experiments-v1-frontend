@@ -10,7 +10,13 @@ function Prints() {
       <p>
         A major goal of this project is to normalize offering high quality
         archival grade prints for onchain art directly from the
-        creater/artist/platform. For this project though, this depends entirely
+        creater/artist/platform. I&apos;m a believer that all digital art should 
+        have a physical counterpart that does not rely on the internet or electricity 
+        to be displayed and enjoyed.  Having the prints come directly from the 
+        creater/artist/platform is also important to me as that maintains the provenance of the art.
+        </p>
+        <p>
+        As of now for this project though, this depends entirely
         on whether theres any interest whatsoever from collectors. If there is,
         I will personally buy a printer and get this whole thing started.
       </p>
@@ -42,12 +48,12 @@ function Prints() {
             May include some sort of watermark or some kind of cryptographic
             signed message for authenticity.
           </li>
-          <li>Will most likely not include an NFC chip.</li>
+          {/* <li>Will most likely not include an NFC chip.</li> */}
           <li>
-            Another idea is generative stationary. Using the same art generator
-            contracts and a random seed, print 1/1 generative stationary or post
-            cards. Sold in packs of 10 with envelopes and a{" "}
-            <i>global forever stamp for each card.</i> Easily send physical 1/1
+            Another idea is to go beyond just the minted tokens. Since the original code 
+            will be onchain forever, you can use that along with random seeds to create brand new outputs. 
+            One example is 1 of 1 generative stationary or post cards. Sold in packs of 10 with envelopes and a{" "}
+            <i>global forever stamp for each card.</i> Effortlessly send 1 of 1 physical 
             art to people you like!
           </li>
         </ul>

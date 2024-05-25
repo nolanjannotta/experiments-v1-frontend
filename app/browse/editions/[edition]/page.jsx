@@ -40,9 +40,8 @@ async function getThumbnails(page, totalTokens, editionId) {
   }
    
     try {
-      const response = await fetch(`https://base-sepolia.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
       const tokens = await response.json()
-
       // console.log("page key", Number(tokens.pageKey))
       return {images: tokens.nfts, loading: false, error: false};
     } catch (e) {
@@ -155,7 +154,7 @@ function Gallery({params}) {
       {thumbnails?.error || !thumbnails.images && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
       {thumbnails?.loading && <p>loading previews...</p>}
       {thumbnails.images?.map((nft, i) => {
-        if(nft.raw.error === "Failed to get token uri"){
+        if(nft.raw?.error === "Failed to get token uri"){
           
           return (
             <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*50) + i + 1)}`}>
@@ -174,7 +173,7 @@ function Gallery({params}) {
 
           <figure style={galleryFig} >
             <img style={galleryImg} width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
-            <figcaption>{nft.raw.metadata.name}
+            <figcaption>{nft.name}
             </figcaption>
           </figure>
           </Link>

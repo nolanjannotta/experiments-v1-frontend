@@ -3,14 +3,12 @@ import React from 'react'
 // import { ConnectKitButton } from "connectkit";
 import {useConnectModal,useAccountModal} from '@rainbow-me/rainbowkit';
 import {useAccount} from 'wagmi'
-import useTruncateAddress from "../hooks/useTruncateAddress";
 import {useCapabilities} from 'wagmi/experimental'
 
 export default function CustomConnect() {
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const account = useAccount();
-  const truncatedAddress = useTruncateAddress(account?.address);
 
   const {data:capabilities} = useCapabilities({
     account: account.address,
@@ -26,13 +24,13 @@ export default function CustomConnect() {
     <div style={container}>
       {openConnectModal && (
         <button style={button} onClick={openConnectModal} type="button">
-          connect wallet
+          connect wallet to mint
         </button>
       )}
       {openAccountModal && (
         <div style={addressContainer}>
           <div>
-            {truncatedAddress}
+            {account?.address.slice(0, 6) + "..." + account?.address.slice(-4)}
             <button style={button} onClick={openAccountModal} type="button">
               disconnect
             </button>

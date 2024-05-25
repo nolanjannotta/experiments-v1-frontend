@@ -32,7 +32,6 @@ async function getThumbnails() {
 
 export default async function Home() {
   const uris = await getThumbnails();
-  console.log(uris)
 
   return (
     <main>

@@ -7,7 +7,7 @@ import { contract } from '@/app/contract'
 function MintPage() {
     const router = useRouter();
     const {data:currentEdition, error, isLoading} = useQuery({
-        queryKey: ["currentEdition"],
+        queryKey: ["lastEdition"],
         queryFn: async() => {
             const currentEditionId = await contract.read.EDITION_COUNTER();
             return Number(currentEditionId);

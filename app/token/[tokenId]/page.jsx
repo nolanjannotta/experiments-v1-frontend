@@ -6,7 +6,6 @@ import Stats from "./Stats"
 import sharp from "sharp";
 // import {FRAME_URL} from "@/app/constants.js";
 import { artAddress } from '@/app/constants.js';
-// import useTruncateAddress from "../../../hooks/useTruncateAddress"
 import {baseScanUrl} from "@/app/constants.js"
 import Moralis from "moralis";
 import { base } from 'viem/chains';

@@ -4,7 +4,7 @@ function V2() {
   return (
     <article>
       <header>
-        <h1>onchain experiments v2</h1>
+        <h1>Onchain-Experiments_V2</h1>
       </header>
       {/* <section> */}
         <p>
@@ -20,14 +20,15 @@ function V2() {
                 increase robustness and flexibility... whatever that means.
             </li>
             <li>
-                add more fun interoperability features.
+                add more fun interoperability features. For example, different editions borrowing features 
+                from each other or interacting in some way. Artist B gets permission from Artist A to incorporate some feature from Artist A&apos;s edition into Artist B&apos;s edition. Basically a collaboration. Similar to the `Signatures` concept` in V1. 
             </li>
 
             <li>
-                Create a platform and tools for other artists to mint their 100% onchain art works. 
+                Create a platform and tools for other artists to deploy and mint their 100% onchain art works. 
             </li>
             <li>
-                continue offering prints as key part of the project. Split revenue between collector, artist, and printer. Not limited to just prints on paper, could include other physical objects.
+                continue offering prints as key part of the project. Split revenue between collector, artist, and printer. Not limited to just prints on paper, could include other physical objects. TBD.
 
             </li>
             <li>
@@ -52,15 +53,17 @@ function V2() {
                         not really necessary IMO.  
                     </li>
                     <li>
-                       may cost more gas, and/or may require additional transactions for approvals and such.
+                       may cost more gas, and/or may require additional transactions for approvals and such. Although this is solved by smart wallets and bundling.
                     </li>
                 </ul>
                     </figure>
             </li>
             <li>
-              create a 2 way bridge between Base chain and Mainnet. Users will be able to store their tokens on mainnet as a 
-              kind of &quot;cold storage,&quot; (since L2s are technically centralized and have actually gone offline for a 
-              period of time in the past. unless im wrong about that. I&apos;m not saying Base has done this, but just L2s in general). 
+              create a 2 way bridge between Base and L1 Mainnet. Users will be able to store their tokens on mainnet as a 
+              kind of &quot;cold storage.&quot; {" "}
+              {/* (since L2s are technically centralized and have actually gone offline for a 
+              period of time in the past. unless im wrong about that. I&apos;m not saying Base has done this, but just L2s in general). */}
+              Some people might want to consolidate their art collections on mainnet.
               They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
             </li>
@@ -72,9 +75,13 @@ function V2() {
               and an online editor for artists to use to create their own art generator contracts. how cool would that be?
 
             </li>
+            {/* <li>
+              put the frontend on chain.
+            </li> */}
             <li>
                 increase vibes by at least 10x.
             </li>
+
             
 
           </ul>
