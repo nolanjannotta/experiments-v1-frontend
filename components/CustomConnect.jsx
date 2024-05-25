@@ -10,6 +10,7 @@ export default function CustomConnect() {
   const { openConnectModal } = useConnectModal();
   const { openAccountModal } = useAccountModal();
   const account = useAccount();
+  const truncatedAddress = useTruncateAddress(account?.address);
 
   const {data:capabilities} = useCapabilities({
     account: account.address,
@@ -31,7 +32,7 @@ export default function CustomConnect() {
       {openAccountModal && (
         <div style={addressContainer}>
           <div>
-            {useTruncateAddress(account?.address)}
+            {truncatedAddress}
             <button style={button} onClick={openAccountModal} type="button">
               disconnect
             </button>
