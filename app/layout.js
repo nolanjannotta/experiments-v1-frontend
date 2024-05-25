@@ -1,6 +1,6 @@
 
 
-import { Inter,Urbanist,Trispace,  Zilla_Slab,Cormorant, IBM_Plex_Sans, Source_Code_Pro } from 'next/font/google'
+import {Source_Code_Pro } from 'next/font/google'
 import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
@@ -13,10 +13,7 @@ export const metadata = {
   description: 'art experiments',
 }
 
-// const zillaSlab = Zilla_Slab({ subsets: ['latin'], weight: ["500", "700"]})
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
-// const cormorant = Cormorant({ subsets: ['latin'], weights: [300]})
-// const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ["500", "700"]})
 
 export const revalidate = 30
 
@@ -24,6 +21,7 @@ export const revalidate = 30
 // console.log(artAddress)
 
 export default function RootLayout({ children }) {
+  const title = {}
   const favicon = (Date.now() % 2) + 1
   return (
     <html lang="en">
@@ -34,7 +32,7 @@ export default function RootLayout({ children }) {
 
       <body className={sourceCode.className}>
       <header>
-      <div style={{display:"flex"}}><h1>Onchain-Experiments_V1™</h1></div>
+      <div style={title}><h1>Onchain-Experiments_V1™</h1></div>
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>

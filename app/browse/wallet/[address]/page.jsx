@@ -3,8 +3,7 @@ import React from "react";
 import { contract } from "../../../contract";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import { useCapabilities, useWriteContracts } from "wagmi/experimental";
-
+import { editionData } from "@/app/editionData";
 
 async function getAllForAddress(address) {
   return contract.read.tokensOfOwner([address]);
@@ -60,20 +59,21 @@ function Address({ params }) {
         <li>address: {params.address}</li>
         <li>balance: {Number(balance)}</li>
         <li>
-          Ids:
+          ids:
           <ul style={{ height: "500px", overflowY: "scroll" }}>
             {tokens.map((id, index) => {
+              console.log(editionData[editionNames[Number(id / 1000000n) - 1]])
               return (
                 <li key={index}>
                   <Link href={`/browse/editions/${Number(id / 1000000n)}`}>
                     {editionNames[Number(id / 1000000n) - 1]}
                   </Link>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;
                   <Link href={`/token/${Number(id)}`}>
                     #{Number(id % 1000000n)}
                   </Link>
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <Link href={`/modify/${Number(id)}`}>&#9874;</Link>
+                  {editionData[editionNames[Number(id / 1000000n) - 1]]?.modifiable && <Link href={`/modify/${Number(id)}`}>modify &#9874;</Link>}
                 </li>
               );
             })}

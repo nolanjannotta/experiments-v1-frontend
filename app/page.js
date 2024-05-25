@@ -1,5 +1,6 @@
 // "use client"
 import Link from 'next/link'
+import Image from 'next/image';
 import HomeThumbnails from '../components/HomeThumbnails'
 // import Image from 'next/image'
 // import styles from './page.module.css'
@@ -48,7 +49,7 @@ export default async function Home() {
           <section style={thumbnails}>
             {uris.map((uri, index) => {
               return (
-                <img width="200px" height="200" key={index} src={uri} alt="thumbnail"></img>
+                <Image width={200} height={200} key={index} src={uri} alt="thumbnail"></Image>
               )
             })}
           </section>
@@ -267,7 +268,7 @@ export default async function Home() {
         As you can see, this project is pretty simple, but very fun! As said above, this is a place for me to 
         experiment and draft ideas, while at the same time creating a finished product that best conveys my vision and that anyone can use and enjoy. 
         This is version 1 of n versions. Brainstorming for V2 can be found <Link href="/v2">here</Link>. I encourage all 
-        onchain generative art enthusiasts to reach out if you have ideas! 
+        onchain generative art enthusiasts to reach out if you want to contribute or have ideas! 
 
       </p>
     </main>
@@ -282,11 +283,10 @@ const outline = {
 }
 
 const thumbnails = {
-  // backgroundColor: "black",
+  width: "100%",
   display: "flex",
   justifyContent: "space-evenly",
   flexWrap: "wrap",
-  // alignItems: "center",
   gap: "2rem"
 
 }
