@@ -106,7 +106,7 @@ export default async function Home() {
         </p>
         <p>
           However, this project is my submission to{" "}
-          <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base's Onchain Summer Buildathon</a>. 
+          <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base&apos;s Onchain Summer Buildathon</a>. 
           {" "} Because of this, I will doing things a little differently. To start, all of my finished editions that I have ready by the deadline will be deployed and 
           added to the project at the same time. The supplies will be way higher to be more inclusive (2,000 - 4,000 per edition...TBD). 
           All editions will be mintable at the same time. They will still be completely free or extremely cheap. 
@@ -115,7 +115,7 @@ export default async function Home() {
         <br />
 
         <p>
-        One thing worth noting is that, since everything is onchain, you're faced with a couple limitations. 
+        One thing worth noting is that, since everything is onchain, you&apos;re faced with a couple limitations. 
         For example contract size, gas limit, computing power, lack of standard SVG solidity libraries (for now...), etc.
         I actually like this &quot;feature&quot;. For me, it pushes me to be more creative will less options. It also 
         helps keep me from overthinking.

@@ -1,6 +1,6 @@
 
 
-// import { Inter,Urbanist,Trispace } from 'next/font/google'
+import { Inter,Urbanist,Trispace,  Zilla_Slab,Cormorant, IBM_Plex_Sans } from 'next/font/google'
 import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
@@ -12,6 +12,10 @@ export const metadata = {
   title: 'Experiments V1',
   description: 'art experiments',
 }
+
+const zillaSlab = Zilla_Slab({ subsets: ['latin'], weight: ["500", "700"]})
+// const cormorant = Cormorant({ subsets: ['latin'], weights: [300]})
+// const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ["500", "700"]})
 
 export const revalidate = 30
 
@@ -25,10 +29,12 @@ export default function RootLayout({ children }) {
       <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="icon" type="image/png" sizes="32x32" href={`/favicons/${favicon}.png`}/>
-      
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+      <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
       </head>
 
-      <body>
+      <body className={zillaSlab.className}>
       <header>
       <div style={{display:"flex"}}><h1>Experiments V1</h1>&trade;</div>
         <nav>
