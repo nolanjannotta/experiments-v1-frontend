@@ -1,6 +1,6 @@
 
 
-import { Inter,Urbanist,Trispace,  Zilla_Slab,Cormorant, IBM_Plex_Sans } from 'next/font/google'
+import { Inter,Urbanist,Trispace,  Zilla_Slab,Cormorant, IBM_Plex_Sans, Source_Code_Pro } from 'next/font/google'
 import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
@@ -13,7 +13,8 @@ export const metadata = {
   description: 'art experiments',
 }
 
-const zillaSlab = Zilla_Slab({ subsets: ['latin'], weight: ["500", "700"]})
+// const zillaSlab = Zilla_Slab({ subsets: ['latin'], weight: ["500", "700"]})
+const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 // const cormorant = Cormorant({ subsets: ['latin'], weights: [300]})
 // const ibm = IBM_Plex_Sans({ subsets: ['latin'], weight: ["500", "700"]})
 
@@ -31,9 +32,9 @@ export default function RootLayout({ children }) {
       <link rel="icon" type="image/png" sizes="32x32" href={`/favicons/${favicon}.png`}/>
       </head>
 
-      <body className={zillaSlab.className}>
+      <body className={sourceCode.className}>
       <header>
-      <div style={{display:"flex"}}><h1>Onchain-Experiments_V1</h1><p>&trade;</p></div>
+      <div style={{display:"flex"}}><h1>Onchain-Experiments_V1™</h1></div>
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>

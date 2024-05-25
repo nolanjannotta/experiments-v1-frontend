@@ -62,7 +62,9 @@ export default async function Home() {
           <a target="_blank" href="https://www.artblocks.io/">
             {" "}
             ArtBlocks
-          </a> and others. These experiments are managed by a single ERC721{" "}
+          </a> and others. There will never
+          be any offchain scripts, javascript, ipfs, or URLs to servers. Raw SVG code is generated
+          and returned 100% onchain forever. These experiments are managed by a single ERC721{" "}
           <Link href="/contracts/main">smart contract</Link> on the{" "}
           <a target="blank" href="https://www.base.org/">
             Base
@@ -71,11 +73,9 @@ export default async function Home() {
           &quot;edition&quot;) is linked to its own immutable{" "}
           <Link href="/contracts/artgenerator">ArtGenerator</Link> contract.
           This contract is in charge of generating the raw SVG code and any
-          attributes that this experiment may or may not have. There will never
-          be any offchain scripts, javascript, ipfs, or URLs to servers. Raw SVG code is generated
-          and returned 100% onchain forever. The goal of this project is to push
-          my knowledge, experiment with onchain art and mechanics, make
-          interesting things, learn a lot, and emerge with a semi refined set of
+          attributes that this experiment may or may not have. The goal of this project is to learn a lot, experiment 
+          with onchain art and mechanics, demonstrate some possibilities of onchain SVGs, make
+          interesting things, and emerge with a semi refined set of
           tools and techniques to work with SVG in solidity to create onchain
           art. Then take what I&apos;ve learned and start thinking about a v2.
         </p>
@@ -285,7 +285,8 @@ const thumbnails = {
   // backgroundColor: "black",
   display: "flex",
   justifyContent: "space-evenly",
+  flexWrap: "wrap",
   // alignItems: "center",
-  // gap: "1rem"
+  gap: "2rem"
 
 }
