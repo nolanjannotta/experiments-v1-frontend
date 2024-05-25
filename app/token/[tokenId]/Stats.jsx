@@ -73,107 +73,129 @@ export default function Stats({ data, tokenId, address }) {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
-      <br/>
-      <br/>
-      {!data.error ? 
-      <article style={{width:"100%"}}>
-        
-        <ul style={{listStyleType: "circle"}}>
-          <li>
-            <p>name: &quot; <Link style={{textDecoration:"none", color: "inherit"}}href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}>{data?.editionName}</Link> #{tokenId % 1000000}&quot;</p>
-          </li>
-          <li>
-            <p> description: &quot;{data?.metadata.description}&quot;</p>
-          </li>
-          <li>
-            <p>token id: {tokenId}</p>
-          </li>
-
-          {data.metadata.attributes.length > 0  &&
-          <li>
-            <>
-              attributes:
-              <ul>
-                {data.metadata.attributes.map((attribute, i) => {
-                  return (
-                    <li key={i}>
-                      {attribute.trait_type}: &quot;{attribute.value}&quot;
-                    </li>
-                  );
-                })}
-              </ul>
-            </>
-          </li>
-          }   
-
-          <li>
-            <>
-              owner:{" "}
-              {data?.owner === account.address ? "you :)" : data?.owner}
-            </>
-          </li>
-
-          <li>
-            <p>
-              opensea:{" "}
-              <a
-                target="_blank"
-                href={`https://testnets.opensea.io/assets/base-sepolia/${address}/${tokenId}`}
-              >
-                &#8599;
-              </a>
-            </p>
-          </li>
-          <li>
-            <p>
-              source code:{" "}
-              <a target="_blank" href={`${data?.metadata.image}`}>
-                &#8599;
-              </a>
-            </p>
-          </li>
-
-          
-          
-          {data?.owner === account.address || !account.isConnected ? 
-          <>
-          <li>
-            <p>
-              
-              transfer: <ConnectSimple>
-                      
-                       <><input placeholder="address to" onChange={handleInputChange}></input> <button style={button} disabled={!transferData.ready} onClick={() => transfer()}>&#x2709;</button></>
-                       
-                      </ConnectSimple>
-            </p>
-          </li>
-          <li>
-          <p>
-            modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
-          </p>
-        </li>
-        <li>destroy: <button style={button} onClick={destroy}>&#x2297;</button></li>
-        </>
-          :
-          <></>
-        } 
-        </ul>
-      </article> : <article>
-        <h3>uh oh, token id #{tokenId} not found!</h3>
-      </article> }
-
-      <nav style={{margin:0}}>
-          <ul>
+      <br />
+      <br />
+      {!data.error ? (
+        <article style={{ width: "100%" }}>
+          <ul style={{ listStyleType: "circle" }}>
             <li>
-              <Link href={`./${Number(tokenId) - 1}`}>
-                &#8592; previous
-              </Link>
+              <p>
+                name: &quot;{" "}
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}
+                >
+                  {data?.editionName}
+                </Link>{" "}
+                #{tokenId % 1000000}&quot;
+              </p>
             </li>
             <li>
-              <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
+              <p> description: &quot;{data?.metadata.description}&quot;</p>
             </li>
+            <li>
+              <p>token id: {tokenId}</p>
+            </li>
+
+            {data.metadata.attributes.length > 0 && (
+              <li>
+                <>
+                  attributes:
+                  <ul>
+                    {data.metadata.attributes.map((attribute, i) => {
+                      return (
+                        <li key={i}>
+                          {attribute.trait_type}: &quot;{attribute.value}&quot;
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </>
+              </li>
+            )}
+
+            <li>
+              <>
+                owner:{" "}
+                {data?.owner === account.address ? "you :)" : data?.owner}
+              </>
+            </li>
+
+            <li>
+              <p>
+                opensea:{" "}
+                <a
+                  target="_blank"
+                  href={`https://testnets.opensea.io/assets/base-sepolia/${address}/${tokenId}`}
+                >
+                  &#8599;
+                </a>
+              </p>
+            </li>
+            <li>
+              <p>
+                source code:{" "}
+                <a target="_blank" href={`${data?.metadata.image}`}>
+                  &#8599;
+                </a>
+              </p>
+            </li>
+
+            {data?.owner === account.address || !account.isConnected ? (
+              <>
+                <li>
+                  <p>
+                    transfer:{" "}
+                    <ConnectSimple label="connect to transfer" asAnchor={true} >
+                      <>
+                        <input
+                          placeholder="address to"
+                          onChange={handleInputChange}
+                        ></input>{" "}
+                        <button
+                          style={button}
+                          disabled={!transferData.ready}
+                          onClick={() => transfer()}
+                        >
+                          &#x2709;
+                        </button>
+                      </>
+                    </ConnectSimple>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
+                  </p>
+                </li>
+                <li>
+                  destroy:{" "}
+                  <button style={button} onClick={destroy}>
+                    &#x2297;
+                  </button>
+                </li>
+              </>
+            ) : (
+              <></>
+            )}
           </ul>
-        </nav>
+        </article>
+      ) : (
+        <article>
+          <h3>uh oh, token id #{tokenId} not found!</h3>
+        </article>
+      )}
+
+      <nav style={{ margin: 0 }}>
+        <ul>
+          <li>
+            <Link href={`./${Number(tokenId) - 1}`}>&#8592; previous</Link>
+          </li>
+          <li>
+            <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
+          </li>
+        </ul>
+      </nav>
     </section>
   );
 }

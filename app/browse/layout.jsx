@@ -1,8 +1,10 @@
 "use client"
 import Link from "next/link";
-import OtherConnectButton from "../../components/OtherConnectButton";
+import ConnectSimple from "../../components/ConnectSimple";
+import { useAccount } from "wagmi";
 
 export default function EditionLayout({ children }) {
+  const {address} = useAccount();
   return (
     <>
       <header style={{textAlign: "center"}}>
@@ -14,7 +16,11 @@ export default function EditionLayout({ children }) {
             <li>&#x26AC;</li>
             <li><Link href="/browse/all">all mints</Link></li>
             <li>&#x26AC;</li>
-            <li><OtherConnectButton /></li>
+            <li>
+              <ConnectSimple label="connect to view your collection" asAnchor={true}>
+              <Link href={`/browse/wallet/${address}`}>my collection</Link>
+              </ConnectSimple>
+            </li>
 
           </ul>
         </nav>

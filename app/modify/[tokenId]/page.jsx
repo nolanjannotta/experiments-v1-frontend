@@ -8,7 +8,7 @@ import { useWriteContract, useConfig} from 'wagmi'
 
 import { useQuery } from "@tanstack/react-query";
 import { editionData } from "@/app/editionData";
-import CustomConnect from "@/components/CustomConnect";
+import ConnectSimple from "@/components/ConnectSimple";
 import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
 
 
@@ -159,16 +159,16 @@ function ModifyToken({ params }) {
         )}
       </header>
 
-      <CustomConnect />
+      <ConnectSimple label="connect to modify" asAnchor={true} />
 
-      {!account.isConnected ? (<p>connect to modify.</p>) : (!isOwned && <p>you are not the owner.</p>)}
+      {account.isConnected && (!isOwned && <p>you are not the owner.</p>)}
 
 
       {!editionData[edition.name]?.modifiable ? (
         <p>{edition.name} is not modifiable</p>
       ) : (
         <fieldset>
-          <legend>Modify</legend>
+          {/* <legend>Modify</legend> */}
 
           <form>
             {editionData[edition.name]?.modify.map((input, index) => {
@@ -189,11 +189,21 @@ function ModifyToken({ params }) {
           <p>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </p>
         </fieldset>
       )}
-      <button disabled={!isOwned} onClick={()=> modify(params.tokenId,modifyBytes)}>
-              Modify
+      <button style={button}  disabled={!isOwned || !editionData[edition.name]?.modifiable} onClick={()=> modify(params.tokenId,modifyBytes)}>
+          &#9874;&#x1D544;&#x1D560;&#x1D555;&#x1D55A;&#x1D557;&#x1D56A;&#9874;
             </button>
     </article>
   );
 }
 
 export default ModifyToken;
+
+
+const button = {
+  background: "none",
+  border: "none",
+  textDecoration: "underline",
+  fontSize: "30px",
+  padding: "0"
+  
+}

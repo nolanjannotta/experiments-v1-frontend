@@ -22,8 +22,13 @@ async function getThumbnails() {
   for(const edition of editions) {
     const editionData = await contract.read.getEdition([edition]);
     const tokenId = Math.floor(Math.random() * Number(editionData.counter)) + 1;
-    let thumbnail = await contract.read.getDataUri([edition * 1000000 + tokenId]);
-    uris.push(thumbnail);
+    try {
+      let thumbnail = await contract.read.getDataUri([edition * 1000000 + tokenId]);
+      uris.push(thumbnail);
+    }
+    catch(e) {
+      console.log(e)
+    }
   }
   return uris;
 

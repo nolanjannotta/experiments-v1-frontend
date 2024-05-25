@@ -1,7 +1,7 @@
 "use client";
 import React, {useState} from "react";
 import { useAccount } from "wagmi";
-import CustomConnect from "@/components/CustomConnect";
+import ConnectSimple from "@/components/ConnectSimple";
 import { useQuery } from "@tanstack/react-query";
 import { contract,contractBase,publicClient } from "@/app/contract";
 import { formatEther, parseEther } from "viem";
@@ -44,7 +44,7 @@ function Admin() {
     return (
       <article>
         <p>if you are the owner, connect your wallet</p>
-        <CustomConnect />
+        <ConnectSimple label="connect" asAnchor={true}/>
       </article>
     );
   }

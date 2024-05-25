@@ -22,7 +22,7 @@ function Modify() {
                 <input type="text" name="editionSearch" onChange={ (event)=>{setInput(event.target.value)}} placeholder="token id"/>
                 
                 {/* <button> */}
-                  <Link href={`/modify/${input}`}><button>Modify</button> </Link>
+                  <Link href={`/modify/${input}`}>Search</Link>
                   {/* </button> */}
             </form>
 

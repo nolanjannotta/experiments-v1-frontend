@@ -1,32 +1,41 @@
-"use client";
+// "use client";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { contract } from "../contract";
+// import { contract } from "../contract";
+import { contract } from "../contract_server";
+
 
 async function getEditions() {
   const lastEdition = await contract.read.EDITION_COUNTER();
   let allEditions = [];
   for (let i = 1; i <= Number(lastEdition); i++) {
-    let edition = await contract.read.getEdition([i]);
-    let thumbnail = await contract.read.getDataUri([i * 1000000 + 1]);
-    allEditions.push({ edition, thumbnail });
+    try{
+        let edition = await contract.read.getEdition([i]);
+        let thumbnail = await contract.read.getDataUri([i * 1000000 + 1]);
+        allEditions.push({ edition, thumbnail });
+    }
+    catch(e){
+        console.log(e.metaMessages[0], e.shortMessage)
+        return{allEditions: [], error: true, errorMessage: e}
+    }
   }
-  return allEditions;
+  return {allEditions, error: false};
 }
 
-export default function Browse() {
-  const { data, isFetching } = useQuery({
-    queryKey: ["editions"],
-    queryFn: getEditions,
-    initialData: [],
-  });
+export default async function Browse() {
+  const {allEditions, error, errorMessage} = await getEditions();
 
   return (
     <section style={section}>
-      <h1 style={{ margin: 0 }}>{isFetching && "loading"} editions</h1>
+      <h1 style={{ margin: 0 }}>{!allEditions && "loading"} editions</h1>
+      {error && errorMessage && 
+      <>
+      <p>{errorMessage.metaMessages[0]}</p>
+      <p>{errorMessage.shortMessage}</p>
+      </>}
 
       <div style={gallery}>
-        {data.map((data, index) => {
+        {!error && allEditions.map((data, index) => {
           return (
             <Link key={index} href={`/browse/editions/${index + 1}`}>
               <figure style={galleryFig}>

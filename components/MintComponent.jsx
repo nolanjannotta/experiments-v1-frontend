@@ -76,6 +76,7 @@ const button = {
     background: "none",
     border: "none",
     textDecoration: "underline",
-    fontSize: "30px"
+    fontSize: "30px",
+    padding: "0"
     
   }
