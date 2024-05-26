@@ -29,7 +29,7 @@ export const config = createConfig({
       // connectionPreference: 'embedded',
       preference: 'smartWalletOnly'
     }),
-    // metaMask(),
+    metaMask(),
 
     walletConnect({
       projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,

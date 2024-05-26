@@ -8,6 +8,9 @@ export default function ConnectPopUp({ show, setShow, account}) {
     const menuRef = useRef(null)
     const {disconnect, status:disconnectStatus} = useDisconnect()
     const {connect, connectors, status:connectStatus } = useConnect();
+    const [uniqueConnectors, setUniqueConnectors] = useState([])
+
+    
 
     function handleClose(event) {
         if(menuRef.current && !menuRef.current.contains(event.target)){
@@ -15,13 +18,16 @@ export default function ConnectPopUp({ show, setShow, account}) {
         }
     }
 
-    // useEffect(() => {
-    //     console.log("disconnected", disconnectStatus, "connected", connectStatus)
-    //     if( (disconnectStatus == "success" && account.isConnected) || (connectStatus == "success" && !account.isConnected)) {
-    //         setShow(false)
-    //     }
+    useEffect(() => {
+        connectors.forEach((connector) => {
+            console.log(connector)
+            setUniqueConnectors((prev) => {return [...prev, connector]})
+        })
 
-    // }, [connectStatus,disconnectStatus])
+
+    }, [connectors])
+
+    console.log(connectors.filter((value, index) => connectors.indexOf(value) !== index))
 
     if(!show){
         return <></>
@@ -37,6 +43,8 @@ export default function ConnectPopUp({ show, setShow, account}) {
                 {!account.isConnected && 
                 <ul style={{listStyle:"none", padding: "0"}}>
                     {connectors.map((connector, index) => {
+                        if(connector.type === "injected")
+                            return
                         return <li style={listItem} key={index} ><button style={button} onClick={() => connect({connector})}>{connector.name}</button></li>
                     })}
                 </ul>}
