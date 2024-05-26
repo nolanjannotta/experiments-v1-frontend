@@ -36,8 +36,8 @@ export default async function Browse() {
         {!error && allEditions.map((data, index) => {
           return (
             <>
-              <figure style={galleryFig}>
-              <Link key={index} href={`/browse/editions/${index + 1}`}>
+              <figure key={index} style={galleryFig}>
+              <Link  href={`/browse/editions/${index + 1}`}>
                 <img width="300" src={data.thumbnail}></img>
                 
                 </Link>

@@ -29,7 +29,13 @@ export const config = createConfig({
       // connectionPreference: 'embedded',
       preference: 'smartWalletOnly'
     }),
-    metaMask({name: 'MetaMask'}),
+    metaMask({
+      dappMetadata: {name: 'Experiments V1', url: 'https://experimentsv1.vercel.app/'},
+
+      extensionOnly: true
+    
+    }),
+    // injected(),
 
     walletConnect({
       projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
