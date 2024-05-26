@@ -154,7 +154,7 @@ function ModifyToken({ params }) {
 
 
       {!editionData[edition.name]?.modifiable ? (
-        <p>{edition.name} is not modifiable</p>
+        <p>*{edition.name} is not modifiable</p>
       ) : (
         <fieldset>
           <legend>Current settings:</legend>
@@ -175,7 +175,7 @@ function ModifyToken({ params }) {
             })}
             
           </form>
-          <p>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </p>
+          <p><small>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </small></p>
           <button style={button}  disabled={!isOwned || !editionData[edition.name]?.modifiable} onClick={()=> modify(params.tokenId,modifyBytes)}>
           &#9874;&#x1D544;&#x1D560;&#x1D555;&#x1D55A;&#x1D557;&#x1D56A;&#9874;
             </button>

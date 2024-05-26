@@ -1,15 +1,12 @@
 "use client"
-import React from 'react'
+import React,{useState} from 'react'
 import {useConnectModal, useAccountModal} from '@rainbow-me/rainbowkit';
-import { useAccount } from 'wagmi';
+import { useAccount, useChainId, useConnect, useSwitchChain  } from 'wagmi';
+import ConnectPopUp from './ConnectPopUp';
 
 export default function ConnectSimple({children, label, asAnchor}) {
   const account = useAccount();
-
-  const { openConnectModal } = useConnectModal();
-  const {openAccountModal} = useAccountModal();
-
-  console.log(account)
+  const [show, setShow] = useState(false)
 
   if(account.address && children){
     return(children)
@@ -18,15 +15,17 @@ export default function ConnectSimple({children, label, asAnchor}) {
 
   return (
     <>
+      <ConnectPopUp show={show} setShow={setShow} account={account} />
+
       {!account.address && (
-        <button style={button} onClick={openConnectModal}>
+        <button style={button} onClick={() => setShow(true)}>
           {asAnchor ? <a>{label}</a> : label}
         </button>
       )}
       {account.address && !children && (
         <p>
           connected as{" "}
-          <button style={{...button, textDecoration: "nones"}} onClick={openAccountModal}>
+          <button style={{...button, textDecoration: "nones"}} onClick={() => setShow(true)}>
             
               {account?.address.slice(0, 6) +
                 "..." +

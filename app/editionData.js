@@ -1,9 +1,9 @@
 export const editionData = {
-  signatures: {
+  "signatures": {
     description: () => {
       return (
         <p>
-          Comes with 1 built in utitility that will become clear in the following editions.
+          Comes with 1 built in utility that will become clear in the following editions.
         </p>
       );
     },
@@ -15,7 +15,6 @@ export const editionData = {
     description: () => {
       return (
         <>
-          {/* <p>Based on very simple set of rules:</p> */}
           <ol>
             <li>
               Start with a blank 1000x1000 rectangle, 
@@ -118,15 +117,15 @@ export const editionData = {
     },
     modifiable: true,
     seed: [
-        { name: "timeZoneOffset", type: "uint8" },
+        {name: "timeZoneOffset", type: "uint8" },
         {name: "selfId", type: "uint32"},
-        { name: "backgroundId", type: "uint32" },
-        { name: "location", type: "string" },
+        {name: "backgroundId", type: "uint32" },
+        {name: "location", type: "string" },
       ],
     modify: [
-        { name: "timeZoneOffset", type: "uint8" },
-        { name: "backgroundId", type: "uint32" },
-        { name: "location", type: "string" },
+        {name: "timeZoneOffset", type: "uint8" },
+        {name: "backgroundId", type: "uint32" },
+        {name: "location", type: "string" },
     ]
   },
   "Black and white": {

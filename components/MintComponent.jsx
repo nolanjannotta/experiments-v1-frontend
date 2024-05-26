@@ -54,7 +54,7 @@ function MintComponent({isMinting, editionId, price, refetch}) {
         {write.status == "error" && <p style={{marginTop: "0"}}>user rejected transaction</p>}
 
         {tx.isLoading && <p style={{marginTop: "0"}}>transaction submitted!</p>}
-        {tx.isSuccess && <p style={{marginTop: "0"}}>success! check it out <Link href={`/token/${fromHex(tx.data?.logs[0].topics[3], "number")}`}>here</Link></p>}
+        {tx.isSuccess && <p style={{marginTop: "0"}}>success! check it out <Link href={`/token/${fromHex(tx?.data?.logs[0].topics[3], "number")}`}>here</Link></p>}
 
         
         
