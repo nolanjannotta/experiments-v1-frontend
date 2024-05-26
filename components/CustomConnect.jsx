@@ -40,7 +40,7 @@ export default function CustomConnect() {
              {account?.address.slice(0, 6) + "..." + account?.address.slice(-4)}
             </button>
           </div>
-          {!paymasterSupported ? <p style={{marginTop:"0", fontSize:"small"}}>*pro tip: connect with a <a target="_blank" href="https://www.coinbase.com/wallet/smart-wallet">coinbase smart wallet</a> to pay <b style={{fontSize:"large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</p> : <p style={{marginTop:"0", fontSize:"small"}}>smart wallet detected, enjoy your free transactions &#x2661;</p>}
+          {!paymasterSupported ? <p style={{marginTop:"0", fontSize:"small"}}>&#x2736;tip: connect with a <a target="_blank" href="https://www.coinbase.com/wallet/smart-wallet">coinbase smart wallet</a> to pay <b style={{fontSize:"large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</p> : <p style={{marginTop:"0", fontSize:"small"}}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</p>}
         </div>
       )}
     </div>
