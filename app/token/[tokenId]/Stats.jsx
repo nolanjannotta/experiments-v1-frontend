@@ -80,7 +80,7 @@ export default function Stats({ data, tokenId, address }) {
           <ul style={{ listStyleType: "circle" }}>
             <li>
               <p>
-                name:{" "}
+                <b>name</b>{": "}
                 <Link
                   style={{ textDecoration: "none", color: "inherit" }}
                   href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}
@@ -91,16 +91,16 @@ export default function Stats({ data, tokenId, address }) {
               </p>
             </li>
             <li>
-              <p> description: {data?.metadata.description}</p>
+              <p> <b>description</b>: {data?.metadata.description}</p>
             </li>
             <li>
-              <p>token id: {tokenId}</p>
+              <p><b>token id</b>: {tokenId}</p>
             </li>
 
             {data.metadata.attributes.length > 0 && (
               <li>
                 <>
-                  attributes:
+                  <b>attributes</b>:
                   <ul>
                     {data.metadata.attributes.map((attribute, i) => {
                       return (
@@ -116,14 +116,14 @@ export default function Stats({ data, tokenId, address }) {
 
             <li>
               <>
-                owner:{" "}
+                <b>owner</b>:{" "}
                 {data?.owner === account.address ? "you :)" : data?.owner}
               </>
             </li>
 
             <li>
               <p>
-                opensea:{" "}
+                <b>opensea</b>:{" "}
                 <a
                   target="_blank"
                   href={`https://testnets.opensea.io/assets/base-sepolia/${address}/${tokenId}`}
@@ -134,7 +134,7 @@ export default function Stats({ data, tokenId, address }) {
             </li>
             <li>
               <p>
-                source code:{" "}
+                <b>source code</b>:{" "}
                 <a target="_blank" href={`${data?.metadata.image}`}>
                   &#8599;
                 </a>
@@ -145,7 +145,7 @@ export default function Stats({ data, tokenId, address }) {
               <>
                 <li>
                   <p>
-                    transfer:{" "}
+                    <b>transfer</b>:{" "}
                     <ConnectSimple label="connect to transfer" asAnchor={true} >
                       <>
                         <input
@@ -165,11 +165,11 @@ export default function Stats({ data, tokenId, address }) {
                 </li>
                 <li>
                   <p>
-                    modify: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
+                    <b>modify</b>: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
                   </p>
                 </li>
                 <li>
-                  destroy:{" "}
+                  <b>destroy</b>:{" "}
                   <button style={button} onClick={destroy}>
                     &#x2297;
                   </button>

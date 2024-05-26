@@ -47,12 +47,9 @@ async function Address({ params }) {
               console.log(editionData[editionNames[Number(id / 1000000n) - 1]])
               return (
                 <li key={index}>
-                  <Link href={`/browse/editions/${Number(id / 1000000n)}`}>
-                    {editionNames[Number(id / 1000000n) - 1]}
-                  </Link>
-                  &nbsp;
+                
                   <Link href={`/token/${Number(id)}`}>
-                    #{Number(id % 1000000n)}
+                  {editionNames[Number(id / 1000000n) - 1]}  #{Number(id % 1000000n)}
                   </Link>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   {editionData[editionNames[Number(id / 1000000n) - 1]]?.modifiable && <Link href={`/modify/${Number(id)}`}>modify &#9874;</Link>}
