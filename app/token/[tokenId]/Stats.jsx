@@ -49,7 +49,7 @@ export default function Stats({ data, tokenId, address }) {
 
   async function destroy() {
     let tokenName = `${data?.editionName} #${tokenId % 1000000}`
-    let confirm = prompt(`You are about to permanently destroy ${tokenName}.\nThere is no coming back from this.\n\nType 'destroy' to confirm.`)
+    let confirm = prompt(`You are about to permanently destroy ${tokenName}.\nThere is no coming back from this.\n\nType 'destroy' to confirm. (case sensitive)`)
     if(confirm != "destroy") {
       alert("destruction cancelled"); 
       return
@@ -80,18 +80,18 @@ export default function Stats({ data, tokenId, address }) {
           <ul style={{ listStyleType: "circle" }}>
             <li>
               <p>
-                name: &quot;{" "}
+                name:{" "}
                 <Link
                   style={{ textDecoration: "none", color: "inherit" }}
                   href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}
                 >
                   {data?.editionName}
                 </Link>{" "}
-                #{tokenId % 1000000}&quot;
+                #{tokenId % 1000000}
               </p>
             </li>
             <li>
-              <p> description: &quot;{data?.metadata.description}&quot;</p>
+              <p> description: {data?.metadata.description}</p>
             </li>
             <li>
               <p>token id: {tokenId}</p>
@@ -105,7 +105,7 @@ export default function Stats({ data, tokenId, address }) {
                     {data.metadata.attributes.map((attribute, i) => {
                       return (
                         <li key={i}>
-                          {attribute.trait_type}: &quot;{attribute.value}&quot;
+                          {attribute.trait_type}: {attribute.value}
                         </li>
                       );
                     })}
