@@ -31,7 +31,7 @@ export default function ConnectSimple({children, label, asAnchor}) {
                 "..." +
                 account?.address.slice(-4)}
             
-          </button>&nbsp;&nbsp;
+          </button>
         </p>
       )}
     </>

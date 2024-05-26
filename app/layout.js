@@ -32,7 +32,10 @@ export default function RootLayout({ children }) {
 
       <body className={sourceCode.className}>
       <header>
-      <div style={title}><h1>Onchain-Experiments_V1™</h1></div>
+      <div style={title}>
+        <br/>
+        <h1>Onchain-Experiments_V1™</h1>
+        </div>
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>
@@ -92,9 +95,11 @@ const footer = {
 
 
 const connectedAddress = {
-  position: "absolute",
+  position: "fixed",
   // right: 5",
-  top: "0",
-  right: "0"
+  top: "10px",
+  right: "20px",
+  zIndex: "1001"
+
 
 }

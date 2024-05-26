@@ -50,7 +50,7 @@ export default function ConnectPopUp({ show, setShow, account}) {
 }
 
 const listItem = {
-    backgroundColor: "blue"
+    // backgroundColor: "blue"
 }
 
 const container = {
