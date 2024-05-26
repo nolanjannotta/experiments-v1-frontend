@@ -8,7 +8,6 @@ export default function ConnectPopUp({ show, setShow, account}) {
     const menuRef = useRef(null)
     const {disconnect, status:disconnectStatus} = useDisconnect()
     const {connect, connectors, status:connectStatus } = useConnect();
-    const [uniqueConnectors, setUniqueConnectors] = useState([])
 
     
 
@@ -18,19 +17,10 @@ export default function ConnectPopUp({ show, setShow, account}) {
         }
     }
 
-    useEffect(() => {
-        connectors.forEach((connector) => {
-            console.log(connector)
-            setUniqueConnectors((prev) => {return [...prev, connector]})
-        })
 
-
-    }, [connectors])
-
-    console.log(connectors.filter((value, index) => connectors.indexOf(value) !== index))
 
     if(!show){
-        return <></>
+        return null
     }
 
 
