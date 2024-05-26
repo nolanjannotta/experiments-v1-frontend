@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useWriteContract, useTransaction,useTransactionReceipt} from 'wagmi'
 import {useAccount} from 'wagmi'
 import { contractBase } from '../app/contract'
@@ -17,7 +17,7 @@ import CustomConnect from './CustomConnect'
 function MintComponent({isMinting, editionId, price, refetch}) {
 
 
-
+    const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
     const write = useWriteContract();
     
@@ -35,11 +35,21 @@ function MintComponent({isMinting, editionId, price, refetch}) {
     }
 
     const tx = useTransactionReceipt({hash: write?.data})
-    // console.log(tx && fromHex(tx.data?.logs[0]?.topics[3], "number"))
+
+    function getMintedId() {
+      if(!tx) return""
+      try {
+        setTokenId(fromHex(tx?.data?.logs[0].topics[3], "number"))
+      }
+      catch(e) {
+        console.log(e)}
+
+    }
 
 
     useEffect(()=> {
         if(tx.isSuccess) {
+            getMintedId()
             refetch()
         }
 
@@ -54,7 +64,12 @@ function MintComponent({isMinting, editionId, price, refetch}) {
         {write.status == "error" && <p style={{marginTop: "0"}}>user rejected transaction</p>}
 
         {tx.isLoading && <p style={{marginTop: "0"}}>transaction submitted!</p>}
-        {tx.isSuccess && <p style={{marginTop: "0"}}>success! check it out <Link href={`/token/${fromHex(tx?.data?.logs[0].topics[3], "number")}`}>here</Link></p>}
+        {tx.isSuccess && <p style={{marginTop: "0"}}>
+          success! 
+
+          {!!tokenId && <> check it out <Link href={`/token/${tokenId}`}>here</Link> </>}
+          
+          </p>}
 
         
         

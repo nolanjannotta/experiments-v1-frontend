@@ -41,7 +41,7 @@ export default async function Browse() {
                 <img width="300" src={data.thumbnail}></img>
                 
                 </Link>
-                <figcaption>{data.edition.name}&nbsp;&nbsp;{Number(data.edition.counter)}/{Number(data.edition.supply)}</figcaption>
+                <figcaption>{data.edition.name}&nbsp;&nbsp; <small>{Number(data.edition.counter)}/{Number(data.edition.supply)}</small></figcaption>
               </figure>
            
             
