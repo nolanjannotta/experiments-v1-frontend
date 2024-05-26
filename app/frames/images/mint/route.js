@@ -15,7 +15,6 @@ export async function GET(request) {
     const allowance = request.nextUrl.searchParams.get("allowance")
     const following = request.nextUrl.searchParams.get("following")
     const active    = request.nextUrl.searchParams.get("active")
-    console.log(active)
     const hasVerifiedAddresses = request.nextUrl.searchParams.get("hasVerifiedAddresses")
     const uri = await getUri(lastId)
 

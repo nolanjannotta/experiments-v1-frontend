@@ -1,7 +1,6 @@
-"use client";
+// "use client";
 import React from "react";
 import { contract } from "../../../contract";
-import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { editionData } from "@/app/editionData";
 
@@ -25,28 +24,12 @@ async function getBalance(address) {
 
 function Address({ params }) {
 
- 
 
+  const balance = getBalance(params.address)
 
-  const { data: balance } = useQuery({
-    queryKey: ["balance"],
-    queryFn: () => getBalance(params.address),
-    initialData: 0,
-  });
+  const tokens = getAllForAddress(params.address)
 
-  const { data: tokens, error:tokensOfOwnerError } = useQuery({
-    queryKey: ["tokens"],
-    queryFn: () => getAllForAddress(params.address),
-    initialData: [],
-  });
-
-  console.log(tokensOfOwnerError)
-
-  const { data: editionNames, error } = useQuery({
-    queryKey: ["editionNames"],
-    queryFn: getAllEditions,
-    initialData: [],
-  });
+  const editionNames = getAllEditions();
 
 
   return (

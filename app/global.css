@@ -9,7 +9,7 @@ html {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "PT Sans", "Open Sans", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 100%;
     line-height: 1.4;
-    background: #fff;
+    background: #fdfdfd;
     color: #000;
     -webkit-overflow-scrolling: touch
 }

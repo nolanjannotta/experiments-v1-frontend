@@ -26,22 +26,18 @@ async function isOwner(tokenId, account) {
 
 async function decodeSeed(tokenId, editionName) {
   const seed = await contract.read.getSeed([tokenId]);
-  console.log("seed", seed)
   const unPacked = await contract.read.unPackSeed([tokenId]);
-console.log("unpacked", unPacked)
   const values = decodeAbiParameters(
     editionData[editionName]?.seed,
     unPacked
   );
   let data = {}
-  console.log("decoded", values)
   values.forEach((value, index)=>{
     data[editionData[editionName].seed[index].name] = value
 
 
   })
 
-  console.log("data", data)
 
   return data;
 }
@@ -56,7 +52,6 @@ function ModifyToken({ params }) {
   const [modifyBytes, setModifyBytes] = useState("");
 //   const [isOwner, setIsOwner] = useState(false);
   const account = useAccount();
-  console.log(inputFields)
 
   const {writeContract} = useWriteContract();
   
@@ -92,7 +87,6 @@ function ModifyToken({ params }) {
     initialData: [],
   });
 
-  console.log(decodedSeed);
 
   useEffect(() => {
     if (account.isConnected) {
@@ -104,7 +98,6 @@ function ModifyToken({ params }) {
   useEffect(() => {
     // if (decodedSeed.length > 0) {
         let inputData = {}
-        // console.log(value)
         editionData[edition.name]?.modify.forEach((value) => {
             
             inputData[value.name] = decodedSeed[value.name]
@@ -112,7 +105,6 @@ function ModifyToken({ params }) {
 
 
       setInputFields(inputData);
-      console.log("input fields", inputData)
     // }
   }, [decodedSeed]); 
 
@@ -125,15 +117,12 @@ function ModifyToken({ params }) {
     const packed = encodeAbiParameters(editionData[edition.name]?.modify || [], values)
     
     setModifyBytes(packed)
-    console.log(packed)
 
   },[inputFields])
 
-  console.log("input fields:", inputFields)
   function eventHandler(event, index) {
     const type = editionData[edition.name].modify[index].type
     const value = type === "string" ? event.target.value : Number(event.target.value);
-    console.log(event.target.value)
     setInputFields(
         prev => ({
             ...prev, 

@@ -36,7 +36,6 @@ function MintComponent({isMinting, editionId, price, refetch}) {
 
     const tx = useTransactionReceipt({hash: write?.data})
     // console.log(tx && fromHex(tx.data?.logs[0]?.topics[3], "number"))
-    console.log(tx)
 
 
     useEffect(()=> {

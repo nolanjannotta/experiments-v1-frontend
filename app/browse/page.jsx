@@ -1,6 +1,5 @@
 // "use client";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
 // import { contract } from "../contract";
 import { contract } from "../contract_server";
 
@@ -15,7 +14,6 @@ async function getEditions() {
         allEditions.push({ edition, thumbnail });
     }
     catch(e){
-        console.log(e.metaMessages[0], e.shortMessage)
         return{allEditions: [], error: true, errorMessage: e}
     }
   }
@@ -37,12 +35,18 @@ export default async function Browse() {
       <div style={gallery}>
         {!error && allEditions.map((data, index) => {
           return (
-            <Link key={index} href={`/browse/editions/${index + 1}`}>
+            <>
               <figure style={galleryFig}>
+              <Link key={index} href={`/browse/editions/${index + 1}`}>
                 <img width="300" src={data.thumbnail}></img>
-                <figcaption>{data.edition.name}</figcaption>
+                
+                </Link>
+                <figcaption>{data.edition.name}&nbsp;&nbsp;{Number(data.edition.counter)}/{Number(data.edition.supply)}</figcaption>
               </figure>
-            </Link>
+           
+            
+            </>
+            
           );
         })}
       </div>

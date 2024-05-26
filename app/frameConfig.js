@@ -80,7 +80,6 @@ const walletClient = createWalletClient({
 
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {
-      console.log(e)
       return {states: "failed", tokenId: null}
     }   
     
@@ -92,7 +91,6 @@ const walletClient = createWalletClient({
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
     // const edition = await signerContract.read.EDITION_COUNTER();
-    console.log("mint edition id", editionId)
     const { request } = await publicClient.simulateContract({
         address: artAddress,
         abi: abi,
