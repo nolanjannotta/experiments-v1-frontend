@@ -7,7 +7,7 @@ import {artAddress} from "./constants"
 import "./global.css"
 // import "./test.css"
 import { baseScanUrl } from './constants'
-
+import ConnectSimple from '../components/ConnectSimple'
 export const metadata = {
   title: 'Experiments V1',
   description: 'art experiments',
@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
         </header>
         <hr/>
       <Web3Provider>
-        
+        <div style={connectedAddress}><ConnectSimple  label="connect"/> &nbsp;&nbsp;</div>
         {children}
         </Web3Provider>
 
@@ -90,7 +90,8 @@ const footer = {
 
 const connectedAddress = {
   position: "absolute",
-  right: "0",
-  top: "0"
+  // right: 5",
+  top: "0",
+  right: "0"
 
 }

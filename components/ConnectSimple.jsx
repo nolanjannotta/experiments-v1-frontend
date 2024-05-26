@@ -1,12 +1,14 @@
 "use client"
 import React from 'react'
-import {useConnectModal} from '@rainbow-me/rainbowkit';
+import {useConnectModal, useAccountModal} from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 
 export default function ConnectSimple({children, label, asAnchor}) {
   const account = useAccount();
 
   const { openConnectModal } = useConnectModal();
+  const {openAccountModal} = useAccountModal();
+
   console.log(account)
 
   if(account.address && children){
@@ -14,13 +16,27 @@ export default function ConnectSimple({children, label, asAnchor}) {
   } 
 
 
-  return(
+  return (
     <>
-      {!account.address && <button style={button} onClick={openConnectModal}>{asAnchor ? <a>{label}</a> : label }</button>}
-      {account.address && !children && <p>connected as: {account?.address.slice(0, 6) + "..." + account?.address.slice(-4)}</p>}
-
+      {!account.address && (
+        <button style={button} onClick={openConnectModal}>
+          {asAnchor ? <a>{label}</a> : label}
+        </button>
+      )}
+      {account.address && !children && (
+        <p>
+          connected as{" "}
+          <button style={{...button, textDecoration: "nones"}} onClick={openAccountModal}>
+            
+              {account?.address.slice(0, 6) +
+                "..." +
+                account?.address.slice(-4)}
+            
+          </button>&nbsp;&nbsp;
+        </p>
+      )}
     </>
-  )
+  );
 
 }
 
