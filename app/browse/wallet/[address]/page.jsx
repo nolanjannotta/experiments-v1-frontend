@@ -1,6 +1,6 @@
 // "use client";
 import React from "react";
-import { contract } from "../../../contract";
+import { contract } from "../../../contract_server";
 import Link from "next/link";
 import { editionData } from "@/app/editionData";
 
@@ -22,14 +22,13 @@ async function getBalance(address) {
   return balance;
 }
 
-function Address({ params }) {
+async function Address({ params }) {
 
 
-  const balance = getBalance(params.address)
+  const balance = await getBalance(params.address)
 
-  const tokens = getAllForAddress(params.address)
-
-  const editionNames = getAllEditions();
+  const tokens = await getAllForAddress(params.address)
+  const editionNames = await getAllEditions();
 
 
   return (
@@ -44,7 +43,7 @@ function Address({ params }) {
         <li>
           ids:
           <ul style={{ height: "500px", overflowY: "scroll" }}>
-            {tokens.map((id, index) => {
+            {tokens?.map((id, index) => {
               console.log(editionData[editionNames[Number(id / 1000000n) - 1]])
               return (
                 <li key={index}>

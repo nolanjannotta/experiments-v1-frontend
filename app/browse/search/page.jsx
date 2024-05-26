@@ -13,7 +13,7 @@ function Search() {
             type="text"
             name="editionSearch"
             onChange={(e) => setInput(e.target.value)}
-            placeholder="token id, edition id, or edition name"
+            placeholder="token id"
           />
           <Link href={`/token/${input}`}>
             {" "}

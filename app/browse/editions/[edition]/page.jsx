@@ -100,42 +100,44 @@ function Gallery({params}) {
         <ul>
           <code>
             <small>
-              <li>&#x2022; edition #: &quot;{params.edition}&quot;</li>
+              <li>&#x2022; <b>edition</b> #{params.edition}</li>
         {Object.keys(editionInfo).map((key, i) => {
           if(key === "artGenerator") {
-            return <li key={i}>&#x2022; {"art generator"}:{" "}<a href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">&#8599;</a></li>
+            return <li key={i}>&#x2022; <b>art generator</b> : <a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">{editionInfo[key].slice(0, 6) +
+            "..." +
+            editionInfo[key].slice(-4)} &#8599;</a></li>
             
           }
           if(key === "price") {
-            return <li  key={i}>&#x2022; {key}: &quot;{formatEther(editionInfo[key])} eth&quot;</li>
+            return <li  key={i}>&#x2022; <b>{key}</b> : {" "} {formatEther(editionInfo[key])} eth</li>
           }
           if (key === "royalty") {
-            return <li key={i}>&#x2022; {key}: &quot;{Number(editionInfo[key]) / 100}%&quot;</li>
+            return <li key={i}>&#x2022; <b>{key}</b> : {" "}{Number(editionInfo[key]) / 100}%</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; {"royalty receiver"}: &quot;{truncateAddress(editionInfo[key])}&quot;</li>
+            return <li  key={i}>&#x2022; <b>royalty receiver</b> : {" "}{truncateAddress(editionInfo[key])}</li>
           }
           if(key === "supply") {
-            return <li  key={i}>&#x2022; {"max supply"}: &quot;{Number(editionInfo[key])}&quot;</li>
+            return <li  key={i}>&#x2022;  <b>max supply</b>: {" "}{Number(editionInfo[key])}</li>
           }
           if(key === "counter") {
-            return <li  key={i}>&#x2022; {"current supply"}: &quot;{Number(editionInfo[key])}&quot;</li>
+            return <li  key={i}>&#x2022; <b>current supply</b> : {" "}{Number(editionInfo[key])}</li>
           }
           if(key === "description") {
-            return <li  key={i}>&#x2022; {key}: &quot;{editionInfo[key]}&quot;</li>
+            return <li  key={i}>&#x2022; <b>{key}</b> : {" "}{editionInfo[key]}</li>
           }
 
           if(key === "mintStatus") {
             if(editionInfo.counter === editionInfo.supply) {
-              return <li  key={i}>&#x2022; {"mint status"}: {"ended"}</li>
+              return <li  key={i}>&#x2022; <b>mint status</b> : {"ended"}</li>
             }
             else {
-              return <li  key={i}>&#x2022; {"public mint status"}: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
+              return <li  key={i}>&#x2022; <b>public mint status</b> : {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
 
             }
           }
           else {
-           return <li  key={i}>&#x2022; {key}: &quot;{editionInfo[key]}&quot;</li> 
+           return <li  key={i}>&#x2022; <b>{key}</b> : {editionInfo[key]}</li> 
           }
           
         })}
