@@ -18,7 +18,7 @@ export default function EditionLayout({ children }) {
             <li>&#x26AC;</li>
             <li>
               <ConnectSimple label="connect to view your collection" asAnchor={true}>
-              <Link href={`/browse/wallet/${address}`}>my collection</Link>
+                  <Link href={`/browse/wallet/${address}`}>my collection</Link>
               </ConnectSimple>
             </li>
 

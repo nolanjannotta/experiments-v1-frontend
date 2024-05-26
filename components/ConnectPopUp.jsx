@@ -35,9 +35,9 @@ export default function ConnectPopUp({ show, setShow, account}) {
             
                 <div style={menu} ref={menuRef}>
                 {!account.isConnected && 
-                <ul style={{listStyle:"none"}}>
+                <ul style={{listStyle:"none", padding: "0"}}>
                     {connectors.map((connector, index) => {
-                        return <li key={index} ><button style={button} onClick={() => connect({connector})}>{connector.name}</button></li>
+                        return <li style={listItem} key={index} ><button style={button} onClick={() => connect({connector})}>{connector.name}</button></li>
                     })}
                 </ul>}
                 {account.isConnected && <button style={button} onClick={disconnect}>disconnect</button>}
@@ -49,6 +49,9 @@ export default function ConnectPopUp({ show, setShow, account}) {
     )
 }
 
+const listItem = {
+    backgroundColor: "blue"
+}
 
 const container = {
     position: "fixed",

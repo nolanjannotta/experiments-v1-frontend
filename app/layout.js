@@ -53,7 +53,10 @@ export default function RootLayout({ children }) {
         </header>
         <hr/>
       <Web3Provider>
-        <div style={connectedAddress}><ConnectSimple  label="connect"/> &nbsp;&nbsp;</div>
+        <div style={connectedAddress}>
+          <ConnectSimple  label="connect" /> &nbsp;&nbsp;
+          
+          </div>
         {children}
         </Web3Provider>
 

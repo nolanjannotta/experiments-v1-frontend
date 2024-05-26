@@ -5,7 +5,7 @@ import {getDefaultConfig,RainbowKitProvider} from '@rainbow-me/rainbowkit';
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import {base,baseSepolia} from 'wagmi/chains';
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
-import { coinbaseWallet, injected, walletConnect } from 'wagmi/connectors';
+import { coinbaseWallet, injected, walletConnect, metaMask } from 'wagmi/connectors';
 
 
 
@@ -29,7 +29,8 @@ export const config = createConfig({
       // connectionPreference: 'embedded',
       preference: 'smartWalletOnly'
     }),
-    injected(),
+    // metaMask(),
+
     walletConnect({
       projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_ID,
     }),
