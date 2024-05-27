@@ -1,16 +1,23 @@
 "use client"
 import React,{useState} from 'react'
-import { useAccount, useChainId, useConnect, useSwitchChain  } from 'wagmi';
+import { useAccount } from 'wagmi';
 import ConnectPopUp from './ConnectPopUp';
+// import {normalize} from "viem/ens"
+// import { createClient, http } from 'viem'
+// import { mainnet } from 'viem/chains';
+import useGetEnsName from '@/hooks/useGetEnsName';
 
 export default function ConnectSimple({children, label, asAnchor}) {
+
   const account = useAccount();
   const [show, setShow] = useState(false)
+
+  const ensName =  useGetEnsName(account.address)
+  
 
   if(account.address && children){
     return(children)
   } 
-
 
   return (
     <>
@@ -25,8 +32,10 @@ export default function ConnectSimple({children, label, asAnchor}) {
         <p>
           connected as{" "}
           <button style={{...button, textDecoration: "nones"}} onClick={() => setShow(true)}>
+
+
             
-              {account?.address.slice(0, 6) +
+              {ensName ? ensName : account?.address.slice(0, 6) +
                 "..." +
                 account?.address.slice(-4)}
             
