@@ -138,7 +138,7 @@ function Gallery({params}) {
               return <li  key={i}>&#x2022; <b>mint status</b>: {"ended"}</li>
             }
             else {
-              return <li  key={i}>&#x2022; <b>public mint status</b>: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
+              return <li  key={i}>&#x2022; <b>public mint status</b>: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : "paused"}</li>
 
             }
           }
