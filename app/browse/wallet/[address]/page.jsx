@@ -44,7 +44,6 @@ async function Address({ params }) {
           ids:
           <ul style={{ height: "500px", overflowY: "scroll" }}>
             {tokens?.map((id, index) => {
-              console.log(editionData[editionNames[Number(id / 1000000n) - 1]])
               return (
                 <li key={index}>
                 

@@ -1,6 +1,5 @@
 "use client"
 import React,{useState} from 'react'
-import {useConnectModal, useAccountModal} from '@rainbow-me/rainbowkit';
 import { useAccount, useChainId, useConnect, useSwitchChain  } from 'wagmi';
 import ConnectPopUp from './ConnectPopUp';
 

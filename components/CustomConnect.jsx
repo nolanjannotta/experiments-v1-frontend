@@ -1,7 +1,5 @@
 "use client"
 import React, {useState} from 'react'
-// import { ConnectKitButton } from "connectkit";
-import {useConnectModal,useAccountModal} from '@rainbow-me/rainbowkit';
 import {useAccount, useConnect, useDisconnect} from 'wagmi'
 import {useCapabilities} from 'wagmi/experimental'
 import ConnectPopUp from './ConnectPopUp';
@@ -14,19 +12,16 @@ export default function CustomConnect() {
   const {disconnect} = useDisconnect();
 
 
-  console.log(connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]) 
 
   const {data:capabilities} = useCapabilities({
     account: account.address,
   });
 
   const paymasterSupported = capabilities && capabilities[account.chainId].paymasterService.supported
-  console.log(!paymasterSupported)
  
 
   function openSmartWallet() {
     const results = disconnect()
-    console.log(results)
     
       connect({connector: connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]})
 

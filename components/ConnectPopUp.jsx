@@ -11,7 +11,6 @@ export default function ConnectPopUp({ show, setShow, account}) {
     // const account = useAccount();
     // const address = account.address
 
-    console.log(account.connector)
 
     function handleClose(event) {
         if(menuRef.current && !menuRef.current.contains(event.target)){

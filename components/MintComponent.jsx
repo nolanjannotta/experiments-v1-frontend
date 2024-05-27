@@ -6,7 +6,6 @@ import {useAccount} from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
-import CustomConnect from './CustomConnect'
 
 
 

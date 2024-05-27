@@ -7,9 +7,6 @@ import {contract } from '../../contract'
 import MintComponent from '../../../components/MintComponent';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
-import { useCapabilities } from 'wagmi/experimental'
-import { useAccount } from 'wagmi'
-// import {config} from '../../../components/Web3Provider'
 import CustomConnect from '../../../components/CustomConnect'
 
 
@@ -45,6 +42,7 @@ function Mint({params}) {
   
   })
 
+
   const {data:lastEdition} = useQuery({
     queryKey: ["lastEdition"],
     queryFn: async() => {
@@ -56,7 +54,11 @@ function Mint({params}) {
   
   })
 
-  // console.log(data)
+  const isMinting = data.edition.mintStatus
+  // const isPaused = !data.edition.mintStatus
+  const isEnded = data.edition.counter === data.edition.supply
+
+  console.log(data)
 
   return (
     <article>
@@ -79,11 +81,12 @@ function Mint({params}) {
             price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
           </li>
           <li>
-            mint status: {isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}
+            mint status: <span style={{color: isMinting ? "green" : !isMinting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
           </li>
         </ul>
         <CustomConnect />
-        <MintComponent isMinting={Number(data?.edition.supply - data?.edition.counter) > 0} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
+
+        <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
         
         <figure style={galleryFig}>
           
