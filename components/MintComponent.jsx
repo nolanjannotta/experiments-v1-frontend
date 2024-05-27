@@ -6,7 +6,7 @@ import {useAccount} from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
-
+import { parseTransaction } from 'viem'
 
 
 
@@ -34,6 +34,7 @@ function MintComponent({isMinting, editionId, price, refetch}) {
     }
 
     const tx = useTransactionReceipt({hash: write?.data})
+
 
     function getMintedId() {
       if(!tx) return""

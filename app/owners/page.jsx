@@ -3,7 +3,7 @@ import {artAddress} from "../constants"
 import Link from 'next/link'
 import { contract,publicClient } from "../contract_server";
 import {useAccount} from "wagmi";
-
+import { ZERO_ADDRESS } from "../constants";
 
 
 async function getOwners() {
@@ -45,6 +45,8 @@ export default async function Owners() {
       <ul>
 
         {owners.map((owner, index) => {
+          if(owner.ownerAddress === ZERO_ADDRESS) return null
+          
           return (
             <li key={index}>
                 &nbsp;&nbsp;&nbsp;

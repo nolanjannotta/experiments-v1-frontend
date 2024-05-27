@@ -38,6 +38,7 @@ function ArtGenerators() {
         </p>
 
         <pre>
+            
         <code>
         {/* <small> */}
         interface IArtGenerator &#123; <br/>
@@ -45,9 +46,11 @@ function ArtGenerators() {
 
         &nbsp;&nbsp;&nbsp;&nbsp;function getRawSvg(bytes32 seed) external view returns(string memory);<br/><br/>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;function getRawSvgAndAttributes(bytes32 seed) external view returns(string memory, Attributes memory);<br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;function getRawSvgAndAttributes(bytes32 seed) external view returns(string memory, string memory);<br/><br/>
 
-        &nbsp;&nbsp;&nbsp;&nbsp;function modify(bytes memory data, bytes32 seed) external view returns (bytes32);<br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;function modify(uint tokenId, bytes memory data) external view returns (bytes32);<br/><br/>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;function unPackSeed(bytes calldata seed) external pure returns(bytes memory);<br/><br/>
 
         &nbsp;&nbsp;&nbsp;&nbsp;function createSeed(uint tokenId, address minter) external view returns(bytes32);<br/><br/>
 
@@ -57,13 +60,32 @@ function ArtGenerators() {
 
         </code>
         </pre>
+
+        <p>The SVG string that is returned looks roughly like this: </p>
+
+        <code>
+            {`
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" height="1000" width="1000">
+                ...more svg code
+            </svg>'
+            
+            
+            `}
+        </code>
+
+        <p>The attributes string looks like this:</p>
+        <code>
+        {`'{"trait_type": "background", "value": "red"}, {"trait_type": "eyes", "value": "blue"}'`}
+
+
+        </code>
         <figure>
-            <figcaption>Current Art Generators<small> (basescan)</small></figcaption>
+            <figcaption>Current Art Generators<small> (takes you to basescan)</small></figcaption>
      
         <ul>
             {artGenerators.map((generator, index) => {
                 if(generator.address == "") return <p key={index}>loading...</p>
-                return <li key={index}><a href={`https://sepolia.basescan.org/address/${generator.address}`} target="_blank">{generator.name} &#8599;</a></li>
+                return <li key={index}><a href={`https://sepolia.basescan.org/address/${generator.address}#code`} target="_blank">{generator.name} &#8599;</a></li>
             })}
         </ul>
         </figure>

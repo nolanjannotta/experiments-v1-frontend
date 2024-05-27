@@ -63,7 +63,7 @@ function Gallery({params}) {
 
 
 
-  const {data: editionInfo, isFetching: editionFething, error} = useQuery({
+  const {data: editionInfo, isFetching: editionFetching, error} = useQuery({
     queryKey: ["editionInfo", params.edition],
     queryFn: () => getEdition(params.edition),
     initialData: editionType,
@@ -78,7 +78,7 @@ function Gallery({params}) {
 
   });
 
-  if(!editionFething && error) {
+  if(!editionFetching && error) {
     return <section style={section}>
       <h1 style={{margin: "0", padding: "0"}}>
           <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
@@ -96,7 +96,7 @@ function Gallery({params}) {
         <section style={{display:"flex", alignItems:"center"}}>
         <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}><h1> &#8592;</h1></Link>
 
-          <h1 style={{textAlign:"center"}}>&nbsp; {editionFething ? "loading" : editionInfo.name} &nbsp;</h1>
+          <h1 style={{textAlign:"center"}}>&nbsp; {editionFetching ? "loading" : editionInfo.name} &nbsp;</h1>
           <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}><h1>&#8594;</h1></Link>
 
         </section>
@@ -109,41 +109,41 @@ function Gallery({params}) {
               <li>&#x2022; <b>edition</b> #{params.edition}</li>
         {Object.keys(editionInfo).map((key, i) => {
           if(key === "artGenerator") {
-            return <li key={i}>&#x2022; <b>art generator</b> : <a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">{editionInfo[key].slice(0, 6) +
+            return <li key={i}>&#x2022; <b>art generator</b>: <a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">{editionInfo[key].slice(0, 6) +
             "..." +
             editionInfo[key].slice(-4)} &#8599;</a></li>
             
           }
           if(key === "price") {
-            return <li  key={i}>&#x2022; <b>{key}</b> : {" "} {formatEther(editionInfo[key])} eth</li>
+            return <li  key={i}>&#x2022; <b>{key}</b>: {" "} {formatEther(editionInfo[key])} eth</li>
           }
           if (key === "royalty") {
-            return <li key={i}>&#x2022; <b>{key}</b> : {" "}{Number(editionInfo[key]) / 100}%</li>
+            return <li key={i}>&#x2022; <b>{key}</b>: {" "}{Number(editionInfo[key]) / 100}%</li>
           }
           if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; <b>royalty receiver</b> : {" "}{truncateAddress(editionInfo[key])}</li>
+            return <li  key={i}>&#x2022; <b>royalty receiver</b>: {" "}{truncateAddress(editionInfo[key])}</li>
           }
           if(key === "supply") {
             return <li  key={i}>&#x2022;  <b>max supply</b>: {" "}{Number(editionInfo[key])}</li>
           }
           if(key === "counter") {
-            return <li  key={i}>&#x2022; <b>current supply</b> : {" "}{Number(editionInfo[key])}</li>
+            return <li  key={i}>&#x2022; <b>current supply</b>: {" "}{Number(editionInfo[key])}</li>
           }
           if(key === "description") {
-            return <li  key={i}>&#x2022; <b>{key}</b> : {" "}{editionInfo[key]}</li>
+            return <li  key={i}>&#x2022; <b>{key}</b>: {" "}{editionInfo[key]}</li>
           }
 
           if(key === "mintStatus") {
             if(editionInfo.counter === editionInfo.supply) {
-              return <li  key={i}>&#x2022; <b>mint status</b> : {"ended"}</li>
+              return <li  key={i}>&#x2022; <b>mint status</b>: {"ended"}</li>
             }
             else {
-              return <li  key={i}>&#x2022; <b>public mint status</b> : {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
+              return <li  key={i}>&#x2022; <b>public mint status</b>: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : '"paused"'}</li>
 
             }
           }
           else {
-           return <li  key={i}>&#x2022; <b>{key}</b> : {editionInfo[key]}</li> 
+           return <li  key={i}>&#x2022; <b>{key}</b>: {editionInfo[key]}</li> 
           }
           
         })}
@@ -207,7 +207,7 @@ function Gallery({params}) {
     <br/>
     <br/>
     <br/>
-      {!editionFething && <Link href="/browse">back</Link>}
+      {!editionFetching && <Link href="/browse">back</Link>}
     </section>
   )
 }

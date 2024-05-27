@@ -3,6 +3,7 @@ import React from "react";
 import { contract } from "../../../contract_server";
 import Link from "next/link";
 import { editionData } from "@/app/editionData";
+import {ZERO_ADDRESS} from "@/app/constants";
 
 async function getAllForAddress(address) {
   return contract.read.tokensOfOwner([address]);
@@ -25,11 +26,21 @@ async function getBalance(address) {
 async function Address({ params }) {
 
 
+  if(params.address === ZERO_ADDRESS) {
+    return(
+      <article>
+      <h4>these tokens are destroyed... we dont talk about these.</h4>
+      </article>
+    )
+  }
+
+
   const balance = await getBalance(params.address)
 
   const tokens = await getAllForAddress(params.address)
   const editionNames = await getAllEditions();
 
+  
 
   return (
     <article>

@@ -38,6 +38,7 @@ export default function RootLayout({ children }) {
         </div>
         <nav>
           <ul>
+          <li>&#11096;</li>
         <li><Link href="/">home</Link></li>
         <li>&#11096;</li>
         <li><Link href="/browse">browse</Link></li>
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
         <li><Link href="/v2">v2</Link></li>
         <li>&#11096;</li>
         <li><Link href="/owners">owners</Link></li>
+        <li>&#11096;</li>
         </ul>
         </nav>
         </header>

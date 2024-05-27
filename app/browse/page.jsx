@@ -23,6 +23,8 @@ async function getEditions() {
 export default async function Browse() {
   const {allEditions, error, errorMessage} = await getEditions();
 
+
+
   return (
     <section style={section}>
       <h1 style={{ margin: 0 }}>{!allEditions && "loading"} editions</h1>
@@ -36,6 +38,9 @@ export default async function Browse() {
 
       <div style={gallery}>
         {!error && allEditions.map((data, index) => {
+          let ended = data.edition.counter >= data.edition.supply;
+          let isMinting = !ended && data.edition.mintStatus;
+          let paused = !ended && !data.edition.mintStatus;
           return (
             <>
               <figure key={index} style={galleryFig}>
@@ -43,7 +48,7 @@ export default async function Browse() {
                 <img width="300" src={data.thumbnail}></img>
                 
                 </Link>
-                <figcaption>{data.edition.name}&nbsp;&nbsp; <small>{Number(data.edition.counter)}/{Number(data.edition.supply)}</small></figcaption>
+                <figcaption>{data.edition.name}&nbsp;&nbsp; <Link href={`/mint/${index+1}`} style={{textDecoration: "none", color: ended ? "red" : isMinting ?  "green" : paused ? "#ffc618" : "inherit" }}>&#9679;</Link> &nbsp;<small>{Number(data.edition.counter)}/{Number(data.edition.supply)}</small></figcaption>
               </figure>
            
             

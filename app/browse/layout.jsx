@@ -10,6 +10,7 @@ export default function EditionLayout({ children }) {
       <header style={{textAlign: "center"}}>
         <nav>
           <ul>
+            <li>&#11096;</li>
             <li><Link href="/browse/search">search</Link></li>
             <li>&#11096;</li>
             <li><Link href="/browse/">all editions</Link></li>
@@ -21,6 +22,7 @@ export default function EditionLayout({ children }) {
                   <Link href={`/browse/wallet/${address}`}>my collection</Link>
               </ConnectSimple>
             </li>
+            <li>&#11096;</li>
 
           </ul>
         </nav>

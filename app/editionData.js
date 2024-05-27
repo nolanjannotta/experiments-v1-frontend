@@ -27,7 +27,7 @@ export const editionData = {
               slice giving you 3 rectangles.
             </li>
             <li>
-              deterministically decide if any of the rectangles are either
+              decide if any of the rectangles are either
               colored or collapsed.
             </li>
             <li>
