@@ -52,8 +52,7 @@ function Prints() {
           <li>
             Another idea is to go beyond just the minted tokens. Since the original code 
             will be onchain forever, you can use that along with random seeds to create brand new outputs. 
-            One example is 1 of 1 generative stationary or post cards. Sold in packs of 10 with envelopes and a{" "}
-            <i>global forever stamp for each card.</i> Effortlessly send 1 of 1 physical 
+            One example is 1 of 1 generative stationary or post cards. Sold in packs. Send 1 of 1 physical 
             art to people you like!
           </li>
         </ul>

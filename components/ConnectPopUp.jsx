@@ -1,6 +1,6 @@
 "use client"
 import React, {useState, useRef, useEffect} from "react"
-import { useDisconnect, useConnect } from "wagmi"
+import { useDisconnect, useConnect, useAccount } from "wagmi"
 
 
 
@@ -8,8 +8,10 @@ export default function ConnectPopUp({ show, setShow, account}) {
     const menuRef = useRef(null)
     const {disconnect, status:disconnectStatus} = useDisconnect()
     const {connect, connectors, status:connectStatus } = useConnect();
+    // const account = useAccount();
+    // const address = account.address
 
-    
+    console.log(account.connector)
 
     function handleClose(event) {
         if(menuRef.current && !menuRef.current.contains(event.target)){
@@ -38,7 +40,20 @@ export default function ConnectPopUp({ show, setShow, account}) {
                         return <li style={listItem} key={index} ><button style={button} onClick={() => connect({connector})}>{connector.name}</button></li>
                     })}
                 </ul>}
-                {account.isConnected && <button style={button} onClick={disconnect}>disconnect</button>}
+                {account.isConnected && 
+                <>
+                <p>{account.address.slice(0, 9) + "..." +account.address.slice(-7)} 
+
+                    { account.connector.name == "Coinbase Wallet" && <span style={{cursor: "pointer"}}><small>&nbsp;<a target="_blank" href="https://homebase.coinbase.com/">open</a></small></span> }
+                    <span style={{cursor: "pointer"}} onClick={() => {navigator.clipboard.writeText(account.address)}}><small>&nbsp;copy</small></span>
+                    
+                    
+                    </p>
+                <p style={{padding:"0"}}></p> 
+
+
+                <button style={button} onClick={disconnect}>disconnect</button>
+                </>}
 
             </div>
 

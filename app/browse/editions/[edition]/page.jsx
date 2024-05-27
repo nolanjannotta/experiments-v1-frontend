@@ -94,16 +94,10 @@ function Gallery({params}) {
         <section style={{display:"flex", alignItems:"center"}}>
         <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}><h1> &#8592;</h1></Link>
 
-          <h1 style={{textAlign:"center"}}>&nbsp;&nbsp; {editionFething ? "loading" : editionInfo.name} &nbsp;&nbsp; </h1>
+          <h1 style={{textAlign:"center"}}>&nbsp; {editionFething ? "loading" : editionInfo.name} &nbsp;</h1>
           <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}><h1>&#8594;</h1></Link>
 
         </section>
-        {/* <h1 style={{margin: "0", padding: "0", textAlign:"center", fontSize: screenSize.width < 1075 ? "large": "xxx-large"}}>
-          <Link style={arrows} href={`/browse/editions/${params.edition > 1 ? params.edition -1 : params.edition}`}> &#8592; </Link>
-          &nbsp; {editionFething ? "loading" : editionInfo.name} &nbsp;
-          <Link style={arrows} href={`/browse/editions/${Number(params.edition) + 1}`}> &#8594; </Link>
-          </h1> */}
-
 
           <br />
         <nav>

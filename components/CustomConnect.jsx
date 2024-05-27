@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 // import { ConnectKitButton } from "connectkit";
 import {useConnectModal,useAccountModal} from '@rainbow-me/rainbowkit';
-import {useAccount} from 'wagmi'
+import {useAccount, useConnect, useDisconnect} from 'wagmi'
 import {useCapabilities} from 'wagmi/experimental'
 import ConnectPopUp from './ConnectPopUp';
 
@@ -10,7 +10,11 @@ export default function CustomConnect() {
 
   const account = useAccount();
   const [show, setShow] = useState(false)
+  const {connect, connectors } = useConnect();
+  const {disconnect} = useDisconnect();
 
+
+  console.log(connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]) 
 
   const {data:capabilities} = useCapabilities({
     account: account.address,
@@ -19,6 +23,14 @@ export default function CustomConnect() {
   const paymasterSupported = capabilities && capabilities[account.chainId].paymasterService.supported
   console.log(!paymasterSupported)
  
+
+  function openSmartWallet() {
+    const results = disconnect()
+    console.log(results)
+    
+      connect({connector: connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]})
+
+  }
 
 
 
@@ -40,7 +52,7 @@ export default function CustomConnect() {
              {account?.address.slice(0, 6) + "..." + account?.address.slice(-4)}
             </button>
           </div>
-          {!paymasterSupported ? <p style={message}>&#x2736;tip: connect with a <a target="_blank" href="https://www.coinbase.com/wallet/smart-wallet">coinbase smart wallet</a> to pay <b style={{fontSize:"large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</p> : <p style={message}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</p>}
+          {!paymasterSupported ? <p style={message}>&#x2736;tip: connect with a <button style={button} onClick={openSmartWallet}>coinbase smart wallet</button> to pay <b style={{fontSize:"large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</p> : <p style={message}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</p>}
         </div>
       )}
     </div>

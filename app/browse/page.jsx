@@ -26,10 +26,12 @@ export default async function Browse() {
   return (
     <section style={section}>
       <h1 style={{ margin: 0 }}>{!allEditions && "loading"} editions</h1>
+      <br/>
+      <br/>
       {error && errorMessage && 
       <>
-      <p>{errorMessage.metaMessages[0]}</p>
-      <p>{errorMessage.shortMessage}</p>
+        <p>{errorMessage.metaMessages[0]}</p>
+        <p>{errorMessage.shortMessage}</p>
       </>}
 
       <div style={gallery}>
