@@ -77,10 +77,10 @@ export default function Stats({ data, tokenId, address }) {
       <br />
       {!data.error ? (
         <article style={{ width: "100%" }}>
-          <ul style={{ listStyleType: "circle" }}>
+          <ul style={{ listStyleType: "none", padding:"0" }}>
             <li>
               <p>
-                <b>name</b>{": "}
+                <b>&#11096; name</b>{": "}
                 <Link
                   style={{ textDecoration: "none", color: "inherit" }}
                   href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}
@@ -91,21 +91,21 @@ export default function Stats({ data, tokenId, address }) {
               </p>
             </li>
             <li>
-              <p> <b>description</b>: {data?.metadata.description}</p>
+              <p> <b>&#11096; description</b>: {data?.metadata.description}</p>
             </li>
             <li>
-              <p><b>token id</b>: {tokenId}</p>
+              <p><b>&#11096; token id</b>: {tokenId}</p>
             </li>
 
             {data.metadata.attributes.length > 0 && (
               <li>
                 <>
-                  <b>attributes</b>:
+                  <b>&#11096; attributes</b>:
                   <ul>
                     {data.metadata.attributes.map((attribute, i) => {
                       return (
                         <li key={i}>
-                          {attribute.trait_type}: {attribute.value}
+                           {attribute.trait_type}: {attribute.value}
                         </li>
                       );
                     })}
@@ -116,14 +116,14 @@ export default function Stats({ data, tokenId, address }) {
 
             <li>
               <>
-                <b>owner</b>:{" "}
+                <b>&#11096; owner</b>:{" "}
                 {data?.owner === account.address ? "you :)" : data?.owner}
               </>
             </li>
 
             <li>
               <p>
-                <b>opensea</b>:{" "}
+                <b>&#11096; opensea</b>:{" "}
                 <a
                   target="_blank"
                   href={`https://testnets.opensea.io/assets/base-sepolia/${address}/${tokenId}`}
@@ -134,7 +134,7 @@ export default function Stats({ data, tokenId, address }) {
             </li>
             <li>
               <p>
-                <b>source code</b>:{" "}
+                <b>&#11096; source code</b>:{" "}
                 <a target="_blank" href={`${data?.metadata.image}`}>
                   &#8599;
                 </a>
@@ -145,7 +145,7 @@ export default function Stats({ data, tokenId, address }) {
               <>
                 <li>
                   <p>
-                    <b>transfer</b>:{" "}
+                    <b>&#11096; transfer</b>:{" "}
                     <ConnectSimple label="connect to transfer" asAnchor={true} >
                       <>
                         <input
@@ -165,11 +165,11 @@ export default function Stats({ data, tokenId, address }) {
                 </li>
                 <li>
                   <p>
-                    <b>modify</b>: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
+                    <b>&#11096; modify</b>: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
                   </p>
                 </li>
                 <li>
-                  <b>destroy</b>:{" "}
+                  <b>&#11096; destroy</b>:{" "}
                   <button style={button} onClick={destroy}>
                     &#x2297;
                   </button>

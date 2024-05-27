@@ -11,11 +11,11 @@ export default function EditionLayout({ children }) {
         <nav>
           <ul>
             <li><Link href="/browse/search">search</Link></li>
-            <li>&#x26AC;</li>
+            <li>&#11096;</li>
             <li><Link href="/browse/">all editions</Link></li>
-            <li>&#x26AC;</li>
+            <li>&#11096;</li>
             <li><Link href="/browse/all">all mints</Link></li>
-            <li>&#x26AC;</li>
+            <li>&#11096;</li>
             <li>
               <ConnectSimple label="connect to view your collection" asAnchor={true}>
                   <Link href={`/browse/wallet/${address}`}>my collection</Link>

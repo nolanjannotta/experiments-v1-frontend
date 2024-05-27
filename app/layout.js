@@ -39,17 +39,17 @@ export default function RootLayout({ children }) {
         <nav>
           <ul>
         <li><Link href="/">home</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/browse">browse</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/modify">modify</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/mint">mint</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/prints">prints</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/v2">v2</Link></li>
-        <li>&#x26AC;</li>
+        <li>&#11096;</li>
         <li><Link href="/owners">owners</Link></li>
         </ul>
         </nav>
