@@ -1,9 +1,7 @@
 // "use client"
 import Link from 'next/link'
 import Image from 'next/image';
-import HomeThumbnails from '../components/HomeThumbnails'
-// import Image from 'next/image'
-// import styles from './page.module.css'
+
 import { contract } from "../app/contract_server";
 
 

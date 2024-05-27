@@ -23,11 +23,13 @@ async function getEdition(editionId) {
 
 }
 
+const perPage = 50;
+
 
 async function getThumbnails(page, totalTokens, editionId) {
 
   const options = {method: 'GET', headers: {accept: 'application/json'}};
-  let limit = 50;
+  let limit = perPage;
   let start = (editionId * 1000000) + ((page) * limit) + 1; 
   if(totalTokens / limit < page) {
     return {images: [], loading: false, error: false};
@@ -165,19 +167,19 @@ function Gallery({params}) {
         if(nft.raw?.error === "Failed to get token uri"){
           
           return (
-            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*50) + i + 1)}`}>
+            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
             <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
               <div style={{width:"70%"}}>
                 <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render this image<br /></p>
                 <p>click to open</p>
                 </div>
-                <figcaption>{editionInfo.name} #{(page*50) + i + 1}</figcaption>
+                <figcaption>{editionInfo.name} #{(page*perPage) + i + 1}</figcaption>
             </figure>
             </Link>
           );
         }
         return (
-          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + ((page*50) + i + 1)}`}>
+          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
 
           <figure style={galleryFig} >
             <img style={galleryImg} width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
@@ -197,9 +199,9 @@ function Gallery({params}) {
       <div style={{display: "flex",justifyContent:"center"}}>
       {page !== 0 && <button style={button} onClick={() => setPage((prev) => Math.max(prev-1, 0))}>&#8592;</button>}
         &nbsp;&nbsp;
-      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page+1}/{(Math.ceil(Number(editionInfo?.counter)/50))}</p>
+      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page+1}/{(Math.ceil(Number(editionInfo?.counter)/perPage))}</p>
       &nbsp;&nbsp;
-      {page+1 < (Math.ceil(Number(editionInfo?.counter)/50)) && <button style={button} onClick={() => setPage(prev => prev+1)}>&#8594;</button>}
+      {page+1 < (Math.ceil(Number(editionInfo?.counter)/perPage)) && <button style={button} onClick={() => setPage(prev => prev+1)}>&#8594;</button>}
       </div>
     
     <br/>

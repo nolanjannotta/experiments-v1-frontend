@@ -54,9 +54,11 @@ function Mint({params}) {
   
   })
 
-  const isMinting = data.edition.mintStatus
+ 
   // const isPaused = !data.edition.mintStatus
   const isEnded = data.edition.counter === data.edition.supply
+
+  const minting = data.edition.mintStatus && !isEnded
 
   console.log(data)
 
@@ -81,7 +83,7 @@ function Mint({params}) {
             price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
           </li>
           <li>
-            mint status: <span style={{color: isMinting ? "green" : !isMinting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
+            mint status: <span style={{color: minting ? "green" : !minting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
           </li>
         </ul>
         <CustomConnect />
