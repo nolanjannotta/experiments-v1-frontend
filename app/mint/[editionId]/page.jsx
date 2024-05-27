@@ -68,22 +68,22 @@ function Mint({params}) {
         <h1>mint</h1>
       </header>
       <section>
-        <ul style={{listStyleType: "circle"}}>
+        <ul style={{listStyleType: "none", padding:"0"}}>
           <li>
-            name: {isLoading ? "loading..." : <><Link style={{textDecoration:"none"}} href={`/browse/editions/${data?.editionId}`}>{data.edition.name} &#8599;</Link></>}
+          &nbsp;&nbsp;&#11096; name: {isLoading ? "loading..." : <><Link style={{textDecoration:"none"}} href={`/browse/editions/${data?.editionId}`}>{data.edition.name} &#8599;</Link></>}
         
           </li>
           <li>
-            current supply: {isLoading ? "loading..." : Number(data.edition.counter)}
+          &nbsp;&nbsp;&#11096; current supply: {isLoading ? "loading..." : Number(data.edition.counter)}
           </li>
           <li>
-            max supply: {isLoading ? "loading..." : Number(data.edition.supply)}
+          &nbsp;&nbsp;&#11096; max supply: {isLoading ? "loading..." : Number(data.edition.supply)}
           </li>
           <li>
-            price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
+          &nbsp;&nbsp;&#11096; price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
           </li>
           <li>
-            mint status: <span style={{color: minting ? "green" : !minting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
+          &nbsp;&nbsp;&#11096; mint status: <span style={{color: minting ? "green" : !minting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
           </li>
         </ul>
         <CustomConnect />

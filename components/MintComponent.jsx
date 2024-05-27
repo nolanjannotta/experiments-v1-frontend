@@ -38,6 +38,7 @@ function MintComponent({isMinting, editionId, price, refetch}) {
     function getMintedId() {
       if(!tx) return""
       try {
+        // if you mint from a contract that emits the tokenId as the first topic
         setTokenId(fromHex(tx?.data?.logs[0].topics[3], "number"))
       }
       catch(e) {
