@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" height="1000" width="1000">
-<title>signatures #2</title>
-<desc>Simple, minimal, cool. The inaugural edition of this whole experiment thing. Original art by 0x8f088ecA0009AD61Fb94a6D7E9A5D7A087c08564</desc>
-
-<polygon points="11,26 979,12 989,990 29,975 " fill="rgb(255, 255, 240)" stroke-width="7" stroke="rgb(30, 30, 30)"/><polygon points="119,127 861,124 896,888 146,860 " fill="rgba(127, 7, 152, .4)"/><polygon points="119,127 861,124 896,888 146,860 " stroke-width="4" stroke="rgb(30, 30, 30)" fill="none"/><path stroke="rgb(30, 30, 30)" fill="none" stroke-width="4" stroke-linecap="round" d="M50 621S318 523, 111 525S206 476, 246 400S542 584, 340 393S464 559, 431 432S623 512, 589 420S814 527, 950 528"/></svg>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 200,200
+                 m -50,0
+                 a 50,50 0 1,0 100,0
+                 a 50,50 0 1,0 -100,0"
+              fill="none" stroke="black" stroke-width="2"/>
+    </svg>

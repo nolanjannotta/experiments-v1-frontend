@@ -8,6 +8,8 @@ import "./global.css"
 // import "./test.css"
 import { baseScanUrl } from './constants'
 import ConnectSimple from '../components/ConnectSimple'
+import Marquee from '@/components/Marquee'
+
 export const metadata = {
   title: 'Experiments V1',
   description: 'art experiments',
@@ -15,7 +17,7 @@ export const metadata = {
 
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 
-export const revalidate = 30
+// export const revalidate = 3
 
 
 // console.log(artAddress)
@@ -31,6 +33,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={sourceCode.className}>
+      
       <header>
       <div style={title}>
         <br/>
@@ -58,8 +61,9 @@ export default function RootLayout({ children }) {
         </header>
         <hr/>
       <Web3Provider>
+        <Marquee />
         <div style={connectedAddress}>
-          <ConnectSimple  label="connect" /> &nbsp;&nbsp;
+          <ConnectSimple  label="connect" />
           
           </div>
         {children}
@@ -99,9 +103,11 @@ const footer = {
 const connectedAddress = {
   position: "fixed",
   // right: 5",
-  top: "10px",
+  top: "20px",
   right: "20px",
   zIndex: "1001"
 
 
 }
+
+

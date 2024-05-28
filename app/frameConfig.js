@@ -1,5 +1,5 @@
 
-import { getContract,  http,webSocket,createWalletClient,createPublicClient,getTransactionConfirmations,fromHex  } from "viem";
+import { getContract,  http,webSocket,createWalletClient,createPublicClient,getTransactionConfirmations,fromHex, createClient  } from "viem";
 import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
 import { baseSepolia } from "wagmi/chains";
@@ -13,13 +13,14 @@ import { contractBase } from "./contract";
 
 const walletClient = createWalletClient({
     chain: baseSepolia,
-    transport: webSocket(`wss://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`)
+    transport: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE)
+    
     // transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`)
   })
 
-  const publicClient = createPublicClient({ 
+  const client = createClient({ 
     chain: baseSepolia,
-    transport: http()
+    transport: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE)
   })
   
 //   console.log(walletClient)
@@ -91,7 +92,7 @@ const walletClient = createWalletClient({
 
     const account = privateKeyToAccount(process.env.MINTING_KEY)
     // const edition = await signerContract.read.EDITION_COUNTER();
-    const { request } = await publicClient.simulateContract({
+    const { request } = await walletClient.simulateContract({
         address: artAddress,
         abi: abi,
         account,

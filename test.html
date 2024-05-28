@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Circle with Path</title>
+</head>
+<body>
+    <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <path id="hand-drawn-circle" fill="none" stroke="black" stroke-width="2"/>
+    </svg>
+    <script>
+        function getRandomOffset(magnitude) {
+            return (Math.random() - 0.5) * magnitude * 2; // Random value between -magnitude and +magnitude
+        }
+    
+        const cx = 200; // Center X coordinate
+        const cy = 200; // Center Y coordinate
+        const radius = 100; // Radius of the circle
+        const noiseMagnitude = 2; // Magnitude of noise to be added
+    
+        const p1 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp1 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp2 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const p2 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp3 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp4 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const p3 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp5 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const cp6 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+        const p4 = { x: cx + radius + getRandomOffset(noiseMagnitude), y: cy + getRandomOffset(noiseMagnitude) };
+    
+        const circlePath = `
+            M ${p1.x},${p1.y}
+            C ${cp1.x},${cp1.y} ${cp2.x},${cp2.y} ${p2.x},${p2.y}
+            C ${cp3.x},${cp3.y} ${cp4.x},${cp4.y} ${p3.x},${p3.y}
+            C ${cp5.x},${cp5.y} ${cp6.x},${cp6.y} ${p4.x},${p4.y}
+            Z
+        `;
+    
+        document.getElementById('hand-drawn-circle').setAttribute('d', circlePath);
+    </script>
+</body>
+</html>
