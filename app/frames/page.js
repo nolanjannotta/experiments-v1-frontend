@@ -4,13 +4,13 @@ import {FRAME_URL} from "../constants.js"
 
 
 export async function generateMetadata({params}) {
-    const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}&editionId=${params.editionId}`
+    const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`
 
 
     const frameMetadata = getFrameMetadata({
       buttons: [
         // {label: 'MINT', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
-        {label: 'Browse', target: `${FRAME_URL}/frames/browse`}, // make /frames/browse redirect to latest edition so /frames/browse/5
+        {label: 'Browse and Mint', target: `${FRAME_URL}/frames/browse`}, // make /frames/browse redirect to latest edition so /frames/browse/5
         {label: 'About', target: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
         {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         

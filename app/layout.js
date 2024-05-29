@@ -17,7 +17,7 @@ export const metadata = {
 
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 
-// export const revalidate = 3
+export const revalidate = 30
 
 
 // console.log(artAddress)

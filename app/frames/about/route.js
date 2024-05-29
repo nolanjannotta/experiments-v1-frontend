@@ -8,11 +8,10 @@ async function getResponse(request) {
     const editionId = request.nextUrl.searchParams.get("editionId");
     
     const body = await request.json();
-    const {message} = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
     
     let state = {}
     try{
-        state = JSON.parse(decodeURIComponent(message.state?.serialized))
+        state = JSON.parse(decodeURIComponent(body.untrustedData.state?.serialized))
     }
     catch(e){
         state = {editionId: Number(editionId)}
@@ -49,7 +48,7 @@ async function getResponse(request) {
     else if(state.index === 0){
         console.log("has state already")
 
-        message.button === 2 && (state.index = 1)
+        body.untrustedData.button === 2 && (state.index = 1)
     }
 
     // if(state.index === 0 && message.state.serialized){
@@ -58,13 +57,13 @@ async function getResponse(request) {
     // }
 
     else if(state.index === 1){
-        message.button === 1 && (state.index = 0)
-        message.button === 2 && (state.index = 2)
+        body.untrustedData.button === 1 && (state.index = 0)
+        body.untrustedData.button === 2 && (state.index = 2)
 
     }
     else if(state.index === 2){
-        message.button === 1 && (state.index = 1)
-        message.button === 2 && (state.index = 3)
+        body.untrustedData.button === 1 && (state.index = 1)
+        body.untrustedData.button === 2 && (state.index = 3)
     }
 
 

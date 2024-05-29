@@ -6,7 +6,7 @@ import { baseSepolia } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
 import sharp from 'sharp';
 import { artAddress } from "./constants";
-import { contractBase } from "./contract";
+import { contract } from "./contract_server";
 // import { Resvg } from "@resvg/resvg-js";
 
 
@@ -17,13 +17,6 @@ const walletClient = createWalletClient({
     
     // transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`)
   })
-
-  const client = createClient({ 
-    chain: baseSepolia,
-    transport: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE)
-  })
-  
-//   console.log(walletClient)
   
   export const signerContract = getContract({
       address: artAddress,
@@ -36,15 +29,6 @@ const walletClient = createWalletClient({
     return await signerContract.read.getEdition([editionId])
   } 
 
-  export async function getSvg(tokenId) {
-    try {
-        return await signerContract.read.getDataUri([tokenId])
-
-    }
-    catch(e) {
-        return ""
-    }   
-  }
 
   export async function getEditionCounter() {
     const counter = await signerContract.read.EDITION_COUNTER();
@@ -53,13 +37,12 @@ const walletClient = createWalletClient({
   }
 
   export async function getUri(tokenId) {
-    const image = await signerContract.read.getDataUri([tokenId])
-
+    // HANDLE NOT EXISTING TOKENS
+    const image = await contract.read.getDataUri([tokenId])
     const png = await FabricImage.fromURL(image);
     return png.toDataURL();
-  
   }
-//   
+
   export async function getLastMint(editionId) {
       !editionId && (editionId = await signerContract.read.EDITION_COUNTER())
       // const lastEditionId = await signerContract.read.EDITION_COUNTER();
@@ -100,24 +83,22 @@ const walletClient = createWalletClient({
         args: [editionId, addressTo]
       })
 
-    //   console.log("request", request)
-
     return await  walletClient.writeContract(request)
   }
 
 
+  export async function getThumbnails(editionIds) {
+    let thumbnails = [];
+    for(const editionId of editionIds) {
+      let edition = await contract.read.getEdition([editionId]);
 
-  export async function getStartImage(lastEditionId) {
-
-      if(!lastEditionId) return {image: "", name: ""}
-      let edition = await signerContract.read.getEdition([lastEditionId]);
-      let image = await signerContract.read.getDataUri([BigInt(lastEditionId * 1000000) + edition.counter]);
-      
-      const png = await FabricImage.fromURL(image);
-      const pngURL = png.toDataURL();
-
-    // return {image: `data:image/png;base64,${pngBuffer.toString('base64')}`, name: edition.name};
-    return {image: pngURL, name: edition.name};
-
-  }
+        const png = await getUri(editionId * 1000000 + 1);
   
+        thumbnails.push({image: png, name: edition.name})
+  
+    }
+  
+    return thumbnails
+  }
+
+

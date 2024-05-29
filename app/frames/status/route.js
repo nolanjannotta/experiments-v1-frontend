@@ -13,8 +13,7 @@ async function getResponse(request) {
     if (!isValid) {
         return new NextResponse('Message not valid', { status: 500 });
       }
-    // console.log(isValid)
-    // const lastData = await getLastMint();
+
     const state = JSON.parse(decodeURIComponent(message.state?.serialized))
     let results = {}
     

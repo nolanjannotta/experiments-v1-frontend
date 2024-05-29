@@ -3,33 +3,35 @@ import {getFrameHtmlResponse,getFrameMessage} from "@coinbase/onchainkit/frame";
 import {FRAME_URL} from "@/app/constants.js";
 
 
-async function getResponse(request) {
-  const editionId = request.nextUrl.searchParams.get("editionId");
+async function getResponse(request, params) {
     const body = await request.json();
-    // const allowFramegear = process.env.NODE_ENV !== 'production'; 
+    const editionCounter = request.nextUrl.searchParams.get("editionCounter") || null;
 
-    // const { isValid, message } = await getFrameMessage(body, { neynarApiKey: process.env.NEYNAR_KEY, allowFramegear});
-    // if (!isValid) {
-    //     return new NextResponse('Message not valid', { status: 500 });
-    //   }
+    const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}`
+    console.log("body",  body)
 
-    const image = `${FRAME_URL}/frames/images/browse/${editionId}`
 
+    // const state = body.untrustedData.state?.serialized &&  JSON.parse(decodeURIComponent(body.untrustedData.state?.serialized))
 
 
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: [{label: "previous",  target: `${FRAME_URL}/frames/browse/${Number(editionId)-1}`},{label: "mint", target=`${FRAME_URL}/frames/mint`},{label: "next",  target: `${FRAME_URL}/frames/browse/${Number(editionId)+1}`}],
+            buttons: [
+                {label: "previous",  target: `${FRAME_URL}/frames/browse/${Number(params.editionId)-1}`},
+                {label: "mint", target: `${FRAME_URL}/frames/mint/${Number(params.editionId)}`},
+                {label: "next",  target: `${FRAME_URL}/frames/browse/${Number(params.editionId)+1}`},
+                {label: "Home", target: `${FRAME_URL}/frames`}
+            ],
+
             image: {src: image, aspectRatio: '1:1'},
-            postUrl: `${FRAME_URL}/frames/results`,
-            // state: {minterAddress: address, tokenName: tokenName, submittedAt: Date.now()/1000}
+            state: "adfadfdffdf"
         })
     );
 
 }
 
-export async function POST(request) {
-  return getResponse(request);
+export async function POST(request, {params}) {
+  return getResponse(request, params);
 }
 
 
