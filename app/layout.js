@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
         </header>
         <hr/>
       <Web3Provider>
-        <Marquee />
+        {/* <Marquee /> */}
         <div style={connectedAddress}>
           <ConnectSimple  label="connect" />
           

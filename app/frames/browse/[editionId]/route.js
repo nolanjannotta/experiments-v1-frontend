@@ -7,7 +7,7 @@ async function getResponse(request, params) {
     const body = await request.json();
     const editionCounter = request.nextUrl.searchParams.get("editionCounter") || null;
 
-    const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}`
+    const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}&date=${Date.now()}`
     console.log("body",  body)
 
 

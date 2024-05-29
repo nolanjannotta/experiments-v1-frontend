@@ -21,7 +21,7 @@ function V2() {
             </li>
             <li>
                 add more fun interoperability features. For example, different editions borrowing features 
-                from each other or interacting in some way. Artist B gets permission from Artist A to incorporate some feature from Artist A&apos;s edition into Artist B&apos;s edition. Basically a collaboration. Similar to the `Signatures` concept` in V1. 
+                from each other or interacting in some way. Artist B gets permission from Artist A to incorporate some feature from Artist A&apos;s edition into Artist B&apos;s edition, by using Artist A&apos;s original art generator contract. Basically onchain collaborations. Similar to the `Signatures` concept in V1. 
             </li>
 
             <li>
@@ -75,9 +75,9 @@ function V2() {
               and an online editor for artists to use to create their own art generator contracts. how cool would that be?
 
             </li>
-            {/* <li>
-              put the frontend on chain.
-            </li> */}
+            <li>
+              a <span style={{fontSize: "x-large"}}>&#x1D4B8;&#x2134;&#x2134;&#x1D4C1;</span>  new name.
+            </li>
             <li>
                 increase vibes by at least 10x.
             </li>
