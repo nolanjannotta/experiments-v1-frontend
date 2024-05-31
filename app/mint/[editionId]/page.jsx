@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
 import MintComponent from '../../../components/MintComponent';
+import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
+
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import CustomConnect from '../../../components/CustomConnect'
@@ -13,6 +15,7 @@ import CustomConnect from '../../../components/CustomConnect'
 async function mintPageData(editionId) {
   
   editionId = BigInt(editionId);
+
 
   // const currentEditionId = await contract.read.EDITION_COUNTER();
   const edition = await contract.read.getEdition([editionId]);
@@ -60,7 +63,6 @@ function Mint({params}) {
 
   const minting = data.edition.mintStatus && !isEnded
 
-  console.log(data)
 
   return (
     <article>
@@ -88,7 +90,10 @@ function Mint({params}) {
         </ul>
         <CustomConnect />
 
-        <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
+        {/* <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/> */}
+
+        <PaymasterMintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
+
         
         <figure style={galleryFig}>
           

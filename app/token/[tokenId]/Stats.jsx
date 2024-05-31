@@ -9,7 +9,6 @@ import ConnectSimple from "../../../components/ConnectSimple";
 
 export default function Stats({ data, tokenId, address }) {
     const [transferData, setTransferData] = useState({ready: false, to: ""})
-    // console.log(data);
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -20,8 +19,7 @@ export default function Stats({ data, tokenId, address }) {
 
     
     useEffect(()=>{
-        console.log("height", window.innerHeight);
-        console.log("width", window.innerWidth);
+
         setDimensions({ width: window.innerWidth, height: window.innerHeight });
         
 
@@ -55,7 +53,6 @@ export default function Stats({ data, tokenId, address }) {
       return
     }
     if(confirm === "destroy") {
-      console.log("destroying")
       write.writeContract({
         ...contractBase,
         functionName: "burn",
@@ -65,7 +62,6 @@ export default function Stats({ data, tokenId, address }) {
     }
   }
 
-  console.log(write)
 
 
   return (

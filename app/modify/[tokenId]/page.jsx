@@ -12,7 +12,6 @@ import ConnectSimple from "@/components/ConnectSimple";
 import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
 
 
-// console.log(contractTypes)
 async function exists(tokenId) {
   return await contract.read.exists([tokenId]);
 }
@@ -79,7 +78,6 @@ function ModifyToken({ params }) {
     queryFn: () => getEdition(params.tokenId),
     initialData: { name: "" },
   });
-  // console.log(editionData[edition.name]?.inputs)
   const { data: decodedSeed, error } = useQuery({
     queryKey: ["decodedSeed", params.tokenId],
     queryFn: () => decodeSeed(params.tokenId, edition.name),
@@ -109,8 +107,7 @@ function ModifyToken({ params }) {
   }, [decodedSeed]); 
 
   useEffect(()=>{
-    // console.log(editionData[edition.name]?.modify.map((value)=>{return value.type}))
-    // const types = editionData[edition.name]?.modify.map((value)=>{return value.type}) || []
+
     if(isEditionFetching) return
 
     const values = editionData[edition.name]?.modify.map((value)=>{return inputFields[value.name]}) || []
@@ -161,7 +158,6 @@ function ModifyToken({ params }) {
 
           <form>
             {editionData[edition.name]?.modify.map((input, index) => {
-                // console.log(inputFields[input.name])
               return (
                 <div key={index}>
                   <label>{input?.name}</label>

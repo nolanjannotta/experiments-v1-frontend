@@ -19,7 +19,7 @@ const doesUserFollowNolan = async (fid) => {
       });
       users = users.concat(result.result.users);
       cursor = result.result.next.cursor;
-    //   console.log(cursor);
+
     } while (cursor !== "" && cursor !== null);
   
     if(users.includes(nolanjFID)) {

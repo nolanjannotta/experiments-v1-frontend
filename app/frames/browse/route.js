@@ -8,7 +8,6 @@ export async function POST(request) {
 
     const counter = await getEditionCounter();
 
-    console.log("hello", counter)
     return permanentRedirect(`${FRAME_URL}/frames/browse/${Number(counter)}?editionCounter=${counter}`)
 
 }

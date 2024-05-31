@@ -99,13 +99,8 @@ export default async function Home() {
           can unpause and pause at anytime as well as mint paused editions. They
           will have a low supply (100-300 probably, 500 max), start as completely free,
           mintable through this website as well as through a frame in warpcast.
-          In an effort to grow my audience, every warpcast user who follows my{" "}
-          <a target="_blank" href="https://warpcast.com/nolanj">
-            account
-          </a>{" "}
-          gets 2 free (zero gas!) mints for each edition through the frame.
           Depending on the demand, the owner may set a reasonable price and
-          royalty (ERC-2981) for the remaining tokens and new editions.
+          royalty for the remaining tokens and new editions.
         </p>
         <p>
           However, this project is my submission to{" "}

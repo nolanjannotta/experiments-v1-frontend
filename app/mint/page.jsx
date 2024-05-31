@@ -22,7 +22,6 @@ function MintPage() {
         if(currentEdition !== 0) {
             router.push(`/mint/${currentEdition}`)
         }
-        // console.log(currentEdition)
     
     },[currentEdition])
 

@@ -7,7 +7,6 @@ import {kv} from "@vercel/kv"
 
 
 export async function GET(request) {
-    // console.log(request.nextUrl.searchParams)
     const lastId    = request.nextUrl.searchParams.get("lastId")
     const name      = request.nextUrl.searchParams.get("editionName")
     const supply    = request.nextUrl.searchParams.get("supply")

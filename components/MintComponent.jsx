@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect, useState} from 'react'
-import { useWriteContract, useTransaction,useTransactionReceipt} from 'wagmi'
+import { useWriteContract, useTransactionReceipt} from 'wagmi'
 import {useAccount} from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'

@@ -76,7 +76,7 @@ function V2() {
 
             </li>
             <li>
-              a <span style={{fontSize: "x-large"}}>&#x1D4B8;&#x2134;&#x2134;&#x1D4C1;</span>  new name.
+              a <span>&#x1D4B8;&#x2134;&#x2134;&#x1D4C1;</span>  new name.
             </li>
             <li>
                 increase vibes by at least 10x.

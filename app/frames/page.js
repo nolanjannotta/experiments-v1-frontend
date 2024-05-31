@@ -11,7 +11,7 @@ export async function generateMetadata({params}) {
       buttons: [
         // {label: 'MINT', target: `${FRAME_URL}/frames/mint?editionId=${params.editionId}`},
         {label: 'Browse and Mint', target: `${FRAME_URL}/frames/browse`}, // make /frames/browse redirect to latest edition so /frames/browse/5
-        {label: 'About', target: `${FRAME_URL}/frames/about?editionId=${params.editionId}`},
+        {label: 'About', target: `${FRAME_URL}/frames/about?pageIndex=0`},
         {label: 'Official Website', action: 'link', target: `${FRAME_URL}/`},
         
       ],

@@ -44,7 +44,6 @@ async function getThumbnails(page, totalTokens, editionId) {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
       const tokens = await response.json()
-      // console.log("page key", Number(tokens.pageKey))
       return {images: tokens.nfts, loading: false, error: false};
     } catch (e) {
       console.log(e)
@@ -59,7 +58,6 @@ function Gallery({params}) {
   const [page, setPage] = useState(0);
 
 
-  // console.log(allThumbnails)
 
 
 

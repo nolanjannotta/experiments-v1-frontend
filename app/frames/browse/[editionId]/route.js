@@ -8,7 +8,6 @@ async function getResponse(request, params) {
     const editionCounter = request.nextUrl.searchParams.get("editionCounter") || null;
 
     const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}&date=${Date.now()}`
-    console.log("body",  body)
 
 
     // const state = body.untrustedData.state?.serialized &&  JSON.parse(decodeURIComponent(body.untrustedData.state?.serialized))

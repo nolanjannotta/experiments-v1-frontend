@@ -6,8 +6,8 @@ import { useDisconnect, useConnect, useAccount } from "wagmi"
 
 export default function ConnectPopUp({ show, setShow, account}) {
     const menuRef = useRef(null)
-    const {disconnect, status:disconnectStatus} = useDisconnect()
-    const {connect, connectors, status:connectStatus } = useConnect();
+    const {disconnect} = useDisconnect()
+    const {connect, connectors} = useConnect();
     // const account = useAccount();
     // const address = account.address
 

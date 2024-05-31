@@ -5,7 +5,6 @@ import abi from "./ART_ABI.json";
 import { artAddress } from "./constants";
 // import { config } from "../components/Web3Provider";
 
-// console.log(config.getClient());
 
 export const publicClient = createPublicClient({ 
     chain: baseSepolia,

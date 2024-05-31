@@ -45,8 +45,7 @@ export default function Marquee() {
 
     //   })
 
-    //   console.log("current", blockNumber)
-    //   console.log(logs)
+
 
 
       const {data: logs, error, isLoading, refetch} = useQuery({

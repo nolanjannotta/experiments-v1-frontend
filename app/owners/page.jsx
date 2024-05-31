@@ -8,7 +8,6 @@ import { ZERO_ADDRESS } from "../constants";
 
 async function getOwners() {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
-  // console.log(artAddress)
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_SEPOLIA}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
 

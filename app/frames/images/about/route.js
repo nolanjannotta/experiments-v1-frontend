@@ -1,20 +1,21 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
-// import {getUri} from "@/app/frameConfig";
+
 
 
 const pageContent = [
     `Experiments V1 is a project where I learn, explore, and experiment with 100% onchain 
-    generative art and onchain mechanics. This is inspired by projects like ArtBlocks. 
+    generative art and onchain mechanics. This is inspired by projects like ArtBlocks. There will never 
+    be any offchain scripts, javascript, ipfs, or URLs to servers. Raw SVG code is generated 
+    and returned 100% onchain forever.
     These experiments are managed by a single ERC721 smart contract on the Base L2 blockchain. 
     Each individual "experiment" (also "edition") is linked to its own stateless immutable ArtGenerator 
     contract. These contracts are in charge of generating the raw SVG code and any attributes that 
-    the experiment may or may not have. There will never be any offchain code, javascript, static images, ipfs or URLs to 
-    servers. Raw SVG code is generated and returned 100% onchain forever. The goal of this 
-    project is to push my knowledge, experiment with onchain art and mechanics, develop my personal style,
+    the experiment may or may not have. The goal of this 
+    project is to expand my knowledge, experiment with onchain art and mechanics, develop my personal style,
     learn a lot, and emerge with a semi refined set of tools and techniques to work with 
     SVG in solidity to create onchain art. Then, take what I've learned and start thinking about v2. 
-    The goal of v2, aside from overall general improvements, is to open it up other artists to deploy and 
+    The goal of v2, aside from overall improvements, is to open it up to other artists to deploy and 
     share their own onchain art and create an ecosystem of on chain that is all interactive and fun.`,
 
     `Each token has 32 bits of storage that is stored in the main ERC721 smart contract. This can be 
@@ -25,15 +26,19 @@ const pageContent = [
     the seed to give different results. Each ArtGenerator contract can modify the seed in its own 
     way, although not all editions are modifiable.`,
 
-    `Each edition will be "uploaded"/deployed individually over time as I make them. Once a new 
+    `My original long term vision for this project is for each edition to be "uploaded"/deployed individually over time as I make them. Once a new 
     edition is added, minting for the previous one will be paused. If the supply for a paused 
     edition is not reached, the owner can unpause and pause at anytime. They will have a low 
     supply (100-300 probably, 500 max), start as completely free, 
-    mintable through this website as well as through a frame in warpcast. In an effort to grow 
-    my audience, every warpcast user who follows my account gets 2 free (zero gas!) mints for 
-    each edition through the frame. Depending on the demand, the owner may set a reasonable price 
-    and royalty (ERC-2981) for the remaining tokens and new editions. At the time of deploying the project, I have
-    a handful of editions already made and will be releasing them probably once a week.`
+    mintable through this website as well as through a frame in warpcast. Depending on the demand, the owner may set a reasonable price 
+    and royalty for the remaining tokens and new editions. At the time of deploying the project, I have
+    a handful of editions already made and will be releasing them probably once a week.`,
+    
+
+    `However, this project is my submission to Base's Onchain Summer Buildathon. Because of this, I will doing 
+    things a little differently. To start, all of my finished editions that I have ready by the deadline will be deployed and 
+    added to the project at the same time. The supplies will be way higher to be more inclusive (2,000 - 4,000 per edition...TBD). 
+    All editions will be mintable at the same time. They will still be completely free or extremely cheap. `
 ]
 
 

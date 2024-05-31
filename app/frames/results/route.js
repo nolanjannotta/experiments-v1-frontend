@@ -21,7 +21,6 @@ async function getResponse(request) {
     const submittedAt = state.submittedAt
 
 
-    // console.log(message)
     const userAllowance = await kv.hget(message.interactor.fid, tokenName);
     const lastSubmitted = await kv.hget(message.interactor.fid, "lastSubmitted") || 0;
 

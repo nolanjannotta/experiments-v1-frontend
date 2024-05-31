@@ -15,7 +15,6 @@ export async function GET(request) {
     // const thumbnail = await getStartImage(editionId);
 
     const thumbnails = await getThumbnails(thumbnailEditions);
-    // console.log(thumbnails)
 
   return new ImageResponse(
     (

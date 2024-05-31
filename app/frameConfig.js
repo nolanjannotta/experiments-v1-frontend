@@ -49,7 +49,6 @@ const walletClient = createWalletClient({
       const lastEdition = await signerContract.read.getEdition([editionId]);
     //   const lastToken = await signerContract.read.getRawSvg([(lastEditionId * 1000000n) + lastEdition.counter])
     //   const lastUri = await signerContract.read.getDataUri([(lastEditionId * 1000000n) + lastEdition.counter])
-    console.log(lastEdition)
       return {editionId: BigInt(editionId), lastEdition}
   }
 
@@ -60,7 +59,6 @@ const walletClient = createWalletClient({
         hash: txHash
      }) 
 
-    //  console.log(fromHex(results.logs[0]?.topics[3], "number"))
 
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {

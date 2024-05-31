@@ -30,10 +30,8 @@ async function tokenData(tokenId) {
     return { metadata: {}, owner: "", error: true };
   }
 
-  // console.log(metadata)
 }
 
-// console.log(publicClient.chain.id)
 
 async function getTokenTransfers(tokenId) {
   try {
@@ -44,7 +42,6 @@ async function getTokenTransfers(tokenId) {
       address: artAddress,
       tokenId: tokenId,
     });
-    // console.log(response.raw.result)
     return response.raw.result;
   } catch (e) {
     return {};
@@ -91,7 +88,6 @@ function truncateAddress(address) {
 
 async function Token({ params }) {
   const transfers = await getTokenTransfers(params?.tokenId);
-  // console.log(transfers)
   const data = await tokenData(params?.tokenId);
 
   // if(data.error) {
@@ -111,7 +107,6 @@ async function Token({ params }) {
         <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
           {transfers?.map((transfer, i) => {
             let hours = new Date(transfer.block_timestamp).toLocaleTimeString();
-            console.log(hours)
             return (
               <li key={i}>
                 &#x7c; &nbsp;&nbsp; &#x2709; #{i+1}{" "}
