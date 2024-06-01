@@ -4,7 +4,7 @@ import { willSponsor } from "../utils";
 
 
 export async function POST(request) {
-
+    console.log("hi")
   const body = await request.json();
   console.log(body)
   const method = body.method;

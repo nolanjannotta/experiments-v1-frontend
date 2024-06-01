@@ -45,7 +45,6 @@ function MintComponent({isMinting, editionId, price, refetch}) {
     
     async function mint() {
         console.log(capabilities)
-
         writes.writeContracts({
             capabilities,
             contracts:  [
