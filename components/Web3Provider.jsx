@@ -11,8 +11,9 @@ export const config = createConfig({
   ssr: true,
   chains: [baseSepolia],
   transports: {
-    [baseSepolia.id]: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE)
+    [baseSepolia.id]: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
   },
+  
   connectors: [
     coinbaseWallet({
       appName: 'Experiments V1',

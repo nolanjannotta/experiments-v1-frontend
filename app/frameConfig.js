@@ -13,9 +13,9 @@ import { contract } from "./contract_server";
 
 const walletClient = createWalletClient({
     chain: baseSepolia,
-    transport: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE)
+    // transport: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
     
-    // transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA}`)
+    transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
   })
   
   export const signerContract = getContract({
