@@ -4,7 +4,6 @@ import { willSponsor } from "../utils";
 
 
 export async function POST(request) {
-    console.log("hi")
   const body = await request.json();
   console.log(body)
   const method = body.method;
@@ -14,17 +13,20 @@ export async function POST(request) {
   if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
     return Response.json({ error: "Not a sponsorable operation" });
   }
+  console.log("passed will sponsor")
 
 
   if (method === "pm_getPaymasterStubData") {
     const result = await paymasterClient.getPaymasterStubData({
       userOperation: userOp,
     });
+    console.log("pm_getPaymasterStubData results", result)
     return Response.json({ result });
   } else if (method === "pm_getPaymasterData") {
     const result = await paymasterClient.getPaymasterData({
       userOperation: userOp,
     });
+    console.log("pm_getPaymasterData results", result)
     return Response.json({ result });
   }
   return Response.json({ error: "Method not found" });
