@@ -9,4 +9,4 @@ import { paymasterActionsEip7677 } from "permissionless/experimental";
 export const paymasterClient = createClient({
   chain: baseSepolia,
   transport: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER),
-}).extend(paymasterActionsEip7677({ entryPoint: ENTRYPOINT_ADDRESS_V07  }));
+}).extend(paymasterActionsEip7677({ entryPoint: ENTRYPOINT_ADDRESS_V06  }));

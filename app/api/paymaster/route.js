@@ -24,6 +24,7 @@ export async function POST(request) {
     });
     console.log("pm_getPaymasterStubData results", result)
     return Response.json({ result });
+    
   } else if (method === "pm_getPaymasterData") {
     const result = await paymasterClient.getPaymasterData({
       userOperation: userOp,
