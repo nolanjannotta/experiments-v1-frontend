@@ -10,6 +10,7 @@ import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import CustomConnect from '../../../components/CustomConnect'
+// import {paymasterClient} from "../../api/paymasterClient"
 
 
 async function mintPageData(editionId) {
@@ -37,6 +38,7 @@ async function mintPageData(editionId) {
 
 function Mint({params}) {
 
+  // console.log(paymasterClient)
 
   const {data, error, isLoading, refetch} = useQuery({
     queryKey: ["mintPageData"],
