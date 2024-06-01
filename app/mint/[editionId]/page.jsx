@@ -91,6 +91,9 @@ function Mint({params}) {
           </li>
         </ul>
         <CustomConnect />
+        
+
+        
 
         {/* <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/> */}
 
