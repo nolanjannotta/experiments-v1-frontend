@@ -8,5 +8,5 @@ import { paymasterActionsEip7677 } from "permissionless/experimental";
 
 export const paymasterClient = createClient({
   chain: baseSepolia,
-  transport: http("https://api.developer.coinbase.com/rpc/v1/base-sepolia/GV5RDSExaDgj--7LRRh5_GQTtqLJP8OA"),
+  transport: http(process.env.NEXT_COINBASE_BASE_SEPOLIA_NODE),
 }).extend(paymasterActionsEip7677({ entryPoint: ENTRYPOINT_ADDRESS_V06 }));

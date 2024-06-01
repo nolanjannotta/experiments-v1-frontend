@@ -11,9 +11,9 @@ export async function POST(request) {
   const [userOp, entrypoint, chainId] = body.params;
 
 
-//   if (!willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
-//     return Response.json({ error: "Not a sponsorable operation" });
-//   }
+  if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
+    return Response.json({ error: "Not a sponsorable operation" });
+  }
 
 
   if (method === "pm_getPaymasterStubData") {
