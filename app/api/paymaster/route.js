@@ -15,6 +15,8 @@ export async function POST(request) {
   }
   console.log("passed will sponsor")
 
+  console.log("paymaster client", paymasterClient)
+
 
   if (method === "pm_getPaymasterStubData") {
     const result = await paymasterClient.getPaymasterStubData({
