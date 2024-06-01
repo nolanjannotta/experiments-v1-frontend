@@ -9,13 +9,14 @@ export async function POST(request) {
   const method = body.method;
   const [userOp, entrypoint, chainId] = body.params;
 
+    console.log("method", method)
+    console.log("userOp", userOp)
+    console.log("entrypoint", entrypoint)
+    console.log("chainId", chainId)
 
   if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
     return Response.json({ error: "Not a sponsorable operation" });
   }
-  console.log("passed will sponsor")
-
-  console.log("paymaster client", paymasterClient)
 
 
   if (method === "pm_getPaymasterStubData") {
@@ -24,7 +25,7 @@ export async function POST(request) {
     });
     console.log("pm_getPaymasterStubData results", result)
     return Response.json({ result });
-    
+
   } else if (method === "pm_getPaymasterData") {
     const result = await paymasterClient.getPaymasterData({
       userOperation: userOp,
