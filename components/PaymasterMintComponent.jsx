@@ -3,7 +3,7 @@
 import React, {useEffect, useState, useMemo} from 'react'
 import {} from 'wagmi'
 
-import { useCapabilities, useWriteContracts } from "wagmi/experimental";
+import { useCapabilities, useWriteContracts, useCallsStatus } from "wagmi/experimental";
 import {useAccount,useTransactionReceipt,useWriteContract } from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
@@ -29,22 +29,37 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
 
-    const writes = useWriteContracts({
-        mutation: { onSuccess: (id) => setTokenId(id) }
-    });
-    const write = useWriteContract({
-        mutation: { onSuccess: (id) => setTokenId(id) }
-    });
+    const writes = useWriteContracts();
+    const write = useWriteContract();
 
-    // this is only for non sponsored transactions
+    console.log(writes.status)
+    console.log(write.status)
+    // to check the non sponsored transaction status
     const tx = useTransactionReceipt({hash: write?.data})
-    tx.onSuccess = refetch
+
+    // to check sponsored transaction status
+    const { data: sponsoredStatus } = useCallsStatus({
+        id:  writes?.data,
+        query: {
+          refetchInterval: (data) => {
+            console.log(data.state.data?.status)
+            return data.state.data?.status === "PENDING" ? 1000 : false}
+        },
+      });
+
+      console.log(sponsoredStatus)
+
 
     useEffect(() => {
-        if(tx.isSuccess) {
+        if(tx.isSuccess || sponsoredStatus?.status === "CONFIRMED") {
             refetch()
         }
-    },[tx])
+
+        if(tx.isSuccess){
+            setTokenId(fromHex(tx.data.logs[0].topics[3], "number"))
+        }
+
+    },[tx,sponsoredStatus])
 
     const { data: availableCapabilities } = useCapabilities({
         account: account.address,
@@ -99,44 +114,21 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     // const tx = useTransactionReceipt({hash: write?.data})
 
 
-    // function getMintedId() {
-    //   if(!tx) return""
-    //   try {
-    //     // if you mint from a contract that emits the tokenId as the first topic
-    //     setTokenId(fromHex(tx?.data?.logs[0].topics[3], "number"))
-    //   }
-    //   catch(e) {
-    //     console.log(e)}
-
-    // }
-
-
-    // useEffect(()=> {
-    //     if(tx.isSuccess) {
-    //         getMintedId()
-    //         refetch()
-    //     }
-
-    // },[tx.isSuccess])
 
   return (
 
     <div style={container}>
-        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
-        {writes.status == "idle" && <br/>}
-        {writes.status == "pending" && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
-        {writes.status == "error" && <p style={{marginTop: "0"}}>user rejected transaction</p>}
+        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService && account.connector.name === "Coinbase Wallet" ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
+        {/* {(write.status == "idle" || writes.status == "idle") && <br/>} */}
+        {(write.status == "pending" || writes.status == "pending") && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
+        {(write.status === "error" || writes.status === "error") && <p style={{marginTop: "0"}}>user rejected transaction</p>}
 
-        {/* {tx.isLoading && <p style={{marginTop: "0"}}>transaction submitted!</p>} */}
+        {(tx.isLoading || sponsoredStatus?.status === "PENDING") && <p style={{marginTop: "0"}}>transaction submitted!</p>}
 
-        {/* {tx.isSuccess && <p style={{marginTop: "0"}}>
-          success! 
+        {(tx.isSuccess || sponsoredStatus?.status === "CONFIRMED") && !(write.status == "pending" || writes.status == "pending") && <p style={{marginTop: "0"}}>success! {!!tokenId && <> check it out <Link href={`/token/${tokenId}`}>here</Link> </>}</p>}
 
-          {!!tokenId && <> check it out <Link href={`/token/${tokenId}`}>here</Link> </>}
-          
-          </p>} */}
+                  {/* {!!tokenId && <> check it out <Link href={`/token/${tokenId}`}>here</Link> </>} */}
 
-        
         
     </div>
   )

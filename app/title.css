@@ -1,10 +1,11 @@
 .title {
     display: inline-block;
-    transition-duration: 2s;
-  }
+    cursor: grab;
+  } 
 
 
   .title:hover {
+    transition-duration: 2s;
     transform: rotatex(-360deg);
   }
 

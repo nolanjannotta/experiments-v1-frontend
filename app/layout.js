@@ -113,7 +113,7 @@ const footer = {
 const connectedAddress = {
   position: "absolute",
   // right: 5",
-  top: "20px",
+  top: "5px",
   right: "20px",
   zIndex: "1001"
 
