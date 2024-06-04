@@ -19,6 +19,7 @@ import {artAddress} from "../constants";
 import ABI from "../ART_ABI.json";
 
 export async function willSponsor({chainId,entrypoint,userOp}) {
+    console.log(UserOperation)
   // check chain id
   if (chainId !== baseSepolia.id) return false;
   // check entrypoint

@@ -9,3 +9,5 @@ export const FRAME_URL = process.env.NODE_ENV == 'development' ? 'http://localho
 export const nolanjFID = 252806;
 
 export const allowFramegear = process.env.NODE_ENV !== 'production'; 
+
+

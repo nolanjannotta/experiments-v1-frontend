@@ -7,6 +7,7 @@ export const editionData = {
         </p>
       );
     },
+    type: "art",
     modifiable: false,
     seed:[],
     modify:[]
@@ -39,6 +40,7 @@ export const editionData = {
         </>
       );
     },
+    type: "art",
     modifiable: false,
     seed:[],
     modify:[]
@@ -74,6 +76,7 @@ export const editionData = {
         </>
       );
     },
+    type: "art",
     modifiable: false,
     seed:[],
     modify: []
@@ -109,12 +112,13 @@ export const editionData = {
             </li>
           </ol>
           <p>
-            note: the thumbnails below are fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s nft api</a> and may not be
+            note: the thumbnails below are fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s api</a> and may not be
             up to date. Click on any clock to open it up and see accurate image.
           </p>
         </>
       );
     },
+    type: "experiment",
     modifiable: true,
     seed: [
         {name: "timeZoneOffset", type: "uint8" },
@@ -138,6 +142,7 @@ export const editionData = {
         </p>
       );
     },
+    type: "experiment",
     modifiable: true,
     seed: [{ name: "selfId", type: "uint32" },{ name: "targetId", type: "uint32" }],
     modify: [{ name: "targetId", type: "uint32" }]
@@ -164,6 +169,7 @@ export const editionData = {
         </>
       );
     },
+    type: "art",
     modifiable: false,
     inputs:[]
   },
@@ -181,6 +187,7 @@ export const editionData = {
         </p>
       );
     },
+    type: "experiment",
     modifiable: false,
     seed:[],
     modify:[]

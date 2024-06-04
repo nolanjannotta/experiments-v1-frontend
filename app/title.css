@@ -1,0 +1,26 @@
+.title {
+    display: inline-block;
+    transition-duration: 2s;
+  }
+
+
+  .title:hover {
+    transform: rotatex(-360deg);
+  }
+
+
+  
+  .mint {
+    display: inline-block;
+    transition-duration: 2s;
+    transition-delay: 3s;
+  }
+
+
+  .mint:hover {
+    transform: rotatez(-360deg);
+  }
+
+
+
+

@@ -13,7 +13,7 @@ function Prints() {
         creator/artist/platform. I&apos;m a believer that all digital art should 
         have a physical counterpart that does not rely on the internet or electricity 
         to be displayed and enjoyed.  Having the prints come directly from the 
-        creator/artist/platform is also important to me as that maintains the provenance of the art.
+        creator/artist/platform is also important to me as that maintains the provenance of the art in my opinion.
         </p>
         <p>
         As of now for this project though, this depends entirely
@@ -51,9 +51,10 @@ function Prints() {
           {/* <li>Will most likely not include an NFC chip.</li> */}
           <li>
             Another idea is to go beyond just the minted tokens. Since the original code 
-            will be onchain forever, you can use that along with random seeds to create brand new outputs. 
+            will be onchain forever, you can use that <i>exact</i> code (provenance) along with random seeds to create brand new outputs. 
             One example is 1 of 1 generative stationary or post cards. Sold in packs. Send 1 of 1 physical 
-            art to people you like!
+            art to people you like! One downside of this though, is that you're arguably increasing the
+            supply of the generative art, although you aren't increasing the supply of the onchain tokens.
           </li>
         </ul>
       </figure>

@@ -5,7 +5,6 @@ import { willSponsor } from "../utils";
 
 export async function POST(request) {
   const body = await request.json();
-  console.log(body)
   const method = body.method;
   const [userOp, entrypoint, chainId] = body.params;
 

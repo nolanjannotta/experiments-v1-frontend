@@ -1,4 +1,5 @@
 "use client"
+import { ENTRYPOINT_ADDRESS_V06, UserOperation } from "permissionless";
 
 import React from 'react'
 import Link from 'next/link'
@@ -38,7 +39,7 @@ async function mintPageData(editionId) {
 
 function Mint({params}) {
 
-  // console.log(paymasterClient)
+  console.log(ENTRYPOINT_ADDRESS_V06)
 
   const {data, error, isLoading, refetch} = useQuery({
     queryKey: ["mintPageData"],
@@ -93,7 +94,7 @@ function Mint({params}) {
         <CustomConnect />
         
 
-        
+
 
         {/* <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/> */}
 

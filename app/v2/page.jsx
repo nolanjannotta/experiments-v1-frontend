@@ -10,7 +10,7 @@ function V2() {
         <p>
           Version 2 of this project does not <b><i>currently</i></b> exist and is not <b><i>yet</i></b> being built.
           This page will act as a place to brainstorm features and ideas for the
-          next version of this project. 
+          next version of this project. Although V2 depends a lot on whether V1 gains any traction.
         </p>
         <p>If YOU have an idea, reach out! lets build the coolest possible 100% onchain art platform. &#8594; <a target="_blank" href="https://twitter.com/jannotta_nolan">twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a></p>
         <figure>
@@ -64,8 +64,8 @@ function V2() {
               {/* (since L2s are technically centralized and have actually gone offline for a 
               period of time in the past. unless im wrong about that. I&apos;m not saying Base has done this, but just L2s in general). */}
               Some people might want to consolidate their art collections on mainnet.
-              They&apos;ll be able to modify, sell and transfer on either chain, and can bridge back and forth 
-              at any time. This feature will ideally be implemented in V1 as well. The exact bridge mechanism is still TBD.
+              They should be able to modify, sell and transfer on either chain, and can bridge back and forth 
+              at any time. The exact bridge mechanism is still TBD.
             </li>
             <li>
               create an entirely new onchain SVG rendering system. for example having a single ultra efficient rendering 

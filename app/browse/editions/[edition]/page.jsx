@@ -104,8 +104,12 @@ function Gallery({params}) {
         <ul>
           <code>
             <small>
-              <li>&#x2022; <b>edition</b> #{params.edition}</li>
+              <li>&#x2022; <b>edition: </b>#{params.edition}</li>
+
+              <li>&#x2022; <b>type: </b>{editionData[editionInfo.name]?.type}</li>
+
         {Object.keys(editionInfo).map((key, i) => {
+
           if(key === "artGenerator") {
             return <li key={i}>&#x2022; <b>art generator</b>: <a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">{editionInfo[key].slice(0, 6) +
             "..." +
@@ -168,7 +172,7 @@ function Gallery({params}) {
             <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
             <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
               <div style={{width:"70%"}}>
-                <p>uh oh, looks like alchemy&apos;s NFT api couldn&apos;t render this image<br /></p>
+                <p>uh oh, looks like alchemy&apos;s api couldn&apos;t render this image<br /></p>
                 <p>click to open</p>
                 </div>
                 <figcaption>{editionInfo.name} #{(page*perPage) + i + 1}</figcaption>
