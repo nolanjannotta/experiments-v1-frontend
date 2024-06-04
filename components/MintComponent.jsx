@@ -1,12 +1,12 @@
 "use client"
 
 import React, {useEffect, useState} from 'react'
-import { useWriteContract, useTransactionReceipt} from 'wagmi'
-import {useAccount} from 'wagmi'
+import { useWriteContract,useAccount, useTransactionReceipt} from 'wagmi'
+import { useCapabilities } from "wagmi/experimental";
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
-import { parseTransaction } from 'viem'
+import PaymasterMintComponent from './PaymasterMintComponent'
 
 
 
@@ -19,6 +19,18 @@ function MintComponent({isMinting, editionId, price, refetch}) {
     const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
     const write = useWriteContract();
+
+    // const {data:capabilities} = useCapabilities({
+    //   account: account.address,
+    // });
+  
+    // const paymasterSupported = capabilities && capabilities[account.chainId].paymasterService.supported
+
+
+    // if(paymasterSupported) {
+    //     return <PaymasterMintComponent isMinting={isMinting} editionId={editionId} price={price} refetch={refetch}/>
+    // }
+   
     
     async function mint() {
 
@@ -55,6 +67,8 @@ function MintComponent({isMinting, editionId, price, refetch}) {
         }
 
     },[tx.isSuccess])
+
+
 
   return (
 

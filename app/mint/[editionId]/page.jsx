@@ -1,13 +1,11 @@
 "use client"
-import { ENTRYPOINT_ADDRESS_V06, UserOperation } from "permissionless";
-
 import React from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
 import MintComponent from '../../../components/MintComponent';
 import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
-
+import { useCapabilities } from "wagmi/experimental";
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import CustomConnect from '../../../components/CustomConnect'
@@ -39,7 +37,9 @@ async function mintPageData(editionId) {
 
 function Mint({params}) {
 
-  console.log(ENTRYPOINT_ADDRESS_V06)
+
+
+
 
   const {data, error, isLoading, refetch} = useQuery({
     queryKey: ["mintPageData"],
@@ -73,51 +73,102 @@ function Mint({params}) {
         <h1>mint</h1>
       </header>
       <section>
-        <ul style={{listStyleType: "none", padding:"0"}}>
+        <ul style={{ listStyleType: "none", padding: "0" }}>
           <li>
-          &nbsp;&nbsp;&#11096; name: {isLoading ? "loading..." : <><Link style={{textDecoration:"none"}} href={`/browse/editions/${data?.editionId}`}>{data.edition.name} &#8599;</Link></>}
-        
+            &nbsp;&nbsp;&#11096; name:{" "}
+            {isLoading ? (
+              "loading..."
+            ) : (
+              <>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  href={`/browse/editions/${data?.editionId}`}
+                >
+                  {data.edition.name} &#8599;
+                </Link>
+              </>
+            )}
           </li>
           <li>
-          &nbsp;&nbsp;&#11096; current supply: {isLoading ? "loading..." : Number(data.edition.counter)}
+            &nbsp;&nbsp;&#11096; current supply:{" "}
+            {isLoading ? "loading..." : Number(data.edition.counter)}
           </li>
           <li>
-          &nbsp;&nbsp;&#11096; max supply: {isLoading ? "loading..." : Number(data.edition.supply)}
+            &nbsp;&nbsp;&#11096; max supply:{" "}
+            {isLoading ? "loading..." : Number(data.edition.supply)}
           </li>
           <li>
-          &nbsp;&nbsp;&#11096; price: {isLoading ? "loading..." : formatEther(data.edition.price)} eth
+            &nbsp;&nbsp;&#11096; price:{" "}
+            {isLoading ? "loading..." : formatEther(data.edition.price)} eth
           </li>
           <li>
-          &nbsp;&nbsp;&#11096; mint status: <span style={{color: minting ? "green" : !minting && !isEnded ? "#ffc618" : isEnded ? "red" : "inherit"}}>{isLoading ? "loading..." : data.edition.counter === data.edition.supply ? "ended" : data.edition.mintStatus ? "active" : "paused"}</span>
+            &nbsp;&nbsp;&#11096; mint status:{" "}
+            <span
+              style={{
+                color: minting
+                  ? "green"
+                  : !minting && !isEnded
+                  ? "#ffc618"
+                  : isEnded
+                  ? "red"
+                  : "inherit",
+              }}
+            >
+              {isLoading
+                ? "loading..."
+                : data.edition.counter === data.edition.supply
+                ? "ended"
+                : data.edition.mintStatus
+                ? "active"
+                : "paused"}
+            </span>
           </li>
         </ul>
         <CustomConnect />
-        
-
-
 
         {/* <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/> */}
 
-        <PaymasterMintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/>
+        <PaymasterMintComponent
+          isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus}
+          editionId={data.editionId}
+          price={data.edition.price}
+          refetch={refetch}
+        />
 
-        
         <figure style={galleryFig}>
-          
-          <img src={data.metadata?.image} alt='image loading...' width="500"></img>
-         <figcaption>{isLoading ? "loading" : `"${data.metadata?.name}"`}</figcaption>
+          <img
+            src={data.metadata?.image}
+            alt="image loading..."
+            width="500"
+          ></img>
+          <figcaption>
+            {isLoading ? "loading" : `"${data.metadata?.name}"`}
+          </figcaption>
         </figure>
-        
-
       </section>
 
       <div style={navigation}>
-        <Link href={`/mint/${(params.editionId > 1) ? Number(params.editionId)-1 : params.editionId}`}>previous</Link>
-        <Link href={`/mint/${(params.editionId < lastEdition) ? Number(params.editionId)+1 : params.editionId}`}>next</Link>
-       
+        <Link
+          href={`/mint/${
+            params.editionId > 1
+              ? Number(params.editionId) - 1
+              : params.editionId
+          }`}
+        >
+          previous
+        </Link>
+        <Link
+          href={`/mint/${
+            params.editionId < lastEdition
+              ? Number(params.editionId) + 1
+              : params.editionId
+          }`}
+        >
+          next
+        </Link>
       </div>
-
     </article>
-  )
+  );
 }
 
 export default Mint

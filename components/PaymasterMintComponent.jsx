@@ -16,13 +16,18 @@ import { ZERO_ADDRESS } from '@/app/constants'
 
 
 
-function MintComponent({isMinting, editionId, price, refetch}) {
+function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
-    const writes = useWriteContracts();
+    const writes = useWriteContracts({
+        mutation: { onSuccess: (id) => setTokenId(id) },
+      });
+    const write = useWriteContract({
+        mutation: { onSuccess: (id) => setTokenId(id) },
+      });
 
-
+        console.log("token id", tokenId)
 
     const { data: availableCapabilities } = useCapabilities({
         account: account.address,
@@ -41,10 +46,8 @@ function MintComponent({isMinting, editionId, price, refetch}) {
         }
       }, [availableCapabilities]);
 
-
     
-    async function mint() {
-        console.log(capabilities)
+    async function sponsorMint() {
         writes.writeContracts({
             capabilities,
             contracts:  [
@@ -59,6 +62,17 @@ function MintComponent({isMinting, editionId, price, refetch}) {
 
 
         
+    }
+
+    async function mint() { 
+
+        write.writeContract({
+            ...contractBase,
+            functionName: "mint",
+            args: [BigInt(editionId)],
+            value: price,
+            onSuccess: () => refetch(),
+        })
     }
 
 
@@ -89,7 +103,7 @@ function MintComponent({isMinting, editionId, price, refetch}) {
   return (
 
     <div style={container}>
-        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606; paymaster</button>
+        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606; {capabilities?.paymasterService ? "paymaster" : ""}</button>
         {writes.status == "idle" && <br/>}
         {writes.status == "pending" && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
         {writes.status == "error" && <p style={{marginTop: "0"}}>user rejected transaction</p>}
@@ -109,7 +123,7 @@ function MintComponent({isMinting, editionId, price, refetch}) {
   )
 }
 
-export default MintComponent
+export default PaymasterMintComponent
 
 const container={
     display: "flex", 
