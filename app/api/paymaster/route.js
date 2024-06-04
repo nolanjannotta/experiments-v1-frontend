@@ -8,6 +8,7 @@ export async function POST(request) {
   const method = body.method;
   const [userOp, entrypoint, chainId] = body.params;
 
+    console.log(paymasterClient)
     console.log("method", method)
     console.log("userOp", userOp)
     console.log("entrypoint", entrypoint)
