@@ -14,20 +14,37 @@ import { ZERO_ADDRESS } from '@/app/constants'
 
 
 
+async function getTxData(hash) {
+
+}
+
+async function getSponsorTxData(hash) {
+
+}
+
 
 
 function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
-    const writes = useWriteContracts({
-        mutation: { onSuccess: (id) => setTokenId(id) },
-      });
-    const write = useWriteContract({
-        mutation: { onSuccess: (id) => setTokenId(id) },
-      });
 
-        console.log("token id", tokenId)
+    const writes = useWriteContracts({
+        mutation: { onSuccess: (id) => setTokenId(id) }
+    });
+    const write = useWriteContract({
+        mutation: { onSuccess: (id) => setTokenId(id) }
+    });
+
+    // this is only for non sponsored transactions
+    const tx = useTransactionReceipt({hash: write?.data})
+    tx.onSuccess = refetch
+
+    useEffect(() => {
+        if(tx.isSuccess) {
+            refetch()
+        }
+    },[tx])
 
     const { data: availableCapabilities } = useCapabilities({
         account: account.address,
@@ -45,6 +62,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
           };
         }
       }, [availableCapabilities]);
+
 
     
     async function sponsorMint() {
@@ -71,9 +89,10 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
             functionName: "mint",
             args: [BigInt(editionId)],
             value: price,
-            onSuccess: () => refetch(),
         })
     }
+
+
 
 
 
@@ -103,7 +122,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
   return (
 
     <div style={container}>
-        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606; {capabilities?.paymasterService ? "paymaster" : ""}</button>
+        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
         {writes.status == "idle" && <br/>}
         {writes.status == "pending" && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
         {writes.status == "error" && <p style={{marginTop: "0"}}>user rejected transaction</p>}
