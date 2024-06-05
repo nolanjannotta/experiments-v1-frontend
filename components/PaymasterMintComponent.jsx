@@ -33,8 +33,6 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     const writes = useWriteContracts();
     const write = useWriteContract();
 
-    console.log(writes.status)
-    console.log(write.status)
     // to check the non sponsored transaction status
     const tx = useTransactionReceipt({hash: write?.data})
 
@@ -43,12 +41,9 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         id:  writes?.data,
         query: {
           refetchInterval: (data) => {
-            console.log(data.state.data?.status)
             return data.state.data?.status === "PENDING" ? 1000 : false}
         },
       });
-
-      console.log(sponsoredStatus)
 
 
     useEffect(() => {
@@ -63,7 +58,6 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     },[tx,sponsoredStatus])
 
       const capabilities = useGetCapabilities(account)
-        console.log(capabilities)
     
     async function sponsorMint() {
         writes.writeContracts({

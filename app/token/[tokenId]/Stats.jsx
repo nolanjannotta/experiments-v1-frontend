@@ -167,7 +167,7 @@ export default function Stats({ data, tokenId, address }) {
                 <li>
                   <b>&#11096; destroy</b>:{" "}
                   <button style={button} onClick={destroy}>
-                    &#x2297;
+                    &#9608;&#9608;
                   </button>
                 </li>
               </>

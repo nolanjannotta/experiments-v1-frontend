@@ -31,7 +31,6 @@ const doesUserFollowNolan = async (fid) => {
 
 async function getResponse(request) {
     const editionId = request.nextUrl.searchParams.get("editionId");
-    console.log(editionId)
     const body = await request.json();
     const allowFramegear = process.env.NODE_ENV !== 'production'; 
 

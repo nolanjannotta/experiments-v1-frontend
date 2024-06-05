@@ -12,6 +12,8 @@ import { editionData } from "@/app/editionData";
 import ConnectSimple from "@/components/ConnectSimple";
 import useGetCapabilities from "@/hooks/useGetCapabilities";
 import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
+import Link from 'next/link'
+
 
 
 async function exists(tokenId) {
@@ -58,7 +60,6 @@ function ModifyToken({ params }) {
   const {writeContracts} = useWriteContracts();
 
   const capabilities = useGetCapabilities(account)
-  console.log(capabilities)
 
   async function sponsorModify() {
     writeContracts({
@@ -191,7 +192,7 @@ function ModifyToken({ params }) {
             })}
             
           </form>
-          <p><small>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </small></p>
+          <p><small>Once you submit the transaction, wait a few seconds and refresh the page to see the changes, or click <Link href={`/token/${params.tokenId}`}>here.</Link> </small></p>
           <button style={button}  disabled={!isOwned || !editionData[edition.name]?.modifiable} onClick={
             account.connector.name === "Coinbase Wallet" && capabilities?.paymasterService ? ()=> sponsorModify(params.tokenId,modifyBytes) :
             ()=> modify(params.tokenId,modifyBytes)
