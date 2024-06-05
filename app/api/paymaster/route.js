@@ -8,10 +8,17 @@ export async function POST(request) {
   const method = body.method;
   const [userOp, entrypoint, chainId] = body.params;
 
+    console.log(paymasterClient)
+    console.log("method", method)
+    console.log("userOp", userOp)
+    console.log("entrypoint", entrypoint)
+    console.log("chainId", chainId)
 
   if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
     return Response.json({ error: "Not a sponsorable operation" });
+    console.log("Not a sponsorable operation")
   }
+  console.log("is a sponsorable operation")
 
 
   if (method === "pm_getPaymasterStubData") {
