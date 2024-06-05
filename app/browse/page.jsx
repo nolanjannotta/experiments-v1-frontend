@@ -3,7 +3,7 @@ import Link from "next/link";
 // import { contract } from "../contract";
 import { contract } from "../contract_server";
 
-
+// try making this a client component
 async function getEditions() {
   const lastEdition = await contract.read.EDITION_COUNTER();
   let allEditions = [];

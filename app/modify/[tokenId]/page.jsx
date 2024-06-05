@@ -5,10 +5,12 @@ import { useAccount } from "wagmi";
 import { contractBase,contract } from "../../contract";
 // import { contractBase } from '../contract'
 import { useWriteContract, useConfig} from 'wagmi'
+import {useWriteContracts} from 'wagmi/experimental'
 
 import { useQuery } from "@tanstack/react-query";
 import { editionData } from "@/app/editionData";
 import ConnectSimple from "@/components/ConnectSimple";
+import useGetCapabilities from "@/hooks/useGetCapabilities";
 import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
 
 
@@ -53,6 +55,24 @@ function ModifyToken({ params }) {
   const account = useAccount();
 
   const {writeContract} = useWriteContract();
+  const {writeContracts} = useWriteContracts();
+
+  const capabilities = useGetCapabilities(account)
+  console.log(capabilities)
+
+  async function sponsorModify() {
+    writeContracts({
+      contracts: [
+        {
+          ...contractBase,
+          functionName: "modify",
+          args: [params.tokenId, modifyBytes],
+        },
+      ],
+      capabilities
+    })
+  }
+
   
   async function modify() {
     writeContract({
@@ -172,7 +192,10 @@ function ModifyToken({ params }) {
             
           </form>
           <p><small>Once you submit the transaction, wait a few seconds and refresh the page to see the changes. </small></p>
-          <button style={button}  disabled={!isOwned || !editionData[edition.name]?.modifiable} onClick={()=> modify(params.tokenId,modifyBytes)}>
+          <button style={button}  disabled={!isOwned || !editionData[edition.name]?.modifiable} onClick={
+            account.connector.name === "Coinbase Wallet" && capabilities?.paymasterService ? ()=> sponsorModify(params.tokenId,modifyBytes) :
+            ()=> modify(params.tokenId,modifyBytes)
+            }>
           &#9874;&#x1D544;&#x1D560;&#x1D555;&#x1D55A;&#x1D557;&#x1D56A;&#9874;
             </button>
         </fieldset>

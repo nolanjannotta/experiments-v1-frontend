@@ -8,6 +8,7 @@ import {useAccount,useTransactionReceipt,useWriteContract } from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
+import useGetCapabilities from '@/hooks/useGetCapabilities';
 import { parseTransaction } from 'viem'
 import { ZERO_ADDRESS } from '@/app/constants'
 
@@ -61,24 +62,8 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     },[tx,sponsoredStatus])
 
-    const { data: availableCapabilities } = useCapabilities({
-        account: account.address,
-      });
-
-      const capabilities = useMemo(() => {
-        if (!availableCapabilities || !account.chainId) return;
-        const capabilitiesForChain = availableCapabilities[account.chainId];
-        if (
-          capabilitiesForChain["paymasterService"] &&
-          capabilitiesForChain["paymasterService"].supported
-        ) {
-          return {
-            paymasterService: {url:`${document.location.origin}/api/paymaster`}
-          };
-        }
-      }, [availableCapabilities]);
-
-
+      const capabilities = useGetCapabilities(account)
+        console.log(capabilities)
     
     async function sponsorMint() {
         writes.writeContracts({
