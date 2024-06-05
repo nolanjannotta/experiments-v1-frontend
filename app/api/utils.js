@@ -79,7 +79,7 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
       abi: ABI,
       data: calls[callToCheckIndex].data,
     });
-    if (innerCalldata.functionName !== "mint" || innerCalldata.functionName !== "modify") return false;
+    if (innerCalldata.functionName !== "mint" && innerCalldata.functionName !== "modify") return false;
 
     return true;
   } catch (e) {
