@@ -9,7 +9,7 @@ import { artAddress } from "./constants";
 import { contract } from "./contract_server";
 // import { Resvg } from "@resvg/resvg-js";
 
-
+export const runtime = "edge"
 
 const walletClient = createWalletClient({
     chain: baseSepolia,
@@ -39,8 +39,9 @@ const walletClient = createWalletClient({
   export async function getUri(tokenId) {
     // HANDLE NOT EXISTING TOKENS
     const image = await contract.read.getDataUri([tokenId])
-    const png = await FabricImage.fromURL(image);
-    return png.toDataURL();
+    return image
+    // const png = await FabricImage.fromURL(image);
+    // return png.toDataURL();
   }
 
   export async function getLastMint(editionId) {

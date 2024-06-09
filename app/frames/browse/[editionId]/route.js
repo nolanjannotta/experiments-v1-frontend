@@ -8,19 +8,6 @@ async function getResponse(request, params) {
     const body = await request.json();
     const editionCounter = request.nextUrl.searchParams.get("editionCounter");
 
-    // let state = {editionCounter: editionCounter}
-    // if(editionCounter) {
-    //     state = {editionCounter: editionCounter}
-    // }
-    // else {
-    //     editionCounter = await getEditionCounter();
-    //     state = {editionCounter: editionCounter}
-    // }
-
-    // console.log(JSON.parse(decodeURIComponent(body.untrustedData.state || "{}")))
-    // console.log(params.editionId)
-    // console.log(editionCounter)
-    console.log("editionCounter", editionCounter)
     const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}&date=${Date.now()}`
 
 
@@ -42,7 +29,6 @@ async function getResponse(request, params) {
             buttons: buttons,
 
             image: {src: image, aspectRatio: '1:1'},
-            state: "boobies"
         })
     );
 
