@@ -1,7 +1,17 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
 import {getUri,getEdition} from "@/app/frameConfig";
+// import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 
+// import {Source_Code_Pro } from 'next/font/google'
+
+
+// const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
+
+// console.log("Source_Code_Pro", sourceCode)
+
+// export const runtime = "edge"
+  // const parser = new XMLParser();
 
 
 export async function GET(request) {
@@ -10,10 +20,19 @@ export async function GET(request) {
     const randomTokenId = editionId * 1000000 + Math.floor((Math.random() * Number(edition.counter)) + 1)
 
     const randomUri = await getUri(randomTokenId);
+    // console.log(randomUri)
+    // let jObj = parser.parse(randomUri);
+    
+
+    // const builder = new XMLBuilder();
+    // const xmlContent = builder.build(jObj);
+    // console.log(xmlContent)
 
     const isEnded = edition.counter >= edition.supply;
     const isActive = !isEnded && edition.mintStatus;
     const isPaused = !isEnded && !edition.mintStatus;
+
+    
 
   return new ImageResponse(
     
@@ -27,6 +46,8 @@ export async function GET(request) {
 
         <div style={imageBox}>
             {randomUri && <img width="70%" src={randomUri} alt="image"></img>}
+            {/* {randomUri && <object width="70%" data={randomUri} alt="image"></object>} */}
+
         </div>
         <p style={description}>{edition.description}</p>
       </Card>
@@ -34,6 +55,13 @@ export async function GET(request) {
     {
       width: 1000,
       height: 1000,
+
+      // fonts: {
+      //   name: "Noto Sans",
+      //   style: "normal",
+
+      // },
+      debug: true
     }
   );
 }

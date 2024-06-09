@@ -4,7 +4,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
 import { baseSepolia } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
-import sharp from 'sharp';
+// import sharp from 'sharp';
 import { artAddress } from "./constants";
 import { contract } from "./contract_server";
 // import { Resvg } from "@resvg/resvg-js";
