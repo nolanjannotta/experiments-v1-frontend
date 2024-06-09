@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 
 
 
+
 const pageContent = [
     `Experiments V1 is a project where I learn, explore, and experiment with 100% onchain 
     generative art and onchain mechanics. This is inspired by projects like ArtBlocks. There will never 

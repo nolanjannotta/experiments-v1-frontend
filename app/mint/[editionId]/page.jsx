@@ -3,13 +3,11 @@ import React from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
-import MintComponent from '../../../components/MintComponent';
 import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
-import { useCapabilities } from "wagmi/experimental";
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
+import { baseSepolia } from 'viem/chains'
 import CustomConnect from '../../../components/CustomConnect'
-// import {paymasterClient} from "../../api/paymasterClient"
 
 
 async function mintPageData(editionId) {
@@ -126,8 +124,8 @@ function Mint({params}) {
         </ul>
         <CustomConnect />
 
-        {/* <MintComponent isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus} editionId={data.editionId} price={data.edition.price} refetch={refetch}/> */}
 
+        
         <PaymasterMintComponent
           isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus}
           editionId={data.editionId}

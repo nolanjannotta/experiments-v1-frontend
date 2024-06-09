@@ -4,10 +4,11 @@ import React, {useEffect, useState, useMemo} from 'react'
 import {} from 'wagmi'
 
 import { useCapabilities, useWriteContracts, useCallsStatus } from "wagmi/experimental";
-import {useAccount,useTransactionReceipt,useWriteContract } from 'wagmi'
+import {useAccount,useTransactionReceipt,useWriteContract, useSwitchChain, useChainId  } from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
+import {baseSepolia} from "viem/chains"
 import useGetCapabilities from '@/hooks/useGetCapabilities';
 import { parseTransaction } from 'viem'
 import { ZERO_ADDRESS } from '@/app/constants'
@@ -15,20 +16,12 @@ import { ZERO_ADDRESS } from '@/app/constants'
 
 
 
-async function getTxData(hash) {
-
-}
-
-async function getSponsorTxData(hash) {
-
-}
-
-
-
 function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     const [tokenId, setTokenId] = useState(0)
     const account = useAccount();
+
+    const {switchChain} = useSwitchChain()
 
     const writes = useWriteContracts();
     const write = useWriteContract();
@@ -86,18 +79,26 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         })
     }
 
+    const buttonDisabled  = !account?.isConnected && !account.isConnecting || !isMinting
 
-
-
+    console.log(account)
 
     // const tx = useTransactionReceipt({hash: write?.data})
 
+    if(account.address && account.chainId !== baseSepolia.id && !buttonDisabled){
+
+        return (
+            <div style={container}>
+                <button style={button} onClick={()=> switchChain({chainId: baseSepolia.id})}><small>switch chains</small></button>
+            </div>
+        )
+    }
 
 
   return (
 
     <div style={container}>
-        <button style={button} disabled={!account?.isConnected && !account.isConnecting || !isMinting} onClick={capabilities?.paymasterService && account.connector.name === "Coinbase Wallet" ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
+        <button style={button} disabled={buttonDisabled} onClick={capabilities?.paymasterService && account.connector.name === "Coinbase Wallet" ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
         {/* {(write.status == "idle" || writes.status == "idle") && <br/>} */}
         {(write.status == "pending" || writes.status == "pending") && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
         {(write.status === "error" || writes.status === "error") && <p style={{marginTop: "0"}}>user rejected transaction</p>}

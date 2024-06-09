@@ -42,7 +42,6 @@ export default async function Browse() {
           let isMinting = !ended && data.edition.mintStatus;
           let paused = !ended && !data.edition.mintStatus;
           return (
-            <>
               <figure key={index} style={galleryFig}>
               <Link  href={`/browse/editions/${index + 1}`}>
                 <img width="300" src={data.thumbnail}></img>
@@ -50,9 +49,6 @@ export default async function Browse() {
                 </Link>
                 <figcaption>{data.edition.name}&nbsp;&nbsp; <Link href={`/mint/${index+1}`} style={{textDecoration: "none", color: ended ? "red" : isMinting ?  "green" : paused ? "#ffc618" : "inherit" }}>&#9679;</Link> &nbsp;<small>{Number(data.edition.counter)}/{Number(data.edition.supply)}</small></figcaption>
               </figure>
-           
-            
-            </>
             
           );
         })}

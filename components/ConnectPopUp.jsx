@@ -1,6 +1,8 @@
 "use client"
-import React, {useState, useRef, useEffect} from "react"
-import { useDisconnect, useConnect, useAccount } from "wagmi"
+import React, {useRef} from "react"
+import { useDisconnect, useConnect, useBalance, useSwitchChain } from "wagmi"
+import { formatEther } from "viem"
+import { baseSepolia } from "viem/chains"
 
 
 
@@ -8,10 +10,8 @@ export default function ConnectPopUp({ show, setShow, account}) {
     const menuRef = useRef(null)
     const {disconnect} = useDisconnect()
     const {connect, connectors} = useConnect();
-    // const account = useAccount();
-    // const address = account.address
-
-
+    const balance = useBalance({address: account.address, chainId: account.chainId})
+    const { chains, switchChain } = useSwitchChain()
     function handleClose(event) {
         if(menuRef.current && !menuRef.current.contains(event.target)){
             setShow(false)
@@ -41,14 +41,18 @@ export default function ConnectPopUp({ show, setShow, account}) {
                 </ul>}
                 {account.isConnected && 
                 <>
-                <p>{account.address.slice(0, 9) + "..." +account.address.slice(-7)} 
+                <p>{account.address.slice(0, 9) + "..." + account.address.slice(-7)} 
 
                     { account.connector.name == "Coinbase Wallet" && <span style={{cursor: "pointer"}}><small>&nbsp;<a target="_blank" href="https://homebase.coinbase.com/">open</a></small></span> }
                     <span style={{cursor: "pointer"}} onClick={() => {navigator.clipboard.writeText(account.address)}}><small>&nbsp;copy</small></span>
                     
                     
                     </p>
-                <p style={{padding:"0"}}></p> 
+
+                {account.chainId !== baseSepolia.id && <button style={button} onClick={() =>switchChain({chainId: 84532})}>switch chains</button>}
+                    
+                {account.chainId === baseSepolia.id && <p style={{padding:"0"}}>balance: {formatEther(balance.data?.value)} eth</p>}
+                 
 
 
                 <button style={button} onClick={disconnect}>disconnect</button>

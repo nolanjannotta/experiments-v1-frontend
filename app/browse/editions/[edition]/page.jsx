@@ -122,8 +122,8 @@ function Gallery({params}) {
           if (key === "royalty") {
             return <li key={i}>&#x2022; <b>{key}</b>: {" "}{Number(editionInfo[key]) / 100}%</li>
           }
-          if(key === "royaltyReceiver") {
-            return <li  key={i}>&#x2022; <b>royalty receiver</b>: {" "}{truncateAddress(editionInfo[key])}</li>
+          if(key === "name") {
+            return <li  key={i}>&#x2022; <b>{key}</b>: {" "}{editionInfo[key]}</li>
           }
           if(key === "supply") {
             return <li  key={i}>&#x2022;  <b>max supply</b>: {" "}{Number(editionInfo[key])}</li>
@@ -144,10 +144,7 @@ function Gallery({params}) {
 
             }
           }
-          else {
-           return <li  key={i}>&#x2022; <b>{key}</b>: {editionInfo[key]}</li> 
-          }
-          
+                    
         })}
         </small>
         </code>

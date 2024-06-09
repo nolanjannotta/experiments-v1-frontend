@@ -5,18 +5,18 @@ import Link from 'next/link'
 import { Web3Provider } from '../components/Web3Provider'
 import {artAddress} from "./constants"
 import "./global.css"
-// import "./test.css"
 import { baseScanUrl } from './constants'
 import ConnectSimple from '../components/ConnectSimple'
 import Marquee from '@/components/Marquee'
 import { coolShape } from './coolShapes'
-import Title from '../components/Title'
 import "./title.css"
+
 
 export const metadata = {
   title: 'Experiments V1',
   description: 'art experiments',
 }
+// const useMousePosition = dynamic(() => import('../hooks/useMousePosition'), {ssr: false})
 
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 
@@ -24,7 +24,10 @@ export const revalidate = 30
 
 
 
+
 export default function RootLayout({ children }) {
+
+
   const title = {}
   const favicon = (Date.now() % 2) + 1
   return (

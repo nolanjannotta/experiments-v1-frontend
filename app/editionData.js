@@ -69,9 +69,9 @@ export const editionData = {
         </p>
 
         <p>
-          note, this particular edition uses lots of gas to render the image. 
-          This usually causes Alchemy&apos;s NFT api to fail which is why most or all of the thumbnails below don&apos;t show up. 
-          You can always click on the image which loads it directly from the blockchain.
+         	<b>&#9733; note, this particular edition uses lots of gas to render the image. 
+          This usually causes Alchemy&apos;s api to fail which is why most or all of the thumbnails below don&apos;t show up. 
+          You can always click on the image which loads it directly from the blockchain.</b>
            </p>
         </>
       );
