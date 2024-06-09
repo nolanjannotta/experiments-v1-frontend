@@ -69,7 +69,7 @@ export async function GET(request) {
 }
 
 const note = {
-  fontSize: "15px",
+  fontSize: "25px",
   display: "flex",
   justifyContent: "center",
   width: "90%",
