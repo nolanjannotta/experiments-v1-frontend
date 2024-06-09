@@ -2,7 +2,7 @@
 import { getFrameMetadata } from '@coinbase/onchainkit/frame';
 import {FRAME_URL} from "../constants.js"
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function generateMetadata({params}) {
     const image = `${FRAME_URL}/frames/images/start?date=${Date.now()}`

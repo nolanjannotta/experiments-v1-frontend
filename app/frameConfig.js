@@ -9,7 +9,7 @@ import { artAddress } from "./constants";
 import { contract } from "./contract_server";
 // import { Resvg } from "@resvg/resvg-js";
 
-export const runtime = "edge"
+// export const runtime = "edge"
 
 const walletClient = createWalletClient({
     chain: baseSepolia,
