@@ -50,6 +50,8 @@ export async function GET(request) {
 
         </div>
         <p style={description}>{edition.description}</p>
+        {edition.name === "rectangular clock" && <p style={note}>note: the roman numeral hour markers and location text currently do not render in a frame. please visit the website for best results.</p>}
+        
       </Card>
     ,
     {
@@ -61,11 +63,19 @@ export async function GET(request) {
       //   style: "normal",
 
       // },
-      debug: true
+      // debug: true
     }
   );
 }
 
+const note = {
+  fontSize: "15px",
+  display: "flex",
+  justifyContent: "center",
+  width: "90%",
+  textAlign: "center",
+  marginTop: "0",
+}
 const description = {
   display: "flex",
   justifyContent: "center",
