@@ -11,6 +11,12 @@ import { contract } from "./contract_server";
 
 // export const runtime = "edge"
 
+
+const publicClient = createPublicClient({
+    chain: baseSepolia,
+    transport: http()
+})
+
 const walletClient = createWalletClient({
     chain: baseSepolia,
     // transport: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
@@ -63,7 +69,7 @@ const walletClient = createWalletClient({
 
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {
-      return {states: "failed", tokenId: null}
+      return {status: "failed", tokenId: null}
     }   
     
     

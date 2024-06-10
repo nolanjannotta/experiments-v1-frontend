@@ -30,6 +30,7 @@ async function getResponse(request, params){
       // value: parseEther('0.00004').toString(), // 0.00004 ETH
     },
   };
+  // console.log(txData);
   return NextResponse.json(txData);
 }
 
