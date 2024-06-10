@@ -11,10 +11,12 @@ async function getResponse(request, params) {
     const image = `${FRAME_URL}/frames/images/browse?editionId=${params.editionId}&date=${Date.now()}`
 
 
+
+
     // const state = body.untrustedData.state?.serialized &&  JSON.parse(decodeURIComponent(body.untrustedData.state?.serialized))
     const buttons = [
          {label: "previous",  target: `${FRAME_URL}/frames/browse/${Number(params.editionId)-1}?editionCounter=${editionCounter}`},
-        {label: "mint", target: `${FRAME_URL}/frames/mint/${Number(params.editionId)}`},
+        {label: "mint", action:"tx",  target: `${FRAME_URL}/frames/transaction/${Number(params.editionId)}`, postUrl: `${FRAME_URL}/frames/tx-success`},
         {label: "Home", target: `${FRAME_URL}/frames`},
         {label: "next",  target: `${FRAME_URL}/frames/browse/${Number(params.editionId)+1}?editionCounter=${editionCounter}`},
 

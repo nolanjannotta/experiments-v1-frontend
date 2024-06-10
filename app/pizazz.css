@@ -16,10 +16,21 @@
     transition-duration: 2s;
     transition-delay: 3s;
   }
-
+ 
 
   .mint:hover {
     transform: rotatez(-360deg);
+  }
+
+  .personal-site {
+    text-decoration: underline;
+    display: inline-block;
+    transition-duration: 1s;
+  }
+  .personal-site:hover {
+
+    
+    transform: rotatex(360deg);
   }
 
 

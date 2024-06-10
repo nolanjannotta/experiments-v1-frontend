@@ -9,7 +9,7 @@ import { baseScanUrl } from './constants'
 import ConnectSimple from '../components/ConnectSimple'
 import Marquee from '@/components/Marquee'
 import { coolShape } from './coolShapes'
-import "./title.css"
+import "./pizazz.css"
 
 
 export const metadata = {
@@ -92,7 +92,7 @@ export default function RootLayout({ children }) {
             <li><a target="_blank" href={`${baseScanUrl}address/${artAddress}`}>basescan</a></li>
             <li>&#x26AC;</li>
 
-            <li style={{color: "#d7d7d7"}}>made with &#9760; by <a style={{color: "inherit"}} href="https://personal-site-neon-ten.vercel.app/index.html" target="_blank">nolan</a></li>
+            <li style={{color: "#d7d7d7"}}>made with &#9760; by <a style={{color: "inherit"}} href="https://personal-site-neon-ten.vercel.app/index.html" target="_blank"><span className="personal-site">nolan</span></a></li>
             <li>&#x26AC;</li>
 
             <li style={{color: "#d7d7d7"}}>est. 2024</li>

@@ -1,10 +1,5 @@
-import {Source_Code_Pro } from 'next/font/google'
 
 
-const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
-
-
-console.log("Source_Code_Pro", sourceCode.style)
 
 
 const style = {
