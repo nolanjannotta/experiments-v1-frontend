@@ -38,7 +38,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         },
       });
 
-
+        console.log("sponsoredStatus", sponsoredStatus)
 
     useEffect(() => {
         if(sponsoredStatus?.status === "CONFIRMED") {
