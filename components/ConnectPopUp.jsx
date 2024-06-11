@@ -51,7 +51,7 @@ export default function ConnectPopUp({ show, setShow, account}) {
 
                 {account.chainId !== baseSepolia.id && <button style={button} onClick={() =>switchChain({chainId: 84532})}>switch chains</button>}
                     
-                {account.chainId === baseSepolia.id && <p style={{padding:"0"}}>balance: {formatEther(balance.data?.value)} eth</p>}
+                {account.chainId === baseSepolia.id && balance.data?.value && <p style={{padding:"0"}}>balance: {formatEther(balance.data?.value)} eth</p>}
                  
 
 

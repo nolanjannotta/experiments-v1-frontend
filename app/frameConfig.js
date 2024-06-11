@@ -77,7 +77,7 @@ const walletClient = createWalletClient({
 
      console.log("results", results)
 
-     results.logs.forEach(log => {console.log("log topics", log.topics)})
+    //  results.logs.forEach(log => {console.log("log topics", log.topics)})
      return {status: results.status, tokenId: tokenId}
     }catch(e) {
         console.log("error", e)

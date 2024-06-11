@@ -24,7 +24,6 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     const {switchChain} = useSwitchChain()
 
     const writes = useWriteContracts();
-    console.log(writes)
     const write = useWriteContract();
 
     // to check the non sponsored transaction status
@@ -40,12 +39,15 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
       });
 
 
+
     useEffect(() => {
-        if(tx.isSuccess || sponsoredStatus?.status === "CONFIRMED") {
+        if(sponsoredStatus?.status === "CONFIRMED") {
             refetch()
+            setTokenId(fromHex(sponsoredStatus.receipts[0].logs[2].topics[3], "number"))
         }
 
         if(tx.isSuccess){
+            refetch()
             setTokenId(fromHex(tx.data.logs[0].topics[3], "number"))
         }
 
