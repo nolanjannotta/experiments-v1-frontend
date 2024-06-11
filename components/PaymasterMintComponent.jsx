@@ -104,7 +104,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         <button style={button} disabled={buttonDisabled} onClick={capabilities?.paymasterService && account.connector.name === "Coinbase Wallet" ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
         {/* {(write.status == "idle" || writes.status == "idle") && <br/>} */}
         {(write.status == "pending" || writes.status == "pending") && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
-        {(write.status === "error" || writes.status === "error" && (writes.status !== "pending" || "success" && writes.status !== "pending" || "success")) && <p style={{marginTop: "0"}}>user rejected transaction</p>}
+        {(write.status === "error" || writes.status === "error") && <p style={{marginTop: "0"}}>user rejected transaction</p>}
 
         {(tx.isLoading || sponsoredStatus?.status === "PENDING") && <p style={{marginTop: "0"}}>transaction submitted!</p>}
 
