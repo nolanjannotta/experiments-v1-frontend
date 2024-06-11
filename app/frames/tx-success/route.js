@@ -11,15 +11,20 @@ async function getResponse(request) {
 //   if (!isValid) {
 //     return new NextResponse('Message not valid', { status: 500 });
 //   }
-    let state = {}
+    let state = {}  
 
-    if(body.untrustedData?.state){
-        state = JSON.parse(decodeURIComponent(body.untrustedData.state))
-    }
-    else if(body?.untrustedData?.transactionId){
+    
+
+    if(body?.untrustedData?.transactionId) {
         state = {txHash: body?.untrustedData?.transactionId}
+        console.log("tx hash from body", body?.untrustedData?.transactionId)
 
     }
+    else if(body.untrustedData?.state){
+        state = JSON.parse(decodeURIComponent(body.untrustedData.state))
+        console.log("tx hash from state", state.txHash)
+    }
+
     
     const txStatus = await checkTxStatus(state.txHash);
 
