@@ -67,11 +67,18 @@ const walletClient = createWalletClient({
      }) 
 
 
+     let tokenId;
+     if(results.logs[0]?.topics[3]) {
+          tokenId = fromHex(results.logs[0]?.topics[3], "number")
+     }
+     else {
+         tokenId = fromHex(results.logs[1]?.topics[3], "number")
+     }
 
      console.log("results", results)
 
      results.logs.forEach(log => {console.log("log topics", log.topics)})
-     return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
+     return {status: results.status, tokenId: tokenId}
     }catch(e) {
         console.log("error", e)
       return {status: "failed", tokenId: null}
