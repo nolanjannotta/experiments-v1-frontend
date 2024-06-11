@@ -43,7 +43,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     useEffect(() => {
         if(sponsoredStatus?.status === "CONFIRMED") {
             refetch()
-            setTokenId(fromHex(sponsoredStatus.receipts[0].logs[2].topics[3], "number"))
+            setTokenId(fromHex(sponsoredStatus.receipts[0].logs[1].topics[3], "number"))
         }
 
         if(tx.isSuccess){
