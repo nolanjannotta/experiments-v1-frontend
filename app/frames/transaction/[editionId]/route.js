@@ -20,6 +20,7 @@ async function getResponse(request, params){
     args: [params.editionId],
   });
 
+
   const txData = {
     chainId: `eip155:${baseSepolia.id}`,
     method: 'eth_sendTransaction',

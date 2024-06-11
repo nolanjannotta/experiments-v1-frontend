@@ -30,7 +30,7 @@ export async function GET(request) {
   return new ImageResponse(
     (
       <Card>
-        {/* <h1>{status != "success" ? "transaction submitted!" : "success!"}</h1> */}
+        <h3 style={{margin:"0", padding: "0"}}>{status != "success" ? "transaction submitted!" : "success!"}</h3>
         {/* {status != "success" ? <p>refresh in a few seconds to check status</p> : ""} */}
         <div
           style={{

@@ -24,6 +24,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
     const {switchChain} = useSwitchChain()
 
     const writes = useWriteContracts();
+    console.log(writes)
     const write = useWriteContract();
 
     // to check the non sponsored transaction status

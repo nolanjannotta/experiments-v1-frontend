@@ -36,6 +36,8 @@ async function getResponse(request) {
         ]
     }
 
+    buttons.push({label: "Home", target: `${FRAME_URL}/frames`})
+
   return new NextResponse(
     getFrameHtmlResponse({
       buttons: buttons,
