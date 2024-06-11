@@ -66,9 +66,12 @@ const walletClient = createWalletClient({
         hash: txHash
      }) 
 
+     console.log("results", results)
+
 
      return {status: results.status, tokenId: fromHex(results.logs[0]?.topics[3], "number")}
     }catch(e) {
+        console.log(e)
       return {status: "failed", tokenId: null}
     }   
     

@@ -27,6 +27,7 @@ async function getResponse(request) {
 
     
     const txStatus = await checkTxStatus(state.txHash);
+    
 
     let buttons = []
 
