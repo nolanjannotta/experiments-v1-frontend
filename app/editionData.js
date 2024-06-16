@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 export const editionData = {
   "signatures": {
     description: () => {
       return (
         <p>
-          Comes with 1 built in utility that will become clear in the following editions.
+          Can be used to &apos;sign&apos; an edition. artists can set a signature id for their edition. as long as the artist owns that signature, it will be placed <small>(usually)</small> in the bottom right corner of each token in the edition. see <Link href="/token/2000003">here</Link> or <Link href="/token/4000002">here</Link> for examples.
         </p>
       );
     },
@@ -137,7 +139,7 @@ export const editionData = {
       return (
         <p>
           A very simple experiment. It can be pointed to a token ID and returns
-          a black and white version of the image. Thats it, thats the art. The owner must own the token
+          a black and white version of the image. Thats literally it. The owner must own the token
           ID that it points to. These images will be blank by default.
         </p>
       );
