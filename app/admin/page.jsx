@@ -55,7 +55,7 @@ function Admin() {
       ]
   })
     const operations = []
-    for(let i = 1; i <= Number(readContracts.data[2].result); i++) {
+    for(let i = 1; i <= Number(readContracts?.data[2].result); i++) {
       operations.push({
         ...contractBase,
         functionName: "getEdition",
@@ -67,7 +67,7 @@ function Admin() {
     contracts: operations
   })
 
-  
+
 
 
   console.log("royalties", totalRoyalties)
