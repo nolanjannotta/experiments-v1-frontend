@@ -23,7 +23,7 @@ async function getBalance(address) {
   return balance;
 }
 
-async function Address({ params }) {
+async function page({ params }) {
 
 
   if(params.address === ZERO_ADDRESS) {
@@ -73,4 +73,4 @@ async function Address({ params }) {
   );
 }
 
-export default Address;
+export default page;

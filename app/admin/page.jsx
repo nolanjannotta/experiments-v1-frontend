@@ -1,13 +1,18 @@
 "use client";
 import React, {useState} from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useWriteContract,useReadContracts , useReadContract, useBalance } from "wagmi";
 import ConnectSimple from "@/components/ConnectSimple";
 import { useQuery } from "@tanstack/react-query";
 import { contract,contractBase,publicClient } from "@/app/contract";
 import { formatEther, parseEther } from "viem";
-import { useWriteContract, useConfig} from 'wagmi'
-// import ABI from "../../app/"
+import splitterABI from "@/app/PaymentSplitter.json"
 
+// async function getTotalPlatformRoyalties() {
+//   const editionCounter = await contract.read.EDITION_COUNTER();
+//   for(let i = 1; i <= Number(editionCounter); i++) {
+
+//   }
+// }
 
 
 async function getAdminData() {
@@ -29,6 +34,43 @@ function Admin() {
     initialData: {},
   });
 
+  const balance = useBalance({
+    address: contractBase.address
+  });
+  
+  const readContracts = useReadContracts({
+      contracts: [
+        {
+          ...contractBase,
+          functionName: "OWNER"
+        },
+        {
+          ...contractBase,
+          functionName: "MINTER_ADDRESS"
+        },
+        {
+        ...contractBase,
+        functionName: "EDITION_COUNTER"
+        }
+      ]
+  })
+    const operations = []
+    for(let i = 1; i <= Number(readContracts.data[2].result); i++) {
+      operations.push({
+        ...contractBase,
+        functionName: "getEdition",
+        args: [i]
+      })
+    }
+
+  const totalRoyalties = useReadContracts({
+    contracts: operations
+  })
+
+  
+
+
+  console.log("royalties", totalRoyalties)
 
   const [inputState, setInputState] = useState({})
 
@@ -67,6 +109,13 @@ function Admin() {
         <p>balance: {formatEther(adminData.contractBalance)} eth</p>
         <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
       </fieldset>
+
+      <fieldset>
+        <legend>release Royalty</legend>
+        <p>balance: {formatEther(adminData.contractBalance)} eth</p> 
+        <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
+      </fieldset>
+
         <br/>
         <br/>
         <br/>

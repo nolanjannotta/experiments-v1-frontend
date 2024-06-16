@@ -75,7 +75,6 @@ export default function Stats({ data, tokenId, address }) {
         <article style={{ width: "100%" }}>
           <ul style={{ listStyleType: "none", padding:"0" }}>
             <li>
-              <p>
                 <b>&#11096; name</b>{": "}
                 <Link
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -84,13 +83,13 @@ export default function Stats({ data, tokenId, address }) {
                   {data?.editionName}
                 </Link>{" "}
                 #{tokenId % 1000000}
-              </p>
+             
             </li>
             <li>
-              <p> <b>&#11096; description</b>: {data?.metadata.description}</p>
+              <b>&#11096; description</b>: {data?.metadata.description}
             </li>
             <li>
-              <p><b>&#11096; token id</b>: {tokenId}</p>
+              <b>&#11096; token id</b>: {tokenId}
             </li>
 
             {data.metadata.attributes.length > 0 && (
@@ -100,8 +99,8 @@ export default function Stats({ data, tokenId, address }) {
                   <ul>
                     {data.metadata.attributes.map((attribute, i) => {
                       return (
-                        <li key={i}>
-                           {attribute.trait_type}: {attribute.value}
+                        <li  key={i}>
+                          {attribute.trait_type}: {attribute.value}
                         </li>
                       );
                     })}
@@ -118,7 +117,7 @@ export default function Stats({ data, tokenId, address }) {
             </li>
 
             <li>
-              <p>
+              
                 <b>&#11096; opensea</b>:{" "}
                 <a
                   target="_blank"
@@ -126,21 +125,17 @@ export default function Stats({ data, tokenId, address }) {
                 >
                   &#8599;
                 </a>
-              </p>
             </li>
             <li>
-              <p>
                 <b>&#11096; source code</b>:{" "}
                 <a target="_blank" href={`${data?.metadata.image}`}>
                   &#8599;
                 </a>
-              </p>
             </li>
 
             {data?.owner === account.address || !account.isConnected ? (
               <>
                 <li>
-                  <p>
                     <b>&#11096; transfer</b>:{" "}
                     <ConnectSimple label="connect to transfer" asAnchor={true} >
                       <>
@@ -157,12 +152,9 @@ export default function Stats({ data, tokenId, address }) {
                         </button>
                       </>
                     </ConnectSimple>
-                  </p>
                 </li>
                 <li>
-                  <p>
                     <b>&#11096; modify</b>: <Link href={`/modify/${tokenId}`}>&#9874;</Link>
-                  </p>
                 </li>
                 <li>
                   <b>&#11096; destroy</b>:{" "}

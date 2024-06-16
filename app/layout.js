@@ -46,28 +46,24 @@ export default function RootLayout({ children }) {
         </div>
         <nav>
           <ul>
-          {/* <li>&#10041;</li> */}
           <li>{coolShape()}</li>
         <li><Link href="/">home</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li><Link href="/browse">browse</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li><Link href="/modify">modify</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li className="mint"><Link href="/mint">mint</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li><Link href="/prints">prints</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li><Link href="/v2">v2</Link></li>
-        {/* <li>&#11096;</li> */}
         <li>{coolShape()}</li>
         <li><Link href="/owners">owners</Link></li>
-        {/* <li>&#10041;</li> */}
+        <li>{coolShape()}</li>
+        <li><Link href="/artist">artist</Link></li>
+        <li>{coolShape()}</li>
+        <li><Link href="/create">create</Link></li>
         <li>{coolShape()}</li>
         </ul>
         </nav>

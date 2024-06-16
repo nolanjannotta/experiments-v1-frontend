@@ -7,10 +7,13 @@ import { contract } from "../app/contract_server";
 
 async function getThumbnails() {
   const lastEdition = await contract.read.EDITION_COUNTER();
+  console.log(lastEdition)
   let uris = [];
   let editions = []
+
   
-  for (let i = 1; i <= 4; i++) {
+  
+  for (let i = 1; i <= (lastEdition <=4 ? lastEdition : 4); i++) {
     let randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);
     while(editions.includes(randomEdition)) {
       randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);

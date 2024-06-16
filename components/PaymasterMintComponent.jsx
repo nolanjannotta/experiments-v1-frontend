@@ -38,12 +38,17 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         },
       });
 
-        console.log("sponsoredStatus", sponsoredStatus)
+        // console.log("sponsoredStatus", sponsoredStatus)
 
     useEffect(() => {
         if(sponsoredStatus?.status === "CONFIRMED") {
             refetch()
-            setTokenId(fromHex(sponsoredStatus.receipts[0].logs[1].topics[3], "number"))
+            try {
+                setTokenId(fromHex(sponsoredStatus.receipts[0].logs[1].topics[3], "number"))
+            }
+            catch(e) {
+                setTokenId(fromHex(sponsoredStatus.receipts[0].logs[2].topics[3], "number"))
+            }
         }
 
         if(tx.isSuccess){
@@ -96,7 +101,10 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         )
     }
 
-    console.log(write.status, writes.status)
+    // console.log(write.status, writes.status)
+
+    let userRejected = (write.status === "error" || writes.status === "error") && (!(write.status === "pending" || writes.status === "pending") && !(write.status === "success" || writes.status === "success"))
+    // console.log("userRejected", userRejected)
 
   return (
 
@@ -104,7 +112,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         <button style={button} disabled={buttonDisabled} onClick={capabilities?.paymasterService && account.connector.name === "Coinbase Wallet" ? sponsorMint : mint}>&#x2606;&#x1D544;&#x1D55A;&#x1D55F;&#x1D565;&#x2606;</button>
         {/* {(write.status == "idle" || writes.status == "idle") && <br/>} */}
         {(write.status == "pending" || writes.status == "pending") && <p style={{marginTop: "0"}}>waiting for user confirmation</p>}
-        {(write.status === "error" || writes.status === "error") && <p style={{marginTop: "0"}}>user rejected transaction</p>}
+        {userRejected && <p style={{marginTop: "0"}}>user rejected transaction</p>}
 
         {(tx.isLoading || sponsoredStatus?.status === "PENDING") && <p style={{marginTop: "0"}}>transaction submitted!</p>}
 

@@ -18,6 +18,7 @@ export const contractBase = {
     abi: abi,
   };
   
+  
 export const contract = getContract({
     ...contractBase,
     client: config.getClient(),

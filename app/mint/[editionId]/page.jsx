@@ -17,17 +17,30 @@ async function mintPageData(editionId) {
 
   // const currentEditionId = await contract.read.EDITION_COUNTER();
   const edition = await contract.read.getEdition([editionId]);
-  // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
-  const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
-  
+  if(edition.counter === 0n) {
+    return{
+      image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGhlaWdodD0iMTAwMCIgd2lkdGg9IjEwMDAiPiA8cmVjdCBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI1IiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIj48L3JlY3Q+IDx0ZXh0IHg9IjUwMCIgeT0iNTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjUwIj4gQ09NSU5HIFNPT04uLi4gPC90ZXh0PiA8L3N2Zz4=",
+      edition,
+    }
+  }
 
-  const mostRecentOwner = await contract.read.ownerOf([editionId* 1000000n + edition.counter]);
+  else {
+    const image = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
+    return {image, edition};
+  }
+
+  // // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
+  // const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
 
 
-  let bufferObj = Buffer.from(lastToken.split("data:application/json;base64,")[1], "base64");
-  let metadata = JSON.parse(bufferObj.toString("utf-8"));
-  
-  return {edition, metadata, mostRecentOwner, editionId};
+  // const mostRecentOwner = await contract.read.ownerOf([editionId* 1000000n + edition.counter]);
+
+
+  // let bufferObj = Buffer.from(lastToken.split("data:application/json;base64,")[1], "base64");
+  // let metadata = JSON.parse(bufferObj.toString("utf-8"));
+  // console.log("metadata", metadata)
+
+  // return {edition, metadata, mostRecentOwner, editionId};
 
 }
 
@@ -42,9 +55,10 @@ function Mint({params}) {
   const {data, error, isLoading, refetch} = useQuery({
     queryKey: ["mintPageData"],
     queryFn: () => {return mintPageData(params.editionId)},
-    initialData: {edition: editionType, metadata: {}, mostRecentOwner: "", editionId: 0,  currentEditionId: 0}
+    initialData: {edition: editionType, image: ''}
   
   })
+
 
 
   const {data:lastEdition} = useQuery({
@@ -80,7 +94,7 @@ function Mint({params}) {
               <>
                 <Link
                   style={{ textDecoration: "none" }}
-                  href={`/browse/editions/${data?.editionId}`}
+                  href={`/browse/editions/${params.editionId}`}
                 >
                   {data.edition.name} &#8599;
                 </Link>
@@ -128,19 +142,19 @@ function Mint({params}) {
         
         <PaymasterMintComponent
           isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus}
-          editionId={data.editionId}
+          editionId={params.editionId}
           price={data.edition.price}
           refetch={refetch}
         />
 
         <figure style={galleryFig}>
           <img
-            src={data.metadata?.image}
+            src={data.image}
             alt="image loading..."
             width="500"
           ></img>
           <figcaption>
-            {isLoading ? "loading" : `"${data.metadata?.name}"`}
+            {isLoading ? "loading" : `${data.edition?.name}`}
           </figcaption>
         </figure>
       </section>

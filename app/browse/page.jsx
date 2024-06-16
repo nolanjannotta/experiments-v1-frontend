@@ -10,8 +10,16 @@ async function getEditions() {
   for (let i = 1; i <= Number(lastEdition); i++) {
     try{
         let edition = await contract.read.getEdition([i]);
-        let thumbnail = await contract.read.getDataUri([i * 1000000 + 1]);
-        allEditions.push({ edition, thumbnail });
+        if(edition.counter > 0) {
+          let thumbnail = await contract.read.getDataUri([i * 1000000 + 1]);
+          allEditions.push({ edition, thumbnail });
+ 
+        }
+        else {
+            allEditions.push({ edition, thumbnail: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGhlaWdodD0iMTAwMCIgd2lkdGg9IjEwMDAiPiA8cmVjdCBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI1IiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIj48L3JlY3Q+IDx0ZXh0IHg9IjUwMCIgeT0iNTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjUwIj4gQ09NSU5HIFNPT04uLi4gPC90ZXh0PiA8L3N2Zz4=" });
+        }
+
+        
     }
     catch(e){
         return{allEditions: [], error: true, errorMessage: e}

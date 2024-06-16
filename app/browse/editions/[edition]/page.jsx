@@ -128,6 +128,9 @@ function Gallery({params}) {
           if(key === "supply") {
             return <li  key={i}>&#x2022;  <b>max supply</b>: {" "}{Number(editionInfo[key])}</li>
           }
+          if(key === "artist") {
+            return <li  key={i}>&#x2022;  <b>artist</b>: {" "}<Link style={{textDecoration:"none"}} href={`/artist/${editionInfo[key]}`}>{truncateAddress(editionInfo[key])}</Link></li>
+          }
           if(key === "counter") {
             return <li  key={i}>&#x2022; <b>current supply</b>: {" "}{Number(editionInfo[key])}</li>
           }
