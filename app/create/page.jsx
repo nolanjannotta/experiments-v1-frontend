@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Link from 'next/link'
 
 function page() {
@@ -9,7 +9,7 @@ function page() {
       </header>
 
     <p>
-        Releasing art through this project is permissioned but open to anyone! If you're interested in creating and sharing your own 100% onchain art through this platform, please reach out and I&apos;ll help you get started!
+        Releasing art through this project is permissioned but open to anyone! If you&apos;re interested in creating and sharing your own 100% onchain art through this platform, please reach out and I&apos;ll help you get started!
 
     </p>
     <p>
@@ -17,7 +17,7 @@ function page() {
     </p>
     <br/>
     <p>
-        as an artist, you'll be in control of the following things: 
+        as an artist, you&apos;ll be in control of the following things: 
         <ul>
             <li>
                 setting the mint status of your edition <small>(active/inactive)</small>. All editions start as inactive by default. Can be toggled back and forth at any time.
