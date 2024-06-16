@@ -34,6 +34,36 @@ function Admin() {
     initialData: {},
   });
 
+
+
+  //   const operations = []
+  //   for(let i = 1; i <= Number(readContracts?.data[2].result); i++) {
+  //     operations.push({
+  //       ...contractBase,
+  //       functionName: "getEdition",
+  //       args: [i]
+  //     })
+  //   }
+
+  // const totalRoyalties = useReadContracts({
+  //   contracts: operations
+  // })
+
+
+
+
+  // console.log("royalties", totalRoyalties)
+
+  const [inputState, setInputState] = useState({})
+
+  const {writeContract, error} = useWriteContract();
+  const handleInputChange = (value, functionName, parameter) => {
+
+    setInputState((inputState) => {return {...inputState, [functionName]: {...inputState[functionName], [parameter]: value}}})
+  }
+
+  const account = useAccount();
+
   const balance = useBalance({
     address: contractBase.address
   });
@@ -54,33 +84,10 @@ function Admin() {
         }
       ]
   })
-    const operations = []
-    for(let i = 1; i <= Number(readContracts?.data[2].result); i++) {
-      operations.push({
-        ...contractBase,
-        functionName: "getEdition",
-        args: [i]
-      })
-    }
 
-  const totalRoyalties = useReadContracts({
-    contracts: operations
-  })
+  console.log("readContracts", readContracts)
 
-
-
-
-  console.log("royalties", totalRoyalties)
-
-  const [inputState, setInputState] = useState({})
-
-  const {writeContract, error} = useWriteContract();
-  const handleInputChange = (value, functionName, parameter) => {
-
-    setInputState((inputState) => {return {...inputState, [functionName]: {...inputState[functionName], [parameter]: value}}})
-  }
-
-  const account = useAccount();
+  
 
   if (!account.isConnected) {
     return (
