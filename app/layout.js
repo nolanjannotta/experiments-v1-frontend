@@ -55,6 +55,8 @@ export default function RootLayout({ children }) {
         <li>{coolShape()}</li>
         <li className="mint"><Link href="/mint">mint</Link></li>
         <li>{coolShape()}</li>
+        <li><Link href="/buySell">buy/sell</Link></li>
+        <li>{coolShape()}</li>
         <li><Link href="/prints">prints</Link></li>
         <li>{coolShape()}</li>
         <li><Link href="/v2">v2</Link></li>
@@ -65,6 +67,7 @@ export default function RootLayout({ children }) {
         <li>{coolShape()}</li>
         <li><Link href="/create">create</Link></li>
         <li>{coolShape()}</li>
+        
         </ul>
         </nav>
         </header>

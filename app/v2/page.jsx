@@ -68,6 +68,9 @@ function V2() {
               at any time. The exact bridge mechanism is still TBD.
             </li>
             <li>
+              build our own secondary marketplace that honors eip 2981 royalties and sends them to the correct payment splitter contract for each edition automatically during the transaction. 
+            </li>
+            <li>
               create an entirely new onchain SVG rendering system. for example having a single ultra efficient rendering 
               contract that returns the actual SVG code (written in yul or huff??). The art generator contracts will instead generate 
               a set of parameters or a compressed SVG string that is passed to the rendering contract. To go even further, there could be 

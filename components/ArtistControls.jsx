@@ -11,6 +11,7 @@ function ArtistControls({edition, index, editionId}) {
     const {address} = useAccount()
 
     const disabled = address !== edition.artist
+
     const {writeContract} = useWriteContract();
 
     const [input, setInput] = useState({
@@ -43,6 +44,9 @@ function ArtistControls({edition, index, editionId}) {
                 </button>
               </small>
             </span>
+          </li>
+          <li>
+            edition id: #{editionId}
           </li>
           <li>supply: {Number(edition.edition.counter)}/{Number(edition.edition.supply)}</li>
           <li>royalty percentage: {Number(edition.edition.royalty) / 100}%</li>
@@ -131,7 +135,7 @@ function ArtistControls({edition, index, editionId}) {
             </span>
           </li>
           <li>
-            <button onClick={() => 
+            <button disabled={!disabled} onClick={() => 
                     writeContract({ 
                     ...contractBase,
                     functionName: 'artistMint',
