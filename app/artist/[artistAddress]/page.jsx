@@ -28,7 +28,7 @@ async function getArtistEditions(artistAddress) {
   return artistEditions;
 }
 
-async function page({params}) {
+async function ArtistAddress({params}) {
 
   const artistEditions = await getArtistEditions(params.artistAddress);
   console.log(artistEditions)
@@ -61,6 +61,6 @@ async function page({params}) {
   )
 }
 
-export default page
+export default ArtistAddress
 
 

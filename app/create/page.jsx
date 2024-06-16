@@ -9,7 +9,7 @@ function page() {
       </header>
 
     <p>
-        Releasing art through this project is permissioned but open to anyone! If you're interested in creating and sharing your own 100% onchain art through this platform, please reach out and I'll help you get started!
+        Releasing art through this project is permissioned but open to anyone! If you're interested in creating and sharing your own 100% onchain art through this platform, please reach out and I&apos;ll help you get started!
 
     </p>
     <p>
@@ -32,8 +32,8 @@ function page() {
                 setting the royalty percentage for your edition.
             </li>
             <li>
-                setting the signature id for you edition <small>(optional)</small>. This uses edition #1 of this project <small>("signatures")</small> to "sign" each token in your edition. 
-                The signature id must be owned by the artist's address. The signature will appear in the bottom right corner of each token in your edition.
+                setting the signature id for you edition <small>(optional)</small>. This uses edition #1 of this project <small>(&apos;signatures&apos;)</small> to &apos;sign&apos; each token in your edition. 
+                The signature id must be owned by the artist&apos;s address. The signature will appear in the bottom right corner of each token in your edition.
             </li>
             <li>
                 artists are also able to mint their own editions through a special function. This bypasses the msg.value check and mint status check. This could be handy if

@@ -6,7 +6,7 @@ import {useAccount} from 'wagmi'
 import { useQuery,keepPreviousData } from "@tanstack/react-query";
 import { useRouter } from 'next/navigation'
 
-function page() {
+function Artist() {
     const router = useRouter()
     const {address} = useAccount()
 
@@ -22,7 +22,7 @@ function page() {
       <header>
         <h1>Artist</h1>
       </header>
-    <p>your #1 place to manage the editions that you've created.</p>
+    <p>your #1 place to manage the editions that you&apos;ve created.</p>
     <ConnectSimple label="connect" />
 
 
@@ -34,4 +34,4 @@ function page() {
   )
 }
 
-export default page
+export default Artist
