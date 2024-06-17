@@ -18,13 +18,13 @@ function Prints() {
         <p>
         As of now for this project though, this depends entirely
         on whether theres any interest whatsoever from collectors. If there is,
-        I will personally buy a printer and get this whole thing started.
+        I will personally invest in a printer and get this whole thing started.
       </p>
 
       <figure>
         <figcaption>Goals:</figcaption>
         <ul>
-          <li>Highest quality reasonably possible. (Epson P700 or P900)</li>
+          <li>Highest quality reasonably possible. <small>(Epson P700 or P900)</small></li>
           <li>
             All printing, packaging and shipping will be done by hand by me.
           </li>
@@ -32,7 +32,7 @@ function Prints() {
           <li>Ideally shipped anywhere in the world.</li>
           <li>
             The revenue from the prints will be split between the artist, the
-            owner of the piece being printed, and the printer. Percentages TBD.{" "}
+            owner of the piece being printed, and the platform/printer. Percentages TBD.
           </li>
           <li>Prints will be priced in Eth. </li>
           <li>
@@ -42,16 +42,15 @@ function Prints() {
           </li>
           <li>
             Will include the SVG code printed on the back or on a separate piece
-            of paper.{" "}
+            of paper.
           </li>
           <li>
             May include some sort of watermark or some kind of cryptographic
             signed message for authenticity.
           </li>
-          {/* <li>Will most likely not include an NFC chip.</li> */}
           <li>
-            Another idea is to go beyond just the minted tokens. Since the original code 
-            will be onchain forever, you can use that <i>exact</i> code (provenance) along with random seeds to create brand new outputs. 
+            Another idea is to go beyond just the minted tokens. Since the original code for the art 
+            will be onchain forever, you can use that <i>exact</i> program <small>(&#9734;provenance&#9734;)</small> along with random seeds to create brand new outputs. 
             One example is 1 of 1 generative stationary or post cards. Sold in packs. Send 1 of 1 physical 
             art to people you like! One downside of this though, is that you&apos;re arguably increasing the
             supply of the generative art, although you aren&apos;t increasing the supply of the onchain tokens.

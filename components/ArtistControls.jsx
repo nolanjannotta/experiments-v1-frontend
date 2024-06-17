@@ -1,7 +1,7 @@
 "use client"
 
 import React,{useState} from 'react'
-import {formatEther, parseEther} from "viem";
+import {formatEther, parseEther, isAddressEqual } from "viem";
 import {useAccount, useWriteContract} from "wagmi"
 import { contractBase } from "@/app/contract";
 import SplitterABI from "@/app/PaymentSplitter.json";
@@ -10,7 +10,8 @@ import Link from 'next/link';
 function ArtistControls({edition, index, editionId}) {
     const {address} = useAccount()
 
-    const disabled = address !== edition.artist
+
+    const disabled = !address || !edition.edition.artist || !isAddressEqual(address, edition.edition.artist)
 
     const {writeContract} = useWriteContract();
 
@@ -19,7 +20,6 @@ function ArtistControls({edition, index, editionId}) {
         price:0
     })
 
-    console.log(index)
     return (
       <section style={section}>
         <ul style={{ listStyle: "none" }}>
@@ -39,7 +39,7 @@ function ArtistControls({edition, index, editionId}) {
                     functionName: 'deleteEdition',
                     args: [index+1],
                 })
-            } disabled={!disabled || Number(edition.edition.counter) > 0}>
+            } disabled={disabled || Number(edition.edition.counter) > 0}>
                   delete
                 </button>
               </small>
@@ -61,7 +61,7 @@ function ArtistControls({edition, index, editionId}) {
                     args: [index+1, true],
                 })
 
-                } disabled={!disabled}>active</button>/
+                } disabled={disabled}>active</button>/
                 <button onClick={() => 
                     writeContract({ 
                     ...contractBase,
@@ -69,7 +69,7 @@ function ArtistControls({edition, index, editionId}) {
                     args: [index+1, false],
                 })
 
-                } disabled={!disabled}>inactive</button>
+                } disabled={disabled}>inactive</button>
               </small>
             </span>
           </li>
@@ -85,7 +85,7 @@ function ArtistControls({edition, index, editionId}) {
                     args: [address],
                 })
                     
-                } disabled={!disabled}>withdraw</button>
+                } disabled={disabled}>withdraw</button>
               </small>
             </span>
           </li>
@@ -101,7 +101,7 @@ function ArtistControls({edition, index, editionId}) {
 
               </input>
               <small>
-                <button disabled={!disabled} onClick={() => 
+                <button disabled={disabled} onClick={() => 
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setPrice',
@@ -124,7 +124,7 @@ function ArtistControls({edition, index, editionId}) {
                     })
               }}></input>
               <small>
-                <button disabled={!disabled} onClick={() => 
+                <button disabled={disabled} onClick={() => 
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setSignatureId',
@@ -135,7 +135,7 @@ function ArtistControls({edition, index, editionId}) {
             </span>
           </li>
           <li>
-            <button disabled={!disabled} onClick={() => 
+            <button disabled={disabled} onClick={() => 
                     writeContract({ 
                     ...contractBase,
                     functionName: 'artistMint',

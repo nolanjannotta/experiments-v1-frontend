@@ -68,7 +68,8 @@ function V2() {
               at any time. The exact bridge mechanism is still TBD.
             </li>
             <li>
-              build our own secondary marketplace that honors eip 2981 royalties and sends them to the correct payment splitter contract for each edition automatically during the transaction. 
+              build our own secondary marketplace that honors EIP 2981 royalties and automatically sends them to the correct payment splitter contract for each edition during the 
+              transaction. Sponsored transactions, zero percent platform fees <small>(aside from the platform fee on royalties)</small>.
             </li>
             <li>
               create an entirely new onchain SVG rendering system. for example having a single ultra efficient rendering 
