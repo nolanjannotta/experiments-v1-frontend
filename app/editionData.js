@@ -137,11 +137,15 @@ export const editionData = {
   "Black and white": {
     description: () => {
       return (
+        <>
+        
         <p>
-          A very simple experiment. It can be pointed to a token ID and returns
-          a black and white version of the image. Thats literally it. The owner must own the token
-          ID that it points to. These images will be blank by default.
+          A very simple experiment. It can be pointed to a token ID (from this project) and returns
+          a black and white version of the image. Thats literally it. 
         </p>
+
+        <p>&#9734; <b>note:</b> The owner must own the token ID that it points to. if not, nothing will be shown. These images are blank by default.&#9734;</p>
+        </>
       );
     },
     type: "experiment",

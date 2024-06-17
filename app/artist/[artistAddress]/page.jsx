@@ -43,14 +43,13 @@ async function ArtistAddress({params}) {
   return (
     <article>
       <header>
-        <h1>Artist: <small>{params.artistAddress}</small></h1>
+        <h4>Artist: <small>{params.artistAddress}</small></h4>
       </header>
+      <p>your #1 place to manage the editions that you&apos;ve created.</p>
       <br/>
 
       { artistEditions.map((edition, index) => {
         return <ArtistControls key={index} edition={edition} index={index} editionId={edition.editionId}/>
-        
-
       })
         
       }
