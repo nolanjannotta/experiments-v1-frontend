@@ -66,7 +66,7 @@ export default async function Home() {
             ArtBlocks
           </a> and others. One important difference however is that here, there will never
           be any offchain code, p5.js, javascript, ipfs, or URLs to servers. Raw SVG code is generated
-          and returned 100% onchain forever. This is a &apos;platform&apos; for sharing and minting generative onchain art/ideas. It's permissioned, but open to anyone! click <Link href="/create">here</Link> for more information. The goal of this project is to learn a lot, experiment 
+          and returned 100% onchain forever. This is a &apos;platform&apos; for sharing and minting generative onchain art/ideas. It&apos;s permissioned, but open to anyone! click <Link href="/create">here</Link> for more information. The goal of this project is to learn a lot, experiment 
           with onchain art and mechanics, demonstrate some possibilities of onchain SVGs, develop my personal style, and emerge with a set of
           tools and techniques to work with SVG in solidity to create onchain
           art. Then take what I&apos;ve learned and start thinking about a v2.
