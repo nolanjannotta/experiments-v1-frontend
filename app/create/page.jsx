@@ -1,4 +1,3 @@
-// import React from 'react'
 import Link from 'next/link'
 
 function page() {
@@ -15,9 +14,33 @@ function page() {
     <p>
     <a target="_blank" href="https://twitter.com/jannotta_nolan">twitter</a> || <a target="_blank" href="https://warpcast.com/nolanj">warpcast</a>
     </p>
+
     <br/>
     <p>
+        to create an edition, you&apos;ll need to provide the following information:
+    </p>
+    <ul>
+            <li>
+                a name for your edition.
+            </li>
+            <li>
+                a description of your edition.
+            </li>
+            <li>
+                The total supply of your edition.
+            </li>
+            <li>
+                address of the Art Generator contract. 
+            </li>
+            <li>
+                address of the artist. <small>(the address must be owned by the artist, this is used to change other setting for the edition. )</small>
+            </li>
+        </ul>
+        <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. This is so I can read the code and make sure it roughly aligns with the core values of Onchain-Experiments_V1™. </b></p>
+    <br/> 
+    <p>
         as an artist, you&apos;ll be in control of the following things: 
+    </p>
         <ul>
             <li>
                 setting the mint status of your edition <small>(active/inactive)</small>. All editions start as inactive by default. Can be toggled back and forth at any time.
@@ -42,8 +65,18 @@ function page() {
             </li>
         </ul>
 
+        <p>
         Obviously, this is all done onchain &#9786; these settings can be set <Link href="/artist">here</Link>. Connect your wallet and your editions will appear.
-    </p>
+
+        </p>
+
+        <h3>fees:</h3>
+
+        <p>
+            if you choose to charge eth for minting your edition, a 5-10% &apos;protocol fee&apos; is subtracted from your revenue. In addition, a 5-10% fee is applied to your royalty percentage. 
+            for example: you set a 10% royalty fee on your edition, the platform royalty fee is 5%. A token is sold for 1 eth, the royalty is .1 eth, artist keep .095 eth, platform keeps .005 eth.
+            This fee will help me continue to sponsor the gas fees for minting and other operations, keep the lights on, and continue to develop this project.
+        </p>
 
 
 

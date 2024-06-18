@@ -1,8 +1,6 @@
 // import {contract} from "../contract"
 import {artAddress} from "../constants"
 import Link from 'next/link'
-import { contract,publicClient } from "../contract_server";
-import {useAccount} from "wagmi";
 import { ZERO_ADDRESS } from "../constants";
 
 

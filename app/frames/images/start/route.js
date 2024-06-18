@@ -1,20 +1,21 @@
 import { ImageResponse } from "next/og";
 import Card from "@/components/Card";
-import {contract} from "@/app/contract_server";
 
-import {getThumbnails} from "@/app/frameConfig";
+import {getThumbnails, getUri} from "@/app/frameConfig";
  
 
 
 export async function GET(request) {
 
     const thumbnailEditions = [1,2,5,4]
-  
+    
     // const editionId = request.nextUrl.searchParams.get("editionId"); 
 // 
     // const thumbnail = await getStartImage(editionId);
 
     const thumbnails = await getThumbnails(thumbnailEditions);
+    const test = await getUri(1000006)
+    console.log("test", test)
   return new ImageResponse(
     (
       <Card>

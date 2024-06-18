@@ -8,7 +8,9 @@ import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import { baseSepolia } from 'viem/chains'
 import CustomConnect from '../../../components/CustomConnect'
-
+import {comingSoon} from "@/app/constants"
+import { useReadContract } from 'wagmi'
+import { contractBase } from '../../contract'
 
 async function mintPageData(editionId) {
   
@@ -19,7 +21,7 @@ async function mintPageData(editionId) {
   const edition = await contract.read.getEdition([editionId]);
   if(edition.counter === 0n) {
     return{
-      image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGhlaWdodD0iMTAwMCIgd2lkdGg9IjEwMDAiPiA8cmVjdCBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI1IiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIj48L3JlY3Q+IDx0ZXh0IHg9IjUwMCIgeT0iNTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjUwIj4gQ09NSU5HIFNPT04uLi4gPC90ZXh0PiA8L3N2Zz4=",
+      image: comingSoon,
       edition,
     }
   }
@@ -46,37 +48,62 @@ async function mintPageData(editionId) {
 
 
 
+
+
+
 function Mint({params}) {
 
+  const {data:edition, isLoading, isFetching, refetch} = useReadContract({
+      ...contractBase,
+      functionName: "getEdition",
+      args: [params.editionId],
+      query: {
+        placeholderData: editionType
+      }
+      
+  })
 
+  const {data:lastMintedUri} = useReadContract({
+    ...contractBase,
+    functionName: "getDataUri",
+    args: [Number(params.editionId) * 1000000 + Number(edition?.counter)]
+  })
 
-
-
-  const {data, error, isLoading, refetch} = useQuery({
-    queryKey: ["mintPageData"],
-    queryFn: () => {return mintPageData(params.editionId)},
-    initialData: {edition: editionType, image: ''}
-  
+  const {data: lastEdition} = useReadContract({
+    ...contractBase,
+    functionName: "EDITION_COUNTER",
   })
 
 
 
-  const {data:lastEdition} = useQuery({
-    queryKey: ["lastEdition"],
-    queryFn: async() => {
-        const lastEdition = await contract.read.EDITION_COUNTER();
-        return Number(lastEdition);
 
-    },
-    initialData: 0
+
+  // const {data, error, isLoading, refetch} = useQuery({
+  //   queryKey: ["mintPageData"],
+  //   queryFn: () => {return mintPageData(params.editionId)},
+  //   initialData: {edition: editionType, image: ''}
   
-  })
+  // })
+
+
+
+  // const {data:lastEdition} = useQuery({
+  //   queryKey: ["lastEdition"],
+  //   queryFn: async() => {
+  //       const lastEdition = await contract.read.EDITION_COUNTER();
+  //       return Number(lastEdition);
+
+  //   },
+  //   initialData: 0
+  
+  // })
 
  
   // const isPaused = !data.edition.mintStatus
-  const isEnded = data.edition.counter === data.edition.supply
+  const isEnded = edition.counter === edition.supply
 
-  const minting = data.edition.mintStatus && !isEnded
+  const minting = edition.mintStatus && !isEnded
+
 
 
   return (
@@ -87,31 +114,17 @@ function Mint({params}) {
       <section>
         <ul style={{ listStyleType: "none", padding: "0" }}>
           <li>
-            &nbsp;&nbsp;&#11096; name:{" "}
-            {isLoading ? (
-              "loading..."
-            ) : (
-              <>
-                <Link
-                  style={{ textDecoration: "none" }}
-                  href={`/browse/editions/${params.editionId}`}
-                >
-                  {data.edition.name} &#8599;
-                </Link>
-              </>
-            )}
+            &nbsp;&nbsp;&#11096; name: {isLoading ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition.name} &#8599;</Link>}
+          </li>
+          <li>&nbsp;&nbsp;&#11096; artist:  {isLoading ? <small>loading...</small>  : edition.artist}</li>
+          <li>
+            &nbsp;&nbsp;&#11096; current supply: {isLoading ? <small>loading...</small>  : Number(edition.counter)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; current supply:{" "}
-            {isLoading ? "loading..." : Number(data.edition.counter)}
+            &nbsp;&nbsp;&#11096; max supply: {isLoading ? <small>loading...</small>  : Number(edition.supply)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; max supply:{" "}
-            {isLoading ? "loading..." : Number(data.edition.supply)}
-          </li>
-          <li>
-            &nbsp;&nbsp;&#11096; price:{" "}
-            {isLoading ? "loading..." : formatEther(data.edition.price)} eth
+            &nbsp;&nbsp;&#11096; price: {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth
           </li>
           <li>
             &nbsp;&nbsp;&#11096; mint status:{" "}
@@ -128,9 +141,9 @@ function Mint({params}) {
             >
               {isLoading
                 ? "loading..."
-                : data.edition.counter === data.edition.supply
+                : edition.counter === edition.supply
                 ? "ended"
-                : data.edition.mintStatus
+                : edition.mintStatus
                 ? "active"
                 : "paused"}
             </span>
@@ -141,43 +154,29 @@ function Mint({params}) {
 
         
         <PaymasterMintComponent
-          isMinting={Number(data?.edition.counter < data.edition.supply) && data.edition.mintStatus}
+          isMinting={Number(edition.counter < edition.supply) && edition.mintStatus}
           editionId={params.editionId}
-          price={data.edition.price}
+          price={edition.price}
           refetch={refetch}
         />
 
         <figure style={galleryFig}>
           <img
-            src={data.image}
+            src={lastMintedUri}
             alt="image loading..."
             width="500"
           ></img>
           <figcaption>
-            {isLoading ? "loading" : `${data.edition?.name}`}
+            {isLoading ? "loading" : `${edition?.name}`}
           </figcaption>
         </figure>
       </section>
 
       <div style={navigation}>
-        <Link
-          href={`/mint/${
-            params.editionId > 1
-              ? Number(params.editionId) - 1
-              : params.editionId
-          }`}
-        >
-          previous
-        </Link>
-        <Link
-          href={`/mint/${
-            params.editionId < lastEdition
-              ? Number(params.editionId) + 1
-              : params.editionId
-          }`}
-        >
-          next
-        </Link>
+
+        { params.editionId > 1 && <Link  href={`/mint/${Number(params.editionId) - 1}`}>previous</Link>}
+
+        { params.editionId < lastEdition && <Link href={`/mint/${Number(params.editionId) + 1}`}>next</Link>}
       </div>
     </article>
   );

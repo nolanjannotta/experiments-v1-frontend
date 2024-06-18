@@ -28,7 +28,6 @@ export const revalidate = 30
 export default function RootLayout({ children }) {
 
 
-  const title = {}
   const favicon = (Date.now() % 2) + 1
   return (
     <html lang="en">
@@ -40,33 +39,21 @@ export default function RootLayout({ children }) {
       <body className={sourceCode.className}>
       
       <header>
-      <div style={title}>
+      <div>
         <br/>
         <h1 className="title">Onchain-Experiments_V1™</h1>
         </div>
         <nav>
           <ul>
-          <li>{coolShape()}</li>
-        <li><Link href="/">home</Link></li>
-        <li>{coolShape()}</li>
-        <li><Link href="/browse">browse</Link></li>
-        <li>{coolShape()}</li>
-        <li><Link href="/modify">modify</Link></li>
-        <li>{coolShape()}</li>
-        <li className="mint"><Link href="/mint">mint</Link></li>
-        <li>{coolShape()}</li>
-        {/* <li><Link href="/buySell">buy/sell</Link></li>
-        <li>{coolShape()}</li> */}
-        <li><Link href="/prints">prints</Link></li>
-        <li>{coolShape()}</li>
-        <li><Link href="/v2">v2</Link></li>
-        <li>{coolShape()}</li>
-        <li><Link href="/owners">owners</Link></li>
-        <li>{coolShape()}</li>
-        <li><Link href="/artist">artist</Link></li>
-        <li>{coolShape()}</li>
+        <li><Link href="/">home</Link> &nbsp;{coolShape()}</li>
+        <li><Link href="/browse">browse</Link> &nbsp;{coolShape()}</li>
+        <li><Link href="/modify">modify</Link> &nbsp;{coolShape()}</li>
+        <li><span className="mint"><Link href="/mint"> mint</Link></span> &nbsp;{coolShape()}</li>
+        <li><Link href="/prints">prints</Link> &nbsp;{coolShape()}</li>
+        <li><Link href="/v2">v2</Link> &nbsp;{coolShape()}</li>
+        <li><Link href="/owners">owners</Link> &nbsp;{coolShape()}</li>
+        <li><Link href="/artist">artist</Link> &nbsp;{coolShape()}</li>
         <li><Link href="/create">create</Link></li>
-        <li>{coolShape()}</li>
         
         </ul>
         </nav>

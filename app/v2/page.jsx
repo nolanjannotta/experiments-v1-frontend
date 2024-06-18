@@ -61,19 +61,17 @@ function V2() {
             <li>
               create a 2 way bridge between Base and L1 Mainnet. Users will be able to store their tokens on mainnet as a 
               kind of &quot;cold storage.&quot; {" "}
-              {/* (since L2s are technically centralized and have actually gone offline for a 
-              period of time in the past. unless im wrong about that. I&apos;m not saying Base has done this, but just L2s in general). */}
               Some people might want to consolidate their art collections on mainnet.
               They should be able to modify, sell and transfer on either chain, and can bridge back and forth 
               at any time. The exact bridge mechanism is still TBD.
             </li>
             <li>
               build our own secondary marketplace that honors EIP 2981 royalties and automatically sends them to the correct payment splitter contract for each edition during the 
-              transaction. Sponsored transactions, zero percent platform fees <small>(aside from the platform fee on royalties)</small>.
+              transaction. Sponsored transactions, zero percent platform fees <small>(aside from the platform fee on royalties set by the artist)</small>.
             </li>
             <li>
               create an entirely new onchain SVG rendering system. for example having a single ultra efficient rendering 
-              contract that returns the actual SVG code (written in yul or huff??). The art generator contracts will instead generate 
+              contract that returns the actual SVG code <small>(written in yul or huff?)</small>. The art generator contracts will instead generate 
               a set of parameters or a compressed SVG string that is passed to the rendering contract. To go even further, there could be 
               a higher level SVG specific language, framework or GUI that compiles down to solidity code that then creates the compressed svg strings, 
               and an online editor for artists to use to create their own art generator contracts. how cool would that be?

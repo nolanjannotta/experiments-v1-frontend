@@ -1,7 +1,7 @@
 "use server";
 
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
-import { contract, publicClient } from "../../contract_server";
+import { contract, publicClient } from "@/app/contract";
 import Stats from "./Stats";
 import sharp from "sharp";
 // import {FRAME_URL} from "@/app/constants.js";

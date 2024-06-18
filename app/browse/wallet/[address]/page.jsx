@@ -1,6 +1,6 @@
 // "use client";
 import React from "react";
-import { contract } from "../../../contract_server";
+import { contract } from "@/app/contract";
 import Link from "next/link";
 import { editionData } from "@/app/editionData";
 import {ZERO_ADDRESS} from "@/app/constants";

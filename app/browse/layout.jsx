@@ -11,7 +11,7 @@ export default function EditionLayout({ children }) {
   const [shapes, setShapes] = useState([])
 
   useEffect(() => {
-    setShapes(coolShapes(5))
+    setShapes(coolShapes(3))
 
   },[])
   const {address} = useAccount();
@@ -20,23 +20,14 @@ export default function EditionLayout({ children }) {
       <header style={{textAlign: "center"}}>
         <nav>
           <ul>
-            {/* <li>&#10041;</li> */}
-            <li>{shapes[0]}</li>
-            <li><Link href="/browse/search">search</Link></li>
-            {/* <li>&#11096;</li> */}
-            <li>{shapes[1]}</li>
-            <li><Link href="/browse/">all editions</Link></li>
-            {/* <li>&#11096;</li> */}
-            <li>{shapes[2]}</li>
-            <li><Link href="/browse/all">all mints</Link></li>
-            {/* <li>&#11096;</li> */}
-            <li>{shapes[3]}</li>
+            <li><Link href="/browse/search">search</Link> &nbsp;{shapes[0]}</li>
+            <li><Link href="/browse/">all editions</Link>&nbsp;{shapes[1]}</li>
+            <li><Link href="/browse/all">all mints</Link>&nbsp;{shapes[2]}</li>
             <li>
               <ConnectSimple label="connect to view your collection" asAnchor={true}>
                   <Link href={`/browse/wallet/${address}`}>my collection</Link>
               </ConnectSimple>
             </li>
-            <li>{shapes[4]}</li>
 
           </ul>
         </nav>

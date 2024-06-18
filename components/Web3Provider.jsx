@@ -11,7 +11,7 @@ export const config = createConfig({
   ssr: true,
   chains: [baseSepolia],
   transports: {
-    [baseSepolia.id]: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
+    [baseSepolia.id]: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
   },
   
   connectors: [
@@ -38,6 +38,8 @@ export const config = createConfig({
 const queryClient = new QueryClient();
 
 export const Web3Provider = ({ children }) => {
+
+  
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>

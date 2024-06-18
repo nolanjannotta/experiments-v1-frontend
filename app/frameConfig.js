@@ -6,7 +6,8 @@ import { baseSepolia } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
 // import sharp from 'sharp';
 import { artAddress } from "./constants";
-import { contract } from "./contract_server";
+import { contract } from "./contract";
+import { nonExistentToken } from "./constants";
 // import { Resvg } from "@resvg/resvg-js";
 
 // export const runtime = "edge"
@@ -32,32 +33,39 @@ const walletClient = createWalletClient({
 
 
   export async function getEdition(editionId) {
-    return await signerContract.read.getEdition([editionId])
+    return await contract.read.getEdition([editionId])
   } 
 
 
   export async function getEditionCounter() {
-    const counter = await signerContract.read.EDITION_COUNTER();
+    const counter = await contract.read.EDITION_COUNTER();
     return Number(counter);
   
   }
 
   export async function getUri(tokenId) {
     // HANDLE NOT EXISTING TOKENS
-    const image = await contract.read.getDataUri([tokenId])
+    try {
+      const image = await contract.read.getDataUri([tokenId])
     return image
+    }
+    catch(e) {
+      console.log("error", e)
+      return nonExistentToken
+    }
+    
     // const png = await FabricImage.fromURL(image);
     // return png.toDataURL();
   }
 
-  export async function getLastMint(editionId) {
-      !editionId && (editionId = await signerContract.read.EDITION_COUNTER())
-      // const lastEditionId = await signerContract.read.EDITION_COUNTER();
-      const lastEdition = await signerContract.read.getEdition([editionId]);
-    //   const lastToken = await signerContract.read.getRawSvg([(lastEditionId * 1000000n) + lastEdition.counter])
-    //   const lastUri = await signerContract.read.getDataUri([(lastEditionId * 1000000n) + lastEdition.counter])
-      return {editionId: BigInt(editionId), lastEdition}
-  }
+  // export async function getLastMint(editionId) {
+  //     !editionId && (editionId = await signerContract.read.EDITION_COUNTER())
+  //     // const lastEditionId = await signerContract.read.EDITION_COUNTER();
+  //     const lastEdition = await signerContract.read.getEdition([editionId]);
+  //   //   const lastToken = await signerContract.read.getRawSvg([(lastEditionId * 1000000n) + lastEdition.counter])
+  //   //   const lastUri = await signerContract.read.getDataUri([(lastEditionId * 1000000n) + lastEdition.counter])
+  //     return {editionId: BigInt(editionId), lastEdition}
+  // }
 
   export async function checkTxStatus(txHash) {
 

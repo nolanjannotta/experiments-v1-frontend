@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { getContract, formatEther} from "viem";
 import ArtistControls from '@/components/ArtistControls';
-import {contract, publicClient} from '@/app/contract_server'
+import {contract, publicClient} from '@/app/contract'
 import splitterABI from '@/app/PaymentSplitter.json'
 
 export const revalidate = 30
@@ -36,7 +36,7 @@ async function ArtistAddress({params}) {
   if(artistEditions.length === 0) {
     return(
       <article>
-      <h4>no editions found for this artist</h4>
+      <h4>no editions found for this address :(</h4>
       </article>
     )
   }

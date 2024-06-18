@@ -7,7 +7,7 @@ import {
   decodeFunctionData,
 } from "viem";
 import { baseSepolia } from "viem/chains";
-import { publicClient } from "../contract_server";
+import { publicClient } from "../contract";
 import {
   coinbaseSmartWalletABI,
   coinbaseSmartWalletProxyBytecode,

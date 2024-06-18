@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image';
 
-import { contract } from "../app/contract_server";
+import { contract } from "@/app/contract";
 
 
 async function getThumbnails() {
