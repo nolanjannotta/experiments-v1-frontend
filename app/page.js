@@ -64,9 +64,15 @@ export default async function Home() {
           <a target="_blank" href="https://www.artblocks.io/">
             {" "}
             ArtBlocks
-          </a> and others. One important different however is that here, there will never
+          </a> and others. One important difference however is that here, there will never
           be any offchain code, p5.js, javascript, ipfs, or URLs to servers. Raw SVG code is generated
-          and returned 100% onchain forever. These experiments are managed by a single ERC721{" "}
+          and returned 100% onchain forever. This is a &apos;platform&apos; for sharing and minting generative onchain art/ideas. It's permissioned, but open to anyone! click <Link href="/create">here</Link> for more information. The goal of this project is to learn a lot, experiment 
+          with onchain art and mechanics, demonstrate some possibilities of onchain SVGs, develop my personal style, and emerge with a set of
+          tools and techniques to work with SVG in solidity to create onchain
+          art. Then take what I&apos;ve learned and start thinking about a v2.
+        </p>
+        <p>
+        These experiments are managed by a single ERC721{" "}
           <Link href="/contracts/main">smart contract</Link> on the{" "}
           <a target="blank" href="https://www.base.org/">
             Base
@@ -75,11 +81,8 @@ export default async function Home() {
           &quot;edition&quot;) is linked to its own immutable{" "}
           <Link href="/contracts/artgenerator">ArtGenerator</Link> contract.
           This contract is in charge of generating the raw SVG code and any
-          attributes that this experiment may or may not have. The goal of this project is to learn a lot, experiment 
-          with onchain art and mechanics, demonstrate some possibilities of onchain SVGs, develop my personal style, and emerge with a set of
-          tools and techniques to work with SVG in solidity to create onchain
-          art. Then take what I&apos;ve learned and start thinking about a v2.
-        </p>
+          attributes that this experiment may or may not have.
+          </p>
         <br />
 
         <p>

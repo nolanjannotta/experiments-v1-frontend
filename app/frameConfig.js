@@ -6,30 +6,30 @@ import { baseSepolia } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
 // import sharp from 'sharp';
 import { artAddress } from "./constants";
-import { contract } from "./contract";
+import { contract, publicClient } from "./contract";
 import { nonExistentToken } from "./constants";
 // import { Resvg } from "@resvg/resvg-js";
 
 // export const runtime = "edge"
 
 
-const publicClient = createPublicClient({
-    chain: baseSepolia,
-    transport: http()
-})
+// const publicClient = createPublicClient({
+//     chain: baseSepolia,
+//     transport: http()
+// })
 
-const walletClient = createWalletClient({
-    chain: baseSepolia,
-    // transport: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
+// const walletClient = createWalletClient({
+//     chain: baseSepolia,
+//     // transport: http(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
     
-    transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
-  })
+//     transport: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
+//   })
   
-  export const signerContract = getContract({
-      address: artAddress,
-      abi: abi,
-      client: walletClient
-  })
+//   export const signerContract = getContract({
+//       address: artAddress,
+//       abi: abi,
+//       client: walletClient
+//   })
 
 
   export async function getEdition(editionId) {
@@ -96,26 +96,26 @@ const walletClient = createWalletClient({
   }
 
 
-  export async function mint(editionId, addressTo) {
+  // export async function mint(editionId, addressTo) {
 
-    const account = privateKeyToAccount(process.env.MINTING_KEY)
-    // const edition = await signerContract.read.EDITION_COUNTER();
-    const { request } = await walletClient.simulateContract({
-        address: artAddress,
-        abi: abi,
-        account,
-        functionName: 'mintTo',
-        args: [editionId, addressTo]
-      })
+  //   const account = privateKeyToAccount(process.env.MINTING_KEY)
+  //   // const edition = await signerContract.read.EDITION_COUNTER();
+  //   const { request } = await walletClient.simulateContract({
+  //       address: artAddress,
+  //       abi: abi,
+  //       account,
+  //       functionName: 'mintTo',
+  //       args: [editionId, addressTo]
+  //     })
 
-    return await  walletClient.writeContract(request)
-  }
+  //   return await  walletClient.writeContract(request)
+  // }
 
 
   export async function getThumbnails(editionIds) {
     let thumbnails = [];
     for(const editionId of editionIds) {
-      let edition = await contract.read.getEdition([editionId]);
+      let edition = await getEdition(editionId) //contract.read.getEdition([editionId]);
 
         const png = await getUri(editionId * 1000000 + 1);
   

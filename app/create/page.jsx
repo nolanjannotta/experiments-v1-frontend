@@ -73,9 +73,36 @@ function page() {
         <h3>fees:</h3>
 
         <p>
-            if you choose to charge eth for minting your edition, a 5-10% &apos;protocol fee&apos; is subtracted from your revenue. In addition, a 5-10% fee is applied to your royalty percentage. 
-            for example: you set a 10% royalty fee on your edition, the platform royalty fee is 5%. A token is sold for 1 eth, the royalty is .1 eth, artist keep .095 eth, platform keeps .005 eth.
+            if you set a mint price for your edition, a 5-10% &apos;protocol fee&apos; is subtracted from your revenue. In addition, a 5-10% fee is applied to your royalty percentage. 
+        <br/>
+        <br/>
+        for example:
+        </p>
+        <ul>
+            
+            <li>
+            you set a 10% royalty on your edition
+            </li>
+            <li>
+            platform royalty fee is 5%
+            </li>
+            <li>
+            A token is sold for 1 eth
+            </li>
+            <li>
+            total royalty is .1 eth
+            </li>
+            <li>
+            artist keep .095 eth
+            </li>
+            <li>
+            platform keeps .005 eth
+            </li>
+
+        </ul>
+        <p>
             This fee will help me continue to sponsor the gas fees for minting and other operations, keep the lights on, and continue to develop this project.
+
         </p>
 
 

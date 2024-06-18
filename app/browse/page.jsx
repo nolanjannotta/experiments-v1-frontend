@@ -1,7 +1,7 @@
 "use server";
 import Link from "next/link";
 // import { contract } from "../contract";
-import { contract } from "@/app/contract";
+import { contract, contractBase, publicClient } from "@/app/contract";
 import {comingSoon} from "@/app/constants"
 
 
@@ -11,6 +11,12 @@ async function getEditions() {
   for (let i = 1; i <= Number(lastEdition); i++) {
     try{
         let edition = await contract.read.getEdition([i]);
+        // let edition = await publicClient.readContract({
+        //   ...contractBase,
+        //   functionName: "getEdition",
+        //   args: [i]
+        // })
+        // console.log(edition)
         if(edition.counter > 0) {
           let thumbnail = await contract.read.getDataUri([i * 1000000 + 1]);
           allEditions.push({ edition, thumbnail });
