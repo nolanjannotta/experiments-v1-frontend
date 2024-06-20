@@ -39,6 +39,9 @@ function V2() {
                    <li>
                     cool new modern feature.
                     </li> 
+                    <li>
+                      captures the 𝓋𝒾𝒷𝑒 of crypto and web3
+                    </li>
                     
                     </ul>
                 <figcaption>con</figcaption>

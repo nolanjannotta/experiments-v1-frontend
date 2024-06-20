@@ -60,26 +60,27 @@ export default async function Home() {
         <p>
           Experiments V1 is a project where I learn, explore, and{" "}
           <i>experiment</i> with 100% onchain generative art and onchain
-          mechanics. This project is inspired by things like{" "}
+          mechanics. This project is inspired by platforms like{" "}
           <a target="_blank" href="https://www.artblocks.io/">
             {" "}
             ArtBlocks
           </a> and others. One important difference however is that here, there will never
           be any offchain code, p5.js, javascript, ipfs, or URLs to servers. Raw SVG code is generated
-          and returned 100% onchain forever. This is a &apos;platform&apos; for sharing and minting generative onchain art/ideas. It&apos;s permissioned, but open to anyone! click <Link href="/create">here</Link> for more information. The goal of this project is to learn a lot, experiment 
-          with onchain art and mechanics, demonstrate some possibilities of onchain SVGs, develop my personal style, and emerge with a set of
+          and returned 100% onchain forever. This is a &apos;platform&apos; for sharing and minting generative onchain art/ideas. It&apos;s permissioned, 
+          but open to anyone! click <Link href="/create">here</Link> for more information. The goal of this project is to learn a lot, experiment 
+          with onchain art and mechanics, demonstrate <i>some</i> possibilities of onchain SVGs, encourage other artists to get involved, develop my personal style, and emerge with a set of
           tools and techniques to work with SVG in solidity to create onchain
           art. Then take what I&apos;ve learned and start thinking about a v2.
         </p>
         <p>
-        These experiments are managed by a single ERC721{" "}
+        These &quot;experiment&quot; (also
+          &quot;edition&quot;) are managed by a single ERC721{" "}
           <Link href="/contracts/main">smart contract</Link> on the{" "}
           <a target="blank" href="https://www.base.org/">
             Base
           </a>{" "}
-          L2 blockchain. Each individual &quot;experiment&quot; (also
-          &quot;edition&quot;) is linked to its own immutable{" "}
-          <Link href="/contracts/artgenerator">ArtGenerator</Link> contract.
+          L2 blockchain. Each individual edition is linked to its own immutable{" "}
+          <Link href="/contracts/artgenerator">Art Generator</Link> contract.
           This contract is in charge of generating the raw SVG code and any
           attributes that this experiment may or may not have.
           </p>
@@ -96,8 +97,16 @@ export default async function Home() {
         </p>
 
         <br />
-
+        
         <p>
+          This project is my submission to{" "}
+          <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base&apos;s 
+          Onchain Summer Buildathon</a>.  To get this project started, I've created 
+          several editions that will be deployed and mintable as soon as this project is ready. I will continue to create and add 
+          new editions over time to develop my personal style and to show the possibilities of onchain SVG art and hopefully inspire others to get involved.
+        </p>
+
+        {/* <p>
           My original long term vision for this project is for each edition to be &quot;uploaded&quot;/deployed individually over
           time as I make them. Once a new edition is added, minting for the
           previous one will be paused. If the supply for a paused edition is not reached, the owner
@@ -106,15 +115,15 @@ export default async function Home() {
           mintable through this website as well as through a frame in warpcast.
           Depending on the demand, the owner may set a reasonable price and
           royalty for the remaining tokens and new editions.
-        </p>
-        <p>
+        </p> */}
+        {/* <p>
           However, this project is my submission to{" "}
           <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base&apos;s Onchain Summer Buildathon</a>. 
           {" "} Because of this, I will doing things a little differently. To start, all of my finished editions that I have ready by the deadline will be deployed and 
           added to the project at the same time. The supplies will be way higher to be more inclusive (2,000 - 4,000 per edition...TBD). 
           All editions will be mintable at the same time. They will still be completely free or extremely cheap. 
         
-          </p>
+          </p> */}
         <br />
 
         <p>
@@ -140,6 +149,33 @@ export default async function Home() {
         Below are some flowcharts that show the basic moving parts for some of
         functions in this project.{" "}
       </p>
+
+      <br/>
+      <br/>
+
+      <h3>Constructing the SVG images</h3>
+
+      <p>
+        when an SVG for a token id is being rendered by the main smart contract, it will first get the seed of the token, 
+        call the art generator contract to get the raw svg code, then insert the code into a blank 1000x1000 SVG template. 
+        If the artist chooses to add a signature, that will be added to the bottom of the SVG. By default it will be placed 
+        in the bottom right corner, the artist can change that by adding a <code>getSignatureTranslate()</code> function to the art generator contract (more info <Link href="/create">here</Link>).
+        The code that is returned from the art generator contract can be any valid SVG elements that can inside an SVG for example:
+
+      </p>
+      <ul>
+        <li>another SVG &#8594; {'<svg>...</svg>'}</li>
+        <li>a group of elements &#8594; {'<g> <rect/> <circle/> ... </g>'}</li>
+        <li>any other elements &#8594; {'<rect/> <circle/> ...'}</li>
+
+      </ul>
+
+      <div style={outline}>
+        <img src="/svgFlowChart.png" alt="svg flow chart"></img>
+      </div>
+
+
+
       <br />
       <br />
       <h3>Minting:</h3>
@@ -276,7 +312,7 @@ export default async function Home() {
 
 const outline = {
   border: "1px solid black",
-  padding: "1rem",
+  // padding: "1rem",
   margin: "1rem"
 }
 
