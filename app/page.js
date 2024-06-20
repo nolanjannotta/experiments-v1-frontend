@@ -73,8 +73,8 @@ export default async function Home() {
           art. Then take what I&apos;ve learned and start thinking about a v2.
         </p>
         <p>
-        These &quot;experiment&quot; (also
-          &quot;edition&quot;) are managed by a single ERC721{" "}
+        These &quot;experiments&quot; (also
+          &quot;editions&quot;) are managed by a single ERC721{" "}
           <Link href="/contracts/main">smart contract</Link> on the{" "}
           <a target="blank" href="https://www.base.org/">
             Base
@@ -101,7 +101,7 @@ export default async function Home() {
         <p>
           This project is my submission to{" "}
           <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base&apos;s 
-          Onchain Summer Buildathon 2024</a>.  To get this project started, I&apos;ve created 
+          Onchain Summer Buildathon 2024</a>.  To get it started, I&apos;ve created 
           several editions that will be deployed and mintable as soon as this project is ready. I will continue to create and add 
           new editions over time to develop my personal style and to show the possibilities of onchain SVG art and hopefully inspire others to get involved.
         </p>
