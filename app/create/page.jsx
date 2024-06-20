@@ -33,7 +33,7 @@ function page() {
                 address of the Art Generator contract. 
             </li>
             <li>
-                address of the artist. <small>(the address must be owned by the artist, this is used to change other setting for the edition. )</small>
+                address of the artist. <small>(the address must be controlled by the artist, this is used to change other setting for the edition. )</small>
             </li>
         </ul>
         <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. 
