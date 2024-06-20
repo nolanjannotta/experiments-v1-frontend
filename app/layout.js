@@ -28,9 +28,6 @@ const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]}
 
 export const revalidate = 30
 
-
-
-
 export default function RootLayout({ children }) {
 
 
@@ -40,13 +37,7 @@ export default function RootLayout({ children }) {
       <head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <link rel="icon" type="image/png" sizes="32x32" href={`/favicons/${favicon}.png`}/>
-      {/* <meta name="twitter:card" content="summary_large_image"/>
-      <meta property="twitter:domain" content="onchainexperiments.xyz"/>
-      <meta property="twitter:url" content="https://www.onchainexperiments.xyz/"/>
-      <meta name="twitter:title" content="Experiments V1"/>
-      <meta name="twitter:description" content="art experiments"/>
-      <meta name="twitter:image" content="https://www.onchainexperiments.xyz/api/ogImage"/> */}
-        
+
       </head>
 
       <body className={sourceCode.className}>
