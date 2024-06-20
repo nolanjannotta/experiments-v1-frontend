@@ -3,12 +3,13 @@
 import { getFrameMetadata } from "@coinbase/onchainkit/frame";
 import { contract, publicClient } from "@/app/contract";
 import Stats from "./Stats";
-import sharp from "sharp";
+import Link from "next/link";
+// import sharp from "sharp";
 // import {FRAME_URL} from "@/app/constants.js";
 import { artAddress } from "@/app/constants.js";
 import { baseScanUrl } from "@/app/constants.js";
 import Moralis from "moralis";
-import { base } from "viem/chains";
+// import { base } from "viem/chains";
 import { FRAME_URL } from "@/app/constants.js";
 await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY });
 
@@ -98,6 +99,7 @@ async function Token({ params }) {
   // }
   return (
     <>
+
       <Stats data={data} tokenId={params.tokenId} address={contract.address} />
 
       <article style={{ textAlign: "center" }}>

@@ -69,6 +69,23 @@ export default function Stats({ data, tokenId, address }) {
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <img src={data?.metadata.image} style={image} alt="loading..."></img>
+      <p>
+        <span><Link href={`./${Number(tokenId) - 1}`}>&#8592; previous</Link></span> 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span><Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link></span>
+      </p>
+      
+
+      {/* <nav style={{ margin: 0 }}>
+        <ul>
+          <li>
+            <Link href={`./${Number(tokenId) - 1}`}>&#8592; previous</Link>
+          </li>
+          <li>
+            <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
+          </li>
+        </ul>
+      </nav> */}
       <br />
       <br />
       {!data.error ? (
@@ -174,16 +191,7 @@ export default function Stats({ data, tokenId, address }) {
         </article>
       )}
 
-      <nav style={{ margin: 0 }}>
-        <ul>
-          <li>
-            <Link href={`./${Number(tokenId) - 1}`}>&#8592; previous</Link>
-          </li>
-          <li>
-            <Link href={`./${Number(tokenId) + 1}`}>next &#8594;</Link>
-          </li>
-        </ul>
-      </nav>
+
     </section>
   );
 }

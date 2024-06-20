@@ -17,7 +17,7 @@ function page() {
 
     <br/>
     <p>
-        to create an edition, you&apos;ll need to provide the following information:
+        To create an edition, you&apos;ll need to provide the following information:
     </p>
     <ul>
             <li>
@@ -36,10 +36,11 @@ function page() {
                 address of the artist. <small>(the address must be owned by the artist, this is used to change other setting for the edition. )</small>
             </li>
         </ul>
-        <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. This is so I can read the code and make sure it roughly aligns with the core values of Onchain-Experiments_V1™. </b></p>
+        <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. 
+            This is so I can read the code and make sure it roughly aligns with the core values of Onchain-Experiments_V1™ <small>(i.e. it as actually onchain)</small>.</b></p>
     <br/> 
     <p>
-        as an artist, you&apos;ll be in control of the following things: 
+        As an artist, you&apos;ll be in control of the following things: 
     </p>
         <ul>
             <li>
@@ -73,7 +74,7 @@ function page() {
         <h3>fees:</h3>
 
         <p>
-            if you set a mint price for your edition, a 5-10% &apos;protocol fee&apos; is subtracted from your revenue. In addition, a 5-10% fee is applied to your royalty percentage. 
+            if you set a mint price for your edition, a 5-10% &apos;protocol fee&apos; is subtracted from each mint transaction. In addition, a 5-10% fee is applied to your royalty percentage. 
         <br/>
         <br/>
         for example:
@@ -84,7 +85,7 @@ function page() {
             you set a 10% royalty on your edition
             </li>
             <li>
-            platform royalty fee is 5%
+            platform royalty fee is 5% <small>(5% of the total 10%)</small>
             </li>
             <li>
             A token is sold for 1 eth
@@ -101,7 +102,7 @@ function page() {
 
         </ul>
         <p>
-            This fee will help me continue to sponsor the gas fees for minting and other operations, keep the lights on, and continue to develop this project.
+            These small fees will help me continue to sponsor the gas costs for minting and other operations, keep the lights on, and continue to develop this project.
 
         </p>
 
