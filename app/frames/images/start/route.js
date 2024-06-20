@@ -21,7 +21,7 @@ export async function GET(request) {
       <Card>
         <h1 style={{ margin: "0" }}>Experiments-V1</h1>
         <p style={{ width: "80%", textAlign: "center", margin: "0" }}>
-          A collection of 100% onchain generative images. experimenting with onchain art
+          A platform for 100% onchain generative images. experimenting with onchain art
           and onchain mechanics.
         </p>
         <ul>
