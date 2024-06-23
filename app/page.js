@@ -157,7 +157,8 @@ export default async function Home() {
 
       <p>
         when an SVG for a token id is being rendered by the main smart contract, it will first get the seed of the token, 
-        call the art generator contract to get the raw svg code, then insert the code into a blank 1000x1000 SVG template. 
+        call the art generator contract to get the raw svg code, then insert the code into a blank 1000x1000 SVG template. At the top of the blank template,
+        the contract will add a {'<title>'} and {'<desc>'} element with the name and artist address of the edition.
         If the artist chooses to add a signature, that will be added to the bottom of the SVG. By default it will be placed 
         in the bottom right corner, the artist can change that by adding a <code>getSignatureTranslate()</code> function to the art generator contract (more info <Link href="/create">here</Link>).
         The code that is returned from the art generator contract can be any valid SVG elements that can inside an SVG for example:

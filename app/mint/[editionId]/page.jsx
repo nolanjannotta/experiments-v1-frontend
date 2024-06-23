@@ -12,6 +12,7 @@ import {comingSoon} from "@/app/constants"
 import { useReadContract } from 'wagmi'
 import { contractBase } from '../../contract'
 
+
 async function mintPageData(editionId) {
   
   editionId = BigInt(editionId);
@@ -67,6 +68,7 @@ function Mint({params}) {
     ...contractBase,
     functionName: "getDataUri",
     args: [Number(params.editionId) * 1000000 + Number(edition?.counter)]
+
   })
 
   const {data: lastEdition} = useReadContract({
@@ -124,7 +126,7 @@ function Mint({params}) {
             &nbsp;&nbsp;&#11096; max supply: {isLoading ? <small>loading...</small>  : Number(edition.supply)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; price: {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth
+            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth
           </li>
           <li>
             &nbsp;&nbsp;&#11096; mint status:{" "}
@@ -162,7 +164,7 @@ function Mint({params}) {
 
         <figure style={galleryFig}>
           <img
-            src={lastMintedUri}
+            src={lastMintedUri || comingSoon}
             alt="image loading..."
             width="500"
           ></img>

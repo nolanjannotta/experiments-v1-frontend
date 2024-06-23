@@ -47,7 +47,11 @@ export default function CustomConnect() {
              {account?.address.slice(0, 6) + "..." + account?.address.slice(-4)}
             </button>
           </div>
-          {!paymasterSupported ? <p style={message}>&#x2736;tip: connect with a <button style={button} onClick={openSmartWallet}>coinbase smart wallet</button> to pay <b style={{fontSize:"large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</p> : <p style={message}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</p>}
+          {!paymasterSupported 
+          ? 
+          <span style={{fontSize:"small"}}><b style={{fontSize:"large"}}>&#x2736; tip</b>: connect with a <button style={button} onClick={openSmartWallet}>coinbase smart wallet</button> to pay <b style={{fontSize:"x-large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</span> 
+          : 
+          <span style={{fontSize:"small"}}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</span>}
         </div>
       )}
     </div>
@@ -86,7 +90,7 @@ export default function CustomConnect() {
 
 const message = {
   marginTop:"0", 
-  fontSize:"small",
+  // fontSize:"small",
   textAlign:"center"
 }
 

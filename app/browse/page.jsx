@@ -56,6 +56,7 @@ export default async function Browse() {
           let ended = data.edition.counter >= data.edition.supply;
           let isMinting = !ended && data.edition.mintStatus;
           let paused = !ended && !data.edition.mintStatus;
+          if(data.edition.name === "") return
           return (
               <figure key={index} style={galleryFig}>
               <Link  href={`/browse/editions/${index + 1}`}>

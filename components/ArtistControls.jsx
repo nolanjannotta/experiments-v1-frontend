@@ -26,7 +26,7 @@ function ArtistControls({edition, index, editionId}) {
           <li>
             name: <Link
                   style={{ textDecoration: "none" }}
-                  href={`/browse/editions/${index+1}`}
+                  href={`/browse/editions/${editionId}`}
                 >
                   {edition.edition.name} &#8599;
                 </Link>
@@ -37,7 +37,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'deleteEdition',
-                    args: [index+1],
+                    args: [editionId],
                 })
             } disabled={disabled || Number(edition.edition.counter) > 0}>
                   delete
@@ -58,7 +58,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setMintStatus',
-                    args: [index+1, true],
+                    args: [editionId, true],
                 })
 
                 } disabled={disabled}>active</button>/
@@ -66,7 +66,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setMintStatus',
-                    args: [index+1, false],
+                    args: [editionId, false],
                 })
 
                 } disabled={disabled}>inactive</button>
@@ -105,7 +105,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setPrice',
-                    args: [index+1, input.signatureId],
+                    args: [editionId, input.signatureId],
                 })}>
                 set
                 </button>
@@ -128,7 +128,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'setSignatureId',
-                    args: [index+1, input.signatureId],
+                    args: [editionId, input.signatureId],
                 })
             }>set</button>
               </small>
@@ -139,7 +139,7 @@ function ArtistControls({edition, index, editionId}) {
                     writeContract({ 
                     ...contractBase,
                     functionName: 'artistMint',
-                    args: [index+1],
+                    args: [editionId],
                 })
             }>mint</button>
           </li>

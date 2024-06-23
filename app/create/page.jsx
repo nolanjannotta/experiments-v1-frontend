@@ -21,23 +21,23 @@ function page() {
     </p>
     <ul>
             <li>
-                a name for your edition.
+                name.
             </li>
             <li>
-                a description of your edition.
+                description.
             </li>
             <li>
-                The total supply of your edition.
+                total supply.
             </li>
             <li>
-                address of the Art Generator contract. 
+                art generator contract address. 
             </li>
             <li>
-                address of the artist. <small>(the address must be controlled by the artist, this is used to change other setting for the edition. )</small>
+                artist address. <small>(the address must be controlled by the artist, this is used to change settings for the edition. )</small>
             </li>
         </ul>
         <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. 
-            This is so I can read the code and make sure it roughly aligns with the core values of Onchain-Experiments_V1™ <small>(i.e. it as actually onchain)</small>.</b></p>
+            This is so I can read the code and make sure it roughly aligns with the core values of Onchain-Experiments_V1™ <small>(i.e. it as actually onchain and at least some effort was involved)</small>.</b></p>
     <br/> 
     <p>
         As an artist, you&apos;ll be in control of the following things: 
@@ -62,7 +62,7 @@ function page() {
             <li>
                 artists are also able to mint their own editions through a special function. This bypasses the msg.value check and mint status check. This could be handy if
                 you pause your edition near the end of the supply, but you want to mint and send token to a friend for example without needing 
-                to unpause and risking someone minting in front of you.  
+                to unpause and risking someone minting in front of you. Another possibility is to set the artist to a smart contract. This contract can have custom mint logic  using this special function. But, this can also bypass platform royalties.
             </li>
         </ul>
 
@@ -102,7 +102,7 @@ function page() {
 
         </ul>
         <p>
-            These small fees will help me continue to sponsor the gas costs for minting and other operations, keep the lights on, and continue to develop this project.
+            These small fees will help me continue to sponsor the gas costs for minting and other operations and continue to develop this project.
 
         </p>
 
