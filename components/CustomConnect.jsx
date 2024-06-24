@@ -21,9 +21,8 @@ export default function CustomConnect() {
  
 
   function openSmartWallet() {
-    const results = disconnect()
-    
-      connect({connector: connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]})
+    disconnect()
+    connect({connector: connectors.filter((connector)=> connector.name === "Coinbase Wallet")[0]})
 
   }
 
@@ -49,7 +48,7 @@ export default function CustomConnect() {
           </div>
           {!paymasterSupported 
           ? 
-          <span style={{fontSize:"small"}}><b style={{fontSize:"large"}}>&#x2736; tip</b>: connect with a <button style={button} onClick={openSmartWallet}>coinbase smart wallet</button> to pay <b style={{fontSize:"x-large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees!</span> 
+          <span style={{fontSize:"small"}}><b style={{fontSize:"large"}}>&#x2736; tip</b>: connect with a<button style={button} onClick={openSmartWallet}>coinbase smart wallet</button>to pay <b style={{fontSize:"x-large"}}>&#x1D56B;&#x1D556;&#x1D563;&#x1D560;</b> gas fees! <b style={{fontSize:"large"}}>&#x2736;</b></span> 
           : 
           <span style={{fontSize:"small"}}>&#x2736;smart wallet detected, enjoy your free transactions &#x2661;</span>}
         </div>
@@ -86,12 +85,6 @@ export default function CustomConnect() {
   //   </div>
 
   // )
-}
-
-const message = {
-  marginTop:"0", 
-  // fontSize:"small",
-  textAlign:"center"
 }
 
 const container = {

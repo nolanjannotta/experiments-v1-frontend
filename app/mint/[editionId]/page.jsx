@@ -126,7 +126,7 @@ function Mint({params}) {
             &nbsp;&nbsp;&#11096; max supply: {isLoading ? <small>loading...</small>  : Number(edition.supply)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth
+            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth <small style={{fontSize: "x-small"}}>100% off!</small>
           </li>
           <li>
             &nbsp;&nbsp;&#11096; mint status:{" "}

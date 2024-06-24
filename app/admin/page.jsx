@@ -28,11 +28,11 @@ async function getAdminData() {
 
 
 function Admin() {
-  const { data: adminData, error: adminError } = useQuery({
-    queryKey: ["adminData"],
-    queryFn: getAdminData,
-    initialData: {},
-  });
+  // const { data: adminData, error: adminError } = useQuery({
+  //   queryKey: ["adminData"],
+  //   queryFn: getAdminData,
+  //   initialData: {},
+  // });
 
 
 
@@ -75,18 +75,28 @@ function Admin() {
           functionName: "OWNER"
         },
         {
-          ...contractBase,
-          functionName: "MINTER_ADDRESS"
-        },
-        {
         ...contractBase,
         functionName: "EDITION_COUNTER"
         }
       ]
   })
 
-  console.log("readContracts", readContracts)
+  console.log("balance", balance)
 
+  // changeOwner
+  // setPlatformFee
+  // setPlatformRoyalty
+  // releasePlatformRoyalty
+  // createNewEdition
+  // withdraw
+
+  if(readContracts.isLoading) {
+    return (
+      <article>
+        <p>loading...</p>
+      </article>
+    )
+  }
   
 
   if (!account.isConnected) {
@@ -98,12 +108,11 @@ function Admin() {
     );
   }
 
-  if (account.address !== adminData.owner) {
+  if (account.address !== readContracts?.data[0]?.result) {
     return (
       <article>
-        <p>owner: {adminData.owner}</p>
-        <p>minter: {adminData.minter}</p>
-        <p>you are not the owner. gtfo</p>
+        <p>owner: {readContracts?.data[0]?.result}</p>
+        <p>you are not the owner.</p>
       </article>
     );
   }
@@ -113,106 +122,41 @@ function Admin() {
 
       <fieldset>
         <legend>withdraw</legend>
-        <p>balance: {formatEther(adminData.contractBalance)} eth</p>
+        <p>balance: {formatEther(balance.data.value)} eth</p>
         <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
-      </fieldset>
-
-      <fieldset>
-        <legend>release Royalty</legend>
-        <p>balance: {formatEther(adminData.contractBalance)} eth</p> 
-        <button onClick={() => writeContract({...contractBase, functionName: "withdraw"})}>withdraw</button>
-      </fieldset>
-
-        <br/>
-        <br/>
-        <br/>
-      <fieldset>
-        <legend>set minter address</legend>
-        <p>minter: {adminData.minter}</p>
-
-        <form>
-          <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setMinterAddress", "address")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setMinterAddress", args:[inputState["setMinterAddress"]?.address]})}>set minter</button>
       </fieldset>
       <br/>
+      <br/>
+      <fieldset>
+        <legend>release Royalty</legend>
+        <input placeholder="edition id"></input>
+        <button onClick={() => writeContract({...contractBase, functionName: "releasePlatformRoyalty"})}>withdraw</button>
+      </fieldset>
         <br/>
-        <br/> 
+        <br/>
       <fieldset>
         <legend>set new owner</legend>
-        <p>owner: {adminData.owner}</p>
+        <p>owner: {readContracts?.data[0]?.result}</p>
         <form>
           <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setNewOwner", "address")}}></input>
           
         </form>
         <button onClick={() => writeContract({...contractBase, functionName: "setOwner", args:[inputState["setNewOwner"]?.address]})}>set owner</button>
       </fieldset>
-      <br/>
-        <br/>
-        <br/>
-       
-      <fieldset>
-        <legend>set price for an edition</legend>
-        <form>
-          <input type="text" placeholder="edition Id" onChange={(e)=>{handleInputChange(e.target.value, "setPrice", "editionId")}}></input>
-          <input type="text" placeholder="price in eth" onChange={(e)=>{handleInputChange(e.target.value, "setPrice", "price")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setPrice", args:[inputState["setPrice"]?.editionId, parseEther(inputState["setPrice"]?.price)]})}>set price</button>
-      </fieldset>
-        <br/>
-        <br/>
-        <br/>
-
-      <fieldset>
-        <legend>toggle mint status</legend>
-        <form>
-          <input type="text" placeholder="edition Id" onChange={(e)=>{handleInputChange(e.target.value, "toggleMintStatus", "editionId")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setMintStatus", args:[inputState["toggleMintStatus"]?.editionId, true]})}>on</button>
-        <button onClick={() => writeContract({...contractBase, functionName: "setMintStatus", args:[inputState["toggleMintStatus"]?.editionId, false]})}>off</button>
-      </fieldset>
-        <br/>
-        <br/>
-        <br/>
-      <fieldset>
-        <legend>set global signature</legend>
-        <p>current signature: {Number(adminData.globalSignature)}</p>
-        <form>
-          <input type="text" placeholder="new signature id" onChange={(e)=>{handleInputChange(e.target.value, "setGlobalSignature", "signatureId")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setGlobalSignatureId", args:[inputState["setGlobalSignature"]?.signatureId]})}>set global signature</button>
-      </fieldset>
-        <br/>
         <br/>
         <br/>
       <fieldset>
         <legend>create new edition</legend>
         <form>
           <input type="text" placeholder="name" onChange={(e)=>{handleInputChange(e.target.value, "createNewEdition", "name")}}></input>
-          <input type="text" placeholder="desciption" onChange={(e)=>{handleInputChange(e.target.value, "createNewEdition", "description")}}></input>
+          <input type="text" placeholder="description" onChange={(e)=>{handleInputChange(e.target.value, "createNewEdition", "description")}}></input>
           <input type="text" placeholder="art generator address" onChange={(e)=>{handleInputChange(e.target.value, "createNewEdition", "artGeneratorAddress")}}></input>
           <input type="text" placeholder="total supply" onChange={(e)=>{handleInputChange(e.target.value, "createNewEdition", "totalSupply")}}></input>
           
         </form>
         <button>create edition</button>
       </fieldset>
-        <br/>
-        <br/>
-        <br/>
-      <fieldset>
-        <legend>set royalty info</legend>
-        <form>
-          <input type="text" placeholder="edition ID" onChange={(e)=>{handleInputChange(e.target.value, "setRoyaltyInfo", "editionId")}}></input>
-          <input type="text" placeholder="receiver" onChange={(e)=>{handleInputChange(e.target.value, "setRoyaltyInfo", "receiver")}}></input>
-          <input type="text" placeholder="basis points" onChange={(e)=>{handleInputChange(e.target.value, "setRoyaltyInfo", "basisPoint")}}></input>
-          
-        </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setRoyaltyInfo", args:[inputState["setRoyaltyInfo"]?.editionId,inputState["setRoyaltyInfo"]?.receiver, inputState["setRoyaltyInfo"]?.basisPoint]})}>set royalty info</button>
-      </fieldset>
+  
     </article>
   );
 }

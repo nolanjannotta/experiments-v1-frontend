@@ -77,7 +77,7 @@ function V2() {
               contract that returns the actual SVG code <small>(written in yul or huff?)</small>. The art generator contracts will instead generate 
               a set of parameters or a compressed SVG string that is passed to the rendering contract. To go even further, there could be 
               a higher level SVG specific language, framework or GUI that compiles down to solidity code that then creates the compressed svg strings, 
-              and an online editor for artists to use to create their own art generator contracts. how cool would that be?
+              and an online editor for artists to use to create their own art generator contracts. Basically anything to make it easier for artists to write creative code. how cool would that be?
 
             </li>
             <li>

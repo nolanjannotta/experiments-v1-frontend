@@ -50,7 +50,7 @@ function Prints() {
           </li>
           <li>
             Another idea is to go beyond just the minted tokens. Since the original code for the art 
-            will be onchain forever, you can use that <i>exact</i> program <small>(&#9734;provenance&#9734;)</small> along with random seeds to create brand new outputs. 
+            will be onchain forever, you can use that <i>exact</i> program <small>(&#9734;pRoVEnAnCe&#9734;)</small> along with random seeds to create brand new outputs. 
             One example is 1 of 1 generative stationary or post cards. Sold in packs. Send 1 of 1 physical 
             art to people you like! One downside of this though, is that you&apos;re arguably increasing the
             supply of the generative art, although you aren&apos;t increasing the supply of the onchain tokens.

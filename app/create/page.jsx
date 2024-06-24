@@ -21,19 +21,19 @@ function page() {
     </p>
     <ul>
             <li>
-                name.
+                name
             </li>
             <li>
-                description.
+                description
             </li>
             <li>
-                total supply.
+                total supply
             </li>
             <li>
-                art generator contract address. 
+                art generator contract address
             </li>
             <li>
-                artist address. <small>(the address must be controlled by the artist, this is used to change settings for the edition. )</small>
+                artist address <small>(the address must be controlled by the artist, this is used to change settings for the edition.)</small>
             </li>
         </ul>
         <p><b>note: this information cannot be changed afterwards. also, the art generator needs to be deployed and the code verified before hand. 
