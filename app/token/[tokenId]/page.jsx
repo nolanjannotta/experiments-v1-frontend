@@ -17,7 +17,7 @@ async function tokenData(tokenId) {
   try {
     const uri = await contract.read.tokenURI([tokenId]);
     const owner = await contract.read.ownerOf([tokenId]);
-    const editionName = await contract.read.getEdition([
+    const edition = await contract.read.getEdition([
       Math.floor(tokenId / 1000000),
     ]);
 
@@ -26,7 +26,7 @@ async function tokenData(tokenId) {
       "base64"
     );
     let metadata = JSON.parse(bufferObj.toString("utf-8"));
-    return { metadata, owner, error: false, editionName: editionName.name };
+    return { metadata, owner, error: false, edition: edition };
   } catch (e) {
     return { metadata: {}, owner: "", error: true };
   }

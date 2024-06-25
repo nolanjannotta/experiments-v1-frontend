@@ -11,14 +11,17 @@ function ArtistControls({edition, index, editionId}) {
     const {address} = useAccount()
 
 
-    const disabled = !address || !edition.edition.artist || !isAddressEqual(address, edition.edition.artist)
+    const disabled = !address || !edition.edition.artistAddress || !isAddressEqual(address, edition.edition.artistAddress)
 
+    console.log(edition)
     const {writeContract} = useWriteContract();
 
     const [input, setInput] = useState({
         signatureId:0,
-        price:0
+        price:0,
+        royalty: 0
     })
+
 
     return (
       <section style={section}>
@@ -46,10 +49,36 @@ function ArtistControls({edition, index, editionId}) {
             </span>
           </li>
           <li>
+            artist name: {edition.edition. artistName}
+          </li>
+          <li>
             edition id: #{editionId}
           </li>
           <li>supply: {Number(edition.edition.counter)}/{Number(edition.edition.supply)}</li>
-          <li>royalty percentage: {Number(edition.edition.royalty) / 100}%</li>
+          <li>royalty percentage: {Number(edition.edition.royalty) / 100}% {" "}
+
+          <span>
+          <input onChange={(e) => {
+                    setInput({
+                        ...input,
+                        royalty: e.target.value
+                    })
+              }}>
+
+              </input>
+          </span> 
+          <small>
+                <button onClick={() =>  writeContract({ 
+                    ...contractBase,
+                    functionName: 'setRoyaltyInfo',
+                    args: [editionId, input.royalty],
+                })
+                }> set</button>
+          </small>
+          {" "}<span style={{fontSize: "x-small"}}>(artist split: {Number(edition.artistSplit)} || platfrom split: {Number(edition.platformSplit)})</span>
+          
+          
+          </li>
           <li>
             mint status: {edition.edition.mintStatus ? "active" : "inactive"}{" "}
             <span>

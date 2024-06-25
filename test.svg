@@ -1,7 +1,188 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" height="1000" width="1000"><title>signatures #7</title><desc>art by 0x8f088eca0009ad61fb94a6d7e9a5d7a087c08564</desc><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" height="1000" width="1000"><polygon points="25,24 975,27 975,987 14,974 " fill="rgb(255, 255, 240)" stroke-width="7" stroke="rgb(30, 30, 30)"/><polygon points="104,144 862,140 855,878 113,884 " fill="rgba(91, 27, 98, .7)"/><polygon points="104,144 862,140 855,878 113,884 " stroke-width="4" stroke="rgb(30, 30, 30)" fill="none"/><path stroke="rgb(30, 30, 30)" fill="none" stroke-width="4" stroke-linecap="round" d="M50 553S375 388, 260 443S571 604, 416 566S599 556, 950 373"/></svg></svg>
-
-
-
-
-
-<path stroke="rgb(30, 30, 30)" fill="none" stroke-width="15" stroke-linecap="round" transform="translate(xValue yValue)scale(.1)" d="..."/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" height="100%" width="100%">
+	<title>
+		panels #45
+	</title>
+	<desc>
+		art by 0x8f088eca0009ad61fb94a6d7e9a5d7a087c08564
+	</desc>
+		<rect width="1000" height="1000" fill="#ffffff" />
+		<polygon fill="none" stroke="black" points="17,20 980,24 984,976 21,981 " />
+		<polygon fill="none" stroke="black" points="34,449 967,454 963,966 37,968 " />
+		<polygon fill="none" stroke="black" points="48,557 950,559 950,951 47,948 " />
+		<polygon fill="none" stroke="black" points="59,567 282,568 286,942 59,938 " />
+		<polygon fill="none" stroke="black" points="67,578 275,579 273,758 70,758 " />
+		<polygon fill="none" stroke="black" points="247,584 267,586 268,750 246,751 " />
+		<polygon fill="none" stroke="black" points="75,584 232,586 232,628 77,630 " />
+		<polygon fill="none" stroke="black" points="82,591 117,591 119,622 82,624 " />
+		<polygon fill="none" stroke="black" points="107,595 112,595 113,618 108,618 " />
+		<polygon fill="none" stroke="black" points="87,605 97,605 98,617 87,617 " />
+		<polygon fill="none" stroke="black" points="130,603 227,603 227,622 131,623 " />
+		<polygon stroke="black" fill="rgba(119, 29, 111, .6)" points="134,607 197,607 197,617 135,617 " />
+		<polygon stroke="black" fill="rgba(52, 94, 144, .6)" points="207,611 222,611 221,618 206,617 " />
+		<polygon fill="none" stroke="black" points="76,643 233,643 233,749 77,751 " />
+		<polygon fill="none" stroke="black" points="81,712 226,711 227,743 81,743 " />
+		<polygon fill="none" stroke="black" points="87,718 197,717 197,738 86,738 " />
+		<polygon fill="none" stroke="black" points="92,723 100,722 101,735 91,736 " />
+		<polygon fill="none" stroke="black" points="108,722 194,722 194,728 109,728 " />
+		<polygon stroke="black" fill="rgba(5, 26, 97, .6)" points="207,718 221,717 221,739 207,739 " />
+		<polygon fill="none" stroke="black" points="84,650 227,648 226,699 84,699 " />
+		<polygon fill="none" stroke="black" points="157,653 222,653 222,694 157,695 " />
+		<polygon stroke="black" fill="rgba(237, 17, 118, .6)" points="162,658 219,658 218,692 161,691 " />
+		<polygon fill="none" stroke="black" points="88,653 147,653 147,659 88,659 " />
+		<polygon stroke="black" fill="rgba(91, 154, 81, .6)" points="88,670 146,670 147,695 87,694 " />
+		<polygon fill="none" stroke="black" points="68,776 84,775 82,931 70,931 " />
+		<polygon fill="none" stroke="black" points="100,775 274,776 275,931 101,932 " />
+		<polygon fill="none" stroke="black" points="109,783 211,783 211,925 109,925 " />
+		<polygon fill="none" stroke="black" points="116,787 161,787 162,917 115,918 " />
+		<polygon stroke="black" fill="rgba(8, 101, 182, .6)" points="119,793 125,793 125,912 120,912 " />
+		<polygon fill="none" stroke="black" points="136,792 156,793 156,869 135,868 " />
+		<polygon fill="none" stroke="black" points="141,797 151,797 151,865 141,865 " />
+		<polygon fill="none" stroke="black" points="136,878 156,879 156,913 136,912 " />
+		<polygon fill="none" stroke="black" points="173,787 206,788 205,803 173,803 " />
+		<polygon fill="none" stroke="black" points="174,815 207,816 205,917 175,918 " />
+		<polygon stroke="black" fill="rgba(98, 209, 160, .6)" points="179,819 185,820 186,912 178,912 " />
+		<polygon stroke="black" fill="rgba(241, 201, 226, .6)" points="195,820 200,819 200,875 196,875 " />
+		<polygon fill="none" stroke="black" points="196,885 201,885 201,913 196,913 " />
+		<polygon fill="none" stroke="black" points="227,787 269,785 268,923 226,923 " />
+		<polygon fill="none" stroke="black" points="231,860 263,861 262,917 232,917 " />
+		<polygon fill="none" stroke="black" points="236,866 257,865 257,912 237,912 " />
+		<polygon fill="none" stroke="black" points="241,870 251,870 251,905 241,905 " />
+		<polygon fill="none" stroke="black" points="231,792 254,791 253,849 232,848 " />
+		<polygon fill="none" stroke="black" points="236,802 249,803 249,844 237,843 " />
+		<polygon fill="none" stroke="black" points="306,568 942,569 940,865 304,861 " />
+		<polygon fill="none" stroke="black" points="314,763 932,762 931,855 313,853 " />
+		<polygon fill="none" stroke="black" points="453,771 925,771 923,847 453,848 " />
+		<polygon fill="none" stroke="black" points="457,799 919,798 917,842 459,840 " />
+		<polygon fill="none" stroke="black" points="657,804 912,804 913,836 657,836 " />
+		<polygon stroke="black" fill="rgba(245, 79, 5, .6)" points="663,816 823,817 823,832 663,832 " />
+		<polygon fill="none" stroke="black" points="830,817 910,816 909,833 830,832 " />
+		<polygon fill="none" stroke="black" points="463,803 647,804 648,823 462,824 " />
+		<polygon fill="none" stroke="black" points="467,809 644,808 644,816 467,815 " />
+		<polygon fill="none" stroke="black" points="457,776 839,777 839,787 457,786 " />
+		<polygon fill="none" stroke="black" points="850,777 919,776 918,786 851,786 " />
+		<polygon fill="none" stroke="black" points="323,770 437,772 439,786 321,784 " />
+		<polygon fill="none" stroke="black" points="323,799 438,798 437,846 321,847 " />
+		<polygon fill="none" stroke="black" points="328,813 351,812 349,841 327,840 " />
+		<polygon fill="none" stroke="black" points="337,830 345,829 344,835 337,835 " />
+		<polygon fill="none" stroke="black" points="361,813 431,813 433,841 362,842 " />
+		<polygon fill="none" stroke="black" points="366,825 427,824 426,835 366,835 " />
+		<polygon fill="none" stroke="black" points="316,579 662,577 660,746 314,744 " />
+		<polygon fill="none" stroke="black" points="322,586 541,584 541,737 321,736 " />
+		<polygon fill="none" stroke="black" points="327,592 449,591 449,729 329,731 " />
+		<polygon fill="none" stroke="black" points="333,596 444,595 444,713 333,713 " />
+		<polygon fill="none" stroke="black" points="337,600 396,601 396,710 338,710 " />
+		<polygon fill="none" stroke="black" points="405,601 440,600 441,605 404,606 " />
+		<polygon stroke="black" fill="rgba(131, 65, 213, .6)" points="404,614 440,613 441,711 404,710 " />
+		<polygon fill="none" stroke="black" points="460,592 536,590 536,671 462,671 " />
+		<polygon fill="none" stroke="black" points="490,596 530,595 531,666 491,666 " />
+		<polygon fill="none" stroke="black" points="496,601 527,600 528,644 496,644 " />
+		<polygon fill="none" stroke="black" points="506,652 527,652 527,663 506,662 " />
+		<polygon fill="none" stroke="black" points="465,595 480,595 481,612 465,611 " />
+		<polygon fill="none" stroke="black" points="470,600 478,600 477,608 470,609 " />
+		<polygon fill="none" stroke="black" points="466,621 480,621 481,666 465,666 " />
+		<polygon fill="none" stroke="black" points="473,627 477,627 477,652 473,653 " />
+		<polygon fill="none" stroke="black" points="462,683 535,684 536,731 461,730 " />
+		<polygon fill="none" stroke="black" points="466,688 484,687 484,719 465,719 " />
+		<polygon fill="none" stroke="black" points="470,692 480,692 480,716 470,716 " />
+		<polygon fill="none" stroke="black" points="494,687 531,688 530,720 495,720 " />
+		<polygon stroke="black" fill="rgba(24, 195, 177, .6)" points="505,692 527,692 527,703 505,703 " />
+		<polygon fill="none" stroke="black" points="506,711 527,711 527,717 505,717 " />
+		<polygon fill="none" stroke="black" points="557,585 653,585 653,737 557,735 " />
+		<polygon fill="none" stroke="black" points="561,722 649,724 648,730 562,729 " />
+		<polygon fill="none" stroke="black" points="563,590 567,590 569,711 562,711 " />
+		<polygon fill="none" stroke="black" points="579,591 647,591 647,712 579,710 " />
+		<polygon fill="none" stroke="black" points="585,596 601,596 601,706 584,706 " />
+		<polygon fill="none" stroke="black" points="589,600 596,600 596,703 589,702 " />
+		<polygon fill="none" stroke="black" points="611,595 642,596 642,639 611,640 " />
+		<polygon fill="none" stroke="black" points="617,600 633,600 633,636 616,636 " />
+		<polygon fill="none" stroke="black" points="612,649 643,650 642,706 611,705 " />
+		<polygon fill="none" stroke="black" points="616,654 631,654 631,685 616,685 " />
+		<polygon fill="none" stroke="black" points="617,693 631,694 631,702 616,702 " />
+		<polygon fill="none" stroke="black" points="678,579 930,577 930,746 677,744 " />
+		<polygon stroke="black" fill="rgba(181, 245, 46, .6)" points="687,585 748,585 747,740 687,739 " />
+		<polygon stroke="black" fill="rgba(119, 202, 192, .6)" points="763,586 923,585 925,689 761,689 " />
+		<polygon fill="none" stroke="black" points="761,702 925,702 923,738 762,740 " />
+		<polygon fill="none" stroke="black" points="767,717 893,718 894,734 768,733 " />
+		<polygon fill="none" stroke="black" points="772,721 877,722 878,727 773,727 " />
+		<polygon fill="none" stroke="black" points="904,716 918,716 918,734 904,733 " />
+		<polygon fill="none" stroke="black" points="308,887 939,887 940,938 306,942 " />
+		<polygon fill="none" stroke="black" points="315,920 932,920 932,932 314,932 " />
+		<polygon fill="none" stroke="black" points="314,894 427,893 428,902 315,900 " />
+		<polygon fill="none" stroke="black" points="445,892 929,894 930,902 446,900 " />
+		<polygon fill="none" stroke="black" points="48,461 910,462 908,532 46,533 " />
+		<polygon fill="none" stroke="black" points="103,476 898,472 900,522 104,520 " />
+		<polygon fill="none" stroke="black" points="112,499 892,500 889,510 113,512 " />
+		<polygon stroke="black" fill="rgba(163, 89, 96, .6)" points="58,474 81,475 80,504 61,501 " />
+		<polygon fill="none" stroke="black" points="938,465 948,465 948,529 938,533 " />
+		<polygon fill="none" stroke="black" points="40,37 279,36 279,415 38,418 " />
+		<polygon fill="none" stroke="black" points="51,48 266,47 266,168 47,169 " />
+		<polygon stroke="black" fill="rgba(96, 196, 117, .6)" points="60,62 255,58 258,129 63,126 " />
+		<polygon fill="none" stroke="black" points="60,152 257,149 258,157 63,158 " />
+		<polygon fill="none" stroke="black" points="47,195 250,196 248,406 47,405 " />
+		<polygon fill="none" stroke="black" points="61,207 226,205 230,256 59,254 " />
+		<polygon stroke="black" fill="rgba(10, 111, 12, .6)" points="82,236 217,234 218,247 83,246 " />
+		<polygon fill="none" stroke="black" points="61,278 227,275 228,396 58,394 " />
+		<polygon stroke="black" fill="rgba(221, 74, 98, .6)" points="70,371 219,372 219,384 68,384 " />
+		<polygon fill="none" stroke="black" points="69,285 207,284 207,352 69,354 " />
+		<polygon fill="none" stroke="black" points="77,293 139,293 137,347 76,346 " />
+		<polygon fill="none" stroke="black" points="83,298 131,298 132,308 82,307 " />
+		<polygon stroke="black" fill="rgba(251, 178, 216, .6)" points="82,319 106,319 105,340 81,339 " />
+		<polygon stroke="black" fill="rgba(3, 79, 132, .6)" points="117,320 132,319 132,341 118,341 " />
+		<polygon stroke="black" fill="rgba(57, 196, 42, .6)" points="153,292 201,293 200,316 151,314 " />
+		<polygon stroke="black" fill="rgba(37, 183, 102, .6)" points="153,329 200,329 199,346 151,345 " />
+		<polygon fill="none" stroke="black" points="315,37 963,33 962,420 311,419 " />
+		<polygon fill="none" stroke="black" points="324,49 546,51 545,405 324,404 " />
+		<polygon fill="none" stroke="black" points="364,61 532,58 533,392 362,393 " />
+		<polygon fill="none" stroke="black" points="374,250 523,253 524,386 373,383 " />
+		<polygon fill="none" stroke="black" points="379,259 517,259 518,307 380,306 " />
+		<polygon fill="none" stroke="black" points="412,265 510,264 512,302 410,300 " />
+		<polygon stroke="black" fill="rgba(228, 73, 46, .6)" points="428,270 505,270 505,292 428,292 " />
+		<polygon stroke="black" fill="rgba(167, 14, 219, .6)" points="385,265 398,265 399,295 387,293 " />
+		<polygon fill="none" stroke="black" points="380,320 498,322 496,379 380,378 " />
+		<polygon stroke="black" fill="rgba(117, 210, 72, .6)" points="386,326 491,327 491,336 386,337 " />
+		<polygon stroke="black" fill="rgba(128, 217, 182, .6)" points="385,349 434,349 434,372 386,372 " />
+		<polygon fill="none" stroke="black" points="447,349 492,348 491,371 446,371 " />
+		<polygon fill="none" stroke="black" points="459,354 486,354 485,361 458,360 " />
+		<polygon stroke="black" fill="rgba(113, 88, 236, .6)" points="511,322 518,321 518,379 511,377 " />
+		<polygon fill="none" stroke="black" points="373,67 429,67 426,233 373,235 " />
+		<polygon stroke="black" fill="rgba(123, 17, 168, .6)" points="381,75 421,77 421,189 379,187 " />
+		<polygon fill="none" stroke="black" points="379,202 407,202 407,228 381,228 " />
+		<polygon fill="none" stroke="black" points="445,68 524,67 522,233 447,232 " />
+		<polygon fill="none" stroke="black" points="452,75 518,76 516,81 454,80 " />
+		<polygon fill="none" stroke="black" points="453,96 481,94 483,228 452,228 " />
+		<polygon fill="none" stroke="black" points="472,110 476,109 477,221 472,222 " />
+		<polygon stroke="black" fill="rgba(9, 195, 207, .6)" points="497,95 516,95 517,227 496,227 " />
+		<polygon fill="none" stroke="black" points="336,61 343,59 344,94 336,97 " />
+		<polygon fill="none" stroke="black" points="337,115 340,115 343,394 335,394 " />
+		<polygon fill="none" stroke="black" points="571,48 949,51 950,94 568,93 " />
+		<polygon fill="none" stroke="black" points="576,53 943,55 943,85 577,88 " />
+		<polygon fill="none" stroke="black" points="581,61 940,57 939,82 579,84 " />
+		<polygon fill="none" stroke="black" points="571,117 948,119 953,402 568,406 " />
+		<polygon fill="none" stroke="black" points="575,120 943,123 947,399 572,397 " />
+		<polygon fill="none" stroke="black" points="581,128 940,129 942,397 578,393 " />
+		<polygon fill="none" stroke="black" points="586,132 937,130 933,387 585,392 " />
+		<polygon fill="none" stroke="black" points="588,138 928,138 933,387 588,387 " />
+		<polygon fill="none" stroke="black" points="597,140 925,145 928,382 597,378 " />
+		<polygon fill="none" stroke="black" points="602,147 920,149 921,374 601,376 " />
+		<polygon fill="none" stroke="black" points="603,152 914,153 917,367 602,370 " />
+		<polygon fill="none" stroke="black" points="607,156 910,155 908,363 608,363 " />
+		<polygon fill="none" stroke="black" points="612,163 905,164 908,357 613,359 " />
+		<polygon fill="none" stroke="black" points="618,170 903,166 902,355 618,353 " />
+		<polygon fill="none" stroke="black" points="624,171 894,173 896,352 627,351 " />
+		<polygon fill="none" stroke="black" points="631,180 889,175 891,343 629,347 " />
+		<polygon fill="none" stroke="black" points="636,182 888,185 883,339 633,340 " />
+		<polygon fill="none" stroke="black" points="642,190 881,187 882,332 639,337 " />
+		<polygon fill="none" stroke="black" points="647,195 877,190 878,331 647,328 " />
+		<polygon fill="none" stroke="black" points="648,200 870,196 869,323 650,327 " />
+		<polygon fill="none" stroke="black" points="654,200 864,205 865,318 654,320 " />
+		<polygon fill="none" stroke="black" points="658,205 861,205 862,316 660,312 " />
+		<polygon fill="none" stroke="black" points="664,215 855,213 854,307 662,309 " />
+		<polygon fill="none" stroke="black" points="671,216 851,220 849,305 668,304 " />
+		<polygon fill="none" stroke="black" points="677,223 847,225 843,302 676,302 " />
+		<polygon fill="none" stroke="black" points="682,225 842,230 841,296 678,292 " />
+		<polygon fill="none" stroke="black" points="687,231 838,233 838,291 683,288 " />
+		<polygon fill="none" stroke="black" points="688,240 832,239 832,282 688,282 " />
+		<polygon fill="none" stroke="black" points="693,242 823,240 824,282 696,280 " />
+		<polygon fill="none" stroke="black" points="699,247 818,250 823,275 698,277 " />
+		<polygon fill="none" stroke="black" points="706,251 813,253 816,267 707,268 " />
+</svg>

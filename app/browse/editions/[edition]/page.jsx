@@ -102,55 +102,20 @@ function Gallery({params}) {
           <br />
         <nav>
         <ul>
-          <code>
             <small>
               <li>&#x2022; <b>edition: </b>#{params.edition}</li>
-
               <li>&#x2022; <b>type: </b>{editionData[editionInfo.name]?.type}</li>
+              <li>&#x2022; <b>name: </b>{editionInfo.name}</li>
+              <li>&#x2022; <b>description: </b>{editionInfo.description} </li>
+              <li>&#x2022; <b>max supply: </b>{Number(editionInfo.supply)} </li>
+              <li>&#x2022; <b>current supply: </b>{Number(editionInfo.counter)} </li>
+              <li>&#x2022; <b>art generator: </b><a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo.artGenerator}`} target="_blank">{truncateAddress(editionInfo?.artGenerator)} &#8599;</a></li>
+              <li>&#x2022; <b>price: </b>{formatEther(editionInfo.price)} eth </li>
+              <li>&#x2022; <b>royalty: </b>{Number(editionInfo.royalty) / 100}% </li>
+              <li>&#x2022; <b>artist: </b><Link style={{textDecoration:"none"}} href={`/artist/${editionInfo.artistAddress}`}>{editionInfo.artistName || truncateAddress(editionInfo?.artistAddress)}</Link></li>
+              <li>&#x2022; <b> public mint status: </b>{editionInfo.mintStatus ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : "paused"}</li>
 
-        {Object.keys(editionInfo).map((key, i) => {
-
-          if(key === "artGenerator") {
-            return <li key={i}>&#x2022; <b>art generator</b>: <a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo[key]}`} target="_blank">{editionInfo[key].slice(0, 6) +
-            "..." +
-            editionInfo[key].slice(-4)} &#8599;</a></li>
-            
-          }
-          if(key === "price") {
-            return <li  key={i}>&#x2022; <b>{key}</b>: {" "} {formatEther(editionInfo[key])} eth</li>
-          }
-          if (key === "royalty") {
-            return <li key={i}>&#x2022; <b>{key}</b>: {" "}{Number(editionInfo[key]) / 100}%</li>
-          }
-          if(key === "name") {
-            return <li  key={i}>&#x2022; <b>{key}</b>: {" "}{editionInfo[key]}</li>
-          }
-          if(key === "supply") {
-            return <li  key={i}>&#x2022;  <b>max supply</b>: {" "}{Number(editionInfo[key])}</li>
-          }
-          if(key === "artist") {
-            return <li  key={i}>&#x2022;  <b>artist</b>: {" "}<Link style={{textDecoration:"none"}} href={`/artist/${editionInfo[key]}`}>{truncateAddress(editionInfo[key])}</Link></li>
-          }
-          if(key === "counter") {
-            return <li  key={i}>&#x2022; <b>current supply</b>: {" "}{Number(editionInfo[key])}</li>
-          }
-          if(key === "description") {
-            return <li  key={i}>&#x2022; <b>{key}</b>: {" "}{editionInfo[key]}</li>
-          }
-
-          if(key === "mintStatus") {
-            if(editionInfo.counter === editionInfo.supply) {
-              return <li  key={i}>&#x2022; <b>mint status</b>: {"ended"}</li>
-            }
-            else {
-              return <li  key={i}>&#x2022; <b>public mint status</b>: {editionInfo[key] ? <Link style={{textDecoration: "none"}} href={`/mint/${params.edition}`}> active &#8599;</Link> : "paused"}</li>
-
-            }
-          }
-                    
-        })}
         </small>
-        </code>
         </ul>
         </nav>
         <br/>

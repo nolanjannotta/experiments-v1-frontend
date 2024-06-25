@@ -14,7 +14,7 @@ async function getArtistEditions(artistAddress) {
   let artistEditions = [];
   for (let i = 1; i <= Number(lastEdition); i++) {
     let edition = await contract.read.getEdition([i]);
-    if(edition.artist === artistAddress) {
+    if(edition.artistAddress === artistAddress) {
       
       const paymentSplitter = getContract({
         abi: splitterABI,
@@ -22,7 +22,10 @@ async function getArtistEditions(artistAddress) {
         client: publicClient
       })
       const releasable = await paymentSplitter.read.releasable([artistAddress]);
-      artistEditions.push({edition, releasable, editionId: i});
+      const artistSplit = await paymentSplitter.read.shares([artistAddress]);
+      const platformSplit = await paymentSplitter.read.shares([contract.address]);
+
+      artistEditions.push({edition, releasable, editionId: i, artistSplit, platformSplit});
     }
   }
   return artistEditions;

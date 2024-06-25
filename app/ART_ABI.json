@@ -180,9 +180,14 @@
                 "internalType": "address"
             },
             {
-                "name": "artist",
+                "name": "artistAddress",
                 "type": "address",
                 "internalType": "address"
+            },
+            {
+                "name": "artistName",
+                "type": "string",
+                "internalType": "string"
             }
         ],
         "outputs": [
@@ -206,30 +211,6 @@
         ],
         "outputs": [],
         "stateMutability": "nonpayable"
-    },
-    {
-        "type": "function",
-        "name": "dimensionsOfId",
-        "inputs": [
-            {
-                "name": "tokenId",
-                "type": "uint256",
-                "internalType": "uint256"
-            }
-        ],
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256",
-                "internalType": "uint256"
-            },
-            {
-                "name": "",
-                "type": "uint256",
-                "internalType": "uint256"
-            }
-        ],
-        "stateMutability": "view"
     },
     {
         "type": "function",
@@ -315,6 +296,11 @@
                         "internalType": "string"
                     },
                     {
+                        "name": "artistName",
+                        "type": "string",
+                        "internalType": "string"
+                    },
+                    {
                         "name": "supply",
                         "type": "uint256",
                         "internalType": "uint256"
@@ -323,21 +309,6 @@
                         "name": "counter",
                         "type": "uint256",
                         "internalType": "uint256"
-                    },
-                    {
-                        "name": "artGenerator",
-                        "type": "address",
-                        "internalType": "contract IArtGenerator"
-                    },
-                    {
-                        "name": "royaltyReceiver",
-                        "type": "address",
-                        "internalType": "address"
-                    },
-                    {
-                        "name": "artist",
-                        "type": "address",
-                        "internalType": "address"
                     },
                     {
                         "name": "royalty",
@@ -358,6 +329,21 @@
                         "name": "mintStatus",
                         "type": "bool",
                         "internalType": "bool"
+                    },
+                    {
+                        "name": "artGenerator",
+                        "type": "address",
+                        "internalType": "contract IArtGenerator"
+                    },
+                    {
+                        "name": "royaltyReceiver",
+                        "type": "address",
+                        "internalType": "address"
+                    },
+                    {
+                        "name": "artistAddress",
+                        "type": "address",
+                        "internalType": "address"
                     }
                 ]
             }

@@ -11,7 +11,7 @@ export default function Stats({ data, tokenId, address }) {
     const [transferData, setTransferData] = useState({ready: false, to: ""})
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
+    console.log(data)
     const image = {
         width: dimensions.width < dimensions.height ? "100%" : "40%",
         
@@ -46,7 +46,7 @@ export default function Stats({ data, tokenId, address }) {
   }
 
   async function destroy() {
-    let tokenName = `${data?.editionName} #${tokenId % 1000000}`
+    let tokenName = `${data?.edition.name} #${tokenId % 1000000}`
     let confirm = prompt(`You are about to permanently destroy ${tokenName}.\nThere is no coming back from this.\n\nType 'destroy' to confirm. (case sensitive)`)
     if(confirm != "destroy") {
       alert("destruction cancelled"); 
@@ -94,22 +94,25 @@ export default function Stats({ data, tokenId, address }) {
             <li>
                 <b>&#11096; name</b>{": "}
                 <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  style={{ textDecoration: "none"}}
                   href={`/browse/editions/${Math.floor(tokenId / 1000000)}`}
                 >
-                  {data?.editionName}
+                  {data?.edition.name}
                 </Link>{" "}
                 #{tokenId % 1000000}
              
             </li>
             <li>
-              <b>&#11096; description</b>: {data?.metadata.description}
+            <b>&#11096; artist</b>: <Link style={{ textDecoration: "none"}} href={`/artist/${data.edition.artistAddress}`}>{data?.edition.artistName || data?.edition.artistAddress}</Link>
+            </li>
+            <li>
+              <b>&#11096; description</b>: {data?.edition.description}
             </li>
             <li>
               <b>&#11096; token id</b>: {tokenId}
             </li>
 
-            {data.metadata.attributes.length > 0 && (
+            {data?.metadata.attributes.length > 0 && (
               <li>
                 <>
                   <b>&#11096; attributes</b>:

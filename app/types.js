@@ -7,6 +7,7 @@ export const editionType = {
     price: 0,
     royalty: 0,
     royaltyReceiver: "",
-    artist: "",
+    artistAddress: "",
+    artistName: "",
     supply: 0
 }
