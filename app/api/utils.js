@@ -18,6 +18,8 @@ import {
 import {artAddress} from "../constants";
 import ABI from "../ART_ABI.json";
 
+const availableFunctions = ["mint","modify", "safeTransferFrom",]
+
 export async function willSponsor({chainId,entrypoint,userOp}) {
   // check chain id
   if (chainId !== baseSepolia.id) return false;
@@ -79,7 +81,7 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
       abi: ABI,
       data: calls[callToCheckIndex].data,
     });
-    if (innerCalldata.functionName !== "mint" && innerCalldata.functionName !== "modify") return false;
+    if (!availableFunctions.includes(innerCalldata.functionName)) return false;
 
     return true;
   } catch (e) {
