@@ -18,7 +18,8 @@ import {
 import {artAddress} from "../constants";
 import ABI from "../ART_ABI.json";
 
-const availableFunctions = ["mint","modify", "safeTransferFrom",]
+
+const availableFunctions = ["mint","modify", "safeTransferFrom"]
 
 export async function willSponsor({chainId,entrypoint,userOp}) {
   // check chain id
@@ -81,6 +82,8 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
       abi: ABI,
       data: calls[callToCheckIndex].data,
     });
+
+    console.log(innerCalldata.functionName)
     if (!availableFunctions.includes(innerCalldata.functionName)) return false;
 
     return true;
