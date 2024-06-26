@@ -2,9 +2,11 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {useAccount, useWriteContract} from "wagmi";
+import {useWriteContracts} from 'wagmi/experimental'
 import { contractBase } from "../../contract";
 import { isAddress } from "viem";
 import ConnectSimple from "../../../components/ConnectSimple";
+import useGetCapabilities from "@/hooks/useGetCapabilities";
 
 
 export default function Stats({ data, tokenId, address }) {
@@ -25,8 +27,26 @@ export default function Stats({ data, tokenId, address }) {
 
     },[])
 
+    const capabilities = useGetCapabilities(account)
+
+
     const write = useWriteContract();
 
+    const writes = useWriteContracts();
+
+
+    async function sponsorTransfer() {
+      writes.writeContracts({
+        contracts: [
+          {
+            ...contractBase,
+            functionName: "safeTransferFrom",
+            args: [account.address, transferData.to, tokenId],
+          },
+        ],
+        capabilities
+      })
+    }
     async function transfer() {
       write.writeContract({
           ...contractBase,
@@ -61,6 +81,9 @@ export default function Stats({ data, tokenId, address }) {
 
     }
   }
+
+
+  const sponsorable = account.connector?.name === "Coinbase Wallet" && capabilities?.paymasterService
 
 
 
@@ -166,7 +189,7 @@ export default function Stats({ data, tokenId, address }) {
                         <button
                           style={button}
                           disabled={!transferData.ready}
-                          onClick={() => transfer()}
+                          onClick={sponsorable ? sponsorTransfer : transfer}
                         >
                           &#x2709;
                         </button>
