@@ -83,7 +83,7 @@ export const editionData = {
     seed:[],
     modify: []
   },
-  "rectangular clock": {
+  "Clock": {
     description: () => {
       return (
         <>
@@ -124,7 +124,7 @@ export const editionData = {
     modifiable: true,
     seedSections: [0, 1, 5, 9, 32],
     seedTypes: ["number", "number", "number", "string"],
-    
+
     seed: [
         {name: "timeZoneOffset", type: "uint8" },
         {name: "selfId", type: "uint32"},
@@ -137,7 +137,7 @@ export const editionData = {
         {name: "location", type: "string" },
     ]
   },
-  "Black and white": {
+  "Black and White": {
     description: () => {
       return (
         <>
