@@ -1,4 +1,4 @@
-export const artAddress = "0xCB6ba303A5825D5a46357FFdd558c6E3e272c98C"; // mainnet!! woohoo!
+export const artAddress = "0x952BbDED48D7662Abb25A8CdF7541663CA992B88"; // mainnet!! woohoo!
 
 export const ZERO_ADDRESS= "0x0000000000000000000000000000000000000000"
 
