@@ -109,7 +109,7 @@ function Gallery({params}) {
               <li>&#x2022; <b>description: </b>{editionInfo.description} </li>
               <li>&#x2022; <b>max supply: </b>{Number(editionInfo.supply)} </li>
               <li>&#x2022; <b>current supply: </b>{Number(editionInfo.counter)} </li>
-              <li>&#x2022; <b>art generator: </b><a style={{textDecoration:"none"}} href={`https://sepolia.basescan.org/address/${editionInfo.artGenerator}`} target="_blank">{truncateAddress(editionInfo?.artGenerator)} &#8599;</a></li>
+              <li>&#x2022; <b>art generator: </b><a style={{textDecoration:"none"}} href={`https://basescan.org/address/${editionInfo.artGenerator}`} target="_blank">{truncateAddress(editionInfo?.artGenerator)} &#8599;</a></li>
               <li>&#x2022; <b>price: </b>{formatEther(editionInfo.price)} eth </li>
               <li>&#x2022; <b>royalty: </b>{Number(editionInfo.royalty) / 100}% </li>
               <li>&#x2022; <b>artist: </b><Link style={{textDecoration:"none"}} href={`/artist/${editionInfo.artistAddress}`}>{editionInfo.artistName || truncateAddress(editionInfo?.artistAddress)}</Link></li>

@@ -75,7 +75,7 @@ function ArtistControls({edition, index, editionId}) {
                 })
                 }> set</button>
           </small>
-          {" "}<span style={{fontSize: "x-small"}}>(artist split: {Number(edition.artistSplit)} || platfrom split: {Number(edition.platformSplit)})</span>
+          {" "}<span style={{fontSize: "x-small"}}>(artist split: {Number(edition.artistSplit)} || platform split: {Number(edition.platformSplit)})</span>
           
           
           </li>
