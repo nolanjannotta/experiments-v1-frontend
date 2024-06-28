@@ -11,7 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { editionData } from "@/app/editionData";
 import ConnectSimple from "@/components/ConnectSimple";
 import useGetCapabilities from "@/hooks/useGetCapabilities";
-import { decodeAbiParameters, encodeAbiParameters,toBytes} from "viem";
+import { decodeAbiParameters, encodeAbiParameters,toBytes, slice, fromHex, trim} from "viem";
 import Link from 'next/link'
 
 
@@ -34,6 +34,32 @@ async function decodeSeed(tokenId, editionName) {
     editionData[editionName]?.seed,
     unPacked
   );
+  
+  
+  // const testValues = []
+
+  // for(let i=0; i<editionData[editionName].seedSections.length-1; i++){
+  //   const start = editionData[editionName].seedSections[i]
+  //   const end = editionData[editionName].seedSections[i+1]
+  //   const type = editionData[editionName].seedTypes[i]
+    
+    
+  //   let sliced = slice(seed, start, end)
+    
+  //   // type == "string" && (sliced = trim(sliced))
+  //   if(type === "string") {
+  //     sliced = trim(sliced, {dir: "right"})
+  //     console.log("sliced", sliced)
+  //   }
+  //   const result = fromHex(sliced, type)
+
+  //   testValues.push(result)
+  // }
+
+
+  // console.log("testValues", testValues)
+
+
   let data = {}
   values.forEach((value, index)=>{
     data[editionData[editionName].seed[index].name] = value

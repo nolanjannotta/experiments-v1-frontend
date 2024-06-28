@@ -122,6 +122,9 @@ export const editionData = {
     },
     type: "experiment",
     modifiable: true,
+    seedSections: [0, 1, 5, 9, 32],
+    seedTypes: ["number", "number", "number", "string"],
+    
     seed: [
         {name: "timeZoneOffset", type: "uint8" },
         {name: "selfId", type: "uint32"},

@@ -2,7 +2,7 @@
 import { getContract,  http,webSocket,createWalletClient,createPublicClient,getTransactionConfirmations,fromHex, createClient  } from "viem";
 import { privateKeyToAccount } from 'viem/accounts'
 import abi from "./ART_ABI.json";
-import { baseSepolia } from "wagmi/chains";
+import { baseSepolia,base } from "wagmi/chains";
 import {FabricImage} from 'fabric/node'; // v6
 // import sharp from 'sharp';
 import { artAddress } from "./constants";

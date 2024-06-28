@@ -7,29 +7,37 @@ import { contract } from "@/app/contract";
 
 async function getThumbnails() {
   const lastEdition = await contract.read.EDITION_COUNTER();
+  const name = await contract.read.name();
+  console.log(name)
   console.log(lastEdition)
   let uris = [];
   let editions = []
+  let ids = []
 
   
   
   for (let i = 1; i <= (lastEdition <=4 ? lastEdition : 4); i++) {
     let randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);
-    while(editions.includes(randomEdition)) {
+    let edition = await contract.read.getEdition([randomEdition]);
+    while(ids.includes(randomEdition) || edition.counter === 0n) {
       randomEdition = Math.floor(Math.random() * Number(lastEdition) + 1);
+      edition = await contract.read.getEdition([randomEdition]);
     }
-    editions.push(randomEdition)
+    // editions.push(randomEdition)
+    editions.push(edition)
+    ids.push(randomEdition)
   }
 
-  for(const edition of editions) {
-    const editionData = await contract.read.getEdition([edition]);
-    const tokenId = Math.floor(Math.random() * Number(editionData.counter)) + 1;
+
+  for(const index of editions.keys()) {
+    // const editionData = await contract.read.getEdition([edition]);
+    const tokenId = Math.floor(Math.random() * Number(editions[index].counter)) + 1;
     try {
-      let thumbnail = await contract.read.getDataUri([edition * 1000000 + tokenId]);
+      let thumbnail = await contract.read.getDataUri([ids[index] * 1000000 + tokenId]);
       uris.push(thumbnail);
     }
     catch(e) {
-      console.log(e)
+      // console.log(e)
     }
   }
   return uris;

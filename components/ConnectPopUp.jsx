@@ -2,7 +2,7 @@
 import React, {useRef} from "react"
 import { useDisconnect, useConnect, useBalance, useSwitchChain } from "wagmi"
 import { formatEther } from "viem"
-import { baseSepolia } from "viem/chains"
+import { baseSepolia,base } from "viem/chains"
 
 
 
@@ -49,9 +49,9 @@ export default function ConnectPopUp({ show, setShow, account}) {
                     
                     </p>
 
-                {account.chainId !== baseSepolia.id && <><button style={button} onClick={() =>switchChain({chainId: 84532})}>switch chains</button><br/></>}
+                {account.chainId !== base.id && <><button style={button} onClick={() =>switchChain({chainId: 84532})}>switch chains</button><br/></>}
                 
-                {account.chainId === baseSepolia.id && balance.data?.value && <p style={{padding:"0"}}>balance: {formatEther(balance.data?.value)} eth</p>}
+                {account.chainId === base.id && balance.data?.value && <p style={{padding:"0"}}>balance: {formatEther(balance.data?.value)} eth</p>}
                  
 
 

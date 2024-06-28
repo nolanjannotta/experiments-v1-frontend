@@ -6,7 +6,7 @@ import {
   decodeAbiParameters,
   decodeFunctionData,
 } from "viem";
-import { baseSepolia } from "viem/chains";
+import { baseSepolia,base } from "viem/chains";
 import { publicClient } from "../contract";
 import {
   coinbaseSmartWalletABI,
@@ -23,7 +23,7 @@ const availableFunctions = ["mint","modify", "safeTransferFrom"]
 
 export async function willSponsor({chainId,entrypoint,userOp}) {
   // check chain id
-  if (chainId !== baseSepolia.id) return false;
+  if (chainId !== base.id) return false;
   // check entrypoint
   // not strictly needed given below check on implementation address, but leaving as example
   if (entrypoint.toLowerCase() !== ENTRYPOINT_ADDRESS_V06.toLowerCase())

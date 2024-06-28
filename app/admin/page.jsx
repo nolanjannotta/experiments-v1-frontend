@@ -17,8 +17,6 @@ import splitterABI from "@/app/PaymentSplitter.json"
 
 async function getAdminData() {
   const owner = await contract.read.OWNER();
-  const minter = await contract.read.MINTER_ADDRESS();
-  const globalSignature = await contract.read.GLOBAL_SIGNATURE_ID();
   const contractBalance = await publicClient.getBalance({address: contract.address});
   return {owner, minter,contractBalance,globalSignature};
 }
@@ -34,17 +32,22 @@ function Admin() {
 
   const {writeContract, error} = useWriteContract();
 
+
   const handleInputChange = (value, functionName, parameter) => {
 
     setInputState((inputState) => {return {...inputState, [functionName]: {...inputState[functionName], [parameter]: value}}})
   }
 
   const account = useAccount();
+  
+  const ownerBalance = useBalance({
+    address: account.address 
+  })
 
   const balance = useBalance({
     address: contractBase.address
   });
-  
+  console.log("ownerBalance", ownerBalance)
   
   const readContracts = useReadContracts({
       contracts: [
@@ -64,7 +67,7 @@ function Admin() {
   }, [inputState["releasePlatformRoyalties"]])
   
 
-
+console.log("readContracts", readContracts)
 
 
   // const royalties = useReadContract({
@@ -102,7 +105,7 @@ function Admin() {
     );
   }
 
-  if (account.address !== readContracts?.data[0]?.result) {
+  if (readContracts.data && account.address !== readContracts?.data[0]?.result) {
     return (
       <article>
         <p>owner: {readContracts?.data[0]?.result}</p>

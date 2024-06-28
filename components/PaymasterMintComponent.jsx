@@ -8,7 +8,7 @@ import {useAccount,useTransactionReceipt,useWriteContract, useSwitchChain, useCh
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
 import {fromHex} from "viem"
-import {baseSepolia} from "viem/chains"
+import {baseSepolia,base} from "viem/chains"
 import useGetCapabilities from '@/hooks/useGetCapabilities';
 import { parseTransaction } from 'viem'
 import { ZERO_ADDRESS } from '@/app/constants'
@@ -92,11 +92,11 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     // const tx = useTransactionReceipt({hash: write?.data})
 
-    if(account.address && account.chainId !== baseSepolia.id && !buttonDisabled){
+    if(account.address && account.chainId !== base.id && !buttonDisabled){
 
         return (
             <div style={container}>
-                <button style={button} onClick={()=> switchChain({chainId: baseSepolia.id})}><small>switch chains</small></button>
+                <button style={button} onClick={()=> switchChain({chainId: base.id})}><small>switch chains</small></button>
             </div>
         )
     }

@@ -23,19 +23,6 @@
     },
     {
         "type": "function",
-        "name": "GLOBAL_SIGNATURE_ID",
-        "inputs": [],
-        "outputs": [
-            {
-                "name": "",
-                "type": "uint256",
-                "internalType": "uint256"
-            }
-        ],
-        "stateMutability": "view"
-    },
-    {
-        "type": "function",
         "name": "OWNER",
         "inputs": [],
         "outputs": [
@@ -618,6 +605,24 @@
     },
     {
         "type": "function",
+        "name": "setArtistAddress",
+        "inputs": [
+            {
+                "name": "edition",
+                "type": "uint256",
+                "internalType": "uint256"
+            },
+            {
+                "name": "artist",
+                "type": "address",
+                "internalType": "address"
+            }
+        ],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+    },
+    {
+        "type": "function",
         "name": "setMintStatus",
         "inputs": [
             {
@@ -680,7 +685,7 @@
     },
     {
         "type": "function",
-        "name": "setRoyaltyInfo",
+        "name": "setRoyalty",
         "inputs": [
             {
                 "name": "edition",

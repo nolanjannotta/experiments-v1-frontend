@@ -6,7 +6,7 @@ import {contract } from '../../contract'
 import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
-import { baseSepolia } from 'viem/chains'
+import { baseSepolia,base } from 'viem/chains'
 import CustomConnect from '../../../components/CustomConnect'
 import {comingSoon} from "@/app/constants"
 import { useReadContract } from 'wagmi'

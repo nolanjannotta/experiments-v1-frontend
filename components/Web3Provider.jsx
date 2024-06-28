@@ -9,9 +9,9 @@ import { coinbaseWallet, injected, walletConnect, metaMask } from 'wagmi/connect
 export const config = createConfig({
   appName: 'Experiments V1',
   ssr: true,
-  chains: [baseSepolia],
+  chains: [base],
   transports: {
-    [baseSepolia.id]: http(`https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
+    [base.id]: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
   },
   
   connectors: [
