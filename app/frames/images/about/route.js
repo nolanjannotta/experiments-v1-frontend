@@ -23,18 +23,13 @@ const pageContent = [
     contract on the BaseL2 blockchain. Each individual edition is linked to its
     own immutable Art Generator contract. This contract is in charge of
     generating the raw SVG code and any attributes that this experiment may or
-    may not have.
-  `,
-
-  `
-    Each token has 32 bits of storage that is stored in the ERC721 smart
+    may not have. Each token has 32 bits of storage that is stored in the ERC721 smart
     contract. This can be number, string, bytes, etc. When it comes to
     generative art, it is usually a 'random' number. This number can be derived
     from block data like timestamp, block hash, minters address, etc. The seed
     can also be any arbitrary data that can fit into 32 bytes, and can be
     packed, unpacked and modified by the art generator contract.
   `,
-
   `
     This project is my submission to Base's Onchain Summer Buildathon 2024. To
     get it started, I've created several editions that will be deployed and
