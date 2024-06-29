@@ -14,8 +14,8 @@ export async function GET(request) {
     // const thumbnail = await getStartImage(editionId);
 
     const thumbnails = await getThumbnails(thumbnailEditions);
-    const test = await getUri(1000006)
-    console.log("test", test)
+    // const test = await getUri(1000006)
+    // console.log("test", test)
   return new ImageResponse(
     (
       <Card>
@@ -35,8 +35,8 @@ export async function GET(request) {
             return(
               <div key={index} style={imageContainer}>
             
-                <img style={{padding:0}} width="100%" src={thumbnail.image}></img>
-                {/* <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p> */}
+                <img style={{padding:0}} width="280px" height="280px" src={thumbnail.image}></img>
+                <p style={{margin: "0", fontSize:"24"}}>{thumbnail.name}</p>
               </div>)
       })}
 
@@ -54,10 +54,13 @@ export async function GET(request) {
 
 const imageSection = {
   width:"100%",
-  marginTop: "30px",
+  height: "50%",
+  marginTop: "10px",
   display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-around"
+  // flexWrap: "wrap",
+  alignItems: "center",
+  justifyContent: "center",
+  // backgroundColor: "red"
 
 }
 
@@ -65,5 +68,10 @@ const imageContainer = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  maxWidth: "20%"
+  marginTop: "5%",
+  // justifyContent: "center",
+  width: "25%",
+  height: "100%",
+  // backgroundColor: "blue"
+
 }

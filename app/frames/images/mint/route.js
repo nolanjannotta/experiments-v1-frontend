@@ -7,7 +7,7 @@ import {kv} from "@vercel/kv"
 
 
 export async function GET(request) {
-    const editionId    = request.nextUrl.searchParams.get("editionId")
+    const editionId = request.nextUrl.searchParams.get("editionId")
     // console.log(editionId)
     // const name      = request.nextUrl.searchParams.get("editionName")
     // const supply    = request.nextUrl.searchParams.get("supply")
@@ -48,7 +48,7 @@ export async function GET(request) {
             justifyContent: "center",
           }}
         >
-            <img width="65%" src={uri}></img>
+            <img width="600px" height="600px"  src={uri}></img>
 
         </div>
           {/* {following === "true" ? <p style={{margin: "20px 0 0 0"}}> {allowance > 0 ? (JSON.parse(hasVerifiedAddresses) ? "select which address of yours to mint to." : "looks like you dont have any addresses verified on farcaster.") : `your free warpcast mints for ${name} are used up :(`} </p> : ""}

@@ -45,7 +45,7 @@ export async function GET(request) {
           price: &nbsp;{Number(edition.price)} eth </p>
 
         <div style={imageBox}>
-            {randomUri && <img width="70%" src={randomUri} alt="image"></img>}
+            {randomUri && <img width="700px" height="700px" src={randomUri} alt="image"></img>}
             {/* {randomUri && <object width="70%" data={randomUri} alt="image"></object>} */}
 
         </div>

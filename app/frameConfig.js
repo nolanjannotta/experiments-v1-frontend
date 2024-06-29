@@ -47,6 +47,7 @@ import { nonExistentToken } from "./constants";
     // HANDLE NOT EXISTING TOKENS
     try {
       const image = await contract.read.getDataUri([tokenId])
+        // console.log("image", image)
     return image
     }
     catch(e) {
