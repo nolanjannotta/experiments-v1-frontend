@@ -15,7 +15,7 @@ async function getResponse(request) {
     ] 
     
 
-    const image = `${FRAME_URL}/frames/images/about?pageIndex=${pageIndex}`
+    const image = `${FRAME_URL}/frames/images/about?pageIndex=${pageIndex}&date=${Date.now()}`
     return new NextResponse(
         getFrameHtmlResponse({
             buttons: buttons,

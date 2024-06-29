@@ -114,24 +114,6 @@ export default async function Home() {
           new editions over time to develop my personal style and to show the possibilities of onchain SVG art and hopefully inspire others to get involved.
         </p>
 
-        {/* <p>
-          My original long term vision for this project is for each edition to be &quot;uploaded&quot;/deployed individually over
-          time as I make them. Once a new edition is added, minting for the
-          previous one will be paused. If the supply for a paused edition is not reached, the owner
-          can unpause and pause at anytime as well as mint paused editions. They
-          will have a low supply (100-300 probably, 500 max), start as completely free,
-          mintable through this website as well as through a frame in warpcast.
-          Depending on the demand, the owner may set a reasonable price and
-          royalty for the remaining tokens and new editions.
-        </p> */}
-        {/* <p>
-          However, this project is my submission to{" "}
-          <a target="_blank" href="https://www.base.org/buildersummer?utm_source=dotorg&utm_campaign=onchainsummer">Base&apos;s Onchain Summer Buildathon</a>. 
-          {" "} Because of this, I will doing things a little differently. To start, all of my finished editions that I have ready by the deadline will be deployed and 
-          added to the project at the same time. The supplies will be way higher to be more inclusive (2,000 - 4,000 per edition...TBD). 
-          All editions will be mintable at the same time. They will still be completely free or extremely cheap. 
-        
-          </p> */}
         <br />
 
         <p>
