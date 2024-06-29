@@ -131,7 +131,7 @@ export default async function Home() {
           For example: tokenId #1000001 is the first token of edition 1,
           #4000056 is the 56th token of edition 4, etc.
         </p>
-      </article>
+      
 
       <br />
       <br />
@@ -296,6 +296,8 @@ export default async function Home() {
         onchain generative art enthusiasts to reach out if you want to contribute or have ideas! 
 
       </p>
+
+      </article>
     </main>
   );
 }
