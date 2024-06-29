@@ -37,12 +37,10 @@ export async function GET(request) {
             return(
               <div key={index} style={imageContainer}>
                 <img style={{padding:"10px"}} width="350px" height="350px" src={thumbnail.image}></img>
-                <p style={{margin: "0", fontSize:"20",}}>{thumbnail.name}</p>
+                <p style={{margin: "0", fontSize:"20"}}>{thumbnail.name}</p>
               </div>
               )
           })}
-
-
       </div>
       </Card>
     ),
