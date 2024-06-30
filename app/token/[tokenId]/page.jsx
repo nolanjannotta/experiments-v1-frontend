@@ -60,7 +60,7 @@ export async function generateMetadata({ params }) {
       {
         label: "open sea",
         action: "link",
-        target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${params.tokenId}`,
+        target: `https://opensea.io/assets/base/${artAddress}/${params.tokenId}`,
       },
     ],
     image: {

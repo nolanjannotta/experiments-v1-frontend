@@ -75,7 +75,7 @@ export default function RootLayout({ children }) {
       <footer>
         <nav>
           <ul>
-            <li><a target="_blank" href={`https://testnets.opensea.io/assets/base-sepolia/${artAddress}`}>open sea</a>&nbsp;{coolShape()}</li>
+            <li><a target="_blank" href={`https://opensea.io/assets/base/${artAddress}`}>open sea</a>&nbsp;{coolShape()}</li>
             <li><a target="_blank" href={`${baseScanUrl}address/${artAddress}`}>basescan</a>&nbsp;{coolShape()}</li>
             <li style={{color: "#d7d7d7"}}>made with &#9760; by <a style={{color: "inherit"}} href="https://personal-site-neon-ten.vercel.app/index.html" target="_blank"><span className="personal-site">nolan</span></a>&nbsp;{coolShape()}</li>
             <li style={{color: "#d7d7d7"}}>est. 2024</li>
@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
- 
+
 
 const footer = {
   position: "absolute",

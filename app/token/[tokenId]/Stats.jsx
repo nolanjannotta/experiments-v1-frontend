@@ -13,7 +13,6 @@ export default function Stats({ data, tokenId, address }) {
     const [transferData, setTransferData] = useState({ready: false, to: ""})
     const account = useAccount();
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-    console.log(data)
     const image = {
         width: dimensions.width < dimensions.height ? "100%" : "40%",
         

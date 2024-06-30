@@ -115,7 +115,7 @@ export const editionData = {
           </ol>
           <p>
             note: the thumbnails below are fetched from <a target="blank" href="https://www.alchemy.com/nft-api">alchemy&apos;s api</a> and may not be
-            up to date. Click on any clock to open it up and see accurate image.
+            up to date. Metadata refreshing is not available on Base yet. Click on any clock to open it up and see accurate image.
           </p>
         </>
       );

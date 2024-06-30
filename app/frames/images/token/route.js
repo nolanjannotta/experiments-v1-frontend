@@ -16,12 +16,11 @@ export async function GET(request) {
         <div
           style={{
             width:"100%",
-            marginTop: "40px",
             display: "flex",
             justifyContent: "center",
           }}
         >
-            { uri ? <img width="90%" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
+            { uri ? <img width="1000px" height="1000px" src={uri} alt="image"></img> : <p>oops, looks like an error occured.</p>}
 
         </div>
       </Card>
