@@ -163,7 +163,7 @@ export default function Stats({ data, tokenId, address }) {
                 <b>&#11096; opensea</b>:{" "}
                 <a
                   target="_blank"
-                  href={`https://testnets.opensea.io/assets/base-sepolia/${address}/${tokenId}`}
+                  href={`https://opensea.io/assets/base/${address}/${tokenId}`}
                 >
                   &#8599;
                 </a>
