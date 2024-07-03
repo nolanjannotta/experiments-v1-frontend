@@ -22,17 +22,12 @@ import ABI from "../ART_ABI.json";
 const availableFunctions = ["mint","modify", "safeTransferFrom"]
 
 export async function willSponsor({chainId,entrypoint,userOp}) {
-  console.log("will sponsor called")
   // check chain id
   if (chainId !== base.id) return false;
-  console.log("did not fail at 0")
   // check entrypoint
   // not strictly needed given below check on implementation address, but leaving as example
-  if (entrypoint.toLowerCase() !== ENTRYPOINT_ADDRESS_V06.toLowerCase()) {
-    console.log("incorrect entrypoint")
+  if (entrypoint.toLowerCase() !== ENTRYPOINT_ADDRESS_V06.toLowerCase())
     return false;
-  }
-    
 
   try {
     // check the userOp.sender is a proxy with the expected bytecode
@@ -59,9 +54,7 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
 
     // keys.coinbase.com always uses executeBatch
     if (calldata.functionName !== "executeBatch") return false;
-    console.log("did not fail at 1")
     if (!calldata.args || calldata.args.length == 0) return false;
-    console.log("did not fail at 2")
 
     const calls = calldata.args[0] // as {
     //   target: Address;
@@ -70,24 +63,20 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
     // }[];
     // modify if want to allow batch calls to your contract
     if (calls.length > 2) return false;
-    console.log("did not fail at 3")
 
     let callToCheckIndex = 0;
     if (calls.length > 1) {
       // if there is more than one call, check if the first is a magic spend call
-      if (calls[0].target.toLowerCase() !== magicSpendAddress.toLowerCase()){
-        console.log("magic spend check failed")
+      if (calls[0].target.toLowerCase() !== magicSpendAddress.toLowerCase())
         return false;
-      }
-        
       callToCheckIndex = 1;
     }
 
-    if (calls[callToCheckIndex].target.toLowerCase() !== artAddress.toLowerCase()) {
-      console.log("art address check failed")
+    if (
+      calls[callToCheckIndex].target.toLowerCase() !==
+      artAddress.toLowerCase()
+    )
       return false;
-    }
-      
 
     const innerCalldata = decodeFunctionData({
       abi: ABI,
