@@ -9,11 +9,11 @@ export async function POST(request) {
   const [userOp, entrypoint, chainId] = body.params;
 
 
-  if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
-    console.log("Not a sponsorable operation")
-    return Response.json({ error: "Not a sponsorable operation" });
+  // if (!await willSponsor({ chainId: parseInt(chainId), entrypoint, userOp })) {
+  //   console.log("Not a sponsorable operation")
+  //   return Response.json({ error: "Not a sponsorable operation" });
     
-  }
+  // }
   console.log("is a sponsorable operation")
 
 
