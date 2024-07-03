@@ -31,20 +31,20 @@ export async function willSponsor({chainId,entrypoint,userOp}) {
 
   try {
     // check the userOp.sender is a proxy with the expected bytecode
-    const code = await publicClient.getBytecode({ address: userOp.sender });
-    if (code != coinbaseSmartWalletProxyBytecode) return false;
+    // const code = await publicClient.getBytecode({ address: userOp.sender });
+    // if (code != coinbaseSmartWalletProxyBytecode) return false;
 
-    // check that userOp.sender proxies to expected implementation
-    const implementation = await publicClient.request({
-      method: "eth_getStorageAt",
-      params: [userOp.sender, erc1967ProxyImplementationSlot, "latest"],
-    });
-    const implementationAddress = decodeAbiParameters(
-      [{ type: "address" }],
-      implementation,
-    )[0];
-    if (implementationAddress != coinbaseSmartWalletV1Implementation)
-      return false;
+    // // check that userOp.sender proxies to expected implementation
+    // const implementation = await publicClient.request({
+    //   method: "eth_getStorageAt",
+    //   params: [userOp.sender, erc1967ProxyImplementationSlot, "latest"],
+    // });
+    // const implementationAddress = decodeAbiParameters(
+    //   [{ type: "address" }],
+    //   implementation,
+    // )[0];
+    // if (implementationAddress != coinbaseSmartWalletV1Implementation)
+    //   return false;
 
     // check that userOp.callData is making a call we want to sponsor
     const calldata = decodeFunctionData({
