@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, {useState} from 'react'
 import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {contract } from '../../contract'
@@ -102,9 +102,12 @@ function Mint({params}) {
 
  
   // const isPaused = !data.edition.mintStatus
-  const isEnded = edition?.counter === edition?.supply
+  // const isEnded = edition?.counter === edition?.supply
 
-  const minting = edition?.mintStatus && !isEnded
+  // const minting = edition?.mintStatus && !isEnded
+
+
+  // edition?.mintStatus && !(edition?.counter === edition?.supply)
 
 
 
@@ -132,11 +135,11 @@ function Mint({params}) {
             &nbsp;&nbsp;&#11096; mint status:{" "}
             <span
               style={{
-                color: minting
+                color: edition?.mintStatus && !(edition?.counter === edition?.supply)
                   ? "green"
-                  : !minting && !isEnded
+                  : !( edition?.mintStatus && !(edition?.counter === edition?.supply)) && !(edition?.counter === edition?.supply)
                   ? "#ffc618"
-                  : isEnded
+                  : edition?.counter === edition?.supply
                   ? "red"
                   : "inherit",
               }}
