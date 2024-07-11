@@ -102,9 +102,9 @@ function Mint({params}) {
 
  
   // const isPaused = !data.edition.mintStatus
-  const isEnded = edition.counter === edition.supply
+  const isEnded = edition?.counter === edition?.supply
 
-  const minting = edition.mintStatus && !isEnded
+  const minting = edition?.mintStatus && !isEnded
 
 
 
