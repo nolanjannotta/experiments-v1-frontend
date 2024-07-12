@@ -34,13 +34,16 @@ function Mint({params}) {
   const {data:lastMintedUri} = useReadContract({
     ...contractBase,
     functionName: "getDataUri",
-    args: [Number(params.editionId) * 1000000 + Number(edition?.counter)]
+    args: [Number(params.editionId) * 1000000 + Number(edition?.counter)],
+    chainId: base.id
+
 
   })
 
   const {data: lastEdition} = useReadContract({
     ...contractBase,
     functionName: "EDITION_COUNTER",
+    chainId: base.id
   })
 
 
