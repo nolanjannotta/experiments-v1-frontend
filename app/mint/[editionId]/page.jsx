@@ -24,7 +24,8 @@ function Mint({params}) {
       args: [params.editionId],
       query: {
         placeholderData: editionType
-      }
+      },
+      chainId: base.id
       
   })
 

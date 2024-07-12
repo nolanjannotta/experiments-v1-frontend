@@ -3,12 +3,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import {base} from 'wagmi/chains';
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
-import { coinbaseWallet, injected, walletConnect, metaMask } from 'wagmi/connectors';
+import { coinbaseWallet, walletConnect, metaMask } from 'wagmi/connectors';
 
 
 export const config = createConfig({
   appName: 'Experiments V1',
-  ssr: true,
+  // ssr: true,
   chains: [base],
   transports: {
     [base.id]: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}`)
@@ -44,7 +44,7 @@ export const Web3Provider = ({ children }) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         {children}
-        <ReactQueryDevtools initialIsOpen={true}/>
+        {/* <ReactQueryDevtools initialIsOpen={true}/> */}
       </QueryClientProvider>
     </WagmiProvider>
   );
