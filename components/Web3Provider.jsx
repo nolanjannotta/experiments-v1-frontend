@@ -34,7 +34,7 @@ export const config = createConfig({
   ],
 });
 
-console.log(config)
+// console.log(config)
 const queryClient = new QueryClient();
 
 export const Web3Provider = ({ children }) => {
