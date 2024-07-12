@@ -1,7 +1,7 @@
 "use client"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import {base,baseSepolia} from 'wagmi/chains';
+import {base} from 'wagmi/chains';
 import {QueryClientProvider, QueryClient} from "@tanstack/react-query";
 import { coinbaseWallet, injected, walletConnect, metaMask } from 'wagmi/connectors';
 

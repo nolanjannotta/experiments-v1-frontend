@@ -13,48 +13,12 @@ import { useReadContract } from 'wagmi'
 import { contractBase } from '../../contract'
 
 
-async function mintPageData(editionId) {
-  
-  editionId = BigInt(editionId);
-
-
-  // const currentEditionId = await contract.read.EDITION_COUNTER();
-  const edition = await contract.read.getEdition([editionId]);
-  if(edition.counter === 0n) {
-    return{
-      image: comingSoon,
-      edition,
-    }
-  }
-
-  else {
-    const image = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
-    return {image, edition};
-  }
-
-  // // const lastImage = await contract.read.getDataUri([editionId* 1000000n + edition.counter]);
-  // const lastToken = await contract.read.tokenURI([editionId* 1000000n + edition.counter]);
-
-
-  // const mostRecentOwner = await contract.read.ownerOf([editionId* 1000000n + edition.counter]);
-
-
-  // let bufferObj = Buffer.from(lastToken.split("data:application/json;base64,")[1], "base64");
-  // let metadata = JSON.parse(bufferObj.toString("utf-8"));
-  // console.log("metadata", metadata)
-
-  // return {edition, metadata, mostRecentOwner, editionId};
-
-}
-
-
-
 
 
 
 function Mint({params}) {
 
-  const {data:edition, isLoading, isFetching, refetch} = useReadContract({
+  const {data:edition, isLoading, isFetching, refetch, error} = useReadContract({
       ...contractBase,
       functionName: "getEdition",
       args: [params.editionId],
@@ -63,6 +27,8 @@ function Mint({params}) {
       }
       
   })
+
+  console.log("error", error)
 
   const {data:lastMintedUri} = useReadContract({
     ...contractBase,
@@ -119,17 +85,17 @@ function Mint({params}) {
       <section>
         <ul style={{ listStyleType: "none", padding: "0" }}>
           <li>
-            &nbsp;&nbsp;&#11096; name: {isLoading ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition.name} &#8599;</Link>}
+            &nbsp;&nbsp;&#11096; name: {isFetching ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition?.name} &#8599;</Link>}
           </li>
-          <li>&nbsp;&nbsp;&#11096; artist:  {isLoading ? <small>loading...</small>  : edition.artist}</li>
+          <li>&nbsp;&nbsp;&#11096; artist:  {isFetching ? <small>loading...</small>  : edition?.artist}</li>
           <li>
-            &nbsp;&nbsp;&#11096; current supply: {isLoading ? <small>loading...</small>  : Number(edition.counter)}
-          </li>
-          <li>
-            &nbsp;&nbsp;&#11096; max supply: {isLoading ? <small>loading...</small>  : Number(edition.supply)}
+            &nbsp;&nbsp;&#11096; current supply: {isFetching ? <small>loading...</small>  : Number(edition?.counter)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth <small style={{fontSize: "x-small"}}>100% off!</small>
+            &nbsp;&nbsp;&#11096; max supply: {isFetching ? <small>loading...</small>  : Number(edition?.supply)}
+          </li>
+          <li>
+            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isFetching ? <small>loading...</small>  : formatEther(edition.price)} eth <small style={{fontSize: "x-small"}}>100% off!</small>
           </li>
           <li>
             &nbsp;&nbsp;&#11096; mint status:{" "}
