@@ -7,7 +7,7 @@ import { ZERO_ADDRESS } from "../constants";
 async function getOwners() {
   const options = {method: 'GET', headers: {accept: 'application/json'}};
     try {
-        const response = await fetch(`https://base-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
+        const response = await fetch(`https://base-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
 
         const owners = await response.json()
         const ordered = owners.owners.sort((a, b) => {

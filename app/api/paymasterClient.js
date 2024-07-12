@@ -5,7 +5,7 @@ import { paymasterActionsEip7677 } from "permissionless/experimental";
 
 
 
-const paymasterService = process.env.COINBASE_BASE_SEPOLIA_PAYMASTER;
+const paymasterService = process.env.COINBASE_BASE_MAINNET_PAYMASTER;
 
 export const paymasterClient = createClient({
   chain: base,

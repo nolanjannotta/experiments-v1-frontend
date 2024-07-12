@@ -42,7 +42,7 @@ async function getThumbnails(page, totalTokens, editionId) {
   }
    
     try {
-      const response = await fetch(`https://base-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
+      const response = await fetch(`https://base-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
       const tokens = await response.json()
       return {images: tokens.nfts, loading: false, error: false};
     } catch (e) {

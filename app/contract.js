@@ -10,7 +10,7 @@ import { artAddress } from "./constants";
 
 export const publicClient = createPublicClient({ 
     chain: base,
-    transport: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
+    transport: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}`)
   })
 
    

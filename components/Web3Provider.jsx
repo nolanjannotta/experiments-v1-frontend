@@ -11,7 +11,7 @@ export const config = createConfig({
   ssr: true,
   chains: [base],
   transports: {
-    [base.id]: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_SEPOLIA_URL}`)
+    [base.id]: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}`)
   },
   
   connectors: [
