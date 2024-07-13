@@ -38,7 +38,9 @@ export default async function Owners() {
 
   return (
     <article>
-      <h2>Owners</h2>
+      <h2 style={{margin: 0}}>Owners &nbsp;</h2>
+      <small>{owners.length} unique owners</small>
+
       <ul>
 
         {owners.map((owner, index) => {

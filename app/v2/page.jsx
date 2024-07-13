@@ -25,8 +25,26 @@ function V2() {
             </li>
 
             <li>
-                Create a platform and tools for other artists to deploy and mint their 100% onchain art works. 
+                Create more and better tools for artists to deploy and mint their 100% onchain art works. 
             </li>
+            <li>
+              add more sophisticated minting options. 
+              <ul>
+                <li>
+                  unlimited supply for a certain time period.
+                </li>
+                <li>
+                  whitelist or allowlist
+                </li>
+                <li>
+                  controlled minting over time. For example, minting 1 per day, 1 per hour, etc.
+                </li>
+                <li>
+                  combine any of the above options.
+                </li>
+              </ul>
+            </li>
+
             <li>
                 continue offering prints as key part of the project. Split revenue between collector, artist, and printer. Not limited to just prints on paper, could include other physical objects. TBD.
 
