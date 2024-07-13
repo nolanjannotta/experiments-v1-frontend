@@ -7,7 +7,7 @@ import {getThumbnails, getUri} from "@/app/frameConfig";
 
 export async function GET(request) {
 
-    const thumbnailEditions = [1,2,5,4]
+    const thumbnailEditions = [1,2,3,4]
     
     // const editionId = request.nextUrl.searchParams.get("editionId"); 
 // 
@@ -19,7 +19,7 @@ export async function GET(request) {
   return new ImageResponse(
     (
       <Card>
-        <h1 style={{ margin: "0" }}>Experiments-V1</h1>
+        <h1 style={{ margin: "0" }}>Onchain-Experiments_V1</h1>
         <p style={{ width: "80%", textAlign: "center", margin: "0" }}>
           A platform for 100% onchain generative images. experimenting with onchain art
           and onchain mechanics.
@@ -45,8 +45,8 @@ export async function GET(request) {
       </Card>
     ),
     {
-      width: 1200,
-      height: 630,
+      width: 1600,
+      height: 900,
     }
   );
 }

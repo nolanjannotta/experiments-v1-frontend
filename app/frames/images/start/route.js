@@ -20,7 +20,7 @@ export async function GET(request) {
   return new ImageResponse(
     (
       <Card>
-        <h1 style={{ margin: "0" }}>Experiments-V1</h1>
+        <h1 style={{ margin: "0" }}>Onchain-Experiments_V1</h1>
         <p style={{ width: "80%", textAlign: "center", margin: "0" }}>
           A platform for 100% onchain generative images. experimenting with onchain art
           and onchain mechanics.
