@@ -83,7 +83,7 @@ export const editionData = {
     seed:[],
     modify: []
   },
-  "rectangular clock": {
+  "Clock": {
     description: () => {
       return (
         <>
