@@ -144,7 +144,7 @@ export const editionData = {
         
         <p>
           A very simple experiment. It can be pointed to a token ID (from this project) and returns
-          a black and white version of the image. Thats literally it. In hindsight, "grayscale" would have been a better name.
+          a black and white version of the image. Thats literally it. In hindsight, &quot;grayscale&quot; would have been a better name.
         </p>
 
         <p>&#9734; <b>note:</b> The owner must own the token ID that it points to. if not, nothing will be shown. These images are blank by default.&#9734;</p>

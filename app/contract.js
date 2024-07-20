@@ -2,9 +2,8 @@ import { getContract, createPublicClient, http,createWalletClient } from "viem";
 import { baseSepolia, mainnet, base } from "wagmi/chains";
 
 import abi from "./ART_ABI.json";
-import { artAddress } from "./constants";
+import { artAddress,currentChain } from "./constants";
 // import { config } from "../components/Web3Provider";
-import { currentChain } from "./constants";
 
 // console.log(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
 

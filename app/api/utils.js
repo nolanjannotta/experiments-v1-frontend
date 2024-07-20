@@ -15,9 +15,8 @@ import {
   erc1967ProxyImplementationSlot,
   magicSpendAddress,
 } from "./constants";
-import {artAddress} from "../constants";
+import {artAddress,currentChain} from "../constants";
 import ABI from "../ART_ABI.json";
-import {currentChain} from "./constants.js"
 
 
 const availableFunctions = ["mint","modify", "safeTransferFrom"]
