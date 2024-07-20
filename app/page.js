@@ -57,8 +57,7 @@ export default async function Home() {
           <br/>
           <section style={thumbnails}>
             {uris.map((uri, index) => {
-              return (
-                <Image width={200} height={200} key={index} src={uri} alt="thumbnail"></Image>
+              return (<Image width={200} style={{boxShadow: "1px 1px 5px grey"}}  height={200} key={index} src={uri} alt="thumbnail"></Image>
               )
             })}
           </section>

@@ -18,7 +18,7 @@ import { contractBase } from '../../contract'
 
 function Mint({params}) {
 
-  const {data:edition, isLoading, isFetching, refetch, error} = useReadContract({
+  const {data:edition, isLoading, refetch, error} = useReadContract({
       ...contractBase,
       functionName: "getEdition",
       args: [params.editionId],
