@@ -60,7 +60,7 @@ export default async function Browse() {
           if(data.edition.name === "") return
           return (
               <figure key={index} style={galleryFig}>
-              <Link  href={`/browse/editions/${index + 1}`} className="shadow">
+              <Link  href={`/browse/editions/${index + 1}?page=1`} className="shadow">
                 <img width="300" src={data.thumbnail} ></img>
                 
                 </Link>

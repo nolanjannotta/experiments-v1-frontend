@@ -1,5 +1,5 @@
 "use client"
-import {useState } from 'react';
+import {useState, useEffect } from 'react';
 import Link from 'next/link'
 import { useQuery,keepPreviousData } from "@tanstack/react-query";
 import {artAddress} from "../../../constants"
@@ -54,13 +54,21 @@ async function getThumbnails(page, totalTokens, editionId) {
   }
 }
 
-function Gallery({params}) {
+function Gallery({params, searchParams}) {
   const screenSize = useScreenSize();
 
   const [page, setPage] = useState(0);
 
 
+  useEffect(() => {
+    if(searchParams.page) {
+      setPage(Number(searchParams.page))
+    }
+    else {
+      setPage(1);
+    }
 
+  }, [searchParams.page])
 
 
   const {data: editionInfo, isFetching: editionFetching, error} = useQuery({
@@ -70,8 +78,8 @@ function Gallery({params}) {
   });
 
   const {data: thumbnails} = useQuery({
-    queryKey: ["thumbnails", params.edition, page],
-    queryFn: () => getThumbnails(page, Number(editionInfo.counter), params.edition),
+    queryKey: ["thumbnails", params.edition, page-1],
+    queryFn: () => getThumbnails(page-1, Number(editionInfo.counter), params.edition),
     initialData: {images: [], loading: true, error: false},
     enabled: editionInfo.counter > 0,
     placeholderData: keepPreviousData
@@ -166,11 +174,15 @@ function Gallery({params}) {
     <br/>
     <br/>
       <div style={{display: "flex",justifyContent:"center"}}>
-      {page !== 0 && <button style={button} onClick={() => setPage((prev) => Math.max(prev-1, 0))}>&#8592;</button>}
+      {/* {page !== 0 && <button style={button} onClick={() => setPage((prev) => Math.max(prev-1, 0))}>&#8592;</button>} */}
+      
+      {page > 1 && <Link style={button} href={`/browse/editions/${params.edition}?page=${page - 1}`}>&#8592;</Link>}
         &nbsp;&nbsp;
-      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page+1}/{(Math.ceil(Number(editionInfo?.counter)/perPage))}</p>
+      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page}/{(Math.ceil(Number(editionInfo?.counter)/perPage))}</p>
       &nbsp;&nbsp;
-      {page+1 < (Math.ceil(Number(editionInfo?.counter)/perPage)) && <button style={button} onClick={() => setPage(prev => prev+1)}>&#8594;</button>}
+      {/* {page+1 < (Math.ceil(Number(editionInfo?.counter)/perPage)) &&  */}
+      
+      {page < Number(editionInfo?.counter)/perPage && <Link style={button} href={`/browse/editions/${params.edition}?page=${page + 1}`}>&#8594;</Link>}
       </div>
     
     <br/>
