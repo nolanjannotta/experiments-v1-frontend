@@ -207,7 +207,7 @@ export const editionData = {
       return (
         <>
           <p>
-            A "derivative" project. An homage to the Chromie Squiggle. An
+            A &quot;derivative&quot; project. An homage to the Chromie Squiggle. An
             onchain experiment.{" "}
           </p>
 
