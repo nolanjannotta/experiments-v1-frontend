@@ -89,17 +89,17 @@ function Mint({params}) {
       <section>
         <ul style={{ listStyleType: "none", padding: "0" }}>
           <li>
-            &nbsp;&nbsp;&#11096; name: {isFetching ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition?.name} &#8599;</Link>}
+            &nbsp;&nbsp;&#11096; name: {isLoading ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition?.name} &#8599;</Link>}
           </li>
-          <li>&nbsp;&nbsp;&#11096; artist:  {isFetching ? <small>loading...</small>  : edition?.artist}</li>
+          <li>&nbsp;&nbsp;&#11096; artist:  {isLoading ? <small>loading...</small>  : edition?.artist}</li>
           <li>
-            &nbsp;&nbsp;&#11096; current supply: {isFetching ? <small>loading...</small>  : Number(edition?.counter)}
-          </li>
-          <li>
-            &nbsp;&nbsp;&#11096; max supply: {isFetching ? <small>loading...</small>  : Number(edition?.supply)}
+            &nbsp;&nbsp;&#11096; current supply: {isLoading ? <small>loading...</small>  : Number(edition?.counter)}
           </li>
           <li>
-            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isFetching ? <small>loading...</small>  : formatEther(edition.price)} eth <small style={{fontSize: "x-small"}}>100% off!</small>
+            &nbsp;&nbsp;&#11096; max supply: {isLoading ? <small>loading...</small>  : Number(edition?.supply)}
+          </li>
+          <li>
+            &nbsp;&nbsp;&#11096; price: <span ><strike>10 eth</strike></span> &#8594; {isLoading ? <small>loading...</small>  : formatEther(edition.price)} eth <small style={{fontSize: "x-small"}}>100% off!</small>
           </li>
           <li>
             &nbsp;&nbsp;&#11096; mint status:{" "}
