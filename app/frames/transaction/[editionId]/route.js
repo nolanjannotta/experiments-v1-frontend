@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { encodeFunctionData, parseEther } from 'viem';
 import { baseSepolia,base } from 'viem/chains';
 import abi from '@/app/ART_ABI.json';
-import { artAddress } from '@/app/constants';
-import {currentChain} from "./constants.js"
+import { artAddress,currentChain } from '@/app/constants';
 
 
 async function getResponse(request, params){
