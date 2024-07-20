@@ -1,4 +1,5 @@
-export const artAddress = "0x952BbDED48D7662Abb25A8CdF7541663CA992B88"; // mainnet!! woohoo!
+import { baseSepolia, base } from "viem/chains";
+
 
 export const ZERO_ADDRESS= "0x0000000000000000000000000000000000000000"
 
@@ -14,3 +15,10 @@ export const comingSoon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d
 
 export const nonExistentToken = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAwIDEwMDAiIGhlaWdodD0iMTAwMCIgd2lkdGg9IjEwMDAiPiA8cmVjdCBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSI1IiB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIi8+IDx0ZXh0IHg9IjUwMCIgeT0iNTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjUwIj4gRVJST1I6IFRISVMgVE9LRU4gRE9FUyBOT1QgRVhJU1RTIDwvdGV4dD4gPC9zdmc+"
 
+
+
+
+
+export const currentChain = base; // baseSepolia;
+export const artAddress = "0x952BbDED48D7662Abb25A8CdF7541663CA992B88"; // mainnet!! woohoo!
+// export const artAddress = "0x99f5ea3d613aa985dcaff07353b6337f23cd07f2"; // sepolia!! woohoo!

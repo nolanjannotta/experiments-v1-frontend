@@ -8,7 +8,7 @@ import { editionData } from '../../../editionData'
 import { formatEther } from 'viem'
 import useScreenSize from "../../../../hooks/useScreenSize"
 import {editionType} from '../../../types'
-
+import "@/app/pizazz.css";
 
 
 function truncateAddress(address) {
@@ -27,7 +27,7 @@ const perPage = 50;
 
 
 async function getThumbnails(page, totalTokens, editionId) {
-
+  
   const options = {method: 'GET', headers: {accept: 'application/json'}};
   let limit = perPage;
   let start = (editionId * 1000000) + ((page) * limit) + 1; 
@@ -42,8 +42,10 @@ async function getThumbnails(page, totalTokens, editionId) {
   }
    
     try {
-      const response = await fetch(`https://base-mainnet.g.alchemy.com/nft/v3/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
+      // console.log(process.env.NEXT_PUBLIC_BASE_MAINNET_URL)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getNFTsForContract?contractAddress=${artAddress}&withMetadata=true&startToken=${start}&limit=${limit}`, options)
       const tokens = await response.json()
+      console.log(tokens)
       return {images: tokens.nfts, loading: false, error: false};
     } catch (e) {
       console.log(e)
@@ -135,7 +137,7 @@ function Gallery({params}) {
           
           return (
             <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
-            <figure  style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
+            <figure className='shadow' style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
               <div style={{width:"70%"}}>
                 <p>uh oh, looks like alchemy&apos;s api couldn&apos;t render this image<br /></p>
                 <p>click to open</p>
@@ -149,7 +151,7 @@ function Gallery({params}) {
           <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
 
           <figure style={galleryFig} >
-            <img style={galleryImg} width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
+            <img className="shadow" width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
             <figcaption>{nft.name}
             </figcaption>
           </figure>
@@ -218,7 +220,7 @@ const gallery = {
 const galleryImg = {
   // width: "30%",
   // height: "auto",
-  objectFit: "cover",
+  // objectFit: "cover",
 }
 
 const galleryFig = {

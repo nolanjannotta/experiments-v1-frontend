@@ -15,6 +15,8 @@ export default function Stats({ data, tokenId, address }) {
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
     const image = {
         width: dimensions.width < dimensions.height ? "100%" : "40%",
+        // border: "1px solid black",
+        boxShadow: "1px 1px 5px grey",
         
       }
 

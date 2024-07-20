@@ -4,6 +4,8 @@ import { encodeFunctionData, parseEther } from 'viem';
 import { baseSepolia,base } from 'viem/chains';
 import abi from '@/app/ART_ABI.json';
 import { artAddress } from '@/app/constants';
+import {currentChain} from "./constants.js"
+
 
 async function getResponse(request, params){
   const body = await request.json();
@@ -22,7 +24,7 @@ async function getResponse(request, params){
 
 
   const txData = {
-    chainId: `eip155:${base.id}`,
+    chainId: `eip155:${currentChain.id}`,
     method: 'eth_sendTransaction',
     params: {
       abi: [],

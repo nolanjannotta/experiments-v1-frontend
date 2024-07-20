@@ -8,7 +8,7 @@ import {editionType} from '../../types'
 import { formatEther } from 'viem'
 import { baseSepolia,base } from 'viem/chains'
 import CustomConnect from '../../../components/CustomConnect'
-import {comingSoon} from "@/app/constants"
+import {comingSoon,currentChain} from "@/app/constants"
 import { useReadContract } from 'wagmi'
 import { contractBase } from '../../contract'
 
@@ -25,7 +25,7 @@ function Mint({params}) {
       query: {
         placeholderData: editionType
       },
-      chainId: base.id
+      chainId: currentChain.id
       
   })
 
@@ -35,7 +35,7 @@ function Mint({params}) {
     ...contractBase,
     functionName: "getDataUri",
     args: [Number(params.editionId) * 1000000 + Number(edition?.counter)],
-    chainId: base.id
+    chainId: currentChain.id
 
 
   })
@@ -43,7 +43,7 @@ function Mint({params}) {
   const {data: lastEdition} = useReadContract({
     ...contractBase,
     functionName: "EDITION_COUNTER",
-    chainId: base.id
+    chainId: currentChain.id
   })
 
 

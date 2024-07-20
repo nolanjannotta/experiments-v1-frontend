@@ -3,6 +3,7 @@ import Link from "next/link";
 // import { contract } from "../contract";
 import { contract, contractBase, publicClient } from "@/app/contract";
 import {comingSoon} from "@/app/constants"
+import "@/app/pizazz.css";
 
 
 async function getEditions() {
@@ -59,8 +60,8 @@ export default async function Browse() {
           if(data.edition.name === "") return
           return (
               <figure key={index} style={galleryFig}>
-              <Link  href={`/browse/editions/${index + 1}`}>
-                <img width="300" src={data.thumbnail}></img>
+              <Link  href={`/browse/editions/${index + 1}`} className="shadow">
+                <img width="300" src={data.thumbnail} ></img>
                 
                 </Link>
                 <figcaption>{data.edition.name}&nbsp;&nbsp; <Link href={`/mint/${index+1}`} style={{textDecoration: "none", color: ended ? "red" : isMinting ?  "green" : paused ? "#ffc618" : "inherit" }}>&#9679;</Link> &nbsp;<small>{Number(data.edition.counter)}/{Number(data.edition.supply)}</small></figcaption>

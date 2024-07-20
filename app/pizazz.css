@@ -28,9 +28,19 @@
     transition-duration: 1s;
   }
   .personal-site:hover {
-
-    
     transform: rotatex(360deg);
+  }
+
+  .shadow {
+    box-shadow: 1px 1px 5px grey;
+
+  }
+
+
+
+  .shadow:hover {
+      box-shadow: 5px 5px 5px grey;
+      transform: translate(-2px, -2px);
   }
 
 

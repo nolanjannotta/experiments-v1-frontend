@@ -4,13 +4,13 @@ import { baseSepolia, mainnet, base } from "wagmi/chains";
 import abi from "./ART_ABI.json";
 import { artAddress } from "./constants";
 // import { config } from "../components/Web3Provider";
-
+import { currentChain } from "./constants";
 
 // console.log(process.env.COINBASE_BASE_SEPOLIA_PAYMASTER)
 
 export const publicClient = createPublicClient({ 
-    chain: base,
-    transport: http(`https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_BASE_MAINNET_URL}`)
+    chain: currentChain,
+    transport: http(`${process.env.NEXT_PUBLIC_BASE_RPC_URL}`)
   })
 
    

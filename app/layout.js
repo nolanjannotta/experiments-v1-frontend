@@ -7,7 +7,6 @@ import {artAddress} from "./constants"
 import "./global.css"
 import { baseScanUrl } from './constants'
 import ConnectSimple from '../components/ConnectSimple'
-import Marquee from '@/components/Marquee'
 import { coolShape } from './coolShapes'
 import "./pizazz.css"
 
@@ -52,7 +51,7 @@ export default function RootLayout({ children }) {
         <li><Link href="/">home</Link> &nbsp;{coolShape()}</li>
         <li><Link href="/browse">browse</Link> &nbsp;{coolShape()}</li>
         <li><Link href="/modify">modify</Link> &nbsp;{coolShape()}</li>
-        <li><span className="mint"><Link href="/mint"> mint</Link></span> &nbsp;{coolShape()}</li>
+        <li><span className="mint"><Link href="/mint/1"> mint</Link></span> &nbsp;{coolShape()}</li>
         <li><Link href="/prints">prints</Link> &nbsp;{coolShape()}</li>
         <li><Link href="/v2">v2</Link> &nbsp;{coolShape()}</li>
         <li><Link href="/owners">owners</Link> &nbsp;{coolShape()}</li>

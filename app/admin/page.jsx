@@ -45,7 +45,7 @@ function Admin() {
   })
 
   const balance = useBalance({
-    address: contractBase.address
+    address: contract.address
   });
   console.log("ownerBalance", ownerBalance)
   

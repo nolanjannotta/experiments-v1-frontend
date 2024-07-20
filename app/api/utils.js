@@ -17,13 +17,14 @@ import {
 } from "./constants";
 import {artAddress} from "../constants";
 import ABI from "../ART_ABI.json";
+import {currentChain} from "./constants.js"
 
 
 const availableFunctions = ["mint","modify", "safeTransferFrom"]
 
 export async function willSponsor({chainId,entrypoint,userOp}) {
   // check chain id
-  if (chainId !== base.id) return false;
+  if (chainId !== currentChain.id) return false;
   // check entrypoint
   // not strictly needed given below check on implementation address, but leaving as example
   if (entrypoint.toLowerCase() !== ENTRYPOINT_ADDRESS_V06.toLowerCase())
