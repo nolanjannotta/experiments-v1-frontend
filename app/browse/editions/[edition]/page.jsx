@@ -156,7 +156,7 @@ function Gallery({params, searchParams}) {
           );
         }
         return (
-          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
+          <Link key={i} style={{textDecoration: "none"}} href={`/token/${params.edition * 1000000 + (((page-1)*perPage) + i + 1)}`}>
 
           <figure style={galleryFig} >
             <img className="shadow" width="300px" alt={"error loading this image"} src={nft.raw.metadata.image}></img>
