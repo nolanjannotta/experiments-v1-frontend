@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
         </ul>
         </nav>
         </header>
-        <hr/>
+        <hr style={{boxShadow: "0px 1px 2px grey"}} />
       <Web3Provider>
         {/* <Marquee /> */}
         <div style={connectedAddress}>

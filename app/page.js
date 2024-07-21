@@ -57,7 +57,7 @@ export default async function Home() {
           <br/>
           <section style={thumbnails}>
             {uris.map((uri, index) => {
-              return (<Image width={200} style={{boxShadow: "1px 1px 5px grey"}}  height={200} key={index} src={uri} alt="thumbnail"></Image>
+              return (<Image width={200} style={shadow}  height={200} key={index} src={uri} alt="thumbnail"></Image>
               )
             })}
           </section>
@@ -161,7 +161,7 @@ export default async function Home() {
       </ul>
 
       <div style={outline}>
-        <img src="/svgFlowChart.png" alt="svg flow chart"></img>
+        <img style={shadow} src="/svgFlowChart.png" alt="svg flow chart"></img>
       </div>
 
 
@@ -180,7 +180,7 @@ export default async function Home() {
 
 
       <div style={outline}>
-        <img src="/mintFlowChart.png" alt="minting flow chart"></img>
+        <img style={shadow} src="/mintFlowChart.png" alt="minting flow chart"></img>
       </div>
 
       <br/>
@@ -199,7 +199,7 @@ export default async function Home() {
       </p>
 
       <div style={outline}>
-        <img src="/tokenURIFlowChart.png" alt="tokenURI flow chart"></img>
+        <img style={shadow} src="/tokenURIFlowChart.png" alt="tokenURI flow chart"></img>
       </div>
       <br />
 
@@ -282,7 +282,7 @@ export default async function Home() {
       </ol>
 
       <div style={outline}>
-        <img src="/modifyFlowChart.png" alt="art generator flow chart"></img>
+        <img style={shadow} src="/modifyFlowChart.png" alt="art generator flow chart"></img>
       </div>
 
       <br/>
@@ -299,6 +299,10 @@ export default async function Home() {
       </article>
     </main>
   );
+}
+
+const shadow = {
+  boxShadow: "2px 2px 5px grey"
 }
 
 
