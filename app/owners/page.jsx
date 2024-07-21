@@ -2,9 +2,33 @@
 import {artAddress} from "../constants"
 import Link from 'next/link'
 import { ZERO_ADDRESS } from "../constants";
+import { getEnsName,createConfig } from '@wagmi/core'
+import { http } from 'viem'
+
+// import useGetEnsName from "@/hooks/useGetEnsName";
+import {mainnet} from "viem/chains"
+
+
+  const ensConfig = createConfig({
+    chains: [mainnet], 
+    transports: {[mainnet.id]: http(process.env.ENS_RPC_URL)},
+    ssr: true
+  })
+
+async function getEns(address) {
+
+  const ensName = await getEnsName(ensConfig, {
+    address: address,
+    chainId: 1
+  })
+  // console.log(ensName)
+  return ensName
+} 
 
 
 async function getOwners() {
+
+  
   const options = {method: 'GET', headers: {accept: 'application/json'}};
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
@@ -14,7 +38,15 @@ async function getOwners() {
             return b.tokenBalances.length - a.tokenBalances.length;
           });
 
-      return ordered;
+        
+        for(const owner of ordered) {
+          const ensName = await getEns(owner.ownerAddress)
+          owner.ens = ensName
+          // console.log(ensName)
+        }
+        // console.log(ordered)
+        return ordered;
+      // return ordered.map((ens) => {ens && console.log("ens", ens)});
     } catch (error) {
       console.log(error)
       return []
@@ -33,7 +65,8 @@ function truncateAddress(address) {
 
 export default async function Owners() {
   // const {address} = useAccount();
-
+    // const ensTest = await getEns("0x910B48C25aFC5b2a998458B62d467D482ECA74AF");
+    // console.log(ensTest)
     const owners = await getOwners();
 
   return (
@@ -47,11 +80,12 @@ export default async function Owners() {
 
         {owners.map((owner, index) => {
           if(owner.ownerAddress === ZERO_ADDRESS) return null
-          
+          // const ens = a
+          // console.log(ens)
           return (
             <li key={index}>
                 &nbsp;&nbsp;&nbsp;
-                <Link href={`/browse/wallet/${owner.ownerAddress}`}>{truncateAddress(owner.ownerAddress)}</Link>
+                <Link href={`/browse/wallet/${owner.ownerAddress}`}>{owner.ens ? owner.ens : truncateAddress(owner.ownerAddress)}</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               balance: {owner.tokenBalances.length} &nbsp;
             <hr/>
