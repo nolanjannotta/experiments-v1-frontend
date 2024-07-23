@@ -19,6 +19,6 @@ export const nonExistentToken = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0c
 
 
 
-export const currentChain = base; // baseSepolia;
-export const artAddress = "0x952BbDED48D7662Abb25A8CdF7541663CA992B88"; // mainnet!! woohoo!
-// export const artAddress = "0x99f5ea3d613aa985dcaff07353b6337f23cd07f2"; // sepolia!! woohoo!
+export const currentChain = baseSepolia;// base; // baseSepolia;
+// export const artAddress = "0x952BbDED48D7662Abb25A8CdF7541663CA992B88"; // mainnet!! woohoo!
+export const artAddress = "0x99f5ea3d613aa985dcaff07353b6337f23cd07f2"; // sepolia!! woohoo!

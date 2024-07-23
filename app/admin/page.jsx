@@ -4,6 +4,7 @@ import { useAccount, useWriteContract,useReadContracts , useReadContract, useBal
 import ConnectSimple from "@/components/ConnectSimple";
 import { useQuery } from "@tanstack/react-query";
 import { contract,contractBase,publicClient } from "@/app/contract";
+import { currentChain } from "@/app/constants";
 import { formatEther, parseEther } from "viem";
 import splitterABI from "@/app/PaymentSplitter.json"
 
@@ -47,6 +48,7 @@ function Admin() {
   const balance = useBalance({
     address: contract.address
   });
+
   console.log("ownerBalance", ownerBalance)
   
   const readContracts = useReadContracts({
@@ -91,6 +93,14 @@ console.log("readContracts", readContracts)
     return (
       <article>
         <p>loading...</p>
+      </article>
+    )
+  }
+  
+  if(currentChain.id !== 8545){
+    return (
+      <article>
+        <p>you are on the wrong network</p>
       </article>
     )
   }

@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { ZERO_ADDRESS } from "../constants";
 import { getEnsName,createConfig } from '@wagmi/core'
 import { http } from 'viem'
-
-// import useGetEnsName from "@/hooks/useGetEnsName";
 import {mainnet} from "viem/chains"
 
 

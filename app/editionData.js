@@ -98,7 +98,7 @@ export const editionData = {
           <p>To modify, you need to change or supply 3 inputs:</p>
           <ol>
             <li>
-              a number between 1 and 24 to set the timezone. The blockchain
+              a number between 0 and 23 to set the timezone. The blockchain
               timestamp is in UTC, so for example PDT (Pacific) is 7 hours <i>behind</i> UTC, so
               the offset would be 17 (24-7). London is 1 hour <i>ahead</i> UTC, so the
               offset would be 1.
