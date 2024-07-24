@@ -96,11 +96,13 @@ console.log("readContracts", readContracts)
       </article>
     )
   }
-  
-  if(currentChain.id !== 8545){
+
+  if(currentChain.id !== 8453 && currentChain.id !== 84532){
+    console.log(currentChain.id)
     return (
       <article>
         <p>you are on the wrong network</p>
+        <p>owner: {readContracts?.data[0]?.result}</p>
       </article>
     )
   }

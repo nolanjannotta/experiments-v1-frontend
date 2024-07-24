@@ -144,13 +144,13 @@ function Gallery({params, searchParams}) {
         if(nft.raw?.error === "Failed to get token uri"){
           
           return (
-            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + ((page*perPage) + i + 1)}`}>
+            <Link key={i} style={{textDecoration:"none", color: "inherit"}} href={`/token/${params.edition * 1000000 + (((page-1)*perPage) + i + 1)}`}>
             <figure className='shadow' style={{width: "300px", height:"300px", display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", textAlign:"center", border: "1px solid lightgrey"}}>
               <div style={{width:"70%"}}>
                 <p>uh oh, looks like alchemy&apos;s api couldn&apos;t render this image<br /></p>
                 <p>click to open</p>
                 </div>
-                <figcaption>{editionInfo.name} #{(page*perPage) + i + 1}</figcaption>
+                <figcaption>{editionInfo.name} #{((page-1)*perPage) + i + 1}</figcaption>
             </figure>
             </Link>
           );
