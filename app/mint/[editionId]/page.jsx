@@ -29,7 +29,8 @@ function Mint({params}) {
       
   })
 
-  console.log("error", error)
+
+  console.log("edition", edition)
 
   const {data:lastMintedUri} = useReadContract({
     ...contractBase,
@@ -91,7 +92,7 @@ function Mint({params}) {
           <li>
             &nbsp;&nbsp;&#11096; name: {isLoading ?  <small>loading...</small> : <Link style={{ textDecoration: "none" }} href={`/browse/editions/${params.editionId}`}>{edition?.name} &#8599;</Link>}
           </li>
-          <li>&nbsp;&nbsp;&#11096; artist:  {isLoading ? <small>loading...</small>  : edition?.artist}</li>
+          <li>&nbsp;&nbsp;&#11096; artist:  {isLoading ? <small>loading...</small>  : edition?.artistName}</li>
           <li>
             &nbsp;&nbsp;&#11096; current supply: {isLoading ? <small>loading...</small>  : Number(edition?.counter)}
           </li>
@@ -137,6 +138,7 @@ function Mint({params}) {
 
         <figure style={galleryFig}>
           <img
+            style={{boxShadow: "2px 2px 5px grey"}}
             src={lastMintedUri || comingSoon}
             alt="image loading..."
             width="500"
