@@ -147,10 +147,10 @@ console.log("readContracts", readContracts)
         <legend>set new owner</legend>
         <p>owner: {readContracts?.data[0]?.result}</p>
         <form>
-          <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "setNewOwner", "address")}}></input>
+          <input type="text" placeholder="address" onChange={(e)=>{handleInputChange(e.target.value, "changeOwner", "address")}}></input>
           
         </form>
-        <button onClick={() => writeContract({...contractBase, functionName: "setOwner", args:[inputState["setNewOwner"]?.address]})}>set owner</button>
+        <button onClick={() => writeContract({...contractBase, functionName: "changeOwner", args:[inputState["changeOwner"]?.address]})}>set owner</button>
       </fieldset>
         <br/>
         <br/>

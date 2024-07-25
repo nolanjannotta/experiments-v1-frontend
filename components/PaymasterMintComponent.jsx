@@ -25,6 +25,7 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     const writes = useWriteContracts();
     const write = useWriteContract();
+    console.log(write.error)
 
     // to check the non sponsored transaction status
     const tx = useTransactionReceipt({hash: write?.data})

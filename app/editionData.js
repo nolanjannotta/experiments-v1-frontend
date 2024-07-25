@@ -202,7 +202,7 @@ export const editionData = {
     modify:[]
   },
 
-  "scribbles": {
+  "Scribbles": {
     description: () => {
       return (
         <>
