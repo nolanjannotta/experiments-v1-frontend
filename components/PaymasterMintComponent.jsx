@@ -4,14 +4,14 @@ import React, {useEffect, useState, useMemo} from 'react'
 import {} from 'wagmi'
 
 import { useCapabilities, useWriteContracts, useCallsStatus } from "wagmi/experimental";
-import {useAccount,useTransactionReceipt,useWriteContract, useSwitchChain, useChainId  } from 'wagmi'
+import {useAccount,useTransactionReceipt,useWriteContract, useSwitchChain, useTransaction, useChainId  } from 'wagmi'
 import { contractBase } from '../app/contract'
 import Link from 'next/link'
-import {fromHex} from "viem"
+import {fromHex,isAddressEqual } from "viem"
 import {baseSepolia,base} from "viem/chains"
 import useGetCapabilities from '@/hooks/useGetCapabilities';
 import { parseTransaction } from 'viem'
-import { ZERO_ADDRESS,currentChain } from '@/app/constants'
+import { ZERO_ADDRESS,currentChain,artAddress } from '@/app/constants'
 
 
 
@@ -19,16 +19,25 @@ import { ZERO_ADDRESS,currentChain } from '@/app/constants'
 function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
 
     const [tokenId, setTokenId] = useState(0)
+    const [txHash, setTxHash] = useState(undefined)
     const account = useAccount();
-
+    // console.log(tokenId)
     const {switchChain} = useSwitchChain()
 
     const writes = useWriteContracts();
     const write = useWriteContract();
-    console.log(write.error)
+    // console.log(write.error)
 
     // to check the non sponsored transaction status
     const tx = useTransactionReceipt({hash: write?.data})
+
+    // const result = useTransaction({
+    //     hash: txHash,
+    //   })
+
+    //   console.log("result", result)
+
+
 
     // to check sponsored transaction status
     const { data: sponsoredStatus } = useCallsStatus({
@@ -39,16 +48,16 @@ function PaymasterMintComponent({isMinting, editionId, price, refetch}) {
         },
       });
 
-        // console.log("sponsoredStatus", sponsoredStatus)
-
     useEffect(() => {
         if(sponsoredStatus?.status === "CONFIRMED") {
+            console.log("sponsoredStatus", sponsoredStatus)
             refetch()
             try {
-                setTokenId(fromHex(sponsoredStatus.receipts[0].logs[1].topics[3], "number"))
+                const log = sponsoredStatus.receipts[0].logs.find((log) => isAddressEqual(log.address, artAddress));
+                setTokenId(fromHex(log.topics[3], "number"))
             }
             catch(e) {
-                setTokenId(fromHex(sponsoredStatus.receipts[0].logs[2].topics[3], "number"))
+                console.log("error reading logs", e);
             }
         }
 
