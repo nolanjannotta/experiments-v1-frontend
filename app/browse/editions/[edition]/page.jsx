@@ -173,21 +173,37 @@ function Gallery({params, searchParams}) {
     <br/>
     <br/>
     <br/>
-      <div style={{display: "flex",justifyContent:"center"}}>
-      {/* {page !== 0 && <button style={button} onClick={() => setPage((prev) => Math.max(prev-1, 0))}>&#8592;</button>} */}
-      
-      {page > 1 && <Link style={button} href={`/browse/editions/${params.edition}?page=${page - 1}`}>&#8592;</Link>}
-        &nbsp;&nbsp;
-      <p style={{margin:"0", fontSize:"small", display:"flex", alignItems:"center"}}>{page}/{(Math.ceil(Number(editionInfo?.counter)/perPage))}</p>
-      &nbsp;&nbsp;
-      {/* {page+1 < (Math.ceil(Number(editionInfo?.counter)/perPage)) &&  */}
-      
-      {page < Number(editionInfo?.counter)/perPage && <Link style={button} href={`/browse/editions/${params.edition}?page=${page + 1}`}>&#8594;</Link>}
-      </div>
+
+    <div style={{display: "flex",justifyContent:"center"}}> 
+
+    <nav>
+      <li>
+      {page > 1 && <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${page - 1}`}>&#8592;</Link>}
+
+      </li>
+    {Array(Math.ceil(Number(editionInfo?.counter)/perPage)).fill(0).map((_, i) => {
+      i++;
     
+    return (
+      <li>
+    <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${i}`}> {page === i ? <bold style={{fontSize: "x-large"}}>{i}</bold> : <small>{i}</small>}</Link>
+    </li>
+  )
+  
+  
+    })}
+
+    <li>
+      {page < Number(editionInfo?.counter)/perPage && <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${page + 1}`}>&#8594;</Link>}
+    </li>
+    </nav>
+
+
+    </div>
     <br/>
     <br/>
     <br/>
+
       {!editionFetching && <Link href="/browse">back</Link>}
     </section>
   )

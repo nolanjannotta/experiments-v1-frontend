@@ -154,10 +154,10 @@ export default function Stats({ data, tokenId, address }) {
             )}
 
             <li>
-              <>
                 <b>&#11096; owner</b>:{" "}
+                <Link href={`/browse/wallet/${data?.owner}`}>
                 {data?.owner === account.address ? "you :)" : data?.owner}
-              </>
+              </Link>
             </li>
 
             <li>
