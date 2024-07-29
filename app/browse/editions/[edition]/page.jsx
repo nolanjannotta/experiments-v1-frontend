@@ -185,7 +185,7 @@ function Gallery({params, searchParams}) {
       i++;
     
     return (
-      <li>
+      <li key={i}>
     <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${i}`}> {page === i ? <bold style={{fontSize: "x-large"}}>{i}</bold> : <small>{i}</small>}</Link>
     </li>
   )
