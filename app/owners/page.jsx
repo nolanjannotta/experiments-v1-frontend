@@ -27,11 +27,12 @@ async function getEns(address) {
 async function getOwners() {
 
   
-  const options = {method: 'GET', headers: {accept: 'application/json'}};
+  const options = {method: 'GET', headers: {accept: 'application/json'}, next: {revalidate: 10}};
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
 
         const owners = await response.json()
+
         const ordered = owners.owners.sort((a, b) => {
             return b.tokenBalances.length - a.tokenBalances.length;
           });
@@ -40,11 +41,8 @@ async function getOwners() {
         for(const owner of ordered) {
           const ensName = await getEns(owner.ownerAddress)
           owner.ens = ensName
-          // console.log(ensName)
         }
-        // console.log(ordered)
         return ordered;
-      // return ordered.map((ens) => {ens && console.log("ens", ens)});
     } catch (error) {
       console.log(error)
       return []
@@ -91,6 +89,30 @@ export default async function Owners() {
           )
         })}
       </ul>
+
+      {/* <nav>
+        <li>
+        {page > 1 && <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${page - 1}`}>&#8592;</Link>}
+
+        </li>
+      {Array(Math.ceil(Number(editionInfo?.counter)/perPage)).fill(0).map((_, i) => {
+        i++;
+      
+      return (
+        <li key={i}>
+      <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${i}`}> {page === i ? <bold style={{fontSize: "x-large"}}>{i}</bold> : <small>{i}</small>}</Link>
+      </li>
+    )
+    
+    
+      })}
+
+      <li>
+        {page < Number(editionInfo?.counter)/perPage && <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${page + 1}`}>&#8594;</Link>}
+      </li>
+    </nav> */}
+
+    
     </article>
   );
 }
