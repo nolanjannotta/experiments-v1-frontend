@@ -25,7 +25,7 @@ export const metadata = {
 
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 
-export const revalidate = 30
+export const revalidate = 0
 
 export default function RootLayout({ children }) {
 

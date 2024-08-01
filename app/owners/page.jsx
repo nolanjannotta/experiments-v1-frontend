@@ -27,7 +27,12 @@ async function getEns(address) {
 async function getOwners() {
 
   
-  const options = {method: 'GET', headers: {accept: 'application/json'}, next: {revalidate: 10}};
+  const options = {
+    method: "GET",
+    headers: { accept: "application/json" },
+    next: { revalidate: 10 },
+  };
+  
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
 
