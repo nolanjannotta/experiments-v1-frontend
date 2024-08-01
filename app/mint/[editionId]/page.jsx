@@ -14,6 +14,9 @@ import { contractBase } from '../../contract'
 
 
 
+// export function generateMetadata({params}) {
+//   console.log("params", params)
+// }
 
 
 function Mint({params}) {
@@ -30,7 +33,6 @@ function Mint({params}) {
   })
 
 
-  console.log("edition", edition)
 
   const {data:lastMintedUri} = useReadContract({
     ...contractBase,

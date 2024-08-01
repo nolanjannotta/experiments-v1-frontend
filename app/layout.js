@@ -11,17 +11,23 @@ import { coolShape } from './coolShapes'
 import "./pizazz.css"
 
 
-export const metadata = {
-  title: 'Experiments V1',
-  description: 'A platform for 100% onchain generative images. experimenting with onchain art and onchain mechanics.',
-  openGraph: {
-    images: "https://www.onchainexperiments.xyz/api/ogImage",
-    url: "https://www.onchainexperiments.xyz/",
-    type: "website",
-    title: "Experiments V1",
-    description: "A platform for 100% onchain generative images. experimenting with onchain art and onchain mechanics.",
+export async function generateMetadata({params}) {
+  
+  return {
+    title: 'Onchain-Experiments_V1',
+    description: 'A platform for 100% onchain generative images. experimenting with onchain art and onchain mechanics.',
+    openGraph: {
+      images: "https://www.onchainexperiments.xyz/api/ogImage",
+      url: "https://www.onchainexperiments.xyz/",
+      type: "website",
+      title: "Onchain-Experiments_V1",
+      description: "A platform for 100% onchain generative images. experimenting with onchain art and onchain mechanics.",
+    }
   }
+
 }
+
+
 
 const sourceCode = Source_Code_Pro({ subsets: ['latin'], weight: ["500", "700"]})
 
