@@ -1,22 +1,14 @@
 "use client"
 import React, {useState} from 'react'
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
-import {contract } from '../../contract'
 import PaymasterMintComponent from '../../../components/PaymasterMintComponent';
 import {editionType} from '../../types'
 import { formatEther } from 'viem'
-import { baseSepolia,base } from 'viem/chains'
 import CustomConnect from '../../../components/CustomConnect'
 import {comingSoon,currentChain} from "@/app/constants"
 import { useReadContract } from 'wagmi'
 import { contractBase } from '../../contract'
 
-
-
-// export function generateMetadata({params}) {
-//   console.log("params", params)
-// }
 
 
 function Mint({params}) {
