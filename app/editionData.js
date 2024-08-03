@@ -183,31 +183,14 @@ export const editionData = {
     inputs:[]
   },
 
-  "not squiggles": {
-    description: () => {
-      return (
-        <p>
-          These are, in fact, <i>not</i> squiggles. As the title suggests, this is an experiment. I
-          wanted to see whether something as legendary as the Chromie Squiggle can be made completely onchain using
-          only solidity and SVG. As it turns out, you can get pretty close. All
-          credit goes to Artblocks and Snowfro. These are obviously not meant to be IDENTICAL to the originals. Most of the key traits are
-          implemented, some are not.
 
-        </p>
-      );
-    },
-    type: "experiment",
-    modifiable: false,
-    seed:[],
-    modify:[]
-  },
 
   "Scribbles": {
     description: () => {
       return (
         <>
           <p>
-            A &quot;derivative&quot; project. An homage to the Chromie Squiggle. An
+            A &quot;derivative&quot; project. An homage to the <a href="https://chromie-squiggles.com/" target="_blank">Chromie Squiggle</a>. An
             onchain experiment.{" "}
           </p>
 

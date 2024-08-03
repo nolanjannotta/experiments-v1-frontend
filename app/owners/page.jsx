@@ -5,6 +5,8 @@ import { ZERO_ADDRESS } from "../constants";
 import { getEnsName,createConfig } from '@wagmi/core'
 import { http } from 'viem'
 import {mainnet} from "viem/chains"
+import { revalidatePath } from 'next/cache'
+
 
 
   const ensConfig = createConfig({
@@ -30,12 +32,12 @@ async function getOwners() {
   const options = {
     method: "GET",
     headers: { accept: "application/json" },
-    cache: 'no-store',
+    next: { revalidate: 1 }
   };
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
-        console.log(response)
+        // console.log(response)
         const owners = await response.json()
 
         const ordered = owners.owners.sort((a, b) => {

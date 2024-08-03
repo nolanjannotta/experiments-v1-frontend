@@ -77,7 +77,7 @@ function Gallery({params, searchParams}) {
     initialData: editionType,
   });
 
-  const {data: thumbnails} = useQuery({
+  const {data: thumbnails, isFetching: thumbnailsFetching} = useQuery({
     queryKey: ["thumbnails", params.edition, page-1],
     queryFn: () => getThumbnails(page-1, Number(editionInfo.counter), params.edition),
     initialData: {images: [], loading: true, error: false},
@@ -85,6 +85,8 @@ function Gallery({params, searchParams}) {
     placeholderData: keepPreviousData
 
   });
+
+  console.log()
 
   if(!editionFetching && error) {
     return <section style={section}>
@@ -139,7 +141,7 @@ function Gallery({params, searchParams}) {
     <div style={gallery}>
 
       {thumbnails?.error || !thumbnails.images && <p>uh oh, something went wrong fetching tokens, please try again.</p>}
-      {thumbnails?.loading && params.edition.counter > 0 && <p>loading previews...</p>}
+      {(thumbnails.images.length == 0) && thumbnailsFetching && (Number(editionInfo.counter) > 0) && <p>loading previews...</p>}
       {thumbnails.images?.map((nft, i) => {
         if(nft.raw?.error === "Failed to get token uri"){
           
@@ -186,7 +188,7 @@ function Gallery({params, searchParams}) {
     
     return (
       <li key={i}>
-    <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${i}`}> {page === i ? <bold style={{fontSize: "x-large"}}>{i}</bold> : <small>{i}</small>}</Link>
+    <Link style={{color: "inherit"}} href={`/browse/editions/${params.edition}?page=${i}`}> {page === i ? <b style={{fontSize: "x-large"}}>{i}</b> : <small>{i}</small>}</Link>
     </li>
   )
   
