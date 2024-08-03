@@ -35,7 +35,7 @@ async function getOwners() {
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
-
+        console.log(response)
         const owners = await response.json()
 
         const ordered = owners.owners.sort((a, b) => {
