@@ -17,10 +17,14 @@ import { revalidatePath } from 'next/cache'
 
 async function getEns(address) {
 
-  const ensName = await getEnsName(ensConfig, {
-    address: address,
-    chainId: 1
-  })
+  const response = await fetch(`https://api.ensdata.net/${address}`)
+  const ensName = await response.json()
+  console.log(ensName)
+
+  // const ensName = await getEnsName(ensConfig, {
+  //   address: address,
+  //   chainId: 1
+  // })
   // console.log(ensName)
   return ensName
 } 
@@ -45,10 +49,10 @@ async function getOwners() {
           });
 
         
-        for(const owner of ordered) {
-          const ensName = await getEns(owner.ownerAddress)
-          owner.ens = ensName
-        }
+        // for(const owner of ordered) {
+        //   const ensName = await getEns(owner.ownerAddress)
+        //   // owner.ens = ensName
+        // }
         return ordered;
     } catch (error) {
       console.log(error)
