@@ -32,7 +32,7 @@ async function getOwners() {
   const options = {
     method: "GET",
     headers: { accept: "application/json" },
-    next: { revalidate: 1 }
+    // next: { revalidate: 1 }
   };
 
     try {
