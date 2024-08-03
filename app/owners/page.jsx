@@ -30,9 +30,9 @@ async function getOwners() {
   const options = {
     method: "GET",
     headers: { accept: "application/json" },
-    next: { revalidate: 10 },
+    cache: 'no-store',
   };
-  
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_ALCHEMY_URL}/getOwnersForContract?contractAddress=${artAddress}&withTokenBalances=true`, options)
 
@@ -73,6 +73,7 @@ export default async function Owners() {
   return (
     <article>
       <h2 style={{margin: 0}}>Owners &nbsp;</h2>
+      {owners.length === 0 && <p>error loading owners, please try again later.</p>}
       <small>{owners.length} unique owners</small>
       <br/>
       <br/>
