@@ -94,7 +94,7 @@ export default async function Home() {
         <br />
 
         <p>
-          Each token has 32 bits of storage that is stored in the ERC721 smart
+          Each token has 32 bytes of storage that is stored in the ERC721 smart
           contract. This can be number, string, bytes, etc. When it comes to
           generative art, it is usually a &quot;random&quot; number. This number
           can be derived from block data like timestamp, block hash, minters 
