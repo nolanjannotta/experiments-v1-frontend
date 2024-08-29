@@ -45,8 +45,9 @@ async function getTokenTransfers(tokenId) {
     });
     return response.raw.result;
   } catch (e) {
-    return {};
-    // console.error(e);
+    console.error(e);
+
+    return [];
   }
 }
 
@@ -108,8 +109,9 @@ async function Token({ params }) {
         <h4>&#x2709; transfers:</h4>
         
         <br />
+        <p>{transfers}</p>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
-          {transfers && transfers?.map((transfer, i) => {
+          {transfers?.map((transfer, i) => {
             let hours = new Date(transfer.block_timestamp).toLocaleTimeString();
             return (
               <li key={i}>
