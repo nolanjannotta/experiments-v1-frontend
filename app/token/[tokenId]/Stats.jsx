@@ -20,6 +20,21 @@ export default function Stats({ data, tokenId, address }) {
         
       }
 
+      // const sourceCode = data?.metadata.image.substring(26)
+      
+      // const html = `
+      // <html>
+      // <body>
+      //   <code>'${atob(sourceCode)}'</code>
+      
+      // </body>
+      
+      // </html>
+      
+      // `
+      // console.log("data:text/html;base64," + btoa(html))
+      // const url = URL.createObjectURL(new Blob([sourceCode], {type: "text/plain"}))
+      // console.log(url)
     
     useEffect(()=>{
 
@@ -172,9 +187,11 @@ export default function Stats({ data, tokenId, address }) {
             </li>
             <li>
                 <b>&#11096; source code</b>:{" "}
-                <a target="_blank" href={`${data?.metadata.image}`}>
+                {/* <a target="_blank" href={data?.metadata.image.replace("data:image/svg+xml;base64,", "data:text/plain,")}> */}
+                <a target="_blank" origins href={'view-source:' + data?.metadata.image}>
                   &#8599;
                 </a>
+                {/* <button onClick={window.open(data?.metadata.image.replace("data:image/svg+xml;base64,", "data:text/plain;base64,"), "_blank")}>source code</button> */}
             </li>
 
             {data?.owner === account.address || !account.isConnected ? (

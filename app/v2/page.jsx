@@ -26,6 +26,8 @@ function V2() {
 
             <li>
                 Create more and better tools for artists to deploy and mint their 100% onchain art works. 
+                For example having two edition queues in the contract. One is permissionless and used for testing. 
+                Parameters can be changed but cannot mint. The other queue is final and permissioned, it is added to by approving an edition from the other queue. 
             </li>
             <li>
               add more sophisticated minting options. 

@@ -12,7 +12,7 @@ export default function ConnectSimple({children, label, asAnchor}) {
   const account = useAccount();
   const [show, setShow] = useState(false)
 
-  const ensName =  useGetEnsName(account.address)
+  // const ensName =  useGetEnsName(account.address)
   
 
   if(account.address && children){
@@ -35,7 +35,7 @@ export default function ConnectSimple({children, label, asAnchor}) {
 
 
             
-              {ensName ? ensName : account?.address.slice(0, 6) +
+              {account?.address.slice(0, 6) +
                 "..." +
                 account?.address.slice(-4)}
             

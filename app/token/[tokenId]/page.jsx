@@ -11,7 +11,7 @@ import { baseScanUrl } from "@/app/constants.js";
 import Moralis from "moralis";
 // import { base } from "viem/chains";
 import { FRAME_URL } from "@/app/constants.js";
-await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_KEY });
+await Moralis.start({ apiKey: process.env.MORALIS_KEY });
 
 async function tokenData(tokenId) {
   try {
@@ -89,6 +89,7 @@ function truncateAddress(address) {
 
 async function Token({ params }) {
   const transfers = await getTokenTransfers(params?.tokenId);
+  console.log(typeof transfers);
   const data = await tokenData(params?.tokenId);
 
   // if(data.error) {
@@ -105,9 +106,10 @@ async function Token({ params }) {
       <article style={{ textAlign: "center" }}>
         <hr />
         <h4>&#x2709; transfers:</h4>
+        
         <br />
         <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
-          {transfers?.map((transfer, i) => {
+          {transfers && transfers?.map((transfer, i) => {
             let hours = new Date(transfer.block_timestamp).toLocaleTimeString();
             return (
               <li key={i}>
