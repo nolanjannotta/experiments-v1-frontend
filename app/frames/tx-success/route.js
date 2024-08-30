@@ -34,7 +34,7 @@ async function getResponse(request) {
 
     if(txStatus.status === "success"){
         buttons = [
-            {label: "open sea", action: "link",  target: `https://testnets.opensea.io/assets/base-sepolia/${artAddress}/${txStatus.tokenId}`}
+            {label: "open sea", action: "link",  target: `https://opensea.io/assets/base/${artAddress}/${txStatus.tokenId}`}
         ]
     }
     else {
