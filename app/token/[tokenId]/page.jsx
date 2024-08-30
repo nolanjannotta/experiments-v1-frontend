@@ -109,7 +109,6 @@ async function Token({ params }) {
         <h4>&#x2709; transfers:</h4>
         
         <br />
-        <p>{transfers}</p>
         <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
           {transfers?.map((transfer, i) => {
             let hours = new Date(transfer.block_timestamp).toLocaleTimeString();
