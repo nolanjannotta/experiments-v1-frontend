@@ -109,7 +109,7 @@ async function Token({ params }) {
         
         <br />
         <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
-          {transfers?.map((transfer, i) => {
+          {transfers?.reverse().map((transfer, i) => {
             let hours = new Date(transfer.block_timestamp).toLocaleTimeString();
             return (
               <li key={i}>
